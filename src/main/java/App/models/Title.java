@@ -25,13 +25,19 @@ public class Title {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private ScientificField scientificField;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Teacher teachers;
 
 	public Title() {}
 
-	public Title(Date startDate, Date endDate, ScientificField scientificField){
+	public Title(Long id, Date startDate, Date endDate, ScientificField scientificField, Teacher teachers) {
+		super();
+		this.id = id;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.scientificField = scientificField;
+		this.teachers = teachers;
 	}
 
 	public Long getId(){
@@ -64,6 +70,14 @@ public class Title {
 
 	public void setScientificField(ScientificField scientificField){
 		this.scientificField = scientificField;
+	}
+
+	public Teacher getTeachers() {
+		return teachers;
+	}
+
+	public void setTeachers(Teacher teachers) {
+		this.teachers = teachers;
 	}
 	
 }

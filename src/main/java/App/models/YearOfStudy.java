@@ -25,7 +25,7 @@ public class YearOfStudy {
 	private Date year;
 
 	@JsonView(ShowSubject.class)
-	@OneToMany(mappedBy="None")
+	@OneToMany(mappedBy="yearOfStudies")
 	private Set<Subject> subjects;
 
 	@ManyToOne(cascade=CascadeType.ALL)

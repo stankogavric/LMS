@@ -30,7 +30,7 @@ public class Teacher {
 	private String jmbg;
 
 	@JsonView(ShowTitle.class)
-	@OneToMany(mappedBy="None")
+	@OneToMany(mappedBy="teachers")
 	private Set<Title> titles;
 
 	@ManyToOne(cascade=CascadeType.ALL)

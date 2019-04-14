@@ -26,16 +26,16 @@ public class StudentYear {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private YearOfStudy yearOfStudy;
 
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Student student;
+	//@ManyToOne(cascade=CascadeType.ALL)
+	//private Student student;
 
 	public StudentYear() {}
 
-	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student){
+	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy/*, Student student*/){
 		this.enrolmentDate = enrolmentDate;
 		this.numIndex = numIndex;
 		this.yearOfStudy = yearOfStudy;
-		this.student = student;
+		//this.student = student;
 	}
 
 	public Long getId(){
@@ -70,12 +70,12 @@ public class StudentYear {
 		this.yearOfStudy = yearOfStudy;
 	}
 	
-	public Student getStudent(){
-		return student;
-	}
-
-	public void setStudent(Student student){
-		this.student = student;
-	}
+//	public Student getStudent(){
+//		return student;
+//	}
+//
+//	public void setStudent(Student student){
+//		this.student = student;
+//	}
 	
 }
