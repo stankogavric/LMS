@@ -5,14 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Set;
-import App.utils.View.ShowSubject;
-import App.utils.View.ShowTopic;
-
-import com.fasterxml.jackson.annotation.JsonView;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.CascadeType;
+import App.utils.View.ShowTopic;
+import App.utils.View.ShowSubject;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 
 @Entity
@@ -28,8 +27,8 @@ public class Subject {
 	@Column(nullable = false)
 	private Integer ects;
 
-	//@ManyToOne(cascade=CascadeType.ALL)
-	//private Boolean mandatory;
+	@Column(nullable = false)
+	private boolean mandatory;
 
 	@Column(nullable = false)
 	private Integer lecturesNum;
@@ -46,34 +45,31 @@ public class Subject {
 	@Column(nullable = false)
 	private Integer otherClasses;
 
-//	@JsonView(ShowTopic.class)
-//	@OneToMany(mappedBy="None")
-//	private Set<Topic> syllabus;
+	@JsonView(ShowTopic.class)
+	@OneToMany(mappedBy="subject")
+	private Set<Topic> syllabus;
 
 //	@JsonView(ShowSubject.class)
 //	@OneToMany(mappedBy="None")
 //	private Set<Subject> prerequisite;
-	
+
 	@ManyToOne(cascade=CascadeType.ALL)
-	private YearOfStudy yearOfStudies;
+	private YearOfStudy yearOfStudy;
 
 	public Subject() {}
 
-	public Subject(Long id, String name, Integer ects, Integer lecturesNum, Integer exercisesNum,
-			Integer otherActivitesNum, Integer researchPaper, Integer otherClasses, /*Set<Topic> syllabus,*/
-			/*Set<Subject> prerequisite,*/ YearOfStudy yearOfStudies) {
-		super();
-		this.id = id;
+	public Subject(String name, Integer ects, Boolean mandatory, Integer lecturesNum, Integer exercisesNum, Integer otherActivitesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus, /*Set<Subject> prerequisite,*/ YearOfStudy yearOfStudy){
 		this.name = name;
 		this.ects = ects;
+		this.mandatory = mandatory;
 		this.lecturesNum = lecturesNum;
 		this.exercisesNum = exercisesNum;
 		this.otherActivitesNum = otherActivitesNum;
 		this.researchPaper = researchPaper;
 		this.otherClasses = otherClasses;
-		//this.syllabus = syllabus;
+		this.syllabus = syllabus;
 		//this.prerequisite = prerequisite;
-		this.yearOfStudies = yearOfStudies;
+		this.yearOfStudy = yearOfStudy;
 	}
 
 	public Long getId(){
@@ -100,13 +96,13 @@ public class Subject {
 		this.ects = ects;
 	}
 	
-//	public Boolean getMandatory(){
-//		return mandatory;
-//	}
-//
-//	public void setMandatory(Boolean mandatory){
-//		this.mandatory = mandatory;
-//	}
+	public Boolean getMandatory(){
+		return mandatory;
+	}
+
+	public void setMandatory(Boolean mandatory){
+		this.mandatory = mandatory;
+	}
 	
 	public Integer getLecturesNum(){
 		return lecturesNum;
@@ -148,13 +144,13 @@ public class Subject {
 		this.otherClasses = otherClasses;
 	}
 	
-//	public Set<Topic> getSyllabus(){
-//		return syllabus;
-//	}
-//
-//	public void setSyllabus(Set<Topic> syllabus){
-//		this.syllabus = syllabus;
-//	}
+	public Set<Topic> getSyllabus(){
+		return syllabus;
+	}
+
+	public void setSyllabus(Set<Topic> syllabus){
+		this.syllabus = syllabus;
+	}
 	
 //	public Set<Subject> getPrerequisite(){
 //		return prerequisite;
@@ -163,15 +159,13 @@ public class Subject {
 //	public void setPrerequisite(Set<Subject> prerequisite){
 //		this.prerequisite = prerequisite;
 //	}
-
-	public YearOfStudy getYearOfStudies() {
-		return yearOfStudies;
+	
+	public YearOfStudy getYearOfStudy(){
+		return yearOfStudy;
 	}
 
-	public void setYearOfStudies(YearOfStudy yearOfStudies) {
-		this.yearOfStudies = yearOfStudies;
+	public void setYearOfStudy(YearOfStudy yearOfStudy){
+		this.yearOfStudy = yearOfStudy;
 	}
-	
-	
 	
 }

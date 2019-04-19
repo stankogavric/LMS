@@ -5,12 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import App.utils.View.ShowStudyProgram;
-import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonView;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.CascadeType;
+import App.utils.View.ShowStudyProgram;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 
 @Entity

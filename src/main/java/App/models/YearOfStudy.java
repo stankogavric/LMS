@@ -5,13 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
-import java.util.Set;
-import App.utils.View.ShowSubject;
-import com.fasterxml.jackson.annotation.JsonView;
-import javax.persistence.OneToMany;
-import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonView;
+import java.util.Date;
+import javax.persistence.CascadeType;
+import App.utils.View.ShowSubject;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 
 @Entity
@@ -25,7 +25,7 @@ public class YearOfStudy {
 	private Date year;
 
 	@JsonView(ShowSubject.class)
-	@OneToMany(mappedBy="yearOfStudies")
+	@OneToMany(mappedBy="yearOfStudy")
 	private Set<Subject> subjects;
 
 	@ManyToOne(cascade=CascadeType.ALL)

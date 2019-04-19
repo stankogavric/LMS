@@ -5,16 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import App.utils.View.ShowSubjectAttendance;
 import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonView;
-import App.utils.View.ShowTitle;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
 import java.util.Set;
+import App.utils.View.ShowStudentYear;
 
 
 @Entity
-public class Teacher {
+public class Student {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,29 +25,30 @@ public class Teacher {
 	private String name;
 
 	@Column(length=128, nullable = false)
-	private String biography;
-
-	@Column(length=128, nullable = false)
 	private String jmbg;
 
-	@JsonView(ShowTitle.class)
-	@OneToMany(mappedBy="teacher")
-	private Set<Title> titles;
+	@JsonView(ShowSubjectAttendance.class)
+	@OneToMany(mappedBy="student")
+	private Set<SubjectAttendance> subjectAttendances;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Address address;
 
+	@JsonView(ShowStudentYear.class)
+	@OneToMany(mappedBy="student")
+	private Set<StudentYear> studentYears;
+
 	@ManyToOne(cascade=CascadeType.ALL)
 	private RegisteredUser registeredUser;
 
-	public Teacher() {}
+	public Student() {}
 
-	public Teacher(String name, String biography, String jmbg, Set<Title> titles, Address address, RegisteredUser registeredUser){
+	public Student(String name, String jmbg, Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears, RegisteredUser registeredUser){
 		this.name = name;
-		this.biography = biography;
 		this.jmbg = jmbg;
-		this.titles = titles;
+		this.subjectAttendances = subjectAttendances;
 		this.address = address;
+		this.studentYears = studentYears;
 		this.registeredUser = registeredUser;
 	}
 
@@ -66,14 +68,6 @@ public class Teacher {
 		this.name = name;
 	}
 	
-	public String getBiography(){
-		return biography;
-	}
-
-	public void setBiography(String biography){
-		this.biography = biography;
-	}
-	
 	public String getJmbg(){
 		return jmbg;
 	}
@@ -82,12 +76,12 @@ public class Teacher {
 		this.jmbg = jmbg;
 	}
 	
-	public Set<Title> getTitles(){
-		return titles;
+	public Set<SubjectAttendance> getSubjectAttendances(){
+		return subjectAttendances;
 	}
 
-	public void setTitles(Set<Title> titles){
-		this.titles = titles;
+	public void setSubjectAttendances(Set<SubjectAttendance> subjectAttendances){
+		this.subjectAttendances = subjectAttendances;
 	}
 	
 	public Address getAddress(){
@@ -96,6 +90,14 @@ public class Teacher {
 
 	public void setAddress(Address address){
 		this.address = address;
+	}
+	
+	public Set<StudentYear> getStudentYears(){
+		return studentYears;
+	}
+
+	public void setStudentYears(Set<StudentYear> studentYears){
+		this.studentYears = studentYears;
 	}
 	
 	public RegisteredUser getRegisteredUser(){

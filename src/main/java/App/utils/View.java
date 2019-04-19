@@ -16,4 +16,11 @@ public class View {
     public interface ShowStudentYear{ };
     public interface ShowSubject{ };
     public interface ShowTopic{ };
+    public interface ShowTeachingType{ };
+    public interface ShowTeacherRealization{ };
+    public interface ShowSubjectRealization{ };
+    public interface ShowSubjectAttendance{ };
+    public interface ShowStudent{ };
+    public interface ShowRegisteredUser{ };
+    public interface ShowAdministrator{ };
 }

@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.CascadeType;
 import javax.persistence.ManyToOne;
 import java.util.Date;
+import javax.persistence.CascadeType;
 
 
 @Entity
@@ -25,19 +25,17 @@ public class Title {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private ScientificField scientificField;
-	
+
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Teacher teachers;
+	private Teacher teacher;
 
 	public Title() {}
 
-	public Title(Long id, Date startDate, Date endDate, ScientificField scientificField, Teacher teachers) {
-		super();
-		this.id = id;
+	public Title(Date startDate, Date endDate, ScientificField scientificField, Teacher teacher){
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.scientificField = scientificField;
-		this.teachers = teachers;
+		this.teacher = teacher;
 	}
 
 	public Long getId(){
@@ -71,13 +69,13 @@ public class Title {
 	public void setScientificField(ScientificField scientificField){
 		this.scientificField = scientificField;
 	}
-
-	public Teacher getTeachers() {
-		return teachers;
+	
+	public Teacher getTeacher(){
+		return teacher;
 	}
 
-	public void setTeachers(Teacher teachers) {
-		this.teachers = teachers;
+	public void setTeacher(Teacher teacher){
+		this.teacher = teacher;
 	}
 	
 }

@@ -3,9 +3,9 @@ package App.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import App.models.TitleType;
+import App.models.SubjectAttendance;
 
 @Repository
-public interface TitleTypeRepository extends JpaRepository<TitleType, Long> {
+public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttendance, Long> {
 
 }

@@ -5,14 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonView;
-import App.utils.View.ShowCity;
-import javax.persistence.OneToMany;
 
 
 @Entity
-public class Country {
+public class TeachingType {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,15 +17,10 @@ public class Country {
 	@Column(length=128, nullable = false)
 	private String name;
 
-	@JsonView(ShowCity.class)
-	@OneToMany(mappedBy="country")
-	private Set<City> cities;
+	public TeachingType() {}
 
-	public Country() {}
-
-	public Country(String name, Set<City> cities){
+	public TeachingType(String name){
 		this.name = name;
-		this.cities = cities;
 	}
 
 	public Long getId(){
@@ -46,14 +37,6 @@ public class Country {
 
 	public void setName(String name){
 		this.name = name;
-	}
-	
-	public Set<City> getCities(){
-		return cities;
-	}
-
-	public void setCities(Set<City> cities){
-		this.cities = cities;
 	}
 	
 }

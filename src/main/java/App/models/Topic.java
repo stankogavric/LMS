@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 
 
 @Entity
@@ -17,10 +19,14 @@ public class Topic {
 	@Column(length=128, nullable = false)
 	private String description;
 
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Subject subject;
+
 	public Topic() {}
 
-	public Topic(String description){
+	public Topic(String description, Subject subject){
 		this.description = description;
+		this.subject = subject;
 	}
 
 	public Long getId(){
@@ -37,6 +43,14 @@ public class Topic {
 
 	public void setDescription(String description){
 		this.description = description;
+	}
+	
+	public Subject getSubject(){
+		return subject;
+	}
+
+	public void setSubject(Subject subject){
+		this.subject = subject;
 	}
 	
 }

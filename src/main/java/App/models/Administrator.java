@@ -10,23 +10,19 @@ import javax.persistence.CascadeType;
 
 
 @Entity
-public class City {
+public class Administrator {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length=128, nullable = false)
-	private String name;
-
 	@ManyToOne(cascade=CascadeType.ALL)
-	private Country country;
+	private RegisteredUser registeredUser;
 
-	public City() {}
+	public Administrator() {}
 
-	public City(String name, Country country){
-		this.name = name;
-		this.country = country;
+	public Administrator(RegisteredUser registeredUser){
+		this.registeredUser = registeredUser;
 	}
 
 	public Long getId(){
@@ -37,20 +33,12 @@ public class City {
 		this.id = id;
 	}
 	
-	public String getName(){
-		return name;
+	public RegisteredUser getRegisteredUser(){
+		return registeredUser;
 	}
 
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public Country getCountry(){
-		return country;
-	}
-
-	public void setCountry(Country country){
-		this.country = country;
+	public void setRegisteredUser(RegisteredUser registeredUser){
+		this.registeredUser = registeredUser;
 	}
 	
 }

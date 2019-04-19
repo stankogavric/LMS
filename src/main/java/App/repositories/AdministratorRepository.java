@@ -3,9 +3,9 @@ package App.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import App.models.TitleType;
+import App.models.Administrator;
 
 @Repository
-public interface TitleTypeRepository extends JpaRepository<TitleType, Long> {
+public interface AdministratorRepository extends JpaRepository<Administrator, Long> {
 
 }
