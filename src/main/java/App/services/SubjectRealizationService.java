@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import App.models.SubjectRealization;
+import App.models.Teacher;
 import App.repositories.SubjectRealizationRepository;
 
 @Service
@@ -40,6 +41,10 @@ public class SubjectRealizationService {
             subjectRealization.setId(Sub.get().getId());
             subjectRealizationRepo.save(subjectRealization);
         }
+    }
+    
+    public Iterable<Teacher> getTeachersWhoTeachExercises(Long subjectId) {
+        return subjectRealizationRepo.findTeachersWhoTeachExercises(subjectId);
     }
 
 }

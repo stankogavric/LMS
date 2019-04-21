@@ -41,5 +41,9 @@ public class SubjectAttendanceService {
             subjectAttendanceRepo.save(subjectAttendance);
         }
     }
+    
+    public Double getAverageMark(Long studentId) {
+        return subjectAttendanceRepo.findAverageMark(studentId);
+    }
 
 }

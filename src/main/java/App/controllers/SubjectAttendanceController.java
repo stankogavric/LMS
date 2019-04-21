@@ -64,5 +64,12 @@ public class SubjectAttendanceController {
 
         return new ResponseEntity<SubjectAttendance>(HttpStatus.NO_CONTENT);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/averageMark/{studentId}", method=RequestMethod.GET)
+    public ResponseEntity<Double> getAverageMark(@PathVariable Long studentId) {
+        Double averageMark = subjectAttendanceService.getAverageMark(studentId);
+        return new ResponseEntity<Double>(averageMark, HttpStatus.OK);
+    }
 
 }
