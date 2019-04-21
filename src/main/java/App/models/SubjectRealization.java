@@ -1,16 +1,18 @@
 package App.models;
 
-import javax.persistence.Column;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonView;
-import App.utils.View.ShowTeacherRealization;
-import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowTeacherRealization;
 
 
 @Entity

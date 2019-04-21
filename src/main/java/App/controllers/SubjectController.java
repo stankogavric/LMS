@@ -64,5 +64,12 @@ public class SubjectController {
 
         return new ResponseEntity<Subject>(HttpStatus.NO_CONTENT);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/findByName/{name}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Optional<Subject>>> getSubjectsByName(@PathVariable String name) {
+        Iterable<Optional<Subject>> subjects = subjectService.getSubjectsByName(name);
+        return new ResponseEntity<Iterable<Optional<Subject>>>(subjects, HttpStatus.OK);
+    }
 
 }

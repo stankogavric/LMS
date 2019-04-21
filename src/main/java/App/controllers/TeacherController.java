@@ -64,5 +64,22 @@ public class TeacherController {
 
         return new ResponseEntity<Teacher>(HttpStatus.NO_CONTENT);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/findByName/{name}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Optional<Teacher>>> getTeachersByName(@PathVariable String name) {
+        Iterable<Optional<Teacher>> teachers = teacherService.getTeachersByName(name);
+        return new ResponseEntity<Iterable<Optional<Teacher>>>(teachers, HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/findByJmbg/{jmbg}", method=RequestMethod.GET)
+    public ResponseEntity<Teacher> getTeacherByJmbg(@PathVariable String jmbg) {
+        Optional<Teacher> teacher = teacherService.getTeacherByJmbg(jmbg);
+        if(teacher.isPresent()) {
+            return new ResponseEntity<Teacher>(teacher.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
+    }
 
 }

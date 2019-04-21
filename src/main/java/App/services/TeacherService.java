@@ -41,5 +41,13 @@ public class TeacherService {
             teacherRepo.save(teacher);
         }
     }
+    
+    public Iterable<Optional<Teacher>> getTeachersByName(String name){
+    	return teacherRepo.findByNameLike("%"+name+"%");
+    }
+    
+    public Optional<Teacher> getTeacherByJmbg(String jmbg){
+    	return teacherRepo.findByJmbg(jmbg);
+    }
 
 }

@@ -41,5 +41,9 @@ public class SubjectService {
             subjectRepo.save(subject);
         }
     }
+    
+    public Iterable<Optional<Subject>> getSubjectsByName(String name){
+    	return subjectRepo.findByNameLike("%"+name+"%");
+    }
 
 }

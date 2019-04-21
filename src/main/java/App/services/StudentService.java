@@ -41,5 +41,13 @@ public class StudentService {
             studentRepo.save(student);
         }
     }
+    
+    public Iterable<Optional<Student>> getStudentsByName(String name){
+    	return studentRepo.findByNameLike("%"+name+"%");
+    }
+    
+    public Optional<Student> getStudentByJmbg(String jmbg){
+    	return studentRepo.findByJmbg(jmbg);
+    }
 
 }
