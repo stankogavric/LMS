@@ -12,7 +12,6 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 	@Query("SELECT AVG(sa.finalGrade) FROM SubjectAttendance sa WHERE sa.student.id = ?1")
 	Double findAverageMark(Long studentId);
 	
-	//Sigurno ne radi dobro, ne radi mi mysql server da testiram, sorry
-	@Query("SELECT student FROM SubjectAttendance sa WHERE sa.finalGrade < 6")
+	@Query("SELECT sa.student FROM SubjectAttendance sa WHERE sa.finalGrade < 6")
 	Student findStudentWhoDidntPassExam(Student student);
 }
