@@ -9,6 +9,6 @@ import App.models.Teacher;
 
 @Repository
 public interface SubjectRealizationRepository extends JpaRepository<SubjectRealization, Long> {
-	@Query("SELECT sr.teacherRealizations.teacher FROM SubjectRealization sr WHERE sr.teacherRealizations.teachingType.name='Exercises' AND sr.subject.id = ?1")
+	@Query("SELECT tr.teacher FROM TeacherRealization tr WHERE tr.teachingType.name='Exercises' AND tr.subjectRealization.subject.id = ?1")
 	Iterable<Teacher> findTeachersWhoTeachExercises(Long subjectId);
 }
