@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.Teacher;
 import App.models.TeacherRealization;
 import App.repositories.TeacherRealizationRepository;
 
@@ -40,6 +41,10 @@ public class TeacherRealizationService {
             teacherRealization.setId(Tea.get().getId());
             teacherRealizationRepo.save(teacherRealization);
         }
+    }
+    
+    public Iterable<Teacher> getTeachersWhoTeachSubject(Long subjectId) {
+        return teacherRealizationRepo.findTeachersWhoTeachSubject(subjectId);
     }
 
 }
