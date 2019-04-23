@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import App.models.StudyProgram;
+import App.models.Subject;
 import App.services.StudyProgramService;
 import App.utils.View.HideOptionalProperties;
 
@@ -63,6 +64,12 @@ public class StudyProgramController {
         }
 
         return new ResponseEntity<StudyProgram>(HttpStatus.NO_CONTENT);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/studyProgramsCandidatedForRemoval/{studyProgram}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Subject>> getSubjectsCandidatedForRemoval(@PathVariable Long studyProgramId) {
+        return new ResponseEntity<Iterable<Subject>>(studyProgramService.getSubjectsCandidatedForRemoval(studyProgramId), HttpStatus.OK);
     }
 
 }

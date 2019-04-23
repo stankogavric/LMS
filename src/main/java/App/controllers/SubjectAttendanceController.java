@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.models.Student;
 import App.models.SubjectAttendance;
 import App.services.SubjectAttendanceService;
 import App.utils.View.HideOptionalProperties;
@@ -70,6 +71,12 @@ public class SubjectAttendanceController {
     public ResponseEntity<Double> getAverageMark(@PathVariable Long studentId) {
         Double averageMark = subjectAttendanceService.getAverageMark(studentId);
         return new ResponseEntity<Double>(averageMark, HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/studentsWhoDidntPassExam/{subjectId}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Student>> getStudentsWhoDidntPassExam(@PathVariable Long subjectId) {
+        return new ResponseEntity<Iterable<Student>>(subjectAttendanceService.getStudentsWhoDidntPassExam(subjectId), HttpStatus.OK);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.Student;
 import App.models.SubjectAttendance;
 import App.repositories.SubjectAttendanceRepository;
 
@@ -44,6 +45,10 @@ public class SubjectAttendanceService {
     
     public Double getAverageMark(Long studentId) {
         return subjectAttendanceRepo.findAverageMark(studentId);
+    }
+    
+    public Iterable<Student> getStudentsWhoDidntPassExam(Long subjectId) {
+        return subjectAttendanceRepo.findStudentsWhoDidntPassExam(subjectId);
     }
 
 }

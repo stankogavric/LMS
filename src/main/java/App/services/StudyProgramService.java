@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import App.models.StudyProgram;
+import App.models.Subject;
 import App.repositories.StudyProgramRepository;
 
 @Service
@@ -40,6 +41,10 @@ public class StudyProgramService {
             studyProgram.setId(Stu.get().getId());
             studyProgramRepo.save(studyProgram);
         }
+    }
+    
+    public Iterable<Subject> getSubjectsCandidatedForRemoval(Long studyProgramId) {
+        return studyProgramRepo.findSubjectsCandidatedForRemoval(studyProgramId);
     }
 
 }
