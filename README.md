@@ -1,1 +1,1 @@
-# LMS - Copyright © 2019 sQuad-Core
+# LMS (Project sQuadunum) - Copyright © 2019 sQuad-Core
