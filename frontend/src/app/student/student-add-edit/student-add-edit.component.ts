@@ -2,19 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Student } from '../student.model';
 import { FormGroup } from '@angular/forms';
 import { StudentService } from '../student.service';
-import { PersonalData } from 'src/app/personal-data/personal-data.model';
-import { Country } from 'src/app/address/country.model';
-import { City } from 'src/app/address/city.model';
-import { Address } from 'src/app/address/address.model';
-import { AccountData } from 'src/app/account-data/account-data.model';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-student-edit',
-  templateUrl: './student-edit.component.html',
-  styleUrls: ['./student-edit.component.css']
+  selector: 'app-student-add-edit',
+  templateUrl: './student-add-edit.component.html',
+  styleUrls: ['./student-add-edit.component.css']
 })
-export class StudentEditComponent implements OnInit {
+export class StudentAddEditComponent implements OnInit {
 
   private edit = false;
   private id : string;

@@ -4,11 +4,11 @@ import { Teacher } from '../teacher.model';
 import { TeacherService } from '../teacher.service';
 
 @Component({
-  selector: 'app-teacher-edit',
-  templateUrl: './teacher-edit.component.html',
-  styleUrls: ['./teacher-edit.component.css']
+  selector: 'app-teacher-add-edit',
+  templateUrl: './teacher-add-edit.component.html',
+  styleUrls: ['./teacher-add-edit.component.css']
 })
-export class TeacherEditComponent implements OnInit {
+export class TeacherAddEditComponent implements OnInit {
   private edit = false;
 
   public form : FormGroup;
