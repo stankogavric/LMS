@@ -43,13 +43,11 @@ public class TeacherService {
     }
     
     public Iterable<Optional<Teacher>> getTeachersByName(String name){
-//    	return teacherRepo.findByNameLike("%"+name+"%");
-    	return null;
+    	return teacherRepo.findTeachersByName("%"+name+"%");
     }
     
     public Optional<Teacher> getTeacherByJmbg(String jmbg){
-//    	return teacherRepo.findByJmbg(jmbg);
-    	return null;
+    	return teacherRepo.findTeacherByJmbg(jmbg);
     }
 
 }

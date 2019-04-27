@@ -43,13 +43,11 @@ public class StudentService {
     }
     
     public Iterable<Optional<Student>> getStudentsByName(String name){
-//    	return studentRepo.findByNameLike("%"+name+"%");
-    	return null;
+    	return studentRepo.findStudentsByName("%"+name+"%");
     }
     
     public Optional<Student> getStudentByJmbg(String jmbg){
-    	return null;
-//    	return studentRepo.findByJmbg(jmbg);
+    	return studentRepo.findStudentByJmbg(jmbg);
     }
 
 }
