@@ -20,12 +20,14 @@ import { AddressComponent } from './address/address.component';
 import { PasswordValidatorDirective } from './account-data/password-validator.directive';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { AccountDataComponent } from './account-data/account-data.component';
-import { StudentEditComponent } from './student/student-edit/student-edit.component';
-import { TeacherEditComponent } from './teacher/teacher-edit/teacher-edit.component';
-import { AdministrativeStaffEditComponent } from './administrativeStaff/administrative-staff-edit/administrative-staff-edit.component';
 import { HomeComponent } from './home/home.component';
 import { UniversityComponent } from './university/university.component';
 import { FacultyComponent } from './faculty/faculty.component';
+import { StudentAddEditComponent } from './student/student-add-edit/student-add-edit.component';
+import { TeacherAddEditComponent } from './teacher/teacher-add-edit/teacher-add-edit.component';
+import { AdministrativeStaffAddEditComponent } from './administrativeStaff/administrative-staff-add-edit/administrative-staff-add-edit.component';
+import { LowerCaseUrlSerializer } from './lower-case-url-serializer';
+import { UrlSerializer } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -36,12 +38,12 @@ import { FacultyComponent } from './faculty/faculty.component';
     PasswordValidatorDirective,
     PersonalDataComponent,
     AccountDataComponent,
-    StudentEditComponent,
-    TeacherEditComponent,
-    AdministrativeStaffEditComponent,
-    HomeComponent,
     UniversityComponent,
-    FacultyComponent
+    FacultyComponent,
+    HomeComponent,
+    StudentAddEditComponent,
+    TeacherAddEditComponent,
+    AdministrativeStaffAddEditComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,10 @@ import { FacultyComponent } from './faculty/faculty.component';
     MatPaginatorModule,
     MatGridListModule
   ],
-  providers: [],
+  providers: [{
+    provide: UrlSerializer,
+    useClass: LowerCaseUrlSerializer
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

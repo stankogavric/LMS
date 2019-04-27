@@ -4,12 +4,13 @@ import { AdministrativeStaff } from '../administrative-staff';
 import { AdministrativeStaffService } from '../administrative-staff.service';
 
 @Component({
-  selector: 'app-administrative-staff-edit',
-  templateUrl: './administrative-staff-edit.component.html',
-  styleUrls: ['./administrative-staff-edit.component.css']
+  selector: 'app-administrative-staff-add-edit',
+  templateUrl: './administrative-staff-add-edit.component.html',
+  styleUrls: ['./administrative-staff-add-edit.component.css']
 })
-export class AdministrativeStaffEditComponent implements OnInit {
+export class AdministrativeStaffAddEditComponent implements OnInit {
 
+  private id : string;
   private edit = false;
   public administrativeStaff = new AdministrativeStaff();
   public form = new FormGroup({});
@@ -22,7 +23,7 @@ export class AdministrativeStaffEditComponent implements OnInit {
   onSave(){
     this.administrativeStaff = this.form.value;
     if(this.edit){
-      // this.studentService.update(this.student.id, this.student).subscribe();
+      this.ASService.update(this.id, this.administrativeStaff).subscribe();
     }else{
       this.ASService.add(this.administrativeStaff).subscribe();
     }
