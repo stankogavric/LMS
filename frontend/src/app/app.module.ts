@@ -24,6 +24,8 @@ import { StudentEditComponent } from './student/student-edit/student-edit.compon
 import { TeacherEditComponent } from './teacher/teacher-edit/teacher-edit.component';
 import { AdministrativeStaffEditComponent } from './administrativeStaff/administrative-staff-edit/administrative-staff-edit.component';
 import { HomeComponent } from './home/home.component';
+import { UniversityComponent } from './university/university.component';
+import { FacultyComponent } from './faculty/faculty.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { HomeComponent } from './home/home.component';
     StudentEditComponent,
     TeacherEditComponent,
     AdministrativeStaffEditComponent,
-    HomeComponent
+    HomeComponent,
+    UniversityComponent,
+    FacultyComponent
   ],
   imports: [
     BrowserModule,

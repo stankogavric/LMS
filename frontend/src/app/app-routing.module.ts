@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { RoleGuard } from './auth/role.guard';
 import { StudentEditComponent } from './student/student-edit/student-edit.component';
 import { HomeComponent } from './home/home.component';
+import { UniversityComponent } from './university/university.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -10,7 +11,8 @@ const routes: Routes = [
   { path: 'student/:id', component: StudentEditComponent },
   { path: 'admin', component: StudentEditComponent, canActivate: [RoleGuard], 
           data: { expectedRoles: ['admin', 'professor']}},
-  {path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: 'university', component: UniversityComponent},
+  { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
 @NgModule({
