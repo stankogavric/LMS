@@ -1,0 +1,25 @@
+<div [formGroup]="addressForm">
+  <mat-card>
+    <mat-card-title>Address info</mat-card-title>
+    <div formGroupName="city">
+      <mat-form-field>
+        <input matInput type="text" name="city" placeholder="City" formControlName="name">
+        <mat-error *ngIf="addressForm.get('city').get('name').invalid">Please enter a valid city.</mat-error>
+      </mat-form-field><br>
+      <div formGroupName="country">
+        <mat-form-field>
+          <input matInput type="text" name="country" placeholder="Country" formControlName="name">
+          <mat-error *ngIf="addressForm.get('city').get('country').get('name').invalid">Please enter a valid country.</mat-error>
+        </mat-form-field><br>
+      </div>
+    </div>
+    <mat-form-field>
+      <input matInput type="text" name="text" placeholder="street" formControlName="street">
+      <mat-error *ngIf="addressForm.get('street').invalid">Please enter a valid street.</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="text" name="number" placeholder="Street number" formControlName="number">
+      <mat-error *ngIf="addressForm.get('number').invalid">Please enter a valid street number.</mat-error>
+    </mat-form-field><br>
+  </mat-card>
+</div>

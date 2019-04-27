@@ -1,0 +1,23 @@
+<div [formGroup]="accountDataForm">
+  <mat-card>
+    <mat-card-title>Account info</mat-card-title>
+    <mat-form-field>
+      <input matInput type="text" name="username" placeholder="Username" formControlName="username">
+      <mat-error *ngIf="accountDataForm.get('username').invalid">Please enter a valid username.</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="email" name="email" placeholder="E-Mail" formControlName="email">
+      <mat-error *ngIf="accountDataForm.get('email').invalid">Please enter a valid email.</mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="password" name="password" placeholder="Password" formControlName="password">
+      <mat-error *ngIf="accountDataForm.get('password').invalid">Please enter a valid password.
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field>
+      <input matInput type="password" name="confirmPassword" placeholder="Confirm password"
+        formControlName="confirmPassword">
+      <mat-error *ngIf="accountDataForm.get('confirmPassword').hasError('MatchPassword')">Password do not match.</mat-error>
+    </mat-form-field><br>
+  </mat-card>
+</div>

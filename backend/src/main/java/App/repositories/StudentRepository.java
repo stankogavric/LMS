@@ -9,6 +9,6 @@ import App.models.Student;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
-	Optional<Student> findByJmbg(String jmbg);
-	Iterable<Optional<Student>> findByNameLike(String name);
+//	Optional<Student> findByJmbg(String jmbg);
+//	Iterable<Optional<Student>> findByNameLike(String name);
 }

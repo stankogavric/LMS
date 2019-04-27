@@ -1,0 +1,17 @@
+<form (submit)="onSave()" [formGroup]="form" method="post">
+  <mat-grid-list cols="3">
+    <mat-grid-tile>
+      <app-account-data [parrentForm]="form"></app-account-data>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card>
+        <mat-card-title>Personal info</mat-card-title>
+        <app-personal-data [parrentForm]="form"></app-personal-data>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <app-address [parrentForm]="form"></app-address>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">Signup</button>
+</form>

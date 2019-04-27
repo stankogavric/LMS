@@ -10,7 +10,6 @@ public class View {
     public interface ShowUniversity{ };
     public interface ShowFaculty{ };
     public interface ShowAddress{ };
-    public interface ShowTeacher{ };
     public interface ShowStudyProgram{ };
     public interface ShowYearOfStudy{ };
     public interface ShowStudentYear{ };
@@ -20,7 +19,10 @@ public class View {
     public interface ShowTeacherRealization{ };
     public interface ShowSubjectRealization{ };
     public interface ShowSubjectAttendance{ };
+    public interface ShowTeacher{ };
     public interface ShowStudent{ };
-    public interface ShowRegisteredUser{ };
+    public interface ShowAccountData{ };
     public interface ShowAdministrator{ };
+    public interface ShowAdministrativeStaff{ };
+    public interface ShowPersonalData{ };
 }

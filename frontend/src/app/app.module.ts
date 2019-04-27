@@ -5,26 +5,55 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {FlexLayoutModule} from "@angular/flex-layout";
 
-// This is from Angular Material
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// Our own
 import {MaterialModule} from './material';
 
 import { StudentComponent } from './student/student.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
+  MatProgressSpinnerModule, MatPaginatorModule
+} from "@angular/material";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { AddressComponent } from './address/address.component';
+import { PasswordValidatorDirective } from './account-data/password-validator.directive';
+import { PersonalDataComponent } from './personal-data/personal-data.component';
+import { AccountDataComponent } from './account-data/account-data.component';
+import { StudentEditComponent } from './student/student-edit/student-edit.component';
+import { TeacherEditComponent } from './teacher/teacher-edit/teacher-edit.component';
+import { AdministrativeStaffEditComponent } from './administrativeStaff/administrative-staff-edit/administrative-staff-edit.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     StudentComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    AddressComponent,
+    PasswordValidatorDirective,
+    PersonalDataComponent,
+    AccountDataComponent,
+    StudentEditComponent,
+    TeacherEditComponent,
+    AdministrativeStaffEditComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MaterialModule
+    MaterialModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatToolbarModule,
+    MatExpansionModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

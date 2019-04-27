@@ -1,11 +1,11 @@
 package App.models;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.CascadeType;
 
 
 @Entity
@@ -16,12 +16,12 @@ public class Administrator {
 	private Long id;
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	private RegisteredUser registeredUser;
+	private AccountData accountData;
 
 	public Administrator() {}
 
-	public Administrator(RegisteredUser registeredUser){
-		this.registeredUser = registeredUser;
+	public Administrator(AccountData accountData){
+		this.accountData = accountData;
 	}
 
 	public Long getId(){
@@ -32,12 +32,12 @@ public class Administrator {
 		this.id = id;
 	}
 	
-	public RegisteredUser getRegisteredUser(){
-		return registeredUser;
+	public AccountData getAccountData(){
+		return accountData;
 	}
 
-	public void setRegisteredUser(RegisteredUser registeredUser){
-		this.registeredUser = registeredUser;
+	public void setAccountData(AccountData accountData){
+		this.accountData = accountData;
 	}
 	
 }

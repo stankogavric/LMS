@@ -1,0 +1,19 @@
+<div [formGroup]="personalDataForm">
+  <mat-card-title>Personal info</mat-card-title>
+  <mat-form-field>
+    <input matInput name="personalNumber" type="number" placeholder="Personal number" formControlName="personalNumber">
+    <mat-error *ngIf="personalDataForm.get('personalNumber').invalid">Please enter a valid personal number.</mat-error>
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput name="name" type="text" placeholder="Name" formControlName="name">
+    <mat-error *ngIf="personalDataForm.get('name').invalid">Please enter a valid name.</mat-error>
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput name="lastName" type="text" placeholder="Last name" formControlName="lastName">
+    <mat-error *ngIf="personalDataForm.get('lastName').invalid">Please enter a valid last name.</mat-error>
+  </mat-form-field><br>
+  <mat-form-field>
+    <input matInput name="profilePicturePath" type="text" placeholder="Profile picture" formControlName="profilePicturePath">
+    <mat-error *ngIf="personalDataForm.get('profilePicturePath').invalid">Please enter a valid image.</mat-error>
+  </mat-form-field><br>
+</div>

@@ -1,14 +1,14 @@
 package App.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Column;
 
 
 @Entity
-public class RegisteredUser {
+public class AccountData {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -23,9 +23,9 @@ public class RegisteredUser {
 	@Column(length=128, nullable = false)
 	private String email;
 
-	public RegisteredUser() {}
+	public AccountData() {}
 
-	public RegisteredUser(String username, String password, String email){
+	public AccountData(String username, String password, String email){
 		this.username = username;
 		this.password = password;
 		this.email = email;

@@ -9,6 +9,6 @@ import App.models.Teacher;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
-	Iterable<Optional<Teacher>> findByNameLike(String name);
-	Optional<Teacher> findByJmbg(String jmbg);
+//	Iterable<Optional<Teacher>> findByNameLike(String name);
+//	Optional<Teacher> findByJmbg(String jmbg);
 }

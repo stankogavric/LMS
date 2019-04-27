@@ -1,17 +1,16 @@
 package App.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import App.utils.View.ShowSubjectAttendance;
-import javax.persistence.ManyToOne;
+import App.utils.View.ShowStudentYear;
+import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonView;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import java.util.Set;
-import App.utils.View.ShowStudentYear;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -20,12 +19,6 @@ public class Student {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(length=128, nullable = false)
-	private String name;
-
-	@Column(length=128, nullable = false)
-	private String jmbg;
 
 	@JsonView(ShowSubjectAttendance.class)
 	@OneToMany(mappedBy="student")
@@ -39,17 +32,19 @@ public class Student {
 	private Set<StudentYear> studentYears;
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	private RegisteredUser registeredUser;
+	private AccountData accountData;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	private PersonalData personalData;
 
 	public Student() {}
 
-	public Student(String name, String jmbg, Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears, RegisteredUser registeredUser){
-		this.name = name;
-		this.jmbg = jmbg;
+	public Student(Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears, AccountData accountData, PersonalData personalData){
 		this.subjectAttendances = subjectAttendances;
 		this.address = address;
 		this.studentYears = studentYears;
-		this.registeredUser = registeredUser;
+		this.accountData = accountData;
+		this.personalData = personalData;
 	}
 
 	public Long getId(){
@@ -58,22 +53,6 @@ public class Student {
 
 	public void setId(Long id){
 		this.id = id;
-	}
-	
-	public String getName(){
-		return name;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-	
-	public String getJmbg(){
-		return jmbg;
-	}
-
-	public void setJmbg(String jmbg){
-		this.jmbg = jmbg;
 	}
 	
 	public Set<SubjectAttendance> getSubjectAttendances(){
@@ -100,12 +79,20 @@ public class Student {
 		this.studentYears = studentYears;
 	}
 	
-	public RegisteredUser getRegisteredUser(){
-		return registeredUser;
+	public AccountData getAccountData(){
+		return accountData;
 	}
 
-	public void setRegisteredUser(RegisteredUser registeredUser){
-		this.registeredUser = registeredUser;
+	public void setAccountData(AccountData accountData){
+		this.accountData = accountData;
+	}
+	
+	public PersonalData getPersonalData(){
+		return personalData;
+	}
+
+	public void setPersonalData(PersonalData personalData){
+		this.personalData = personalData;
 	}
 	
 }

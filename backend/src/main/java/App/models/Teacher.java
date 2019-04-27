@@ -1,16 +1,16 @@
 package App.models;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonView;
+import javax.persistence.Column;
 import App.utils.View.ShowTitle;
+import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonView;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import java.util.Set;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -21,13 +21,7 @@ public class Teacher {
 	private Long id;
 
 	@Column(length=128, nullable = false)
-	private String name;
-
-	@Column(length=128, nullable = false)
 	private String biography;
-
-	@Column(length=128, nullable = false)
-	private String jmbg;
 
 	@JsonView(ShowTitle.class)
 	@OneToMany(mappedBy="teacher")
@@ -37,17 +31,19 @@ public class Teacher {
 	private Address address;
 
 	@ManyToOne(cascade=CascadeType.ALL)
-	private RegisteredUser registeredUser;
+	private AccountData accountData;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	private PersonalData personalData;
 
 	public Teacher() {}
 
-	public Teacher(String name, String biography, String jmbg, Set<Title> titles, Address address, RegisteredUser registeredUser){
-		this.name = name;
+	public Teacher(String biography, Set<Title> titles, Address address, AccountData accountData, PersonalData personalData){
 		this.biography = biography;
-		this.jmbg = jmbg;
 		this.titles = titles;
 		this.address = address;
-		this.registeredUser = registeredUser;
+		this.accountData = accountData;
+		this.personalData = personalData;
 	}
 
 	public Long getId(){
@@ -58,28 +54,12 @@ public class Teacher {
 		this.id = id;
 	}
 	
-	public String getName(){
-		return name;
-	}
-
-	public void setName(String name){
-		this.name = name;
-	}
-	
 	public String getBiography(){
 		return biography;
 	}
 
 	public void setBiography(String biography){
 		this.biography = biography;
-	}
-	
-	public String getJmbg(){
-		return jmbg;
-	}
-
-	public void setJmbg(String jmbg){
-		this.jmbg = jmbg;
 	}
 	
 	public Set<Title> getTitles(){
@@ -98,12 +78,20 @@ public class Teacher {
 		this.address = address;
 	}
 	
-	public RegisteredUser getRegisteredUser(){
-		return registeredUser;
+	public AccountData getAccountData(){
+		return accountData;
 	}
 
-	public void setRegisteredUser(RegisteredUser registeredUser){
-		this.registeredUser = registeredUser;
+	public void setAccountData(AccountData accountData){
+		this.accountData = accountData;
+	}
+	
+	public PersonalData getPersonalData(){
+		return personalData;
+	}
+
+	public void setPersonalData(PersonalData personalData){
+		this.personalData = personalData;
 	}
 	
 }
