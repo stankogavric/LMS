@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { PasswordValidatorDirective } from './password-validator.directive';
-
+import { MustMatch } from '../validators/must-match-validator.directive';
 @Component({
   selector: 'app-account-data',
   templateUrl: './account-data.component.html',
@@ -18,8 +17,10 @@ export class AccountDataComponent implements OnInit {
     this.accountDataForm = this.fb.group({
       username: ['', {validators: [Validators.required, Validators.minLength(3)]}],
       email: ['', {validators: [Validators.required, Validators.email]}],
-      password: ['', {validators: [Validators.required, Validators.minLength(8), PasswordValidatorDirective.MatchPassword]}],
-      confirmPassword: ['', {validators: [PasswordValidatorDirective.MatchPassword]}]
+      password: ['', {validators: [Validators.required, Validators.minLength(8)]}],
+      confirmPassword: [''],
+    }, {
+      validator: MustMatch('password', 'confirmPassword')
     });
 
     this.parrentForm.addControl("accountData", this.accountDataForm);

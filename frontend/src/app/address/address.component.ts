@@ -26,19 +26,6 @@ export class AddressComponent implements OnInit {
       number: ['', {validators: [Validators.required]}],
     });
 
-    // if(this.address){
-    //   this.addressForm.patchValue({
-    //     number: this.address.number,
-    //     street: this.address.street,
-    //   });
-    //   if(this.address.city){
-    //     this.addressForm.patchValue({
-    //       country: this.address.city.country,
-    //       city: this.address.city.name,
-    //     });
-    //   }
-    // }
-
     this.parrentForm.addControl("address", this.addressForm);
   }
 
