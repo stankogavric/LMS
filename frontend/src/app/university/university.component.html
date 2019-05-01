@@ -1,6 +1,6 @@
-<h2 align="center">{{ university.name }}</h2>
-<div align="center">{{ university.description }}</div>
-<div>Rector: {{ university.rector.personalData.firstname }} {{ university.rector.personalData.lastname }}</div>
-<div *ngFor="let p of university.phones">Phone: {{ p.phone }}</div>
-<div *ngFor="let e of university.emails">Email: {{ e.email }}</div>
-<div>Address: {{ university.address.street }} {{ university.address.number }}, {{ university.address.city.name }}, {{ university.address.city.country.name }}</div>
+<h2 align="center">{{ university?.name }}</h2>
+<div align="center">{{ university?.description }}</div>
+<div>Rector: {{ university?.rector.personalData.firstName }} {{ university?.rector.personalData.lastName }}</div>
+<div *ngFor="let p of university?.phones">Phone: {{ p.phone }}</div>
+<div *ngFor="let e of university?.emails">Email: {{ e.email }}</div>
+<div>Address: {{ university?.address.street }} {{ university?.address.number }}, {{ university?.address.city.name }}, {{ university?.address.city.country.name }}</div>

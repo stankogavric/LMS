@@ -42,8 +42,8 @@ public class StudentService {
         }
     }
     
-    public Iterable<Optional<Student>> getStudentsByName(String name){
-    	return studentRepo.findStudentsByName("%"+name+"%");
+    public Iterable<Optional<Student>> getStudentsByFirstName(String firstName){
+    	return studentRepo.findStudentsByFirstName("%"+firstName+"%");
     }
     
     public Optional<Student> getStudentByJmbg(String jmbg){

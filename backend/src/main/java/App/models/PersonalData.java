@@ -15,10 +15,10 @@ public class PersonalData {
 	private Long id;
 
 	@Column(length=128, nullable = false)
-	private String firstname;
+	private String firstName;
 	
 	@Column(length=128, nullable = false)
-	private String lastname;
+	private String lastName;
 
 	@Column(length=128, nullable = false)
 	private String personalNumber;
@@ -28,10 +28,10 @@ public class PersonalData {
 
 	public PersonalData() {}
 
-	public PersonalData(String firstname, String lastname, String personalNumber, String profilePicturePath) {
+	public PersonalData(String firstName, String lastName, String personalNumber, String profilePicturePath) {
 		super();
-		this.firstname = firstname;
-		this.lastname = lastname;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.personalNumber = personalNumber;
 		this.profilePicturePath = profilePicturePath;
 	}
@@ -44,20 +44,20 @@ public class PersonalData {
 		this.id = id;
 	}
 	
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getPersonalNumber(){

@@ -12,7 +12,7 @@ import { Email } from '../email/email.model';
 })
 export class FacultyComponent implements OnInit {
 
-  private faculty: Faculty;
+  public faculty: Faculty;
 
   constructor(private facultyService: FacultyService, private route: ActivatedRoute) { }
 

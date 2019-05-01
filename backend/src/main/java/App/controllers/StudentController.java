@@ -67,8 +67,8 @@ public class StudentController {
     
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/findByName/{name}", method=RequestMethod.GET)
-    public ResponseEntity<Iterable<Optional<Student>>> getStudentsByName(@PathVariable String name) {
-        Iterable<Optional<Student>> students = studentService.getStudentsByName(name);
+    public ResponseEntity<Iterable<Optional<Student>>> getStudentsByFirstName(@PathVariable String firstName) {
+        Iterable<Optional<Student>> students = studentService.getStudentsByFirstName(firstName);
         return new ResponseEntity<Iterable<Optional<Student>>>(students, HttpStatus.OK);
     }
     

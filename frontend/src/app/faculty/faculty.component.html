@@ -1,6 +1,6 @@
-<h2 align="center">{{ faculty.name }}</h2>
-<div align="center">{{ faculty.description }}</div>
-<div>Dean: {{ faculty.dean.personalData.firstname }} {{ faculty.dean.personalData.lastname }}</div>
-<div *ngFor="let p of faculty.phones">Phone: {{ p.phone }}</div>
-<div *ngFor="let e of faculty.emails">Email: {{ e.email }}</div>
-<div>Address: {{ faculty.address.street }} {{ faculty.address.number }}, {{ faculty.address.city.name }}, {{ faculty.address.city.country.name }}</div>
+<h2 align="center">{{ faculty?.name }}</h2>
+<div align="center">{{ faculty?.description }}</div>
+<div>Dean: {{ faculty?.dean.personalData.firstName }} {{ faculty?.dean.personalData.lastName }}</div>
+<div *ngFor="let p of faculty?.phones">Phone: {{ p.phone }}</div>
+<div *ngFor="let e of faculty?.emails">Email: {{ e.email }}</div>
+<div>Address: {{ faculty?.address.street }} {{ faculty?.address.number }}, {{ faculty?.address.city.name }}, {{ faculty?.address.city.country.name }}</div>

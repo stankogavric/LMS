@@ -12,6 +12,6 @@ import App.models.Student;
 public interface StudentRepository extends JpaRepository<Student, Long> {
 	@Query("SELECT s FROM Student s WHERE s.personalData.personalNumber = ?1")
 	Optional<Student> findStudentByJmbg(String jmbg);
-	@Query("SELECT s FROM Student s WHERE s.personalData.firstname LIKE ?1")
-	Iterable<Optional<Student>> findStudentsByName(String name);
+	@Query("SELECT s FROM Student s WHERE s.personalData.firstName LIKE ?1")
+	Iterable<Optional<Student>> findStudentsByFirstName(String firstName);
 }
