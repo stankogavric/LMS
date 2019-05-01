@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import App.models.Email;
 import App.models.Faculty;
 import App.models.Phone;
+import App.models.StudyProgram;
 import App.services.FacultyService;
 import App.utils.View.HideOptionalProperties;
 
@@ -66,6 +67,12 @@ public class FacultyController {
         }
 
         return new ResponseEntity<Faculty>(HttpStatus.NO_CONTENT);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/studyPrograms/{facultyId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<StudyProgram>> getStudyPrograms(@PathVariable Long facultyId) {
+        return new ResponseEntity<ArrayList<StudyProgram>>(facultyService.getStudyPrograms(facultyId), HttpStatus.OK);
     }
     
     @JsonView(HideOptionalProperties.class)

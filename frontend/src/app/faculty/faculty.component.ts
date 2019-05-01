@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Faculty } from './faculty.model';
 import { Phone } from '../phone/phone.model';
 import { Email } from '../email/email.model';
+import { StudyProgram } from '../study-program/study-program.model';
 
 @Component({
   selector: 'app-faculty',
@@ -20,6 +21,9 @@ export class FacultyComponent implements OnInit {
     this.route.params.subscribe(routeParams => {
       this.facultyService.getOne(routeParams.id).subscribe((data: Faculty)=>{
         this.faculty=data;
+        this.facultyService.getStudyPrograms(data.id).subscribe((data: StudyProgram[])=>{
+          this.faculty.studyPrograms=data;
+        });
         this.facultyService.getFacultyPhones(data.id).subscribe((data: Phone[])=>{
           this.faculty.phones=data;
         });

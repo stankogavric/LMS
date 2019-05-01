@@ -1,5 +1,6 @@
 package App.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +8,17 @@ import org.springframework.stereotype.Service;
 
 import App.models.StudyProgram;
 import App.models.Subject;
+import App.models.YearOfStudy;
 import App.repositories.StudyProgramRepository;
+import App.repositories.YearOfStudyRepository;
 
 @Service
 public class StudyProgramService {
 
     @Autowired
     private StudyProgramRepository studyProgramRepo;
+    @Autowired
+    private YearOfStudyRepository yearOfStudyRepo;
 
     public StudyProgramService() {
     }
@@ -45,6 +50,10 @@ public class StudyProgramService {
     
     public Iterable<Subject> getSubjectsCandidatedForRemoval(Long studyProgramId) {
         return studyProgramRepo.findSubjectsCandidatedForRemoval(studyProgramId);
+    }
+    
+    public ArrayList<YearOfStudy> getYearsOfStudy(Long studyProgramId) {
+    	return yearOfStudyRepo.findByStudyProgramIdEquals(studyProgramId);
     }
 
 }

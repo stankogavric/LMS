@@ -1,0 +1,26 @@
+<h2 align="center">{{ studyProgram?.name }}</h2>
+<div align="center">{{ studyProgram?.description }}</div>
+<br>
+<div>Subjects:</div>
+<mat-accordion>
+    <div *ngFor="let y of studyProgram?.yearsOfStudy">
+        <!--
+        <a [routerLink]="[ '/subject', s.id ]">
+            <mat-card>{{ s.name }}</mat-card>
+        </a>
+        -->
+        <mat-expansion-panel *ngFor="let s of y?.subjects" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ s.name }}
+                </mat-panel-title>
+                <mat-panel-description>
+                    {{ s.ects }} ECTS
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p *ngFor="let s of s.syllabus">{{ s.description }}</p>
+        </mat-expansion-panel>
+    </div>
+</mat-accordion>
+<br>
+<div>Head teacher: {{ studyProgram?.headTeacher.personalData.firstName }} {{ studyProgram?.headTeacher.personalData.lastName }}</div>

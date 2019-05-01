@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Faculty } from './faculty.model';
 import { Phone } from '../phone/phone.model';
 import { Email } from '../email/email.model';
+import { StudyProgram } from '../study-program/study-program.model';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class FacultyService {
 
   update(id:string, faculty:Faculty) {
     return this.http.put(this.facultyUrl+`/${id}`, faculty)
+  }
+
+  getStudyPrograms(facultyId: number) {
+    return this.http.get<StudyProgram[]>(this.facultyUrl+`/studyPrograms/${facultyId}`);
   }
 
   getFacultyPhones(facultyId: number) {

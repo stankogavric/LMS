@@ -1,5 +1,9 @@
 <h2 align="center">{{ faculty?.name }}</h2>
 <div align="center">{{ faculty?.description }}</div>
+<br>
+<div>Study programs:</div>
+<div><a *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
+<br>
 <div>Dean: {{ faculty?.dean.personalData.firstName }} {{ faculty?.dean.personalData.lastName }}</div>
 <div *ngFor="let p of faculty?.phones">Phone: {{ p.phone }}</div>
 <div *ngFor="let e of faculty?.emails">Email: {{ e.email }}</div>

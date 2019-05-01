@@ -11,15 +11,19 @@ import App.models.Faculty;
 import App.models.FacultyEmails;
 import App.models.FacultyPhones;
 import App.models.Phone;
+import App.models.StudyProgram;
 import App.repositories.FacultyEmailsRepository;
 import App.repositories.FacultyPhonesRepository;
 import App.repositories.FacultyRepository;
+import App.repositories.StudyProgramRepository;
 
 @Service
 public class FacultyService {
 
     @Autowired
     private FacultyRepository facultyRepo;
+    @Autowired
+    private StudyProgramRepository studyProgramRepo;
     @Autowired
     private FacultyPhonesRepository facultyPhonesRepo;
     @Autowired
@@ -51,6 +55,10 @@ public class FacultyService {
             faculty.setId(Fac.get().getId());
             facultyRepo.save(faculty);
         }
+    }
+    
+    public ArrayList<StudyProgram> getStudyPrograms(Long facultyId) {
+    	return studyProgramRepo.findByFacultyIdEquals(facultyId);
     }
 
     public ArrayList<Phone> getFacultyPhones(Long facultyId) {

@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import App.models.Subject;
+import App.models.Topic;
 import App.services.SubjectService;
 import App.utils.View.HideOptionalProperties;
 
@@ -70,6 +72,12 @@ public class SubjectController {
     public ResponseEntity<Iterable<Optional<Subject>>> getSubjectsByName(@PathVariable String name) {
         Iterable<Optional<Subject>> subjects = subjectService.getSubjectsByName(name);
         return new ResponseEntity<Iterable<Optional<Subject>>>(subjects, HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/syllabuses/{subjectId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Topic>> getSyllabuses(@PathVariable Long subjectId) {
+        return new ResponseEntity<ArrayList<Topic>>(subjectService.getSyllabuses(subjectId), HttpStatus.OK);
     }
 
 }

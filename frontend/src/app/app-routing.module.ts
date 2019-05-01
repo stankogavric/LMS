@@ -7,6 +7,8 @@ import { AdministrativeStaffAddEditComponent } from './administrativeStaff/admin
 import { HomeComponent } from './home/home.component';
 import { UniversityComponent } from './university/university.component';
 import { FacultyComponent } from './faculty/faculty.component';
+import { StudyProgramComponent } from './study-program/study-program.component';
+import { SubjectComponent } from './subject/subject.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +22,8 @@ const routes: Routes = [
           data: { expectedRoles: ['admin', 'professor']}},
   { path: 'university', component: UniversityComponent},
   { path: 'faculty/:id', component: FacultyComponent},
+  { path: 'studyProgram/:id', component: StudyProgramComponent},
+  { path: 'subject/:id', component: SubjectComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

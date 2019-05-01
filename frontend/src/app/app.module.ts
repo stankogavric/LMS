@@ -29,6 +29,10 @@ import { LowerCaseUrlSerializer } from './lower-case-url-serializer';
 import { UrlSerializer } from '@angular/router';
 import { PhoneComponent } from './phone/phone.component';
 import { EmailComponent } from './email/email.component';
+import { StudyProgramComponent } from './study-program/study-program.component';
+import { YearOfStudyComponent } from './year-of-study/year-of-study.component';
+import { SubjectComponent } from './subject/subject.component';
+import { TopicComponent } from './topic/topic.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,11 @@ import { EmailComponent } from './email/email.component';
     TeacherAddEditComponent,
     AdministrativeStaffAddEditComponent,
     PhoneComponent,
-    EmailComponent
+    EmailComponent,
+    StudyProgramComponent,
+    YearOfStudyComponent,
+    SubjectComponent,
+    TopicComponent
   ],
   imports: [
     BrowserModule,

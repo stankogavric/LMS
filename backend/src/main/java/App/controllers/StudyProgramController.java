@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import App.models.StudyProgram;
 import App.models.Subject;
+import App.models.YearOfStudy;
 import App.services.StudyProgramService;
 import App.utils.View.HideOptionalProperties;
 
@@ -70,6 +72,12 @@ public class StudyProgramController {
     @RequestMapping(value="/studyProgramsCandidatedForRemoval/{studyProgram}", method=RequestMethod.GET)
     public ResponseEntity<Iterable<Subject>> getSubjectsCandidatedForRemoval(@PathVariable Long studyProgramId) {
         return new ResponseEntity<Iterable<Subject>>(studyProgramService.getSubjectsCandidatedForRemoval(studyProgramId), HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/yearsofstudy/{studyProgramId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<YearOfStudy>> getYearsOfStudy(@PathVariable Long studyProgramId) {
+        return new ResponseEntity<ArrayList<YearOfStudy>>(studyProgramService.getYearsOfStudy(studyProgramId), HttpStatus.OK);
     }
 
 }

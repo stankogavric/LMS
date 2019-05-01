@@ -3,6 +3,7 @@ import { Address } from '../address/address.model';
 import { Teacher } from '../teacher/teacher.model';
 import { Phone } from '../phone/phone.model';
 import { Email } from '../email/email.model';
+import { StudyProgram } from '../study-program/study-program.model';
 
 export class Faculty {
 	id:number;
@@ -13,5 +14,5 @@ export class Faculty {
 	description: string;
 	phones: Phone[];
 	emails: Email[];
-    //studyPrograms: StudyProgram[];
+    studyPrograms: StudyProgram[];
 }

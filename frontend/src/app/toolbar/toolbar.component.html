@@ -7,11 +7,11 @@
   <!-- This fills the remaining space of the current row -->
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-      <button mat-button routerLink="/university">University</button>
+      <button mat-button routerLink="university">University</button>
 
       <button mat-button [matMenuTriggerFor]="facultiesMenu">Faculties</button>
       <mat-menu #facultiesMenu="matMenu">
-        <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]" >{{ f.name }}</button>
+        <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]">{{ f.name }}</button>
       </mat-menu>
 
       <button mat-button routerLink="register/student">Sign up</button>

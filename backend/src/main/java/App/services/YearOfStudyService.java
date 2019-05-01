@@ -1,11 +1,14 @@
 package App.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.Subject;
 import App.models.YearOfStudy;
+import App.repositories.SubjectRepository;
 import App.repositories.YearOfStudyRepository;
 
 @Service
@@ -13,6 +16,8 @@ public class YearOfStudyService {
 
     @Autowired
     private YearOfStudyRepository yearOfStudyRepo;
+    @Autowired
+    private SubjectRepository subjectRepo;
 
     public YearOfStudyService() {
     }
@@ -42,4 +47,7 @@ public class YearOfStudyService {
         }
     }
 
+    public ArrayList<Subject> getSubjects(Long yearOfStudyId) {
+    	return subjectRepo.findByYearOfStudyIdEquals(yearOfStudyId);
+    }
 }
