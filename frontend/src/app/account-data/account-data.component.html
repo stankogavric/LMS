@@ -10,14 +10,15 @@
       <mat-error *ngIf="accountDataForm.get('email').invalid">Please enter a valid email.</mat-error>
     </mat-form-field><br>
     <mat-form-field>
-      <input matInput type="password" name="password" placeholder="Password" formControlName="password">
+      <input matInput type="password" name="password" placeholder="Password" formControlName="password"
+      (change)="accountDataForm.get('confirmPassword').updateValueAndValidity()">
       <mat-error *ngIf="accountDataForm.get('password').invalid">Please enter a valid password.
       </mat-error>
     </mat-form-field><br>
     <mat-form-field>
       <input matInput type="password" name="confirmPassword" placeholder="Confirm password"
         formControlName="confirmPassword">
-      <mat-error *ngIf="accountDataForm.get('confirmPassword').hasError('MatchPassword')">Password do not match.</mat-error>
+      <mat-error *ngIf="accountDataForm.get('confirmPassword').invalid">Password do not match.</mat-error>
     </mat-form-field><br>
   </mat-card>
 </div>

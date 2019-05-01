@@ -17,7 +17,6 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddressComponent } from './address/address.component';
-import { PasswordValidatorDirective } from './account-data/password-validator.directive';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { AccountDataComponent } from './account-data/account-data.component';
 import { HomeComponent } from './home/home.component';
@@ -37,7 +36,6 @@ import { EmailComponent } from './email/email.component';
     StudentComponent,
     ToolbarComponent,
     AddressComponent,
-    PasswordValidatorDirective,
     PersonalDataComponent,
     AccountDataComponent,
     UniversityComponent,
