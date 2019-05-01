@@ -1,17 +1,22 @@
 package App.models;
 
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonView;
-import java.util.Date;
-import App.utils.View.ShowFaculty;
-import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowFaculty;
+import App.utils.View.ShowUniversityEmails;
+import App.utils.View.ShowUniversityPhones;
 
 
 @Entity
@@ -36,15 +41,31 @@ public class University {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Teacher rector;
+	
+	@Column(length=128, nullable = false)
+	private String description;
+	
+	@JsonView(ShowUniversityPhones.class)
+	@OneToMany(mappedBy="university")
+	private Set<UniversityPhones> phones;
+	
+	@JsonView(ShowUniversityEmails.class)
+	@OneToMany(mappedBy="university")
+	private Set<UniversityEmails> emails;
 
 	public University() {}
 
-	public University(String name, Date dateOfEstablishment, Set<Faculty> faculties, Address address, Teacher rector){
+	public University(String name, Date dateOfEstablishment, Set<Faculty> faculties, Address address, Teacher rector,
+			String description, Set<UniversityPhones> phones, Set<UniversityEmails> emails) {
+		super();
 		this.name = name;
 		this.dateOfEstablishment = dateOfEstablishment;
 		this.faculties = faculties;
 		this.address = address;
 		this.rector = rector;
+		this.description = description;
+		this.phones = phones;
+		this.emails = emails;
 	}
 
 	public Long getId(){
@@ -93,6 +114,30 @@ public class University {
 
 	public void setRector(Teacher rector){
 		this.rector = rector;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Set<UniversityPhones> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(Set<UniversityPhones> phones) {
+		this.phones = phones;
+	}
+
+	public Set<UniversityEmails> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(Set<UniversityEmails> emails) {
+		this.emails = emails;
 	}
 	
 }

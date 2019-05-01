@@ -8,16 +8,21 @@
   <span class="fill-remaining-space"></span>
   <div fxLayout="row" fxShow="false" fxShow.gt-sm>
       <button mat-button routerLink="/university">University</button>
+
+      <button mat-button [matMenuTriggerFor]="facultiesMenu">Faculties</button>
+      <mat-menu #facultiesMenu="matMenu">
+        <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]" >{{ f.name }}</button>
+      </mat-menu>
+
       <button mat-button routerLink="register/student">Sign up</button>
       <button mat-button routerLink="register/student">Sign in</button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
-   <mat-icon>menu</mat-icon>
+    <mat-icon>menu</mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Uni</button>
+    <button mat-menu-item>Facu</button>
+  </mat-menu>
 
 </mat-toolbar>
-<mat-menu x-position="before" #menu="matMenu">
-  <button mat-menu-item routerLink="/products">Products</button>
-  <button mat-menu-item routerLink="/dashboard">Dashboard</button>
-  <!--<button mat-menu-item>Help</button>-->
-</mat-menu>

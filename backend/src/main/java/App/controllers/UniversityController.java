@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.models.Email;
+import App.models.Phone;
 import App.models.University;
 import App.services.UniversityService;
 import App.utils.View.HideOptionalProperties;
@@ -63,6 +66,18 @@ public class UniversityController {
         }
 
         return new ResponseEntity<University>(HttpStatus.NO_CONTENT);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/phones/{universityId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Phone>> getUniversityPhones(@PathVariable Long universityId) {
+        return new ResponseEntity<ArrayList<Phone>>(universityService.getUniversityPhones(universityId), HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/emails/{universityId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Email>> getUniversityEmails(@PathVariable Long universityId) {
+        return new ResponseEntity<ArrayList<Email>>(universityService.getUniversityEmails(universityId), HttpStatus.OK);
     }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FacultyService } from '../faculty/faculty.service';
+import { Faculty } from '../faculty/faculty.model';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,11 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
-  title = "sQuadunum"
+  title = "sQuadunum";
+  faculties = [];
 
-  constructor() { }
+  constructor(private facultyService: FacultyService) { }
 
   ngOnInit() {
+    this.facultyService.getAll().subscribe((data: Faculty[]) => {
+      this.faculties = data;
+    });
   }
 
 }

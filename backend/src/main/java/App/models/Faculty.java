@@ -1,16 +1,21 @@
 package App.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import com.fasterxml.jackson.annotation.JsonView;
-import javax.persistence.CascadeType;
-import App.utils.View.ShowStudyProgram;
 import javax.persistence.OneToMany;
-import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowFacultyEmails;
+import App.utils.View.ShowFacultyPhones;
+import App.utils.View.ShowStudyProgram;
 
 
 @Entity
@@ -35,15 +40,31 @@ public class Faculty {
 	@JsonView(ShowStudyProgram.class)
 	@OneToMany(mappedBy="faculty")
 	private Set<StudyProgram> studyPrograms;
+	
+	@Column(length=128, nullable = false)
+	private String description;
+	
+	@JsonView(ShowFacultyPhones.class)
+	@OneToMany(mappedBy="faculty")
+	private Set<FacultyPhones> phones;
+	
+	@JsonView(ShowFacultyEmails.class)
+	@OneToMany(mappedBy="faculty")
+	private Set<FacultyEmails> emails;
 
 	public Faculty() {}
 
-	public Faculty(String name, University university, Address address, Teacher dean, Set<StudyProgram> studyPrograms){
+	public Faculty(String name, University university, Address address, Teacher dean, Set<StudyProgram> studyPrograms,
+			String description, Set<FacultyPhones> phones, Set<FacultyEmails> emails) {
+		super();
 		this.name = name;
 		this.university = university;
 		this.address = address;
 		this.dean = dean;
 		this.studyPrograms = studyPrograms;
+		this.description = description;
+		this.phones = phones;
+		this.emails = emails;
 	}
 
 	public Long getId(){
@@ -92,6 +113,30 @@ public class Faculty {
 
 	public void setStudyPrograms(Set<StudyProgram> studyPrograms){
 		this.studyPrograms = studyPrograms;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Set<FacultyPhones> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(Set<FacultyPhones> phones) {
+		this.phones = phones;
+	}
+
+	public Set<FacultyEmails> getEmails() {
+		return emails;
+	}
+
+	public void setEmails(Set<FacultyEmails> emails) {
+		this.emails = emails;
 	}
 	
 }

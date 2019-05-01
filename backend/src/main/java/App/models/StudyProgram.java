@@ -32,14 +32,20 @@ public class StudyProgram {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Faculty faculty;
+	
+	@Column(length=128, nullable = false)
+	private String description;
 
 	public StudyProgram() {}
 
-	public StudyProgram(String name, Set<YearOfStudy> yearsOfStudy, Teacher headTeacher, Faculty faculty){
+	public StudyProgram(String name, Set<YearOfStudy> yearsOfStudy, Teacher headTeacher, Faculty faculty,
+			String description) {
+		super();
 		this.name = name;
 		this.yearsOfStudy = yearsOfStudy;
 		this.headTeacher = headTeacher;
 		this.faculty = faculty;
+		this.description = description;
 	}
 
 	public Long getId(){
@@ -80,6 +86,14 @@ public class StudyProgram {
 
 	public void setFaculty(Faculty faculty){
 		this.faculty = faculty;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }

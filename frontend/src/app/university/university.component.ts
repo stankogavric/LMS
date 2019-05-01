@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { University } from './university.model';
 import { UniversityService } from './university.service';
 import { ActivatedRoute } from '@angular/router';
+import { Phone } from '../phone/phone.model';
+import { Email } from '../email/email.model';
 
 @Component({
   selector: 'app-university',
@@ -16,7 +18,14 @@ export class UniversityComponent implements OnInit {
 
   ngOnInit() {
     this.universityService.getAll().subscribe((data: University[])=>{
-      this.university=data[0];});
+      this.university=data[0];
+      this.universityService.getUniversityPhones(data[0].id).subscribe((data: Phone[])=>{
+        this.university.phones=data;
+      });
+      this.universityService.getUniversityEmails(data[0].id).subscribe((data: Email[])=>{
+        this.university.emails=data;
+      });
+    });
   }
 
 }

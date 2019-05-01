@@ -25,4 +25,10 @@ public class View {
     public interface ShowAdministrator{ };
     public interface ShowAdministrativeStaff{ };
     public interface ShowPersonalData{ };
+    public interface ShowPhone{ };
+    public interface ShowEmail{ };
+    public interface ShowUniversityEmails{ };
+    public interface ShowFacultyEmails{ };
+    public interface ShowUniversityPhones{ };
+    public interface ShowFacultyPhones{ };
 }

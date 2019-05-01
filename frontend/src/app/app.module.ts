@@ -28,6 +28,8 @@ import { TeacherAddEditComponent } from './teacher/teacher-add-edit/teacher-add-
 import { AdministrativeStaffAddEditComponent } from './administrativeStaff/administrative-staff-add-edit/administrative-staff-add-edit.component';
 import { LowerCaseUrlSerializer } from './lower-case-url-serializer';
 import { UrlSerializer } from '@angular/router';
+import { PhoneComponent } from './phone/phone.component';
+import { EmailComponent } from './email/email.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { UrlSerializer } from '@angular/router';
     HomeComponent,
     StudentAddEditComponent,
     TeacherAddEditComponent,
-    AdministrativeStaffAddEditComponent
+    AdministrativeStaffAddEditComponent,
+    PhoneComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,

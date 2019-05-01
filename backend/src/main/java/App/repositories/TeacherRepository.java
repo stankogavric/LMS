@@ -10,7 +10,7 @@ import App.models.Teacher;
 
 @Repository
 public interface TeacherRepository extends JpaRepository<Teacher, Long> {
-	@Query("SELECT t FROM Teacher t WHERE t.personalData.name LIKE ?1")
+	@Query("SELECT t FROM Teacher t WHERE t.personalData.firstname LIKE ?1")
 	Iterable<Optional<Teacher>> findTeachersByName(String name);
 	@Query("SELECT t FROM Teacher t WHERE t.personalData.personalNumber = ?1")
 	Optional<Teacher> findTeacherByJmbg(String jmbg);

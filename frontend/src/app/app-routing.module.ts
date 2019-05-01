@@ -6,6 +6,7 @@ import { TeacherAddEditComponent } from './teacher/teacher-add-edit/teacher-add-
 import { AdministrativeStaffAddEditComponent } from './administrativeStaff/administrative-staff-add-edit/administrative-staff-add-edit.component';
 import { HomeComponent } from './home/home.component';
 import { UniversityComponent } from './university/university.component';
+import { FacultyComponent } from './faculty/faculty.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'admin', component: StudentAddEditComponent, canActivate: [RoleGuard], 
           data: { expectedRoles: ['admin', 'professor']}},
   { path: 'university', component: UniversityComponent},
+  { path: 'faculty/:id', component: FacultyComponent},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

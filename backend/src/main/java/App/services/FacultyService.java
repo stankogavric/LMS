@@ -1,11 +1,18 @@
 package App.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.Email;
 import App.models.Faculty;
+import App.models.FacultyEmails;
+import App.models.FacultyPhones;
+import App.models.Phone;
+import App.repositories.FacultyEmailsRepository;
+import App.repositories.FacultyPhonesRepository;
 import App.repositories.FacultyRepository;
 
 @Service
@@ -13,6 +20,10 @@ public class FacultyService {
 
     @Autowired
     private FacultyRepository facultyRepo;
+    @Autowired
+    private FacultyPhonesRepository facultyPhonesRepo;
+    @Autowired
+    private FacultyEmailsRepository facultyEmailsRepo;
 
     public FacultyService() {
     }
@@ -42,4 +53,21 @@ public class FacultyService {
         }
     }
 
+    public ArrayList<Phone> getFacultyPhones(Long facultyId) {
+    	ArrayList<FacultyPhones> phonesId = facultyPhonesRepo.findByFacultyIdEquals(facultyId);
+    	ArrayList<Phone> phones = new ArrayList<Phone>();
+    	for(FacultyPhones p : phonesId) {
+    		phones.add(p.getPhone());
+    	}
+    	return phones;
+    }
+    
+    public ArrayList<Email> getFacultyEmails(Long facultyId) {
+    	ArrayList<FacultyEmails> emailsId = facultyEmailsRepo.findByFacultyIdEquals(facultyId);
+    	ArrayList<Email> emails = new ArrayList<Email>();
+    	for(FacultyEmails p : emailsId) {
+    		emails.add(p.getEmail());
+    	}
+    	return emails;
+    }
 }
