@@ -1,0 +1,21 @@
+<button type="button" mat-button (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+</button>
+<mat-drawer-container class="admin-container" autosize>
+  <mat-drawer #drawer class="admin-sidenav" mode="side" opened="true">
+      <button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
+      <br>
+      <mat-menu #usersMenu="matMenu">
+        <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
+        <button mat-menu-item routerLink="students">Students</button>
+        <button mat-menu-item routerLink="teachers">Teachers</button>
+      </mat-menu>
+    <button mat-button routerLink="">Study programs</button>
+  </mat-drawer>
+
+  <div class="admin-sidenav-content">
+    <router-outlet></router-outlet>
+    <!--<router-outlet name="adminSidenav"></router-outlet>-->
+  </div>
+
+</mat-drawer-container>

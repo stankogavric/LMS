@@ -12,7 +12,7 @@ import { StudentComponent } from './student/student.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
-  MatProgressSpinnerModule, MatPaginatorModule
+  MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule
 } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +33,9 @@ import { StudyProgramComponent } from './study-program/study-program.component';
 import { YearOfStudyComponent } from './year-of-study/year-of-study.component';
 import { SubjectComponent } from './subject/subject.component';
 import { TopicComponent } from './topic/topic.component';
+import { AdminSidenavComponent } from './admin-sidenav/admin-sidenav.component';
+import { StudentsComponent } from './student/students/students.component';
+import { TeachersComponent } from './teacher/teachers/teachers.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { TopicComponent } from './topic/topic.component';
     StudyProgramComponent,
     YearOfStudyComponent,
     SubjectComponent,
-    TopicComponent
+    TopicComponent,
+    AdminSidenavComponent,
+    StudentsComponent,
+    TeachersComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +77,8 @@ import { TopicComponent } from './topic/topic.component';
     MatExpansionModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatSidenavModule,
+    MatTableModule,
     MatGridListModule
   ],
   providers: [{

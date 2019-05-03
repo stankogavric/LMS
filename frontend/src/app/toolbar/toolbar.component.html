@@ -21,8 +21,15 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Uni</button>
-    <button mat-menu-item>Facu</button>
+      <button mat-button routerLink="university">University</button>
+
+      <button mat-button [matMenuTriggerFor]="facultiesMenu" (click)="$event.stopPropagation();">Faculties</button>
+      <mat-menu #facultiesMenu="matMenu">
+        <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]">{{ f.name }}</button>
+      </mat-menu>
+
+      <button mat-button routerLink="register/student">Sign up</button>
+      <button mat-button routerLink="register/student">Sign in</button>
   </mat-menu>
 
 </mat-toolbar>
