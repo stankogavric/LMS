@@ -11,6 +11,7 @@ import { StudyProgramComponent } from './study-program/study-program.component';
 import { SubjectComponent } from './subject/subject.component';
 import { StudentsComponent } from './student/students/students.component';
 import { TeachersComponent } from './teacher/teachers/teachers.component';
+import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'subject/:id', component: SubjectComponent},
   { path: 'teachers', component: TeachersComponent},
   { path: 'students', component: StudentsComponent},
+  { path: 'studyPrograms', component: StudyProgramsComponent},
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

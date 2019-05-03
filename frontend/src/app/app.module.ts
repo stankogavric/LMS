@@ -36,6 +36,7 @@ import { TopicComponent } from './topic/topic.component';
 import { AdminSidenavComponent } from './admin-sidenav/admin-sidenav.component';
 import { StudentsComponent } from './student/students/students.component';
 import { TeachersComponent } from './teacher/teachers/teachers.component';
+import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { TeachersComponent } from './teacher/teachers/teachers.component';
     TopicComponent,
     AdminSidenavComponent,
     StudentsComponent,
-    TeachersComponent
+    TeachersComponent,
+    StudyProgramsComponent
   ],
   imports: [
     BrowserModule,
