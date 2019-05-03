@@ -1,18 +1,25 @@
 package App.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import App.models.Student;
 import App.services.StudentService;
@@ -81,5 +88,18 @@ public class StudentController {
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
+    
+	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Student> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String studentStr) throws IOException {
+		Student student = new ObjectMapper().readValue(studentStr, Student.class);
+		File convertFile = new File("resources\\images\\profile images\\student_" + student.getAccountData().getUsername() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
+		convertFile.createNewFile();
+		FileOutputStream fout = new FileOutputStream(convertFile);
+		fout.write(file.getBytes());
+		fout.close();
+		student.getPersonalData().setProfilePicturePath(convertFile.getPath());
+		studentService.addStudent(student);
+		return new ResponseEntity<Student>(student, HttpStatus.OK);
+	}
 
 }

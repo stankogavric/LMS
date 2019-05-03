@@ -37,10 +37,4 @@ export class TeachersComponent implements OnInit {
     });
   }
 
-  add(){
-    this.teacherService.add(this.teacher).subscribe((data: any) => {
-      this.getAll();
-    });
-  }
-
 }

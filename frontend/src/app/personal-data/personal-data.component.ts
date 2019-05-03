@@ -18,17 +18,18 @@ export class PersonalDataComponent implements OnInit {
   ngOnInit() {
     this.personalDataForm = this.fb.group({
       personalNumber: ['', {validators: [Validators.pattern('[0-9]{13}')]}],
-      name: ['', {validators: [Validators.pattern('[a-zA-Z]{3,}')]}],
+      firstName: ['', {validators: [Validators.pattern('[a-zA-Z]{3,}')]}],
       lastName: ['', {validators: [Validators.pattern('[a-zA-Z]{3,}')]}],
-      profilePicturePath: ['', {asyncValidators: [mimeTypeValidator]}],
+      profilePicturePath: [''],
+      profileImage: ['', {asyncValidators: [mimeTypeValidator]}],
     });
     this.parrentForm.addControl("personalData", this.personalDataForm);
   }
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.personalDataForm.patchValue({ profilePicturePath: file });
-    this.personalDataForm.get("profilePicturePath").updateValueAndValidity();
+    this.personalDataForm.patchValue({ profileImage: file });
+    this.personalDataForm.get("profileImage").updateValueAndValidity();
     const reader = new FileReader();
     reader.onload = () => {
       this.imagePreview = reader.result as string;;

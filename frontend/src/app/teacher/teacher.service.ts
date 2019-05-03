@@ -24,8 +24,11 @@ export class TeacherService {
     return this.http.delete(this.teacherUrl+`/${id}`);
   }
 
-  add(teacher:Teacher) {
-    return this.http.post(this.teacherUrl, teacher);
+  add(teacher:Teacher, image:File) {
+    const postData = new FormData();
+    postData.append("profileImage", image, image.name);
+    postData.append("data", JSON.stringify(teacher));
+    return this.http.post(this.teacherUrl+'/register', postData);
   }
 
   update(id:string, teacher:Teacher) {

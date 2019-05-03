@@ -37,10 +37,4 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  add(){
-    this.studentService.add(this.student).subscribe((data: any) => {
-      this.getAll();
-    });
-  }
-
 }
