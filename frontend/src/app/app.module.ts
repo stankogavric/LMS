@@ -39,6 +39,7 @@ import { TeachersComponent } from './teacher/teachers/teachers.component';
 import { StudentSidenavComponent } from './student/student-sidenav/student-sidenav.component';
 import { CurrentSubjectsComponent } from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './student/past-subjects/past-subjects.component';
+import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { PastSubjectsComponent } from './student/past-subjects/past-subjects.com
     StudentSidenavComponent,
     CurrentSubjectsComponent,
     PastSubjectsComponent
+    StudyProgramsComponent
   ],
   imports: [
     BrowserModule,

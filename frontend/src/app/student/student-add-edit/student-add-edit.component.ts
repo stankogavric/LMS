@@ -31,11 +31,14 @@ export class StudentAddEditComponent implements OnInit {
   }
 
   onSave(){
-    this.student = this.form.value;
+    const std = this.form.value;
+    delete std['accountData']['confirmPassword'];
+    delete std['personalData']['profileImage'];
+    this.student = std;
     if(this.edit){
       this.studentService.update(this.id, this.student).subscribe();
     }else{
-      this.studentService.add(this.student).subscribe();
+      this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
     }
   }
 

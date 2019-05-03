@@ -12,7 +12,7 @@ export class StudentsComponent implements OnInit {
 
   students : Student[] = [];
   student : Student = new Student();
-  displayedColumns: string[] = ['no', 'firstName', 'lastName', 'personalNumber', 'profilePicturePath', 'country', 'city', 'street', 'streetNumber', 'email', 'username'];
+  displayedColumns: string[] = ['no', 'firstName', 'lastName', 'personalNumber', 'profilePicturePath', 'country', 'city', 'street', 'streetNumber', 'email', 'username', 'actions'];
   dataSource = new MatTableDataSource<Student>(this.students);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,14 +31,14 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  delete(id: String){
+  delete(id: string){
     this.studentService.delete(id).subscribe((data: any) => {
       this.getAll();
     });
   }
 
-  add(){
-    this.studentService.add(this.student).subscribe((data: any) => {
+  update(id: string, student: Student){
+    this.studentService.update(id, student).subscribe((data: any) => {
       this.getAll();
     });
   }

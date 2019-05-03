@@ -24,8 +24,11 @@ export class AdministrativeStaffService {
     return this.http.delete(this.administrativeStaffUrl+`/${id}`);
   }
 
-  add(administrativeStaff:AdministrativeStaff) {
-    return this.http.post(this.administrativeStaffUrl, administrativeStaff);
+  add(admStf:AdministrativeStaff, image:File) {
+    const postData = new FormData();
+    postData.append("profileImage", image, image.name);
+    postData.append("data", JSON.stringify(admStf));
+    return this.http.post(this.administrativeStaffUrl+'/register', postData);
   }
 
   update(id:string, administrativeStaff:AdministrativeStaff) {

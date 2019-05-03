@@ -5,8 +5,8 @@
     <mat-error *ngIf="personalDataForm.get('personalNumber').invalid">Please enter a valid personal number.</mat-error>
   </mat-form-field><br>
   <mat-form-field>
-    <input matInput name="firstName" type="text" placeholder="First name" formControlName="name">
-    <mat-error *ngIf="personalDataForm.get('name').invalid">Please enter a valid first name.</mat-error>
+    <input matInput name="firstName" type="text" placeholder="First name" formControlName="firstName">
+    <mat-error *ngIf="personalDataForm.get('firstName').invalid">Please enter a valid first name.</mat-error>
   </mat-form-field><br>
   <mat-form-field>
     <input matInput name="lastName" type="text" placeholder="Last name" formControlName="lastName">
@@ -15,9 +15,9 @@
   <div>
     <button mat-stroked-button type="button" (click)="filePicker.click()">Profile picture</button>
     <input hidden type="file" #filePicker (change)="onImagePicked($event)">
-    <mat-error *ngIf="personalDataForm.get('profilePicturePath').invalid">Please select a valid image.</mat-error><br>
+    <mat-error *ngIf="personalDataForm.get('profileImage').invalid">Please select a valid image.</mat-error><br>
   </div>
 </div>
-<div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profilePicturePath').valid">
+<div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profileImage').valid">
   <img [src]="imagePreview" alt="Can't dispaly picture">
 </div>
