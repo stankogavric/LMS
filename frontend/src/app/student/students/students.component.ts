@@ -37,12 +37,6 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  add(){
-    this.studentService.add(this.student).subscribe((data: any) => {
-      this.getAll();
-    });
-  }
-
   update(id: string, student: Student){
     this.studentService.update(id, student).subscribe((data: any) => {
       this.getAll();

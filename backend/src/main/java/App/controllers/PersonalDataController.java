@@ -18,51 +18,52 @@ import App.models.PersonalData;
 import App.services.PersonalDataService;
 import App.utils.View.HideOptionalProperties;
 
-@CrossOrigin(origins={"http://localhost:4200"})
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/personaldata")
 public class PersonalDataController {
 
-    @Autowired
-    PersonalDataService personalDataService;
+	@Autowired
+	PersonalDataService personalDataService;
 
-    @JsonView(HideOptionalProperties.class)
-    @RequestMapping()
-    public ResponseEntity<Iterable<PersonalData>> getPersonalData() {
-        return new ResponseEntity<Iterable<PersonalData>>(personalDataService.getPersonalData(), HttpStatus.OK);
-    }
+	@JsonView(HideOptionalProperties.class)
+	@RequestMapping()
+	public ResponseEntity<Iterable<PersonalData>> getPersonalData() {
+		return new ResponseEntity<Iterable<PersonalData>>(personalDataService.getPersonalData(), HttpStatus.OK);
+	}
 
-    @JsonView(HideOptionalProperties.class)
-    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-    public ResponseEntity<PersonalData> getPersonalDataById(@PathVariable Long id) {
-        Optional<PersonalData> personalData = personalDataService.getPersonalDataById(id);
-        if(personalData.isPresent()) {
-            return new ResponseEntity<PersonalData>(personalData.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
-    }
+	@JsonView(HideOptionalProperties.class)
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<PersonalData> getPersonalDataById(@PathVariable Long id) {
+		Optional<PersonalData> personalData = personalDataService.getPersonalDataById(id);
+		if (personalData.isPresent()) {
+			return new ResponseEntity<PersonalData>(personalData.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
+	}
 
-    @RequestMapping(value="", method=RequestMethod.POST)
-    public ResponseEntity<PersonalData> addPersonalData(@RequestBody PersonalData PersonalData) {
-        personalDataService.addPersonalData(PersonalData);
-        return new ResponseEntity<PersonalData>(PersonalData, HttpStatus.CREATED);
-    }
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<PersonalData> addPersonalData(@RequestBody PersonalData PersonalData) {
+		personalDataService.addPersonalData(PersonalData);
+		return new ResponseEntity<PersonalData>(PersonalData, HttpStatus.CREATED);
+	}
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<PersonalData> updatePersonalData(@PathVariable Long id, @RequestBody PersonalData PersonalData) {
-        personalDataService.updatePersonalData(id, PersonalData);
-        return new ResponseEntity<PersonalData>(PersonalData, HttpStatus.CREATED);
-    }
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<PersonalData> updatePersonalData(@PathVariable Long id,
+			@RequestBody PersonalData PersonalData) {
+		personalDataService.updatePersonalData(id, PersonalData);
+		return new ResponseEntity<PersonalData>(PersonalData, HttpStatus.CREATED);
+	}
 
-    @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-    public ResponseEntity<PersonalData> removePersonalData(@PathVariable Long id) {
-        try {
-            personalDataService.removePersonalData(id);
-        }catch (Exception e) {
-            return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
-        }
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<PersonalData> removePersonalData(@PathVariable Long id) {
+		try {
+			personalDataService.removePersonalData(id);
+		} catch (Exception e) {
+			return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
+		}
 
-        return new ResponseEntity<PersonalData>(HttpStatus.NO_CONTENT);
-    }
+		return new ResponseEntity<PersonalData>(HttpStatus.NO_CONTENT);
+	}
 
 }
