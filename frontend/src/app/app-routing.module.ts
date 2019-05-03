@@ -11,6 +11,9 @@ import { StudyProgramComponent } from './study-program/study-program.component';
 import { SubjectComponent } from './subject/subject.component';
 import { StudentsComponent } from './student/students/students.component';
 import { TeachersComponent } from './teacher/teachers/teachers.component';
+import { StudentComponent } from './student/student.component';
+import { CurrentSubjectsComponent} from './student/current-subjects/current-subjects.component';
+import { PastSubjectsComponent} from './student/past-subjects/past-subjects.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +31,9 @@ const routes: Routes = [
   { path: 'subject/:id', component: SubjectComponent},
   { path: 'teachers', component: TeachersComponent},
   { path: 'students', component: StudentsComponent},
+  { path: 'student/:id', component: StudentComponent},
+  { path: 'currentSubjects', component: CurrentSubjectsComponent},
+  { path: 'pastSubjects', component: PastSubjectsComponent},
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];

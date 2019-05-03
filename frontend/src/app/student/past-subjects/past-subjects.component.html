@@ -1,0 +1,42 @@
+<div>Average grade: {{avgGrade}}</div>
+<mat-accordion>
+<!-- TODO fix display after backend is changed with more classes -->
+<mat-expansion-panel *ngFor = "let subject of subjects" (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{subject[0].name}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ul>
+      <li>
+        <label for="">Subject id:</label>
+        {{subject[0].id}}
+      </li>
+      <li>
+          <label for="">Ects:</label>
+          {{subject[0].ects}}
+      </li>
+      <li>
+          <label for="">Final grade:</label>
+          {{subject[1]}}
+      </li>
+      <li>
+          <label for="">Lectures weekly:</label>
+          {{subject[0].lecturesNum}}
+        </li>
+        <li>
+            <label for="">Exercises weekly:</label>
+            {{subject[0].exercisesNum}}
+          </li>
+          <li>
+              <label for="">Other activities weekly:</label>
+              {{subject[0].otherActivitesNum}}
+            </li>
+            <li>
+                <label for="">Other classes weekly:</label>
+                {{subject[0].otherClasses}}
+              </li>
+    </ul>
+  </mat-expansion-panel>
+</mat-accordion>

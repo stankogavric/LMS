@@ -9,6 +9,8 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.util.Date;
 import javax.persistence.CascadeType;
+
+import App.utils.View.ShowStudyProgram;
 import App.utils.View.ShowSubject;
 import javax.persistence.OneToMany;
 import java.util.Set;
@@ -28,6 +30,7 @@ public class YearOfStudy {
 	@OneToMany(mappedBy="yearOfStudy")
 	private Set<Subject> subjects;
 
+	@JsonView(ShowStudyProgram.class)
 	@ManyToOne(cascade=CascadeType.ALL)
 	private StudyProgram studyProgram;
 

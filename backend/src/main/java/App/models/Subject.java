@@ -13,7 +13,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.utils.View.ShowSubject;
 import App.utils.View.ShowTopic;
+import App.utils.View.ShowYearOfStudy;
 
 
 @Entity
@@ -55,6 +57,7 @@ public class Subject {
 //	@OneToMany(mappedBy="None")
 //	private Set<Subject> prerequisite;
 
+	@JsonView(ShowYearOfStudy.class)
 	@ManyToOne(cascade=CascadeType.ALL)
 	private YearOfStudy yearOfStudy;
 

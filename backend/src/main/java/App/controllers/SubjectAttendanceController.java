@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import App.models.Student;
+import App.models.Subject;
 import App.models.SubjectAttendance;
 import App.services.SubjectAttendanceService;
 import App.utils.View.HideOptionalProperties;
+import App.utils.View.ShowSubject;
+import App.utils.View.ShowSubjectAttendance;
+import App.utils.View.ShowYearOfStudy;
 
 @CrossOrigin(origins={"http://localhost:4200"})
 @RestController
@@ -79,4 +84,17 @@ public class SubjectAttendanceController {
         return new ResponseEntity<Iterable<Student>>(subjectAttendanceService.getStudentsWhoDidntPassExam(subjectId), HttpStatus.OK);
     }
 
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/subjects/{studentId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Subject>> getCurrentSubjectsByStudentId(@PathVariable Long studentId) {
+    	return new ResponseEntity<ArrayList<Subject>>(subjectAttendanceService.getCurrentSubjects(studentId), HttpStatus.OK);
+    }
+    
+    //TODO fix fetching data after all classes added
+    @JsonView(ShowYearOfStudy.class)
+    @RequestMapping(value="/pastSubjects/{studentId}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Object>> getPastSubjectsByStudentId(@PathVariable Long studentId) {
+    	return new ResponseEntity<ArrayList<Object>>(subjectAttendanceService.getPastSubjects(studentId), HttpStatus.OK);
+    }
+    
 }

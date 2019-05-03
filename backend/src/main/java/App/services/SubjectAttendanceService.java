@@ -1,11 +1,13 @@
 package App.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import App.models.Student;
+import App.models.Subject;
 import App.models.SubjectAttendance;
 import App.repositories.SubjectAttendanceRepository;
 
@@ -49,6 +51,14 @@ public class SubjectAttendanceService {
     
     public Iterable<Student> getStudentsWhoDidntPassExam(Long subjectId) {
         return subjectAttendanceRepo.findStudentsWhoDidntPassExam(subjectId);
+    }
+    
+    public ArrayList<Subject> getCurrentSubjects(Long studentId){
+    	return subjectAttendanceRepo.findCurrentSubjects(studentId);
+    }
+    
+    public ArrayList<Object> getPastSubjects(Long studentId){
+    	return subjectAttendanceRepo.findPastSubjects(studentId);
     }
 
 }

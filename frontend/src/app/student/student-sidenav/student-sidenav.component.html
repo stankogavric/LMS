@@ -1,0 +1,22 @@
+<button type="button" mat-button (click)="drawer.toggle()">
+  <mat-icon>menu</mat-icon>
+</button>
+<mat-drawer-container class="studentcontainer" autosize>
+<mat-drawer #drawer class="student-sidenav" mode="side" opened="true">
+    <button mat-button [matMenuTriggerFor]="studentMenu">Menu</button>
+    <br>
+    <mat-menu #studentMenu="matMenu">
+      <button mat-menu-item routerLink="currentSubjects">Current Subjects</button><br>
+      <button mat-menu-item routerLink="pastSubjects">Previous Subjects</button><br>
+      <button mat-button routerLink="">Submit Exam</button><br>
+      <button mat-button routerLink="">Notifications</button><br>
+      <button mat-button routerLink="">Messages</button><br>
+      <button mat-button routerLink="">Forum</button><br>
+    </mat-menu>
+</mat-drawer>
+
+<div class="student-sidenav-content">
+  <router-outlet></router-outlet>
+</div>
+
+</mat-drawer-container>
