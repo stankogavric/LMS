@@ -20,8 +20,6 @@ import App.models.Subject;
 import App.models.SubjectAttendance;
 import App.services.SubjectAttendanceService;
 import App.utils.View.HideOptionalProperties;
-import App.utils.View.ShowSubject;
-import App.utils.View.ShowSubjectAttendance;
 import App.utils.View.ShowYearOfStudy;
 
 @CrossOrigin(origins={"http://localhost:4200"})

@@ -31,7 +31,9 @@ public class TeacherService {
 
     public void removeTeacher(Long id) {
         Optional<Teacher> teacher = teacherRepo.findById(id);
-        teacherRepo.delete(teacher.get());
+        Teacher t = teacher.get();
+        t.setDeleted(true);
+        teacherRepo.save(t);
     }
 
     public void updateTeacher(Long id, Teacher teacher) {

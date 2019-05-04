@@ -10,10 +10,15 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonView;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Where;
+
 import javax.persistence.ManyToOne;
 
 
 @Entity
+@Where(clause = "deleted = 'false'")
 public class Teacher {
 
 	@Id
@@ -35,15 +40,21 @@ public class Teacher {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private PersonalData personalData;
+	
+	@NotNull
+	private Boolean deleted = false;
 
 	public Teacher() {}
 
-	public Teacher(String biography, Set<Title> titles, Address address, AccountData accountData, PersonalData personalData){
+	public Teacher(String biography, Set<Title> titles, Address address, AccountData accountData,
+			PersonalData personalData, @NotNull Boolean deleted) {
+		super();
 		this.biography = biography;
 		this.titles = titles;
 		this.address = address;
 		this.accountData = accountData;
 		this.personalData = personalData;
+		this.deleted = deleted;
 	}
 
 	public Long getId(){
@@ -92,6 +103,14 @@ public class Teacher {
 
 	public void setPersonalData(PersonalData personalData){
 		this.personalData = personalData;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }

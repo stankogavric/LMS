@@ -31,7 +31,9 @@ public class StudentService {
 
     public void removeStudent(Long id) {
         Optional<Student> student = studentRepo.findById(id);
-        studentRepo.delete(student.get());
+        Student s = student.get();
+        s.setDeleted(true);
+        studentRepo.save(s);
     }
 
     public void updateStudent(Long id, Student student) {

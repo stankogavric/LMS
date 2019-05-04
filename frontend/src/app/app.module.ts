@@ -66,7 +66,7 @@ import { StudyProgramsComponent } from './study-program/study-programs/study-pro
     TeachersComponent,
     StudentSidenavComponent,
     CurrentSubjectsComponent,
-    PastSubjectsComponent
+    PastSubjectsComponent,
     StudyProgramsComponent
   ],
   imports: [

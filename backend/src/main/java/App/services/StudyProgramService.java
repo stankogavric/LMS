@@ -34,10 +34,12 @@ public class StudyProgramService {
     public void addStudyProgram(StudyProgram studyProgram) {
         studyProgramRepo.save(studyProgram);
     }
-
+    
     public void removeStudyProgram(Long id) {
         Optional<StudyProgram> studyProgram = studyProgramRepo.findById(id);
-        studyProgramRepo.delete(studyProgram.get());
+        StudyProgram s = studyProgram.get();
+        s.setDeleted(true);
+        studyProgramRepo.save(s);
     }
 
     public void updateStudyProgram(Long id, StudyProgram studyProgram) {
