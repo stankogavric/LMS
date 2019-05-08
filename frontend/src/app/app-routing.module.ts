@@ -15,6 +15,8 @@ import { StudentComponent } from './student/student.component';
 import { CurrentSubjectsComponent} from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent} from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
+import { AdministratorsComponent } from './administrator/administrators/administrators.component';
+import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -32,6 +34,8 @@ const routes: Routes = [
   { path: 'subject/:id', component: SubjectComponent},
   { path: 'teachers', component: TeachersComponent},
   { path: 'students', component: StudentsComponent},
+  { path: 'administrativeStaff', component: AdministrativeStaffComponent},
+  { path: 'administrators', component: AdministratorsComponent},
   { path: 'student/:id', component: StudentComponent},
   { path: 'currentSubjects', component: CurrentSubjectsComponent},
   { path: 'pastSubjects', component: PastSubjectsComponent},

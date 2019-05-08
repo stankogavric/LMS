@@ -40,6 +40,9 @@ import { StudentSidenavComponent } from './student/student-sidenav/student-siden
 import { CurrentSubjectsComponent } from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { AdministratorsComponent } from './administrator/administrators/administrators.component';
+import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +70,10 @@ import { StudyProgramsComponent } from './study-program/study-programs/study-pro
     StudentSidenavComponent,
     CurrentSubjectsComponent,
     PastSubjectsComponent,
-    StudyProgramsComponent
+    StudyProgramsComponent,
+    AdministratorComponent,
+    AdministratorsComponent,
+    AdministrativeStaffComponent
   ],
   imports: [
     BrowserModule,

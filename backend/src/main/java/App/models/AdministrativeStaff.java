@@ -5,10 +5,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Where;
+
 import javax.persistence.CascadeType;
 
 
 @Entity
+@Where(clause = "deleted = 'false'")
 public class AdministrativeStaff {
 
 	@Id
@@ -23,13 +28,19 @@ public class AdministrativeStaff {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private PersonalData personalData;
+	
+	@NotNull
+	private Boolean deleted = false;
 
 	public AdministrativeStaff() {}
 
-	public AdministrativeStaff(Address address, AccountData AccountData, PersonalData personalData){
+	public AdministrativeStaff(Address address, App.models.AccountData accountData, PersonalData personalData,
+			@NotNull Boolean deleted) {
+		super();
 		this.address = address;
-		this.AccountData = AccountData;
+		AccountData = accountData;
 		this.personalData = personalData;
+		this.deleted = deleted;
 	}
 
 	public Long getId(){
@@ -62,6 +73,14 @@ public class AdministrativeStaff {
 
 	public void setPersonalData(PersonalData personalData){
 		this.personalData = personalData;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }
