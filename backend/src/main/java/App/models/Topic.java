@@ -21,12 +21,17 @@ public class Topic {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Subject subject;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private TeachingTerm teachingTerm;
 
 	public Topic() {}
 
-	public Topic(String description, Subject subject){
+	public Topic(String description, Subject subject, TeachingTerm teachingTerm) {
+		super();
 		this.description = description;
 		this.subject = subject;
+		this.teachingTerm = teachingTerm;
 	}
 
 	public Long getId(){
@@ -51,6 +56,14 @@ public class Topic {
 
 	public void setSubject(Subject subject){
 		this.subject = subject;
+	}
+
+	public TeachingTerm getTeachingTerm() {
+		return teachingTerm;
+	}
+
+	public void setTeachingTerm(TeachingTerm teachingTerm) {
+		this.teachingTerm = teachingTerm;
 	}
 	
 }
