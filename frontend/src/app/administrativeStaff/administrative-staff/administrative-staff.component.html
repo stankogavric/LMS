@@ -8,62 +8,62 @@
 
     <ng-container matColumnDef="firstName">
       <th mat-header-cell *matHeaderCellDef> First name </th>
-      <td mat-cell *matCellDef="let student"> {{student.personalData.firstName}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.personalData.firstName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lastName">
       <th mat-header-cell *matHeaderCellDef> Last name </th>
-      <td mat-cell *matCellDef="let student"> {{student.personalData.lastName}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.personalData.lastName}} </td>
     </ng-container>
 
     <ng-container matColumnDef="personalNumber">
       <th mat-header-cell *matHeaderCellDef> Personal number </th>
-      <td mat-cell *matCellDef="let student"> {{student.personalData.personalNumber}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.personalData.personalNumber}} </td>
     </ng-container>
 
     <ng-container matColumnDef="profilePicturePath">
       <th mat-header-cell *matHeaderCellDef> Profile picture path </th>
-      <td mat-cell *matCellDef="let student"> {{student.personalData.profilePicturePath}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.personalData.profilePicturePath}} </td>
     </ng-container>
 
     <ng-container matColumnDef="country">
       <th mat-header-cell *matHeaderCellDef> Country </th>
-      <td mat-cell *matCellDef="let student"> {{student.address.city.country.name}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.address.city.country.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="city">
       <th mat-header-cell *matHeaderCellDef> City </th>
-      <td mat-cell *matCellDef="let student"> {{student.address.city.name}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.address.city.name}} </td>
     </ng-container>
 
     <ng-container matColumnDef="street">
       <th mat-header-cell *matHeaderCellDef> Street </th>
-      <td mat-cell *matCellDef="let student"> {{student.address.street}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.address.street}} </td>
     </ng-container>
 
     <ng-container matColumnDef="streetNumber">
       <th mat-header-cell *matHeaderCellDef> Street number </th>
-      <td mat-cell *matCellDef="let student"> {{student.address.number}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.address.number}} </td>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <th mat-header-cell *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let student"> {{student.accountData.email}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.accountData.email}} </td>
     </ng-container>
 
     <ng-container matColumnDef="username">
       <th mat-header-cell *matHeaderCellDef> Username </th>
-      <td mat-cell *matCellDef="let student"> {{student.accountData.username}} </td>
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> {{administrativeStaffPerson.accountData.username}} </td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>  </th>
-      <td mat-cell *matCellDef="let student"> 
-        <button mat-raised-button color="warn" (click)="delete(student.id)">
+      <td mat-cell *matCellDef="let administrativeStaffPerson"> 
+        <button mat-raised-button color="warn" (click)="delete(administrativeStaffPerson.id)">
           <mat-icon>delete</mat-icon>
           Delete
         </button>
-        <button mat-raised-button color="accent" [routerLink]="['/edit/student', student.id]">
+        <button mat-raised-button color="accent" [routerLink]="['/edit/administrativestaff', administrativeStaffPerson.id]">
           <mat-icon>edit</mat-icon>
           Edit
         </button>

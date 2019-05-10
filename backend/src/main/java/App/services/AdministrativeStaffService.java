@@ -32,10 +32,12 @@ public class AdministrativeStaffService {
     	loginServ.addPermsion(administrativeStaff.getAccountData(), "ROLE_ADMINISTRATIVE_STAFF");
         administrativeStaffRepo.save(administrativeStaff);
     }
-
+    
     public void removeAdministrativeStaff(Long id) {
         Optional<AdministrativeStaff> administrativeStaff = administrativeStaffRepo.findById(id);
-        administrativeStaffRepo.delete(administrativeStaff.get());
+        AdministrativeStaff a = administrativeStaff.get();
+        a.setDeleted(true);
+        administrativeStaffRepo.save(a);
     }
 
     public void updateAdministrativeStaff(Long id, AdministrativeStaff administrativeStaff) {

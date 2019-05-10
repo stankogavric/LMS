@@ -12,7 +12,7 @@ export class StudyProgramsComponent implements OnInit {
 
   studyPrograms : StudyProgram[] = [];
   studyProgram : StudyProgram = new StudyProgram();
-  displayedColumns: string[] = ['no', 'name', 'description', 'actions'];
+  displayedColumns: string[] = ['no', 'name', 'description', 'headTeacher', 'faculty', 'university', 'actions'];
   dataSource = new MatTableDataSource<StudyProgram>(this.studyPrograms);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

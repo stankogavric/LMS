@@ -32,10 +32,12 @@ public class AdministratorService {
     	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMIN");
         administratorRepo.save(administrator);
     }
-
+    
     public void removeAdministrator(Long id) {
         Optional<Administrator> administrator = administratorRepo.findById(id);
-        administratorRepo.delete(administrator.get());
+        Administrator a = administrator.get();
+        a.setDeleted(true);
+        administratorRepo.save(a);
     }
 
     public void updateAdministrator(Long id, Administrator administrator) {

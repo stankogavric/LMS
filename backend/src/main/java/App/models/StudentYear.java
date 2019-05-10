@@ -1,13 +1,20 @@
 package App.models;
 
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.util.Date;
-import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowExamRealization;
 
 
 @Entity
@@ -28,14 +35,21 @@ public class StudentYear {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Student student;
+	
+	@JsonView(ShowExamRealization.class)
+	@OneToMany(mappedBy="studentYear")
+	private Set<ExamRealization> examRealizations;
 
 	public StudentYear() {}
 
-	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student){
+	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student,
+			Set<ExamRealization> examRealizations) {
+		super();
 		this.enrolmentDate = enrolmentDate;
 		this.numIndex = numIndex;
 		this.yearOfStudy = yearOfStudy;
 		this.student = student;
+		this.examRealizations = examRealizations;
 	}
 
 	public Long getId(){
@@ -76,6 +90,14 @@ public class StudentYear {
 
 	public void setStudent(Student student){
 		this.student = student;
+	}
+
+	public Set<ExamRealization> getExamRealizations() {
+		return examRealizations;
+	}
+
+	public void setExamRealizations(Set<ExamRealization> examRealizations) {
+		this.examRealizations = examRealizations;
 	}
 	
 }

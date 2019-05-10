@@ -42,6 +42,9 @@ import { PastSubjectsComponent } from './student/past-subjects/past-subjects.com
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
+import { AdministratorComponent } from './administrator/administrator.component';
+import { AdministratorsComponent } from './administrator/administrators/administrators.component';
+import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +73,9 @@ import { AuthInterceptor } from './auth/auth-interceptor';
     CurrentSubjectsComponent,
     PastSubjectsComponent,
     StudyProgramsComponent,
-    LoginComponent
+    LoginComponent,
+    AdministratorsComponent,
+    AdministrativeStaffComponent
   ],
   imports: [
     BrowserModule,

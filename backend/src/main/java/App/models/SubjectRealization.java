@@ -12,7 +12,9 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.utils.View.ShowExam;
 import App.utils.View.ShowTeacherRealization;
+import App.utils.View.ShowTeachingTerm;
 
 
 @Entity
@@ -25,14 +27,26 @@ public class SubjectRealization {
 	@JsonView(ShowTeacherRealization.class)
 	@OneToMany(mappedBy="subjectRealization")
 	private Set<TeacherRealization> teacherRealizations;
+	
+	@JsonView(ShowTeachingTerm.class)
+	@OneToMany(mappedBy="subjectRealization")
+	private Set<TeachingTerm> teachingTerms;
+	
+	@JsonView(ShowExam.class)
+	@OneToMany(mappedBy="subjectRealization")
+	private Set<Exam> exams;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Subject subject;
 
 	public SubjectRealization() {}
 
-	public SubjectRealization(Set<TeacherRealization> teacherRealizations, Subject subject){
+	public SubjectRealization(Set<TeacherRealization> teacherRealizations, Set<TeachingTerm> teachingTerms,
+			Set<Exam> exams, Subject subject) {
+		super();
 		this.teacherRealizations = teacherRealizations;
+		this.teachingTerms = teachingTerms;
+		this.exams = exams;
 		this.subject = subject;
 	}
 
@@ -58,6 +72,22 @@ public class SubjectRealization {
 
 	public void setSubject(Subject subject){
 		this.subject = subject;
+	}
+
+	public Set<TeachingTerm> getTeachingTerms() {
+		return teachingTerms;
+	}
+
+	public void setTeachingTerms(Set<TeachingTerm> teachingTerms) {
+		this.teachingTerms = teachingTerms;
+	}
+
+	public Set<Exam> getExams() {
+		return exams;
+	}
+
+	public void setExams(Set<Exam> exams) {
+		this.exams = exams;
 	}
 	
 }

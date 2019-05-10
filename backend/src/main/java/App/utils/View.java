@@ -31,4 +31,8 @@ public class View {
     public interface ShowFacultyEmails{ };
     public interface ShowUniversityPhones{ };
     public interface ShowFacultyPhones{ };
+    public interface ShowPrerequisite{ };
+    public interface ShowTeachingTerm{ };
+    public interface ShowExamRealization{ };
+    public interface ShowExam{ };
 }
