@@ -18,6 +18,7 @@ import { StudyProgramsComponent } from './study-program/study-programs/study-pro
 import { LoginComponent } from './login/login.component';
 import { AdministratorsComponent } from './administrator/administrators/administrators.component';
 import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
+import { SubjectsComponent } from './subject/subjects/subjects.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,8 +44,9 @@ const routes: Routes = [
   { path: 'currentSubjects', component: CurrentSubjectsComponent},
   { path: 'pastSubjects', component: PastSubjectsComponent},
   { path: 'studyPrograms', component: StudyProgramsComponent},
+  { path: 'subjects', component: SubjectsComponent},
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
-  { path: '**', redirectTo: '', pathMatch: 'full' },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

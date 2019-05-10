@@ -45,6 +45,7 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdministratorsComponent } from './administrator/administrators/administrators.component';
 import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
+import { SubjectsComponent } from './subject/subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { AdministrativeStaffComponent } from './administrativeStaff/administrati
     StudyProgramsComponent,
     LoginComponent,
     AdministratorsComponent,
-    AdministrativeStaffComponent
+    AdministrativeStaffComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,

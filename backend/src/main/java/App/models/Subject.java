@@ -41,7 +41,7 @@ public class Subject {
 	private Integer exercisesNum;
 
 	@Column(nullable = false)
-	private Integer otherActivitesNum;
+	private Integer otherActivitiesNum;
 
 	@Column(nullable = false)
 	private Integer researchPaper;
@@ -70,7 +70,7 @@ public class Subject {
 	public Subject() {}
 
 	public Subject(String name, Integer ects, Boolean mandatory, Integer lecturesNum, Integer exercisesNum,
-			Integer otherActivitesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus,
+			Integer otherActivitiesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus,
 			Set<Subject> prerequisites, Set<Subject> prerequisiteFor, YearOfStudy yearOfStudy) {
 		super();
 		this.name = name;
@@ -78,7 +78,7 @@ public class Subject {
 		this.mandatory = mandatory;
 		this.lecturesNum = lecturesNum;
 		this.exercisesNum = exercisesNum;
-		this.otherActivitesNum = otherActivitesNum;
+		this.otherActivitiesNum = otherActivitiesNum;
 		this.researchPaper = researchPaper;
 		this.otherClasses = otherClasses;
 		this.syllabus = syllabus;
@@ -135,14 +135,14 @@ public class Subject {
 		this.exercisesNum = exercisesNum;
 	}
 	
-	public Integer getOtherActivitesNum(){
-		return otherActivitesNum;
+	public Integer getOtherActivitiesNum() {
+		return otherActivitiesNum;
 	}
 
-	public void setOtherActivitesNum(Integer otherActivitesNum){
-		this.otherActivitesNum = otherActivitesNum;
+	public void setOtherActivitiesNum(Integer otherActivitiesNum) {
+		this.otherActivitiesNum = otherActivitiesNum;
 	}
-	
+
 	public Integer getResearchPaper(){
 		return researchPaper;
 	}
