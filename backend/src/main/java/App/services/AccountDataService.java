@@ -24,6 +24,10 @@ public class AccountDataService {
     public Optional<AccountData> getAccountDataById(Long id) {
         return accountDataRepo.findById(id);
     }
+    
+    public Optional<AccountData> getAccountDataByUserName(String username) {
+        return accountDataRepo.findByUsername(username);
+    }
 
     public void addAccountData(AccountData accountData) {
         accountDataRepo.save(accountData);

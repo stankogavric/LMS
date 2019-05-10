@@ -14,6 +14,9 @@ public class AdministratorService {
     @Autowired
     private AdministratorRepository administratorRepo;
 
+    @Autowired
+    private LoginService loginServ;
+    
     public AdministratorService() {
     }
 
@@ -26,6 +29,7 @@ public class AdministratorService {
     }
 
     public void addAdministrator(Administrator administrator) {
+    	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMIN");
         administratorRepo.save(administrator);
     }
 

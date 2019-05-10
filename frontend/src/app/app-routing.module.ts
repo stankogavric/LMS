@@ -15,17 +15,20 @@ import { StudentComponent } from './student/student.component';
 import { CurrentSubjectsComponent} from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent} from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'register/student', component: StudentAddEditComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'edit/student/:id', component: StudentAddEditComponent },
-  { path: 'register/teacher', component: TeacherAddEditComponent },
+  { path: 'register/teacher', component: TeacherAddEditComponent, canActivate: [RoleGuard], 
+  data: { expectedRoles: ['ROLE_ADMIN']}},
   { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
-  { path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent },
+  { path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard], 
+  data: { expectedRoles: ['ROLE_ADMIN']}},
   { path: 'edit/administrativestaff/:id', component: AdministrativeStaffAddEditComponent },
-  { path: 'admin', component: StudentAddEditComponent, canActivate: [RoleGuard], 
-          data: { expectedRoles: ['admin', 'professor']}},
+  { path: 'register/student', component: StudentAddEditComponent, canActivate: [RoleGuard], 
+          data: { expectedRoles: ['ROLE_ADMIN']}},
   { path: 'university', component: UniversityComponent},
   { path: 'faculty/:id', component: FacultyComponent},
   { path: 'studyProgram/:id', component: StudyProgramComponent},

@@ -7,7 +7,7 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(username: string, password: string){
-    this.http.post<{token: string}>("url", {username: username, password: password}).subscribe(response =>{
+    this.http.post<{token: string}>("http://localhost:8080/login", {username: username, password: password}).subscribe(response =>{
       if(response.token){
         localStorage.setItem('token', response.token);
         this.router.navigate(['/']);

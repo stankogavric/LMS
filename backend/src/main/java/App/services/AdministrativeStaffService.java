@@ -14,6 +14,9 @@ public class AdministrativeStaffService {
     @Autowired
     private AdministrativeStaffRepository administrativeStaffRepo;
 
+    @Autowired
+    private LoginService loginServ;
+    
     public AdministrativeStaffService() {
     }
 
@@ -26,6 +29,7 @@ public class AdministrativeStaffService {
     }
 
     public void addAdministrativeStaff(AdministrativeStaff administrativeStaff) {
+    	loginServ.addPermsion(administrativeStaff.getAccountData(), "ROLE_ADMINISTRATIVE_STAFF");
         administrativeStaffRepo.save(administrativeStaff);
     }
 

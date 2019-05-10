@@ -8,19 +8,28 @@ import decode from 'jwt-decode';
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const token = localStorage.getItem('token');
-    if(token){
+    var authorized = false;
+    if (token) {
       const tokenPayload = decode(token);
       const expectedRoles = route.data.expectedRoles;
-      if(new Date(tokenPayload.expiresIn) > new Date() && expectedRoles.includes(tokenPayload.role)){
-        return true;
+      if (new Date(tokenPayload.created + tokenPayload.exp) > new Date()) {
+        tokenPayload.role.forEach(auth => {
+          if (expectedRoles.includes(auth.authority)) {
+            authorized = true;
+          }
+        });
       }
     }
-    this.router.navigate(['student']);
-    return false;
+    if(authorized){
+      return true;
+    }else{
+      this.router.navigate(['login']);
+      return false;
+    }
   }
-  
+
 }

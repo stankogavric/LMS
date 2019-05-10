@@ -15,7 +15,7 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
   MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule
 } from "@angular/material";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AddressComponent } from './address/address.component';
 import { PersonalDataComponent } from './personal-data/personal-data.component';
 import { AccountDataComponent } from './account-data/account-data.component';
@@ -40,6 +40,8 @@ import { StudentSidenavComponent } from './student/student-sidenav/student-siden
 import { CurrentSubjectsComponent } from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
+import { LoginComponent } from './login/login.component';
+import { AuthInterceptor } from './auth/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -67,7 +69,8 @@ import { StudyProgramsComponent } from './study-program/study-programs/study-pro
     StudentSidenavComponent,
     CurrentSubjectsComponent,
     PastSubjectsComponent,
-    StudyProgramsComponent
+    StudyProgramsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -89,10 +92,9 @@ import { StudyProgramsComponent } from './study-program/study-programs/study-pro
     MatTableModule,
     MatGridListModule
   ],
-  providers: [{
-    provide: UrlSerializer,
-    useClass: LowerCaseUrlSerializer
-  }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+      {provide: UrlSerializer, useClass: LowerCaseUrlSerializer}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

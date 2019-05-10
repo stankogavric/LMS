@@ -14,6 +14,9 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepo;
 
+    @Autowired
+    private LoginService loginServ;
+    
     public StudentService() {
     }
 
@@ -26,6 +29,7 @@ public class StudentService {
     }
 
     public void addStudent(Student student) {
+    	loginServ.addPermsion(student.getAccountData(), "ROLE_STUDENT");
         studentRepo.save(student);
     }
 

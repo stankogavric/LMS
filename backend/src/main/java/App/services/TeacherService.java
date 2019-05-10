@@ -13,6 +13,9 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepo;
+    
+    @Autowired
+    private LoginService loginServ;
 
     public TeacherService() {
     }
@@ -26,6 +29,7 @@ public class TeacherService {
     }
 
     public void addTeacher(Teacher teacher) {
+    	loginServ.addPermsion(teacher.getAccountData(), "ROLE_TEACHER");
         teacherRepo.save(teacher);
     }
 
