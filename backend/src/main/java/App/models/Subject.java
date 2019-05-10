@@ -8,12 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import App.utils.View.ShowPrerequisite;
 import App.utils.View.ShowTopic;
 import App.utils.View.ShowYearOfStudy;
 
@@ -53,9 +53,15 @@ public class Subject {
 	@OneToMany(mappedBy="subject")
 	private Set<Topic> syllabus;
 
-	@JsonView(ShowPrerequisite.class)
-	@OneToMany(mappedBy="subject")
-	private Set<Prerequisite> prerequisites;
+//	@JsonView(ShowPrerequisite.class)
+//	@OneToMany(mappedBy="subject")
+//	private Set<Prerequisite> prerequisites;
+	
+	@ManyToMany
+    private Set<Subject> prerequisites;
+	
+	@ManyToMany(mappedBy="prerequisites")
+    private Set<Subject> prerequisiteFor;
 
 	@JsonView(ShowYearOfStudy.class)
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -65,7 +71,7 @@ public class Subject {
 
 	public Subject(String name, Integer ects, Boolean mandatory, Integer lecturesNum, Integer exercisesNum,
 			Integer otherActivitesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus,
-			Set<Prerequisite> prerequisites, YearOfStudy yearOfStudy) {
+			Set<Subject> prerequisites, Set<Subject> prerequisiteFor, YearOfStudy yearOfStudy) {
 		super();
 		this.name = name;
 		this.ects = ects;
@@ -77,6 +83,7 @@ public class Subject {
 		this.otherClasses = otherClasses;
 		this.syllabus = syllabus;
 		this.prerequisites = prerequisites;
+		this.prerequisiteFor = prerequisiteFor;
 		this.yearOfStudy = yearOfStudy;
 	}
 
@@ -160,12 +167,20 @@ public class Subject {
 		this.syllabus = syllabus;
 	}
 
-	public Set<Prerequisite> getPrerequisites() {
+	public Set<Subject> getPrerequisites() {
 		return prerequisites;
 	}
 
-	public void setPrerequisites(Set<Prerequisite> prerequisites) {
+	public void setPrerequisites(Set<Subject> prerequisites) {
 		this.prerequisites = prerequisites;
+	}
+
+	public Set<Subject> getPrerequisiteFor() {
+		return prerequisiteFor;
+	}
+
+	public void setPrerequisiteFor(Set<Subject> prerequisiteFor) {
+		this.prerequisiteFor = prerequisiteFor;
 	}
 
 	public YearOfStudy getYearOfStudy(){

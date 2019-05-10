@@ -35,4 +35,8 @@ public class View {
     public interface ShowTeachingTerm{ };
     public interface ShowExamRealization{ };
     public interface ShowExam{ };
+    public interface ShowAuthor{ };
+    public interface ShowFile{ };
+    public interface ShowTeachingMaterial{ };
+    public interface ShowAccountDataPermission{ };
 }

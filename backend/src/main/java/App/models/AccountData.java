@@ -10,6 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowAccountDataPermission;
+
 
 @Entity
 public class AccountData {
@@ -27,6 +31,7 @@ public class AccountData {
 	@Column(length=128, nullable = false)
 	private String email;
 
+	@JsonView(ShowAccountDataPermission.class)
 	@OneToMany(mappedBy = "accountData", cascade = CascadeType.ALL)
 	private Set<AccountDataPermission> accountDataPermissions;
 	

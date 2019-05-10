@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import App.utils.View.ShowAccountDataPermission;
+
 @Entity
 public class Permission {
 
@@ -19,6 +23,7 @@ public class Permission {
 	@Column(nullable = false, unique = true)
 	private String title;
 	
+	@JsonView(ShowAccountDataPermission.class)
 	@OneToMany(mappedBy = "permission")
 	private Set<AccountDataPermission> accDataPermissions;
 

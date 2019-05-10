@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 import App.utils.View.ShowExam;
 import App.utils.View.ShowTeacherRealization;
+import App.utils.View.ShowTeachingMaterial;
 import App.utils.View.ShowTeachingTerm;
 
 
@@ -38,16 +39,21 @@ public class SubjectRealization {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Subject subject;
+	
+	@JsonView(ShowTeachingMaterial.class)
+	@OneToMany(mappedBy="subjectRealization")
+	private Set<TeachingMaterial> teachingMaterials;
 
 	public SubjectRealization() {}
 
 	public SubjectRealization(Set<TeacherRealization> teacherRealizations, Set<TeachingTerm> teachingTerms,
-			Set<Exam> exams, Subject subject) {
+			Set<Exam> exams, Subject subject, Set<TeachingMaterial> teachingMaterials) {
 		super();
 		this.teacherRealizations = teacherRealizations;
 		this.teachingTerms = teachingTerms;
 		this.exams = exams;
 		this.subject = subject;
+		this.teachingMaterials = teachingMaterials;
 	}
 
 	public Long getId(){
@@ -88,6 +94,14 @@ public class SubjectRealization {
 
 	public void setExams(Set<Exam> exams) {
 		this.exams = exams;
+	}
+
+	public Set<TeachingMaterial> getTeachingMaterials() {
+		return teachingMaterials;
+	}
+
+	public void setTeachingMaterials(Set<TeachingMaterial> teachingMaterials) {
+		this.teachingMaterials = teachingMaterials;
 	}
 	
 }

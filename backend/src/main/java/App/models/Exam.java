@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import App.utils.View.ShowExamRealization;
+import App.utils.View.ShowTopic;
 
 @Entity
 public class Exam {
@@ -41,6 +42,10 @@ public class Exam {
 	@JsonView(ShowExamRealization.class)
 	@OneToMany(mappedBy="exam")
 	private Set<ExamRealization> examRealizations;
+	
+	@JsonView(ShowTopic.class)
+	@OneToMany(mappedBy="exam")
+	private Set<Topic> syllabus;
 
 	public Exam() {
 		super();

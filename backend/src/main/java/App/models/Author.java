@@ -9,33 +9,29 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class File {
+public class Author {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(length=128, nullable = false)
-	private String description;
 	
 	@Column(length=128, nullable = false)
-	private String url;
+	private String firstName;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Message message;
+	@Column(length=128, nullable = false)
+	private String lastName;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private TeachingMaterial teachingMaterial;
 
-	public File() {
+	public Author() {
 		super();
 	}
 
-	public File(String description, String url, Message message, TeachingMaterial teachingMaterial) {
+	public Author(String firstName, String lastName, TeachingMaterial teachingMaterial) {
 		super();
-		this.description = description;
-		this.url = url;
-		this.message = message;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.teachingMaterial = teachingMaterial;
 	}
 
@@ -47,28 +43,20 @@ public class File {
 		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public String getUrl() {
-		return url;
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public Message getMessage() {
-		return message;
-	}
-
-	public void setMessage(Message message) {
-		this.message = message;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public TeachingMaterial getTeachingMaterial() {
@@ -77,6 +65,6 @@ public class File {
 
 	public void setTeachingMaterial(TeachingMaterial teachingMaterial) {
 		this.teachingMaterial = teachingMaterial;
-	}	
+	}
 
 }
