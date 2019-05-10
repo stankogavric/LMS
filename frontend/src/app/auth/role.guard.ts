@@ -8,7 +8,7 @@ import decode from 'jwt-decode';
 })
 export class RoleGuard implements CanActivate {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
     const token = localStorage.getItem('token');

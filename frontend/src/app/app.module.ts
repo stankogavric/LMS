@@ -33,7 +33,7 @@ import { StudyProgramComponent } from './study-program/study-program.component';
 import { YearOfStudyComponent } from './year-of-study/year-of-study.component';
 import { SubjectComponent } from './subject/subject.component';
 import { TopicComponent } from './topic/topic.component';
-import { AdminSidenavComponent } from './admin-sidenav/admin-sidenav.component';
+import { AdminSidenavComponent } from './administrator/admin-sidenav/admin-sidenav.component';
 import { StudentsComponent } from './student/students/students.component';
 import { TeachersComponent } from './teacher/teachers/teachers.component';
 import { StudentSidenavComponent } from './student/student-sidenav/student-sidenav.component';
@@ -45,6 +45,8 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { AdministratorComponent } from './administrator/administrator.component';
 import { AdministratorsComponent } from './administrator/administrators/administrators.component';
 import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
+import { AdministratorAddEditComponent } from './administrator/administrator-add-edit/administrator-add-edit.component';
+import { SubjectsComponent } from './subject/subjects/subjects.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,10 @@ import { AdministrativeStaffComponent } from './administrativeStaff/administrati
     StudyProgramsComponent,
     LoginComponent,
     AdministratorsComponent,
-    AdministrativeStaffComponent
+    AdministrativeStaffComponent,
+    AdministratorAddEditComponent,
+    AdministratorComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,

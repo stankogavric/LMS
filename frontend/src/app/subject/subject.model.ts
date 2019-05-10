@@ -8,7 +8,7 @@ export class Subject {
 	mandatory:boolean;
 	lecturesNum:number;
 	exercisesNum:number;
-	otherActivitesNum:number;
+	otherActivitiesNum:number;
 	researchPaper:number;
 	otherClasses:number;
 	syllabus:Topic[];

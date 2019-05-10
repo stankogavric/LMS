@@ -14,8 +14,8 @@
         <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]">{{ f.name }}</button>
       </mat-menu>
 
-      <button mat-button routerLink="register/student">Register</button>
       <button mat-button routerLink="login">Login</button>
+      <button mat-button (click)="onLogout()">Logout</button>
   </div>
   <button mat-button [mat-menu-trigger-for]="menu" fxHide="false" fxHide.gt-sm>
     <mat-icon>menu</mat-icon>
@@ -28,8 +28,8 @@
         <button mat-menu-item *ngFor="let f of faculties" [routerLink]="['faculty', f.id]">{{ f.name }}</button>
       </mat-menu>
 
-      <button mat-button routerLink="register/student">Register</button>
       <button mat-button routerLink="login">Login</button>
+      <button mat-button (click)="onLogout()">Logout</button>
   </mat-menu>
 
 </mat-toolbar>

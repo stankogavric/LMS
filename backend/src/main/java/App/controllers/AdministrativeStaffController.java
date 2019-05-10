@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -73,6 +74,7 @@ public class AdministrativeStaffController {
     }
     
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	@Secured("ROLE_ADMINISTRATOR")
 	public ResponseEntity<AdministrativeStaff> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String admStfStr) throws IOException {
 		AdministrativeStaff admStf = new ObjectMapper().readValue(admStfStr, AdministrativeStaff.class);
 		File convertFile = new File("resources\\images\\profile images\\administrative_staff" + admStf.getAccountData().getUsername() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));

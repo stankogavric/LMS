@@ -1,0 +1,4 @@
+<form (submit)="onSave()" [formGroup]="form" method="post">
+  <app-account-data [parrentForm]="form"></app-account-data>
+  <button mat-raised-button color="accent" type="submit" [disabled]="form.invalid">Signup</button>
+</form>
