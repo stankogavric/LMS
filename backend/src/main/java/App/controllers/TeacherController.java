@@ -1,7 +1,5 @@
 package App.controllers;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -23,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import App.models.Teacher;
+import App.services.FileService;
 import App.services.TeacherService;
 import App.utils.View.HideOptionalProperties;
 
@@ -34,6 +33,9 @@ public class TeacherController {
     @Autowired
     TeacherService teacherService;
 
+    @Autowired
+    FileService fileService;
+    
     @JsonView(HideOptionalProperties.class)
     @RequestMapping()
     public ResponseEntity<Iterable<Teacher>> getTeachers() {
@@ -48,12 +50,6 @@ public class TeacherController {
             return new ResponseEntity<Teacher>(teacher.get(), HttpStatus.OK);
         }
         return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
-    }
-
-    @RequestMapping(value="", method=RequestMethod.POST)
-    public ResponseEntity<Teacher> addTeacher(@RequestBody Teacher Teachers) {
-        teacherService.addTeacher(Teachers);
-        return new ResponseEntity<Teacher>(Teachers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
@@ -90,16 +86,12 @@ public class TeacherController {
         return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
     }
     
+    @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Secured("ROLE_ADMINISTRATOR")
 	public ResponseEntity<Teacher> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String teacherStr) throws IOException {
 		Teacher teacher = new ObjectMapper().readValue(teacherStr, Teacher.class);
-		File convertFile = new File("resources\\images\\profile images\\teacher_" + teacher.getAccountData().getUsername() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
-		convertFile.createNewFile();
-		FileOutputStream fout = new FileOutputStream(convertFile);
-		fout.write(file.getBytes());
-		fout.close();
-		teacher.getPersonalData().setProfilePicturePath(convertFile.getPath());
+		fileService.saveProfileImage(file, "teacher_" + teacher.getAccountData().getUsername(), teacher.getPersonalData());
 		teacherService.addTeacher(teacher);
 		return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
 	}

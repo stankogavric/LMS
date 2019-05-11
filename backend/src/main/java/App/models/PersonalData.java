@@ -23,7 +23,7 @@ public class PersonalData {
 	@Column(length=128, nullable = false)
 	private String personalNumber;
 
-	@Column(length=128, nullable = false)
+	@Column(length=128)
 	private String profilePicturePath;
 
 	public PersonalData() {}

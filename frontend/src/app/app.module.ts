@@ -3,104 +3,61 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {FlexLayoutModule} from "@angular/flex-layout";
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MaterialModule} from './material';
-
-import { StudentComponent } from './student/student.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import {MatGridListModule} from '@angular/material/grid-list';
-import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
-  MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule
-} from "@angular/material";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AddressComponent } from './address/address.component';
-import { PersonalDataComponent } from './personal-data/personal-data.component';
-import { AccountDataComponent } from './account-data/account-data.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { UniversityComponent } from './university/university.component';
 import { FacultyComponent } from './faculty/faculty.component';
-import { StudentAddEditComponent } from './student/student-add-edit/student-add-edit.component';
-import { TeacherAddEditComponent } from './teacher/teacher-add-edit/teacher-add-edit.component';
-import { AdministrativeStaffAddEditComponent } from './administrativeStaff/administrative-staff-add-edit/administrative-staff-add-edit.component';
 import { LowerCaseUrlSerializer } from './lower-case-url-serializer';
 import { UrlSerializer } from '@angular/router';
-import { PhoneComponent } from './phone/phone.component';
+import { PhoneComponent  } from './phone/phone.component';
 import { EmailComponent } from './email/email.component';
 import { StudyProgramComponent } from './study-program/study-program.component';
 import { YearOfStudyComponent } from './year-of-study/year-of-study.component';
 import { SubjectComponent } from './subject/subject.component';
 import { TopicComponent } from './topic/topic.component';
-import { AdminSidenavComponent } from './administrator/admin-sidenav/admin-sidenav.component';
-import { StudentsComponent } from './student/students/students.component';
-import { TeachersComponent } from './teacher/teachers/teachers.component';
-import { StudentSidenavComponent } from './student/student-sidenav/student-sidenav.component';
 import { CurrentSubjectsComponent } from './student/current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './auth/auth-interceptor';
-import { AdministratorComponent } from './administrator/administrator.component';
-import { AdministratorsComponent } from './administrator/administrators/administrators.component';
-import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
-import { AdministratorAddEditComponent } from './administrator/administrator-add-edit/administrator-add-edit.component';
 import { SubjectsComponent } from './subject/subjects/subjects.component';
+import { AdministratorModule } from './administrator/administrator.module';
+import { SharedModule } from './shared/shared.module';
+import { MaterialModule } from './shared/material.module';
+import { StudentModule } from './student/student.module';
+import { AdministrativeStaffModule } from './administrativeStaff/administrativeStaff.module';
+import { TeacherModule } from './teacher/teacher.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StudentComponent,
     ToolbarComponent,
-    AddressComponent,
-    PersonalDataComponent,
-    AccountDataComponent,
     UniversityComponent,
     FacultyComponent,
     HomeComponent,
-    StudentAddEditComponent,
-    TeacherAddEditComponent,
-    AdministrativeStaffAddEditComponent,
     PhoneComponent,
     EmailComponent,
     StudyProgramComponent,
     YearOfStudyComponent,
     SubjectComponent,
     TopicComponent,
-    AdminSidenavComponent,
-    StudentsComponent,
-    TeachersComponent,
-    StudentSidenavComponent,
     CurrentSubjectsComponent,
     PastSubjectsComponent,
     StudyProgramsComponent,
     LoginComponent,
-    AdministratorsComponent,
-    AdministrativeStaffComponent,
-    AdministratorAddEditComponent,
-    AdministratorComponent,
     SubjectsComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule,
+    AdministratorModule,
+    StudentModule,
+    AdministrativeStaffModule,
+    TeacherModule,
+    SharedModule,
     MaterialModule,
-    MatInputModule,
-    MatCardModule,
-    MatButtonModule,
-    MatToolbarModule,
-    MatExpansionModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatGridListModule
+    AppRoutingModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
       {provide: UrlSerializer, useClass: LowerCaseUrlSerializer}

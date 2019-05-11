@@ -25,7 +25,7 @@ export class AdministratorService {
   }
 
   add(administrator:Administrator) {
-    return this.http.post(this.administratorUrl, administrator);
+    return this.http.post(this.administratorUrl+'/register', administrator);
   }
 
   update(id:string, administrator:Administrator) {

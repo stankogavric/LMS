@@ -19,7 +19,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.roleSubcription = this.authService.roleChanged.subscribe(
       (roles: [])=>{
         this.roles = roles;
-        console.log(this.roles);
       }
     );
   }

@@ -42,7 +42,8 @@ public class AdministratorController {
         return new ResponseEntity<Administrator>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value="", method=RequestMethod.POST)
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/register", method=RequestMethod.POST)
     public ResponseEntity<Administrator> addAdministrator(@RequestBody Administrator Administrators) {
         administratorService.addAdministrator(Administrators);
         return new ResponseEntity<Administrator>(Administrators, HttpStatus.CREATED);

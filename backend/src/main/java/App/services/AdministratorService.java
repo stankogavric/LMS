@@ -29,7 +29,7 @@ public class AdministratorService {
     }
 
     public void addAdministrator(Administrator administrator) {
-    	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMIN");
+    	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMINISTRATOR");
         administratorRepo.save(administrator);
     }
     

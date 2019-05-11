@@ -1,7 +1,5 @@
 package App.controllers;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Optional;
 
@@ -9,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import App.models.Student;
+import App.services.FileService;
 import App.services.StudentService;
 import App.utils.View.HideOptionalProperties;
 
@@ -33,6 +32,9 @@ public class StudentController {
 
     @Autowired
     StudentService studentService;
+    
+    @Autowired
+    FileService fileService;
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping()
@@ -48,12 +50,6 @@ public class StudentController {
             return new ResponseEntity<Student>(student.get(), HttpStatus.OK);
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
-    }
-
-    @RequestMapping(value="", method=RequestMethod.POST)
-    public ResponseEntity<Student> addStudent(@RequestBody Student Students) {
-        studentService.addStudent(Students);
-        return new ResponseEntity<Student>(Students, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
@@ -90,16 +86,12 @@ public class StudentController {
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
     
+    @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	@Secured("ROLE_ADMINISTRATIVE_STAFF")
+    @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATIVE_STAFF','ROLE_ADMINISTRATOR')")
 	public ResponseEntity<Student> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String studentStr) throws IOException {
 		Student student = new ObjectMapper().readValue(studentStr, Student.class);
-		File convertFile = new File("resources\\images\\profile images\\student_" + student.getAccountData().getUsername() + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
-		convertFile.createNewFile();
-		FileOutputStream fout = new FileOutputStream(convertFile);
-		fout.write(file.getBytes());
-		fout.close();
-		student.getPersonalData().setProfilePicturePath(convertFile.getPath());
+		fileService.saveProfileImage(file, "student_" + student.getAccountData().getUsername(), student.getPersonalData());
 		studentService.addStudent(student);
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
