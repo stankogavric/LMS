@@ -1,0 +1,273 @@
+[{
+        "repNum":40,
+        "naziv": "AccountData",
+        "mnozina": "AccountData",
+        "data": {
+            "id": "Long",
+            "username": "String",
+            "password": "String",
+            "email": "String"
+        }
+    },
+    {
+        "repNum": 5,
+        "naziv": "TitleType",
+        "mnozina": "TitleTypes",
+        "data": {
+            "id": "String",
+            "name": "String"
+        }
+    },
+    {
+        "naziv": "Title",
+        "mnozina": "Titles",
+        "data": {
+            "id": "String",
+            "startDate": "Date",
+            "endDate": "Date",
+            "scientificField": "ScientificField",
+            "teacher": "Teacher"
+        }
+    },
+    {
+        "naziv": "ScientificField",
+        "mnozina": "ScientificFields",
+        "data": {
+            "id": "String",
+            "name": "String"
+        }
+    },
+    {
+        "naziv": "Country",
+        "mnozina": "Countries",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "cities": "City[]"
+        }
+    },
+    {
+        "naziv": "City",
+        "mnozina": "Cities",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "country": "Country"
+        }
+    },
+    {
+        "repNum":1,
+        "naziv": "University",
+        "mnozina": "Universities",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "description": "String",
+            "dateOfEstablishment": "Date",
+            "faculties": "Faculty[]",
+            "address": "Address",
+            "rector": "Teacher"
+        }
+    },
+    {
+        "naziv": "Faculty",
+        "mnozina": "Faculties",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "description": "String",
+            "university": "University",
+            "address": "Address",
+            "dean": "Teacher",
+            "studyPrograms": "StudyProgram[]"
+        }
+    },
+    {
+        "naziv": "Address",
+        "mnozina": "Addresses",
+        "data": {
+            "id": "String",
+            "street": "String",
+            "number": "String",
+            "city": "City"
+        }
+    },
+    {
+        "naziv": "StudyProgram",
+        "mnozina": "StudyPrograms",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "description": "String",
+            "yearsOfStudy": "YearOfStudy[]",
+            "headTeacher": "Teacher",
+            "faculty": "Faculty",
+            "deleted": "Boolean"
+        }
+    },
+    {
+        "naziv": "YearOfStudy",
+        "mnozina": "YearsOfStudy",
+        "data": {
+            "id": "String",
+            "year": "Integer",
+            "subjectRealizations": "SubjectRealization[]",
+            "studyProgram": "StudyProgram",
+            "startDate": "Date",
+            "endDate": "Date"
+        }
+    },
+    {
+        "naziv": "StudentYear",
+        "mnozina": "StudentsYear",
+        "data": {
+            "id": "String",
+            "enrolmentDate": "Date",
+            "numIndex": "String",
+            "yearOfStudy": "YearOfStudy",
+            "student": "Student"
+        }
+    },
+    {
+        "naziv": "Subject",
+        "mnozina": "Subjects",
+        "data": {
+            "id": "String",
+            "name": "String",
+            "ects": "Integer",
+            "mandatory": "Boolean",
+            "lecturesNum": "Integer",
+            "exercisesNum": "Integer",
+            "otherActivitiesNum": "Integer",
+            "researchPaper": "Integer",
+            "otherClasses": "Integer",
+            "syllabus": "Topic[]",
+            "prerequisite": "Subject[]",
+            "yearOfStudy": "YearOfStudy"
+        }
+    },
+    {
+        "naziv": "Topic",
+        "mnozina": "Topics",
+        "data": {
+            "id": "String",
+            "description": "String",
+            "subject": "Subject"
+        }
+    },
+    {
+        "naziv": "TeachingType",
+        "mnozina": "TeachingTypes",
+        "data": {
+            "id": "Long",
+            "name": "String"
+        }
+    },
+    {
+        "naziv": "TeacherRealization",
+        "mnozina": "TeacherRealizations",
+        "data": {
+            "id": "Long",
+            "numberOfClasses": "Integer",
+            "teachingType": "TeachingType",
+            "teacher": "Teacher",
+            "subjectRealization": "SubjectRealization"
+        }
+    },
+    {
+        "naziv": "SubjectRealization",
+        "mnozina": "SubjectRealization",
+        "data": {
+            "id": "Long",
+            "teacherRealizations": "TeacherRealization[]",
+            "subject": "Subject",
+            "yearOfStudy": "YearOfStudy"
+        }
+    },
+    {
+        "naziv": "SubjectAttendance",
+        "mnozina": "SubjectAttendances",
+        "data": {
+            "id": "Long",
+            "finalGrade": "Integer",
+            "student": "Student",
+            "subjectRealization": "SubjectRealization"
+        }
+    },
+    {
+        "naziv": "Teacher",
+        "mnozina": "Teachers",
+        "data": {
+            "id": "String",
+	        "biography": "String",
+            "titles": "Title[]",
+            "address": "Address",
+            "accountData": "AccountData",
+            "personalData": "PersonalData",
+            "deleted": "Boolean"
+        }
+    },
+    {
+        "naziv": "Student",
+        "mnozina": "Students",
+        "data": {
+            "id": "Long",
+            "subjectAttendances": "SubjectAttendance[]",
+            "address": "Address",
+            "studentYears": "StudentYear[]",
+            "accountData": "AccountData",
+            "personalData": "PersonalData",
+            "deleted": "Boolean",
+            "yearOfStudy": "Integer"
+        }
+    },
+    {
+        "naziv": "Administrator",
+        "mnozina": "Administrators",
+        "data": {
+            "id": "Long",
+            "accountData": "AccountData",
+            "deleted": "Boolean"
+        }
+    },
+    {
+        "naziv": "AdministrativeStaff",
+        "mnozina": "AdministrativeStaff",
+        "data": {
+            "id": "Long",
+            "accountData": "AccountData",
+            "personalData": "PersonalData",
+            "address": "Address",
+            "deleted": "Boolean"
+        }
+    },
+    {
+        "naziv": "PersonalData",
+        "mnozina": "PersonalData",
+        "data": {
+            "id": "Long",
+            "firstName": "String",
+            "lastName": "String",
+            "personalNumber": "String",
+            "profilePicturePath": "String"
+        }
+    },
+    {
+        "naziv": "Permission",
+        "mnozina": "Permissions",
+        "data": {
+            "id": "Long",
+            "title": "String"
+        }
+    },
+    {
+        "repNum":40,
+        "naziv": "AccountDataPermission",
+        "mnozina": "AccountDataPermissions",
+        "data": {
+            "id": "Long",
+            "accountDataId": "String",
+            "PermissionId": "String"
+        }
+    }
+]
