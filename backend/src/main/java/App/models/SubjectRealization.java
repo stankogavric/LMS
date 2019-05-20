@@ -46,14 +46,6 @@ public class SubjectRealization {
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private YearOfStudy yearOfStudy;
-	
-	public YearOfStudy getYearOfStudy() {
-		return yearOfStudy;
-	}
-
-	public void setYearOfStudy(YearOfStudy yearOfStudy) {
-		this.yearOfStudy = yearOfStudy;
-	}
 
 	public SubjectRealization() {}
 
@@ -115,6 +107,14 @@ public class SubjectRealization {
 
 	public void setTeachingMaterials(Set<TeachingMaterial> teachingMaterials) {
 		this.teachingMaterials = teachingMaterials;
+	}
+
+	public YearOfStudy getYearOfStudy() {
+		return yearOfStudy;
+	}
+
+	public void setYearOfStudy(YearOfStudy yearOfStudy) {
+		this.yearOfStudy = yearOfStudy;
 	}
 	
 }

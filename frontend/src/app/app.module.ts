@@ -29,6 +29,8 @@ import { MaterialModule } from './shared/material.module';
 import { StudentModule } from './student/student.module';
 import { AdministrativeStaffModule } from './administrativeStaff/administrativeStaff.module';
 import { TeacherModule } from './teacher/teacher.module';
+import { ExamComponent } from './exam/exam.component';
+import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { TeacherModule } from './teacher/teacher.module';
     PastSubjectsComponent,
     StudyProgramsComponent,
     LoginComponent,
-    SubjectsComponent
+    SubjectsComponent,
+    ExamComponent,
+    ExamAddEditComponent
   ],
   imports: [
     BrowserModule,

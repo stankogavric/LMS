@@ -1,34 +1,22 @@
-<button type="button" mat-button (click)="drawer.toggle()">
-    <mat-icon>menu</mat-icon>
-</button>
-<mat-drawer-container class="admin-container" autosize>
-  <mat-drawer #drawer class="admin-sidenav" mode="side" opened="true">
-    <button mat-button [matMenuTriggerFor]="addMenu">Add</button>
-    <br>
-    <mat-menu #addMenu="matMenu">
-      <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
-      <button mat-menu-item routerLink="register/student">Student</button>
-      <button mat-menu-item routerLink="register/teacher">Teacher</button>
-      <button mat-menu-item routerLink="register/administrativestaff">Administrative staff</button>
-      <button mat-menu-item routerLink="register/administrator">Administrator</button>
-    </mat-menu>
-    <button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
-    <br>
-    <mat-menu #usersMenu="matMenu">
-      <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
-      <button mat-menu-item routerLink="students">Students</button>
-      <button mat-menu-item routerLink="teachers">Teachers</button>
-      <button mat-menu-item routerLink="administrativeStaff">Administrative staff</button>
-      <button mat-menu-item routerLink="administrators">Administrators</button>
-    </mat-menu>
-    <button mat-button routerLink="subjects">Subjects</button>
-    <br>
-    <button mat-button routerLink="studyPrograms">Study programs</button>
-  </mat-drawer>
-
-  <div class="admin-sidenav-content">
-    <router-outlet></router-outlet>
-    <!--<router-outlet name="adminSidenav"></router-outlet>-->
-  </div>
-
-</mat-drawer-container>
+<button mat-button [matMenuTriggerFor]="addMenu">Add</button>
+<br>
+<mat-menu #addMenu="matMenu">
+  <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
+  <button mat-menu-item routerLink="register/student">Student</button>
+  <button mat-menu-item routerLink="register/teacher">Teacher</button>
+  <button mat-menu-item routerLink="register/administrativestaff">Administrative staff</button>
+  <button mat-menu-item routerLink="register/administrator">Administrator</button>
+  <button mat-menu-item routerLink="add/exam">Exam</button>
+</mat-menu>
+<button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
+<br>
+<mat-menu #usersMenu="matMenu">
+  <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
+  <button mat-menu-item routerLink="students">Students</button>
+  <button mat-menu-item routerLink="teachers">Teachers</button>
+  <button mat-menu-item routerLink="administrativeStaff">Administrative staff</button>
+  <button mat-menu-item routerLink="administrators">Administrators</button>
+</mat-menu>
+<button mat-button routerLink="subjects">Subjects</button>
+<br>
+<button mat-button routerLink="studyPrograms">Study programs</button>
