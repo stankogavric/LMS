@@ -40,6 +40,8 @@ import { StudentSidenavComponent } from '../student/student-sidenav/student-side
     ReactiveFormsModule,
     MaterialModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    FlexLayoutModule,
     AdminSidenavComponent,
     StudentSidenavComponent,
     AccountDataComponent,
