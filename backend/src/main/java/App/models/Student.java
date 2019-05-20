@@ -46,11 +46,13 @@ public class Student {
 	
 	@NotNull
 	private Boolean deleted = false;
+	
+	private int yearOfStudy;
 
 	public Student() {}
 
 	public Student(Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears,
-			AccountData accountData, PersonalData personalData, @NotNull Boolean deleted) {
+			AccountData accountData, PersonalData personalData, @NotNull Boolean deleted, int yearOfStudy) {
 		super();
 		this.subjectAttendances = subjectAttendances;
 		this.address = address;
@@ -58,6 +60,7 @@ public class Student {
 		this.accountData = accountData;
 		this.personalData = personalData;
 		this.deleted = deleted;
+		this.yearOfStudy = yearOfStudy;
 	}
 
 	public Long getId(){
@@ -114,6 +117,14 @@ public class Student {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	public int getYearOfStudy() {
+		return yearOfStudy;
+	}
+
+	public void setYearOfStudy(int yearOfStudy) {
+		this.yearOfStudy = yearOfStudy;
 	}
 	
 }
