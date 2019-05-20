@@ -1,19 +1,23 @@
 package App.models;
 
+import java.util.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 import com.fasterxml.jackson.annotation.JsonView;
-import java.util.Date;
-import javax.persistence.CascadeType;
 
 import App.utils.View.ShowStudyProgram;
-import App.utils.View.ShowSubject;
-import javax.persistence.OneToMany;
-import java.util.Set;
+import App.utils.View.ShowSubjectRealization;
 
 
 @Entity
@@ -24,11 +28,19 @@ public class YearOfStudy {
 	private Long id;
 
 	@Column(nullable = false)
-	private Date year;
+	private int year;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
 
-	@JsonView(ShowSubject.class)
+	@JsonView(ShowSubjectRealization.class)
 	@OneToMany(mappedBy="yearOfStudy")
-	private Set<Subject> subjects;
+	private Set<SubjectRealization> subjectRealizations;
 
 	@JsonView(ShowStudyProgram.class)
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -36,9 +48,13 @@ public class YearOfStudy {
 
 	public YearOfStudy() {}
 
-	public YearOfStudy(Date year, Set<Subject> subjects, StudyProgram studyProgram){
+	public YearOfStudy(Long id, int year, Date startDate, Date endDate, Set<SubjectRealization> subjectRealizations,
+			StudyProgram studyProgram) {
+		this.id = id;
 		this.year = year;
-		this.subjects = subjects;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.subjectRealizations = subjectRealizations;
 		this.studyProgram = studyProgram;
 	}
 
@@ -49,21 +65,37 @@ public class YearOfStudy {
 	public void setId(Long id){
 		this.id = id;
 	}
-	
-	public Date getYear(){
+		
+	public int getYear() {
 		return year;
 	}
 
-	public void setYear(Date year){
+	public void setYear(int year) {
 		this.year = year;
 	}
-	
-	public Set<Subject> getSubjects(){
-		return subjects;
+
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setSubjects(Set<Subject> subjects){
-		this.subjects = subjects;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Set<SubjectRealization> getSubjectRealizations(){
+		return subjectRealizations;
+	}
+
+	public void setSubjectRealizations(Set<SubjectRealization> subjectRealizations){
+		this.subjectRealizations = subjectRealizations;
 	}
 	
 	public StudyProgram getStudyProgram(){
