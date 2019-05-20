@@ -8,6 +8,7 @@ import { Subject } from 'rxjs';
 export class AuthService {
 
   roleChanged = new Subject<any[]>();
+  loggedInStatusChanged = new Subject<boolean>();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -17,6 +18,7 @@ export class AuthService {
         localStorage.setItem('token', response.token);
         this.roleChanged.next(this.getCurrentRoles());
         this.router.navigate(['/']);
+        this.loggedInStatusChanged.next(true);
       }
     });
   }
@@ -25,6 +27,7 @@ export class AuthService {
     this.roleChanged.next([]);
     localStorage.removeItem('token');
     this.router.navigate(['/']);
+    this.loggedInStatusChanged.next(false);
   }
 
   getCurrentRoles(){
@@ -36,6 +39,21 @@ export class AuthService {
       });
     }
     return roles;
+  }
+
+  getCurrentUser(){
+    const token = localStorage.getItem('token');
+    if(token){
+      return decode(token).sub;
+    }
+    return null;
+  }
+
+  isLoggedIn(){
+    if(localStorage.getItem('token')){
+      return true;
+    }
+    return false;
   }
 
 }
