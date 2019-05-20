@@ -1,6 +1,7 @@
 package App.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class YearOfStudyService {
     private YearOfStudyRepository yearOfStudyRepo;
     @Autowired
     private SubjectRepository subjectRepo;
+    @Autowired
+    private YearOfStudyService yearOfStudyService;
 
     public YearOfStudyService() {
     }
@@ -49,5 +52,18 @@ public class YearOfStudyService {
 
     public ArrayList<Subject> getSubjects(Long yearOfStudyId) {
     	return subjectRepo.findByYearOfStudyIdEquals(yearOfStudyId);
+    }
+    
+    @SuppressWarnings("deprecation")
+	public Optional<YearOfStudy> getNextYearOfStudyByStudyProgram(Long id) {
+    	Optional<YearOfStudy> yos = yearOfStudyService.getYearOfStudyById(id);
+    	if(yos.isPresent()) {
+    		YearOfStudy yearOfStudy = yos.get();
+    		Date year = yearOfStudy.getYear();
+    		year.setYear(year.getYear()+1);
+    		Optional<YearOfStudy> nextYearOfStudy = yearOfStudyRepo.getNextYearOfStudy(year, yearOfStudy.getStudyProgram().getId());
+    		return nextYearOfStudy;
+    	}
+        return yos;
     }
 }

@@ -44,16 +44,29 @@ public class SubjectRealization {
 	@OneToMany(mappedBy="subjectRealization")
 	private Set<TeachingMaterial> teachingMaterials;
 
+	@ManyToOne(cascade=CascadeType.ALL)
+	private YearOfStudy yearOfStudy;
+	
+	public YearOfStudy getYearOfStudy() {
+		return yearOfStudy;
+	}
+
+	public void setYearOfStudy(YearOfStudy yearOfStudy) {
+		this.yearOfStudy = yearOfStudy;
+	}
+
 	public SubjectRealization() {}
 
-	public SubjectRealization(Set<TeacherRealization> teacherRealizations, Set<TeachingTerm> teachingTerms,
-			Set<Exam> exams, Subject subject, Set<TeachingMaterial> teachingMaterials) {
+	public SubjectRealization(Long id, Set<TeacherRealization> teacherRealizations, Set<TeachingTerm> teachingTerms,
+			Set<Exam> exams, Subject subject, Set<TeachingMaterial> teachingMaterials, YearOfStudy yearOfStudy) {
 		super();
+		this.id = id;
 		this.teacherRealizations = teacherRealizations;
 		this.teachingTerms = teachingTerms;
 		this.exams = exams;
 		this.subject = subject;
 		this.teachingMaterials = teachingMaterials;
+		this.yearOfStudy = yearOfStudy;
 	}
 
 	public Long getId(){

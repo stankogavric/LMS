@@ -41,5 +41,9 @@ public class StudentYearService {
             studentYearRepo.save(studentYear);
         }
     }
+    
+    public Optional<StudentYear> getStudentYearByYearOfStudyId(Long id) {
+        return studentYearRepo.findByYearOfStudyId(id);
+    }
 
 }
