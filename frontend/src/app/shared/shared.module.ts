@@ -14,6 +14,8 @@ import { AdminSidenavComponent } from '../administrator/admin-sidenav/admin-side
 import { PersonalDataComponent } from '../personal-data/personal-data.component';
 import { AddressComponent } from '../address/address.component';
 import { StudentSidenavComponent } from '../student/student-sidenav/student-sidenav.component';
+import { SubjectsComponent } from '../subject/subjects/subjects.component';
+import { SubjectComponent } from '../subject/subject.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { StudentSidenavComponent } from '../student/student-sidenav/student-side
     StudentSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
-    AddressComponent
+    AddressComponent,
+    SubjectsComponent,
+    SubjectComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +50,9 @@ import { StudentSidenavComponent } from '../student/student-sidenav/student-side
     StudentSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
-    AddressComponent
+    AddressComponent,
+    SubjectComponent,
+    SubjectsComponent
   ]
 })
 export class SharedModule { }

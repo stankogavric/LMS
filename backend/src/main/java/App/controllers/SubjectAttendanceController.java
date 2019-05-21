@@ -83,16 +83,16 @@ public class SubjectAttendanceController {
     }
 
     @JsonView(HideOptionalProperties.class)
-    @RequestMapping(value="/subjects/{studentId}", method=RequestMethod.GET)
-    public ResponseEntity<ArrayList<Subject>> getCurrentSubjectsByStudentId(@PathVariable Long studentId) {
-    	return new ResponseEntity<ArrayList<Subject>>(subjectAttendanceService.getCurrentSubjects(studentId), HttpStatus.OK);
+    @RequestMapping(value="/subjects/{studentUsername}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Subject>> getCurrentSubjectsByStudentId(@PathVariable String studentUsername) {
+    	return new ResponseEntity<ArrayList<Subject>>(subjectAttendanceService.getCurrentSubjects(studentUsername), HttpStatus.OK);
     }
     
     //TODO fix fetching data after all classes added
     @JsonView(ShowYearOfStudy.class)
-    @RequestMapping(value="/pastSubjects/{studentId}", method=RequestMethod.GET)
-    public ResponseEntity<ArrayList<Object>> getPastSubjectsByStudentId(@PathVariable Long studentId) {
-    	return new ResponseEntity<ArrayList<Object>>(subjectAttendanceService.getPastSubjects(studentId), HttpStatus.OK);
+    @RequestMapping(value="/pastSubjects/{studentUsername}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Object>> getPastSubjectsByStudentUsername(@PathVariable String studentUsername) {
+    	return new ResponseEntity<ArrayList<Object>>(subjectAttendanceService.getPastSubjects(studentUsername), HttpStatus.OK);
     }
     
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from '../../subject/subject.model';
-import {SubjectAttendanceService} from '../../subject/subject-attendance.service'
+import {SubjectService} from '../../subject/subject.service';
+import { AuthService} from '../../auth/auth.service';
 
 @Component({
   selector: 'app-past-subjects',
@@ -11,23 +12,29 @@ export class PastSubjectsComponent implements OnInit {
 
   panelOpenState = false;
 
+
   subjects: Subject[] = [];
   avgGrade : number = 0; //TODO after backend is finished with all classes
+  totalEcts : number = 0;
   
-
-
-  constructor(private subjectAttService: SubjectAttendanceService) { }
+  constructor(private subjectService: SubjectService, private authService: AuthService) { }
 
   ngOnInit() {
-    //TODO fix id from logged student
-    this.getPastSubjects(1);
+    let loggedUser = this.authService.getCurrentUser();
+    if (loggedUser) {
+      this.getPastSubjects(loggedUser);
+    }
+    else {
+      console.log("unknown username");
+    }   
     
   }
 
-  getPastSubjects(id: number){
-    this.subjectAttService.getPastSubjects(id).subscribe((data : Subject[]) => {
+  getPastSubjects(username: String){
+    this.subjectService.getStudentsPastSubjects(username).subscribe((data : Subject[]) => {
       this.subjects = data;
       this.getAvgGrade();
+      this.getTotalEcts();
     });
   }
 
@@ -42,6 +49,18 @@ export class PastSubjectsComponent implements OnInit {
     };
     this.avgGrade = sum/total;
   }
+
+  getTotalEcts() {
+    let ects = 0;
+    for (let i = 0; i < this.subjects.length; i++) {
+      if(this.subjects[i].ects != null){
+       ects+= this.subjects[i].ects;
+      }
+    }
+    this.totalEcts = ects;
+  }
+
+
 
 
 
