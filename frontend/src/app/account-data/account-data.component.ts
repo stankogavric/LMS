@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Injectable } from '@angular/core';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { MustMatch } from '../validators/must-match-validator.directive';
+import { FormErrorService } from '../shared/formError.service';
+
 @Component({
   selector: 'app-account-data',
   templateUrl: './account-data.component.html',
@@ -11,7 +13,7 @@ export class AccountDataComponent implements OnInit {
   @Input() public parrentForm: FormGroup;
   public accountDataForm : FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,  public formError: FormErrorService) { }
 
   ngOnInit() {
     this.accountDataForm = this.fb.group({
@@ -20,7 +22,7 @@ export class AccountDataComponent implements OnInit {
       password: ['', {validators: [Validators.required, Validators.minLength(8)]}],
       confirmPassword: [''],
     }, {
-      validator: MustMatch('password', 'confirmPassword')
+      validators: [MustMatch('password', 'confirmPassword')]
     });
 
     this.parrentForm.addControl("accountData", this.accountDataForm);

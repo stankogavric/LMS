@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Address } from './address.model';
+import { FormErrorService } from '../shared/formError.service';
 
 @Component({
   selector: 'app-address',
@@ -12,7 +13,7 @@ export class AddressComponent implements OnInit {
   @Input() public parrentForm: FormGroup;
   public addressForm : FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public formError: FormErrorService) { }
 
   ngOnInit() {
     this.addressForm = this.fb.group({
