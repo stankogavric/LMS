@@ -53,12 +53,12 @@ public class SubjectAttendanceService {
         return subjectAttendanceRepo.findStudentsWhoDidntPassExam(subjectId);
     }
     
-    public ArrayList<Subject> getCurrentSubjects(Long studentId){
-    	return subjectAttendanceRepo.findCurrentSubjects(studentId);
+    public ArrayList<Subject> getCurrentSubjects(String username){
+    	return subjectAttendanceRepo.findCurrentSubjects(username);
     }
     
-    public ArrayList<Object> getPastSubjects(Long studentId){
-    	return subjectAttendanceRepo.findPastSubjects(studentId);
+    public ArrayList<Object> getPastSubjects(String username){
+    	return subjectAttendanceRepo.findPastSubjects(username);
     }
 
 }

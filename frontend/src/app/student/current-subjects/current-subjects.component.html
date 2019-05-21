@@ -1,37 +1,10 @@
-<mat-accordion>
-  
-    <mat-expansion-panel *ngFor = "let subject of subjects" (opened)="panelOpenState = true"
-                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            {{subject.name}}
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <ul>
-          <li>
-            <label for="">Subject id:</label>
-            {{subject.id}}
-          </li>
-          <li>
-              <label for="">Ects:</label>
-              {{subject.ects}}
-          </li>
-          <li>
-              <label for="">Lectures weekly:</label>
-              {{subject.lecturesNum}}
-            </li>
-            <li>
-                <label for="">Exercises weekly:</label>
-                {{subject.exercisesNum}}
-              </li>
-              <li>
-                  <label for="">Other activities weekly:</label>
-                  {{subject.otherActivitesNum}}
-                </li>
-                <li>
-                    <label for="">Other classes weekly:</label>
-                    {{subject.otherClasses}}
-                  </li>
-        </ul>
-      </mat-expansion-panel>
-    </mat-accordion>
+<div>
+  <p>My current subjects</p>
+  <br>
+  <mat-accordion>
+    <ng-container *ngFor="let subject of subjects; let i = index">
+      <app-subject  [subject]="subject"></app-subject>
+    </ng-container>
+  </mat-accordion>
+</div>
+
