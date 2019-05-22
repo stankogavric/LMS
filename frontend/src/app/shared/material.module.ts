@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
-  MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule, MatCheckboxModule, MatIconModule, MatMenuModule
+  MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule, MatCheckboxModule, 
+  MatIconModule, MatMenuModule, MatSelectModule, MatDatepickerModule
 } from "@angular/material";
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -19,7 +21,10 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
     MatGridListModule,
     MatCheckboxModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    DragDropModule
   ],
   exports: [
     MatInputModule,
@@ -34,7 +39,10 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
     MatGridListModule,
     MatCheckboxModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    DragDropModule
   ]
 })
 export class MaterialModule {}

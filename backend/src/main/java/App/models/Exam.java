@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,19 +25,17 @@ public class Exam {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
 	private Date startTime;
 	
-	@Column(nullable = false)
 	private Date endTime;
 	
 	@Column(nullable = false)
 	private Integer points;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.MERGE})
 	private SubjectRealization subjectRealization;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.MERGE})
 	private ExamType examType;
 	
 	@JsonView(ShowExamRealization.class)
@@ -44,15 +43,15 @@ public class Exam {
 	private Set<ExamRealization> examRealizations;
 	
 	@JsonView(ShowTopic.class)
-	@OneToMany(mappedBy="exam")
-	private Set<Topic> syllabus;
+	@OneToMany(mappedBy="exam", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<ExamTopic> syllabus;
 
 	public Exam() {
 		super();
 	}
 
 	public Exam(Date startTime, Date endTime, Integer points, SubjectRealization subjectRealization, ExamType examType,
-			Set<ExamRealization> examRealizations) {
+			Set<ExamRealization> examRealizations, Set<ExamTopic> syllabus) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -60,6 +59,7 @@ public class Exam {
 		this.subjectRealization = subjectRealization;
 		this.examType = examType;
 		this.examRealizations = examRealizations;
+		this.syllabus = syllabus;
 	}
 
 	public Long getId() {
@@ -116,6 +116,14 @@ public class Exam {
 
 	public void setExamRealizations(Set<ExamRealization> examRealizations) {
 		this.examRealizations = examRealizations;
+	}
+
+	public Set<ExamTopic> getSyllabus() {
+		return syllabus;
+	}
+
+	public void setSyllabus(Set<ExamTopic> syllabus) {
+		this.syllabus = syllabus;
 	}
 	
 }

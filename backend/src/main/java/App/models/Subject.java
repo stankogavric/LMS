@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -19,6 +22,7 @@ import App.utils.View.ShowYearOfStudy;
 
 
 @Entity
+@Where(clause = "deleted = 'false'")
 public class Subject {
 
 	@Id
@@ -66,12 +70,16 @@ public class Subject {
 	@JsonView(ShowYearOfStudy.class)
 	@ManyToOne(cascade=CascadeType.ALL)
 	private YearOfStudy yearOfStudy;
+	
+	@NotNull
+	private Boolean deleted = false;
 
 	public Subject() {}
 
 	public Subject(String name, Integer ects, Boolean mandatory, Integer lecturesNum, Integer exercisesNum,
 			Integer otherActivitiesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus,
-			Set<Subject> prerequisites, Set<Subject> prerequisiteFor, YearOfStudy yearOfStudy) {
+			Set<Subject> prerequisites, Set<Subject> prerequisiteFor, YearOfStudy yearOfStudy,
+			@NotNull Boolean deleted) {
 		super();
 		this.name = name;
 		this.ects = ects;
@@ -85,6 +93,7 @@ public class Subject {
 		this.prerequisites = prerequisites;
 		this.prerequisiteFor = prerequisiteFor;
 		this.yearOfStudy = yearOfStudy;
+		this.deleted = deleted;
 	}
 
 	public Long getId(){
@@ -189,6 +198,14 @@ public class Subject {
 
 	public void setYearOfStudy(YearOfStudy yearOfStudy){
 		this.yearOfStudy = yearOfStudy;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(Boolean deleted) {
+		this.deleted = deleted;
 	}
 	
 }

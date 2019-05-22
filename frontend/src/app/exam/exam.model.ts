@@ -1,7 +1,7 @@
-import { Topic } from '../topic/topic.model';
 import { SubjectRealization } from '../subject/subject-realization.model';
 import { ExamType } from './exam-type.model';
 import { ExamRealization } from './exam-realization.model';
+import { ExamTopic } from '../exam-topic/exam-topic.model';
 
 export class Exam {
 	id:number;
@@ -11,5 +11,5 @@ export class Exam {
     subjectRealization: SubjectRealization;
     examType: ExamType;
     examRealizations: ExamRealization[];
-    syllabus: Topic[];
+    syllabus: ExamTopic[];
 }

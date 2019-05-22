@@ -1,16 +1,15 @@
 package App.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
-
 
 @Entity
-public class Topic {
+public class ExamTopic {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,15 +18,15 @@ public class Topic {
 	@Column(length=128, nullable = false)
 	private String description;
 
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Subject subject;
+	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
+	private Exam exam;
 
-	public Topic() {}
+	public ExamTopic() {}
 
-	public Topic(String description, Subject subject) {
+	public ExamTopic(String description, Exam exam) {
 		super();
 		this.description = description;
-		this.subject = subject;
+		this.exam = exam;
 	}
 
 	public Long getId(){
@@ -45,13 +44,13 @@ public class Topic {
 	public void setDescription(String description){
 		this.description = description;
 	}
-	
-	public Subject getSubject(){
-		return subject;
+
+	public Exam getExam() {
+		return exam;
 	}
 
-	public void setSubject(Subject subject){
-		this.subject = subject;
+	public void setExam(Exam exam) {
+		this.exam = exam;
 	}
 	
 }

@@ -31,6 +31,7 @@ import { AdministrativeStaffModule } from './administrativeStaff/administrativeS
 import { TeacherModule } from './teacher/teacher.module';
 import { ExamComponent } from './exam/exam.component';
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
+import { ExamTopicComponent } from './exam-topic/exam-topic.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.compone
     LoginComponent,
     SubjectsComponent,
     ExamComponent,
-    ExamAddEditComponent
+    ExamAddEditComponent,
+    ExamTopicComponent
   ],
   imports: [
     BrowserModule,

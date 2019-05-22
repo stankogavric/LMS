@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import App.models.SubjectRealization;
 import App.models.Teacher;
 import App.services.FileService;
 import App.services.TeacherService;
@@ -95,5 +96,11 @@ public class TeacherController {
 		teacherService.addTeacher(teacher);
 		return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
 	}
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/{username}/subjectRealizations", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<SubjectRealization>> getSubjectRealizations(@PathVariable String username) {
+        return new ResponseEntity<Iterable<SubjectRealization>>(teacherService.getSubjectRealizations(username), HttpStatus.OK);
+    }
 
 }
