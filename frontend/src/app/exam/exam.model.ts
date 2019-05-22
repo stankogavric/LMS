@@ -8,6 +8,7 @@ export class Exam {
 	startTime: Date;
 	endTime: Date;
     points: number;
+    durationInMinutes: number;
     subjectRealization: SubjectRealization;
     examType: ExamType;
     examRealizations: ExamRealization[];

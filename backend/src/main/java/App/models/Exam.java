@@ -32,6 +32,9 @@ public class Exam {
 	@Column(nullable = false)
 	private Integer points;
 	
+	@Column(nullable = false)
+	private Integer durationInMinutes;
+	
 	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.MERGE})
 	private SubjectRealization subjectRealization;
 	
@@ -50,12 +53,14 @@ public class Exam {
 		super();
 	}
 
-	public Exam(Date startTime, Date endTime, Integer points, SubjectRealization subjectRealization, ExamType examType,
-			Set<ExamRealization> examRealizations, Set<ExamTopic> syllabus) {
+	public Exam(Date startTime, Date endTime, Integer points, Integer durationInMinutes,
+			SubjectRealization subjectRealization, ExamType examType, Set<ExamRealization> examRealizations,
+			Set<ExamTopic> syllabus) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.points = points;
+		this.durationInMinutes = durationInMinutes;
 		this.subjectRealization = subjectRealization;
 		this.examType = examType;
 		this.examRealizations = examRealizations;
@@ -124,6 +129,14 @@ public class Exam {
 
 	public void setSyllabus(Set<ExamTopic> syllabus) {
 		this.syllabus = syllabus;
+	}
+
+	public Integer getDurationInMinutes() {
+		return durationInMinutes;
+	}
+
+	public void setDurationInMinutes(Integer durationInMinutes) {
+		this.durationInMinutes = durationInMinutes;
 	}
 	
 }

@@ -7,7 +7,6 @@ import { SubjectRealization } from 'src/app/subject/subject-realization.model';
 import { TeacherService } from 'src/app/teacher/teacher.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
-import { Topic } from 'src/app/topic/topic.model';
 import { ExamTopic } from 'src/app/exam-topic/exam-topic.model';
 import { ExamTopicService } from '../exam-topic.service';
 
@@ -31,7 +30,8 @@ export class ExamAddEditComponent implements OnInit {
       points: ['', {validators: [Validators.required]}],
       examType: ['', {validators: [Validators.required]}],
       subjectRealization: ['', {validators: [Validators.required]}],
-      topic: ['', {validators: []}]
+      topic: ['', {validators: []}],
+      durationInMinutes: ['', {validators: [Validators.required]}]
     });
 
     this.getSubjectRealization();
@@ -49,7 +49,6 @@ export class ExamAddEditComponent implements OnInit {
     delete e.topic;
     this.exam = e;
     this.examService.add(this.exam).subscribe(exam =>{
-      console.log(exam);
       this.topics.forEach(topic => {
         this.examTopicService.add(new ExamTopic(topic, exam)).subscribe();
       });

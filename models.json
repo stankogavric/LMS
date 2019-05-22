@@ -153,6 +153,7 @@
         "data": {
             "id": "String",
             "description": "String",
+            "week": "Integer",
             "subject": "Subject"
         }
     },
@@ -200,7 +201,7 @@
         "mnozina": "Teachers",
         "data": {
             "id": "String",
-	        "biography": "String",
+            "biography": "String",
             "titles": "Title[]",
             "address": "Address",
             "accountData": "AccountData",

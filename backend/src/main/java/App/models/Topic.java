@@ -18,15 +18,19 @@ public class Topic {
 
 	@Column(length=128, nullable = false)
 	private String description;
+	
+	@Column(nullable = false)
+	private Integer week;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private Subject subject;
 
 	public Topic() {}
 
-	public Topic(String description, Subject subject) {
+	public Topic(String description, Integer week, Subject subject) {
 		super();
 		this.description = description;
+		this.week = week;
 		this.subject = subject;
 	}
 
@@ -52,6 +56,14 @@ public class Topic {
 
 	public void setSubject(Subject subject){
 		this.subject = subject;
+	}
+
+	public Integer getWeek() {
+		return week;
+	}
+
+	public void setWeek(Integer week) {
+		this.week = week;
 	}
 	
 }
