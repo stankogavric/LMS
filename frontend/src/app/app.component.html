@@ -1,5 +1,6 @@
 <app-toolbar></app-toolbar>
-<button type="button" mat-button (click)="drawer.toggle()" *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0) || (roles.indexOf('ROLE_STUDENT') >= 0)">
+<button type="button" mat-button (click)="drawer.toggle()"
+    *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0) || (roles.indexOf('ROLE_STUDENT') >= 0)">
     <mat-icon>menu</mat-icon>
 </button>
 <mat-drawer-container class="main-container" autosize>
@@ -7,12 +8,11 @@
         <app-admin-sidenav *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0)"></app-admin-sidenav>
         <app-admin-sidenav *ngIf="(roles.indexOf('ROLE_TEACHER') >= 0)"></app-admin-sidenav>
         <app-student-sidenav *ngIf="(roles.indexOf('ROLE_STUDENT') >= 0)"></app-student-sidenav>
+        <!-- <app-teacher-sidenav *ngIf="(roles.indexOf('ROLE_TEACHER') >= 0)"></app-teacher-sidenav> -->
     </mat-drawer>
 
     <div class="main-sidenav-content">
-    <router-outlet></router-outlet>
-    <!--<router-outlet name="adminSidenav"></router-outlet>-->
+        <router-outlet></router-outlet>
+        <!--<router-outlet name="adminSidenav"></router-outlet>-->
     </div>
-
 </mat-drawer-container>
-        

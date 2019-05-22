@@ -1,3 +1,34 @@
-<p>
-  subject works!
-</p>
+
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+      <mat-panel-description style="float:left;">
+          {{subject.name}}
+      </mat-panel-description>
+  </mat-expansion-panel-header>
+    <ul>
+      <li>
+        <label for="id">Subject id:</label>
+        {{subject.id}}
+      </li>
+      <li>
+        <label for="ects">Ects:</label>
+        {{subject.ects}}
+      </li>
+      <li>
+        <label for="lecturesNum">Lectures weekly:</label>
+        {{subject.lecturesNum}}
+      </li>
+      <li>
+        <label for="exercisesNum">Exercises weekly:</label>
+        {{subject.exercisesNum}}
+      </li>
+      <li>
+        <label for="otherActivitesNum">Other activities weekly:</label>
+        {{subject.otherActivitiesNum}}
+      </li>
+      <li>
+        <label for="otherClasses">Other classes weekly:</label>
+        {{subject.otherClasses}}
+      </li>
+    </ul>
+</mat-expansion-panel>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Subject} from '../../subject/subject.model';
-import {SubjectAttendanceService} from '../../subject/subject-attendance.service'
-
+import {SubjectService} from '../../subject/subject.service';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-current-subjects',
@@ -15,16 +15,22 @@ export class CurrentSubjectsComponent implements OnInit {
   subjects: Subject[] = [];
 
 
-  constructor(private subjectAttService: SubjectAttendanceService) { }
+  constructor(private subjectService: SubjectService, private authService: AuthService) {}
 
   ngOnInit() {
-    //TODO fix id from logged student
-    this.getCurrentSubjects(1);
+    let loggedUser = this.authService.getCurrentUser();
+    if (loggedUser) {
+      this.getCurrentSubjects(loggedUser);
+    }
+    else {
+      console.log("unknown username");
+    }
   }
 
-  getCurrentSubjects(id: number){
-    this.subjectAttService.getCurrentSubjects(id).subscribe((data : Subject[]) => {
+  getCurrentSubjects(username: String){
+    this.subjectService.getStudentsCurrentSubjects(username).subscribe((data : Subject[]) => {
       this.subjects = data;
+      console.log(this.subjects);
     });
   }
 

@@ -9,6 +9,9 @@ import { Topic } from '../topic/topic.model';
 export class SubjectService {
 
   private subjectUrl = "http://localhost:8080/subject";
+  private teacherRealUrl = "http://localhost:8080/teacherrealization/"
+  private subjAttUrl = "http://localhost:8080/subjectattendance"
+
 
   constructor(private http: HttpClient) {
   }
@@ -35,6 +38,18 @@ export class SubjectService {
 
   getSyllabuses(subjectId: number) {
     return this.http.get<Topic[]>(this.subjectUrl+`/syllabuses/${subjectId}`);
+  }
+
+  getTeachersCurrentSubjects(username: String){
+    return this.http.get<Subject[]>(this.teacherRealUrl+`/${username}/currentSubjects`);
+  }
+
+  getStudentsPastSubjects(username : String){
+    return this.http.get<Subject[]>(this.subjAttUrl+`/pastSubjects/${username}`);
+  }
+
+  getStudentsCurrentSubjects(username: String){
+    return this.http.get<Subject[]>(this.subjAttUrl+`/subjects/${username}`);
   }
 
 }

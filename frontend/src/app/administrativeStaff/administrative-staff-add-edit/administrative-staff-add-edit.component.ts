@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { AdministrativeStaff } from '../administrative-staff';
 import { AdministrativeStaffService } from '../administrative-staff.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormErrorService } from 'src/app/shared/formError.service';
 
 @Component({
   selector: 'app-administrative-staff-add-edit',
@@ -16,7 +17,7 @@ export class AdministrativeStaffAddEditComponent implements OnInit {
   public administrativeStaff = new AdministrativeStaff();
   public form = new FormGroup({});
 
-  constructor(private ASService: AdministrativeStaffService, private route: ActivatedRoute) { }
+  constructor(private ASService: AdministrativeStaffService, private route: ActivatedRoute,  public formErrorService: FormErrorService) { }
 
   ngOnInit() {
     this.form = new FormGroup({});
@@ -31,15 +32,19 @@ export class AdministrativeStaffAddEditComponent implements OnInit {
   }
 
   onSave(){
-    const admStf = this.form.value;
-    delete admStf['accountData']['confirmPassword'];
-    delete admStf['personalData']['profileImage'];
-    this.administrativeStaff = admStf;
-
-    if(this.edit){
-      this.ASService.update(this.id, this.administrativeStaff).subscribe();
+    if(this.form.invalid){
+      this.formErrorService.markFormGroupTouched(this.form);
     }else{
-      this.ASService.add(this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe();
+      const admStf = this.form.value;
+      delete admStf['accountData']['confirmPassword'];
+      delete admStf['personalData']['profileImage'];
+      this.administrativeStaff = admStf;
+
+      if(this.edit){
+        this.ASService.update(this.id, this.administrativeStaff).subscribe();
+      }else{
+        this.ASService.add(this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe();
+      }
     }
   }
 
