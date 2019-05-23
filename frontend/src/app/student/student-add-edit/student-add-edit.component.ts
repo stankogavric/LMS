@@ -36,6 +36,7 @@ export class StudentAddEditComponent implements OnInit {
       this.formErrorService.markFormGroupTouched(this.form);
     }else{
       const std = this.form.value;
+      console.log(std);
       delete std['accountData']['confirmPassword'];
       delete std['personalData']['profileImage'];
       this.student = std;
