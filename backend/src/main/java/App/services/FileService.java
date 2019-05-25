@@ -16,7 +16,7 @@ public class FileService {
 	public void saveProfileImage(MultipartFile file, String fileName, PersonalData pData) throws IOException {
 	    Tika tika = new Tika();
 	    String mimeType = tika.detect(file.getBytes());
-		if(file != null && (mimeType == "image/png" || mimeType == "image/jpeg")) {
+		if(file != null && (mimeType.equals("image/png") || mimeType.equals("image/jpeg"))) {
 			File convertFile = new File("resources\\images\\profile images\\" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 			convertFile.createNewFile();
 			FileOutputStream fout = new FileOutputStream(convertFile);

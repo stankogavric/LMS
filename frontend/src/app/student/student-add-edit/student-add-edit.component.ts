@@ -3,6 +3,7 @@ import { Student } from '../student.model';
 import { FormGroup } from '@angular/forms';
 import { StudentService } from '../student.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormErrorService } from 'src/app/shared/formError.service';
 
 @Component({
   selector: 'app-student-add-edit',
@@ -16,7 +17,7 @@ export class StudentAddEditComponent implements OnInit {
   public student: Student = new Student();
   public form : FormGroup;
 
-  constructor(private studentService: StudentService, private route: ActivatedRoute) { }
+  constructor(private studentService: StudentService, private route: ActivatedRoute, public formErrorService: FormErrorService) { }
 
   ngOnInit() {
     this.form = new FormGroup({});
@@ -31,14 +32,19 @@ export class StudentAddEditComponent implements OnInit {
   }
 
   onSave(){
-    const std = this.form.value;
-    delete std['accountData']['confirmPassword'];
-    delete std['personalData']['profileImage'];
-    this.student = std;
-    if(this.edit){
-      this.studentService.update(this.id, this.student).subscribe();
+    if(this.form.invalid){
+      this.formErrorService.markFormGroupTouched(this.form);
     }else{
-      this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
+      const std = this.form.value;
+      console.log(std);
+      delete std['accountData']['confirmPassword'];
+      delete std['personalData']['profileImage'];
+      this.student = std;
+      if(this.edit){
+        this.studentService.update(this.id, this.student).subscribe();
+      }else{
+        this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
+      }
     }
   }
 

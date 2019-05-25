@@ -1,7 +1,6 @@
 package App.models;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,11 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-
-import com.fasterxml.jackson.annotation.JsonView;
-
-import App.utils.View.ShowTopic;
 
 @Entity
 public class TeachingTerm {
@@ -29,13 +23,6 @@ public class TeachingTerm {
 	@Column(nullable = false)
 	private Date endTime;
 	
-	@JsonView(ShowTopic.class)
-	@OneToMany(mappedBy="teachingTerm")
-	private Set<Topic> syllabus;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private TeachingType teachingType;
-	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private SubjectRealization subjectRealization;
 	
@@ -46,13 +33,10 @@ public class TeachingTerm {
 		super();
 	}
 
-	public TeachingTerm(Date startTime, Date endTime, Set<Topic> syllabus, TeachingType teachingType,
-			SubjectRealization subjectRealization, Classroom classroom) {
+	public TeachingTerm(Date startTime, Date endTime, SubjectRealization subjectRealization, Classroom classroom) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
-		this.syllabus = syllabus;
-		this.teachingType = teachingType;
 		this.subjectRealization = subjectRealization;
 		this.classroom = classroom;
 	}
@@ -79,22 +63,6 @@ public class TeachingTerm {
 
 	public void setEndTime(Date endTime) {
 		this.endTime = endTime;
-	}
-
-	public Set<Topic> getSyllabus() {
-		return syllabus;
-	}
-
-	public void setSyllabus(Set<Topic> syllabus) {
-		this.syllabus = syllabus;
-	}
-
-	public TeachingType getTeachingType() {
-		return teachingType;
-	}
-
-	public void setTeachingType(TeachingType teachingType) {
-		this.teachingType = teachingType;
 	}
 
 	public SubjectRealization getSubjectRealization() {

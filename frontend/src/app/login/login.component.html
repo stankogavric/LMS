@@ -1,12 +1,12 @@
 <mat-card>
   <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
     <mat-form-field>
-      <input matInput name="username" ngModel type="text" placeholder="Username" #emailInput="ngModel" required>
-      <mat-error *ngIf="emailInput.invalid">Please enter a valid username.</mat-error>
+      <input matInput name="username" ngModel type="text" placeholder="Username" #usernameInput="ngModel" required>
+      <mat-error>{{formError.mapErrors(usernameInput, 'Username')}}</mat-error>
     </mat-form-field>
     <mat-form-field>
       <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
-      <mat-error *ngIf="passwordInput.invalid">Please enter a valid password.</mat-error>
+      <mat-error>{{formError.mapErrors(passwordInput, 'Password')}}</mat-error>
     </mat-form-field>
     <button mat-raised-button color="accent" type="submit">Login</button>
   </form>

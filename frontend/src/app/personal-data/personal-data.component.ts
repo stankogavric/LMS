@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { mimeTypeValidator } from '../validators/mime-type-validator.directive';
+import { FormErrorService } from '../shared/formError.service';
 
 @Component({
   selector: 'app-personal-data',
@@ -13,13 +14,13 @@ export class PersonalDataComponent implements OnInit {
   public personalDataForm : FormGroup;
   imagePreview: string;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public formError: FormErrorService) { }
 
   ngOnInit() {
     this.personalDataForm = this.fb.group({
-      personalNumber: ['', {validators: [Validators.pattern('[0-9]{13}')]}],
-      firstName: ['', {validators: [Validators.pattern('[a-zA-Z]{3,}')]}],
-      lastName: ['', {validators: [Validators.pattern('[a-zA-Z]{3,}')]}],
+      personalNumber: ['', {validators: [Validators.required, Validators.pattern('[0-9]{13}')]}],
+      firstName: ['', {validators: [Validators.required, Validators.pattern('[a-zA-Z]{3,}')]}],
+      lastName: ['', {validators: [Validators.required, Validators.pattern('[a-zA-Z]{3,}')]}],
       profilePicturePath: [''],
       profileImage: ['', {asyncValidators: [mimeTypeValidator]}],
     });

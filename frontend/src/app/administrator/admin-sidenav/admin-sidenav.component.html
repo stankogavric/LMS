@@ -2,11 +2,17 @@
 <br>
 <mat-menu #addMenu="matMenu">
   <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
-  <button mat-menu-item routerLink="register/student">Student</button>
-  <button mat-menu-item routerLink="register/teacher">Teacher</button>
-  <button mat-menu-item routerLink="register/administrativestaff">Administrative staff</button>
-  <button mat-menu-item routerLink="register/administrator">Administrator</button>
+  
+  <button mat-menu-item [matMenuTriggerFor]="addUsersMenu">Users</button>
+  <mat-menu #addUsersMenu="matMenu">
+    <button mat-menu-item routerLink="register/student">Student</button>
+    <button mat-menu-item routerLink="register/teacher">Teacher</button>
+    <button mat-menu-item routerLink="register/administrativestaff">Administrative staff</button>
+    <button mat-menu-item routerLink="register/administrator">Administrator</button>
+  </mat-menu>
+
   <button mat-menu-item routerLink="add/exam">Exam</button>
+  <button mat-menu-item routerLink="add/topics">Topics</button>
 </mat-menu>
 <button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
 <br>

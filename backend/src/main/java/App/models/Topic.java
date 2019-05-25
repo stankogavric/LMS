@@ -18,24 +18,20 @@ public class Topic {
 
 	@Column(length=128, nullable = false)
 	private String description;
+	
+	@Column(nullable = false)
+	private Integer week;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private Subject subject;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private TeachingTerm teachingTerm;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Exam exam;
 
 	public Topic() {}
 
-	public Topic(String description, Subject subject, TeachingTerm teachingTerm, Exam exam) {
+	public Topic(String description, Integer week, Subject subject) {
 		super();
 		this.description = description;
+		this.week = week;
 		this.subject = subject;
-		this.teachingTerm = teachingTerm;
-		this.exam = exam;
 	}
 
 	public Long getId(){
@@ -62,20 +58,12 @@ public class Topic {
 		this.subject = subject;
 	}
 
-	public TeachingTerm getTeachingTerm() {
-		return teachingTerm;
+	public Integer getWeek() {
+		return week;
 	}
 
-	public void setTeachingTerm(TeachingTerm teachingTerm) {
-		this.teachingTerm = teachingTerm;
-	}
-
-	public Exam getExam() {
-		return exam;
-	}
-
-	public void setExam(Exam exam) {
-		this.exam = exam;
+	public void setWeek(Integer week) {
+		this.week = week;
 	}
 	
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Teacher } from './teacher.model';
+import { SubjectRealization } from '../subject/subject-realization.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,6 +34,10 @@ export class TeacherService {
 
   update(id:string, teacher:Teacher) {
     return this.http.put(this.teacherUrl+`/${id}`, teacher)
+  }
+
+  getSubjectRealization(username: String){
+    return this.http.get<SubjectRealization[]>(this.teacherUrl+`/${username}`+"/subjectRealizations");
   }
 
 }

@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import App.utils.View.ShowStudyProgram;
 import App.utils.View.ShowSubjectRealization;
 
 
@@ -42,7 +41,7 @@ public class YearOfStudy {
 	@OneToMany(mappedBy="yearOfStudy")
 	private Set<SubjectRealization> subjectRealizations;
 
-	@JsonView(ShowStudyProgram.class)
+	//@JsonView(ShowStudyProgram.class)
 	@ManyToOne(cascade=CascadeType.ALL)
 	private StudyProgram studyProgram;
 

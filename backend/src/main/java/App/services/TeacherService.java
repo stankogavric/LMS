@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.SubjectRealization;
 import App.models.Teacher;
+import App.repositories.SubjectRealizationRepository;
 import App.repositories.TeacherRepository;
 
 @Service
@@ -13,6 +15,8 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepo;
+    @Autowired
+    private SubjectRealizationRepository subjectRealizationRepo;
     
     @Autowired
     private LoginService loginServ;
@@ -54,6 +58,10 @@ public class TeacherService {
     
     public Optional<Teacher> getTeacherByJmbg(String jmbg){
     	return teacherRepo.findTeacherByJmbg(jmbg);
+    }
+    
+    public Iterable<SubjectRealization> getSubjectRealizations(String username) {
+        return subjectRealizationRepo.findByTeacherUsername(username);
     }
 
 }

@@ -1,0 +1,50 @@
+<h3>New Topics</h3>
+<div class="example-container" [formGroup]="addEditTopicsForm">
+
+  <mat-form-field>
+    <mat-label>Subject</mat-label>
+    <mat-select name = "subjectRealization" formControlName="subjectRealization">
+      <mat-option *ngFor="let subjectRealization of subjectRealizations" [value]="subjectRealization">
+        {{subjectRealization.subject.name}} {{subjectRealization.yearOfStudy.year}}. godina {{subjectRealization.yearOfStudy.studyProgram.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)="addWeek()">Add week</button>
+
+  <mat-form-field>
+    <mat-label>Week</mat-label>
+    <mat-select name = "week" formControlName="week">
+      <mat-option *ngFor="let week of weeks" [value]="week">
+        {{week.weekNumber}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Topic" name="topic" formControlName="topic"></textarea>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
+
+  <h3>Topics</h3>
+  <mat-vertical-stepper #stepper>
+    <ng-template matStepperIcon="edit" let-index="index">
+      {{index + 1}}.
+    </ng-template>
+  
+    <ng-template matStepperIcon="done" let-index="index">
+      {{index + 1}}.
+    </ng-template>
+
+    <ng-template matStepperIcon="number" let-index="index">
+      {{index + 1}}.
+    </ng-template>
+
+    <mat-step label="week" *ngFor="let week of weeks">
+      <div *ngFor="let topic of week.topics">{{topic}}</div>
+    </mat-step>
+  </mat-vertical-stepper>
+
+  <button mat-raised-button color="accent" (click)="add()">Add topics</button>
+</div>

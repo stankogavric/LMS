@@ -33,10 +33,12 @@ public class SubjectService {
     public void addSubject(Subject subject) {
         subjectRepo.save(subject);
     }
-
+    
     public void removeSubject(Long id) {
-        Optional<Subject> subject = subjectRepo.findById(id);
-        subjectRepo.delete(subject.get());
+    	Optional<Subject> subject = subjectRepo.findById(id);
+        Subject s = subject.get();
+        s.setDeleted(true);
+        subjectRepo.save(s);
     }
 
     public void updateSubject(Long id, Subject subject) {

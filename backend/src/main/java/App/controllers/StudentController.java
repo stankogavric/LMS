@@ -65,7 +65,6 @@ public class StudentController {
         }catch (Exception e) {
             return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<Student>(HttpStatus.NO_CONTENT);
     }
     
@@ -95,5 +94,5 @@ public class StudentController {
 		studentService.addStudent(student);
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}
-
+    
 }

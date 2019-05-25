@@ -21,6 +21,8 @@ import { AdministrativeStaffComponent } from './administrativeStaff/administrati
 import { AdministratorAddEditComponent } from './administrator/administrator-add-edit/administrator-add-edit.component';
 import { SubjectsComponent } from './subject/subjects/subjects.component';
 import { TeacherSubjectsComponent} from './teacher/teacher-subjects/teacher-subjects.component'; 
+import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
+import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,6 +38,11 @@ const routes: Routes = [
   { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
   { path: 'register/teacher', component: TeacherAddEditComponent, 
         canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
+
+
+  { path: 'add/exam', component: ExamAddEditComponent },
+
+  { path: 'add/topics', component: AddEditTopicsComponent },
         
   { path: 'administrators', component: AdministratorsComponent},
   { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
