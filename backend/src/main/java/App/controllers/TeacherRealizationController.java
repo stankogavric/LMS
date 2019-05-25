@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.models.Subject;
 import App.models.Teacher;
 import App.models.TeacherRealization;
 import App.services.TeacherRealizationService;
@@ -70,6 +71,13 @@ public class TeacherRealizationController {
     @RequestMapping(value="teachersWhoTeachSubject/{subjectId}", method=RequestMethod.GET)
     public ResponseEntity<Iterable<Teacher>> getTeachersWhoTeachSubject(@PathVariable Long subjectId) {
         return new ResponseEntity<Iterable<Teacher>>(teacherRealizationService.getTeachersWhoTeachSubject(subjectId), HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/{username}/currentSubjects", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Subject>> getTeachersSubjects(@PathVariable String username) {
+        Iterable<Subject> subjects = teacherRealizationService.getTeacherSubjects(username);
+        return new ResponseEntity<Iterable<Subject>>(subjects, HttpStatus.OK);
     }
 
 }

@@ -16,11 +16,13 @@ import { AddressComponent } from '../address/address.component';
 import { StudentSidenavComponent } from '../student/student-sidenav/student-sidenav.component';
 import { SubjectsComponent } from '../subject/subjects/subjects.component';
 import { SubjectComponent } from '../subject/subject.component';
+import { TeacherSidenavComponent } from '../teacher/teacher-sidenav/teacher-sidenav.component';
 
 @NgModule({
   declarations: [
     AdminSidenavComponent,
     StudentSidenavComponent,
+    TeacherSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
     AddressComponent,
@@ -48,6 +50,7 @@ import { SubjectComponent } from '../subject/subject.component';
     FlexLayoutModule,
     AdminSidenavComponent,
     StudentSidenavComponent,
+    TeacherSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
     AddressComponent,

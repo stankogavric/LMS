@@ -1,10 +1,13 @@
 package App.services;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import App.models.Subject;
 import App.models.Teacher;
 import App.models.TeacherRealization;
 import App.repositories.TeacherRealizationRepository;
@@ -45,6 +48,13 @@ public class TeacherRealizationService {
     
     public Iterable<Teacher> getTeachersWhoTeachSubject(Long subjectId) {
         return teacherRealizationRepo.findTeachersWhoTeachSubject(subjectId);
+    }
+    
+    public Iterable<Subject> getTeacherSubjects(String username){
+    	Date date = new Date();  
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
+        String today = formatter.format(date);  
+    	return teacherRealizationRepo.getTeacherSubjects(username, date);
     }
 
 }
