@@ -1,6 +1,5 @@
 package App.services;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
 
@@ -52,8 +51,6 @@ public class TeacherRealizationService {
     
     public Iterable<Subject> getTeacherSubjects(String username){
     	Date date = new Date();  
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");  
-        String today = formatter.format(date);  
     	return teacherRealizationRepo.getTeacherSubjects(username, date);
     }
 

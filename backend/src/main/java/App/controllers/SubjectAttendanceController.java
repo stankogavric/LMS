@@ -1,6 +1,7 @@
 package App.controllers;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.dto.StudentDTO;
+import App.mapper.StudentMapper;
 import App.models.Student;
 import App.models.Subject;
 import App.models.SubjectAttendance;
 import App.services.SubjectAttendanceService;
 import App.utils.View.HideOptionalProperties;
+import App.utils.View.ShowStudent;
 import App.utils.View.ShowYearOfStudy;
 
 @CrossOrigin(origins={"http://localhost:4200"})
@@ -29,6 +33,8 @@ public class SubjectAttendanceController {
 
     @Autowired
     SubjectAttendanceService subjectAttendanceService;
+    @Autowired
+    StudentMapper studentMapper;
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping()
@@ -93,6 +99,14 @@ public class SubjectAttendanceController {
     @RequestMapping(value="/pastSubjects/{studentUsername}", method=RequestMethod.GET)
     public ResponseEntity<ArrayList<Object>> getPastSubjectsByStudentUsername(@PathVariable String studentUsername) {
     	return new ResponseEntity<ArrayList<Object>>(subjectAttendanceService.getPastSubjects(studentUsername), HttpStatus.OK);
+    }
+    
+    @JsonView(ShowStudent.class)
+    @RequestMapping(value="/teacher/{teacherUsername}/{subjectId}/students", method=RequestMethod.GET)
+    public ResponseEntity<Collection<StudentDTO>> getStudentsBySubject(@PathVariable String teacherUsername, @PathVariable Long subjectId){
+    	Collection<Student> studenti = subjectAttendanceService.getStudentsBySubject(subjectId, teacherUsername);
+    	
+    	return new ResponseEntity<Collection<StudentDTO>>(studentMapper.toDtoList(studenti), HttpStatus.OK);
     }
     
 }

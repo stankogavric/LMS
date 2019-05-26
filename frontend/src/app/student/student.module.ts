@@ -6,6 +6,7 @@ import { StudentAddEditComponent } from './student-add-edit/student-add-edit.com
 import { StudentsComponent } from './students/students.component';
 import { CurrentSubjectsComponent } from './current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './past-subjects/past-subjects.component';
+import { StudentsListComponent } from './students-list/students-list.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { PastSubjectsComponent } from './past-subjects/past-subjects.component';
     StudentsComponent,
     CurrentSubjectsComponent,
     PastSubjectsComponent,
+    StudentsListComponent,
   ],
   imports: [
     SharedModule

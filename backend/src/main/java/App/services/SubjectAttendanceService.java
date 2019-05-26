@@ -1,6 +1,7 @@
 package App.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,11 @@ public class SubjectAttendanceService {
     
     public ArrayList<Object> getPastSubjects(String username){
     	return subjectAttendanceRepo.findPastSubjects(username);
+    }
+    
+    public ArrayList<Student> getStudentsBySubject(Long subjectId, String teacherUsername){
+    	Date today = new Date();
+    	return subjectAttendanceRepo.findStudentsBySubject(subjectId, today, teacherUsername);
     }
 
 }
