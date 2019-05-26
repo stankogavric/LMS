@@ -9,7 +9,7 @@ import { Topic } from '../topic/topic.model';
 export class SubjectService {
 
   private subjectUrl = "http://localhost:8080/subject";
-  private teacherRealUrl = "http://localhost:8080/teacherrealization/"
+  private teacherRealUrl = "http://localhost:8080/teacherrealization"
   private subjAttUrl = "http://localhost:8080/subjectattendance"
 
 

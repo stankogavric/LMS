@@ -20,6 +20,7 @@ import { AdministratorsComponent } from './administrator/administrators/administ
 import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
 import { AdministratorAddEditComponent } from './administrator/administrator-add-edit/administrator-add-edit.component';
 import { SubjectsComponent } from './subject/subjects/subjects.component';
+import { TeacherSubjectsComponent} from './teacher/teacher-subjects/teacher-subjects.component'; 
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'pastSubjects', component: PastSubjectsComponent},
   { path: 'studyPrograms', component: StudyProgramsComponent},
   { path: 'subjects', component: SubjectsComponent},
+  {path: 'teacherSubjects', component: TeacherSubjectsComponent},
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

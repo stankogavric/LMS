@@ -1,5 +1,5 @@
 [{
-        "repNum":40,
+        "repNum":10,
         "naziv": "AccountData",
         "mnozina": "AccountData",
         "data": {
@@ -263,7 +263,7 @@
         }
     },
     {
-        "repNum":40,
+        "repNum":10,
         "naziv": "AccountDataPermission",
         "mnozina": "AccountDataPermissions",
         "data": {
