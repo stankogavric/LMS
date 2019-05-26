@@ -1,6 +1,6 @@
 <app-toolbar></app-toolbar>
 <button type="button" mat-button (click)="drawer.toggle()"
-    *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0) || (roles.indexOf('ROLE_STUDENT') >= 0)">
+    *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0) || (roles.indexOf('ROLE_STUDENT') >= 0) || (roles.indexOf('ROLE_TEACHER') >= 0)">
     <mat-icon>menu</mat-icon>
 </button>
 <mat-drawer-container class="main-container" autosize>
