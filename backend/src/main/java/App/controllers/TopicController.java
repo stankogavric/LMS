@@ -51,11 +51,13 @@ public class TopicController {
     }
 
     @RequestMapping(value="", method=RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Topic> addTopic(@RequestPart("icon") MultipartFile file, @RequestPart("data") String topicStr) throws IOException {
+    public ResponseEntity<Topic> addTopic(@RequestPart("icon") Optional<MultipartFile> file, @RequestPart("data") String topicStr) throws IOException {
     	Topic topic = new ObjectMapper().readValue(topicStr, Topic.class);
     	Topic savedTopic = topicService.addTopic(topic);
-		fileService.saveTopicIcon(file, "topic_" + savedTopic.getId(), savedTopic);
-		topicService.updateTopic(savedTopic.getId(), savedTopic);
+    	if(file.isPresent()) {
+    		fileService.saveTopicIcon(file.get(), "topic_" + savedTopic.getId(), savedTopic);
+    		topicService.updateTopic(savedTopic.getId(), savedTopic);
+    	}
         return new ResponseEntity<Topic>(savedTopic, HttpStatus.CREATED);
     }
 

@@ -51,6 +51,9 @@ export class AddEditTopicsComponent implements OnInit {
 
   addTopic(){
     this.addEditTopicsForm.get('week').value.topics.push([new Topic(this.addEditTopicsForm.get('topic').value, this.addEditTopicsForm.get('week').value.weekNumber, this.addEditTopicsForm.get('subjectRealization').value.subject, null), this.addEditTopicsForm.get('icon').value, this.iconPreview]);
+    delete this.iconPreview;
+    this.addEditTopicsForm.patchValue({ icon: "" });
+    this.addEditTopicsForm.get("icon").updateValueAndValidity();
   }
 
   addWeek(){
@@ -59,13 +62,19 @@ export class AddEditTopicsComponent implements OnInit {
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.addEditTopicsForm.patchValue({ icon: file });
-    this.addEditTopicsForm.get("icon").updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.iconPreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
+    if(file){
+      this.addEditTopicsForm.patchValue({ icon: file });
+      this.addEditTopicsForm.get("icon").updateValueAndValidity();
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.iconPreview = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  deleteTopic(week:Week, topic: [Topic, File, string]){
+    this.weeks[this.weeks.indexOf(week)].topics.splice(this.weeks[this.weeks.indexOf(week)].topics.indexOf(topic), 1);
   }
   
 }

@@ -29,13 +29,15 @@ export class PersonalDataComponent implements OnInit {
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    this.personalDataForm.patchValue({ profileImage: file });
-    this.personalDataForm.get("profileImage").updateValueAndValidity();
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;;
-    };
-    reader.readAsDataURL(file);
+    if(file){
+      this.personalDataForm.patchValue({ profileImage: file });
+      this.personalDataForm.get("profileImage").updateValueAndValidity();
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result as string;;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
 }

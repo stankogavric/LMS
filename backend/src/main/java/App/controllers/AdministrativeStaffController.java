@@ -74,9 +74,11 @@ public class AdministrativeStaffController {
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Secured("ROLE_ADMINISTRATOR")
-	public ResponseEntity<AdministrativeStaff> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String admStfStr) throws IOException {
+	public ResponseEntity<AdministrativeStaff> uploadFile(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String admStfStr) throws IOException {
 		AdministrativeStaff admStf = new ObjectMapper().readValue(admStfStr, AdministrativeStaff.class);
-		fileService.saveProfileImage(file, "administrative_staff_" + admStf.getAccountData().getUsername(), admStf.getPersonalData());
+		if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "administrative_staff_" + admStf.getAccountData().getUsername(), admStf.getPersonalData());
+		}
 		administrativeStaffService.addAdministrativeStaff(admStf);
 		return new ResponseEntity<AdministrativeStaff>(admStf, HttpStatus.OK);
 	}

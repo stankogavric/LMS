@@ -1,4 +1,3 @@
-<h3>New Topics</h3>
 <div class="example-container" [formGroup]="addEditTopicsForm">
 
   <mat-form-field>
@@ -59,12 +58,22 @@
           <div class="image-preview" *ngIf="topic[2]">
             <img [src]="topic[2]" alt="Can't display icon">
             {{topic[0].description}}
+            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
           </div>
-          <div *ngIf="!topic[2]">{{topic[0].description}}</div>
+          <div *ngIf="!topic[2]">
+            {{topic[0].description}}
+            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </div>
         </li>
       </ol>
     </mat-step>
   </mat-vertical-stepper>
 
-  <button mat-raised-button color="accent" (click)="add()">Add topics</button>
+  <button mat-raised-button color="accent" (click)="add()">Save topics</button>
 </div>
