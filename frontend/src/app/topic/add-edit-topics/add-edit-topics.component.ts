@@ -5,6 +5,8 @@ import { TeacherService } from 'src/app/teacher/teacher.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { TopicService } from '../topic.service';
 import { Topic } from '../topic.model';
+import { mimeTypeValidator } from 'src/app/validators/mime-type-validator.directive';
+import { FormErrorService } from 'src/app/shared/formError.service';
 
 @Component({
   selector: 'app-add-edit-topics',
@@ -17,14 +19,16 @@ export class AddEditTopicsComponent implements OnInit {
   public subjectRealizations: SubjectRealization[] = [];
   public topics: String[] = [];
   public weeks: Week[] = [];
+  public iconPreview: string;
 
-  constructor(private fb: FormBuilder, private teacherService: TeacherService, private topicService: TopicService, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private teacherService: TeacherService, private topicService: TopicService, private authService: AuthService, public formError: FormErrorService) { }
 
   ngOnInit() {
     this.addEditTopicsForm = this.fb.group({
       subjectRealization: ['', {validators: [Validators.required]}],
       topic: ['', {validators: []}],
-      week: ['', {validators: [Validators.required]}]
+      week: ['', {validators: [Validators.required]}],
+      icon: ['', {asyncValidators: [mimeTypeValidator]}],
     });
 
     this.getSubjectRealization();
@@ -33,7 +37,7 @@ export class AddEditTopicsComponent implements OnInit {
   add(){
     this.weeks.forEach(week => {
       week.topics.forEach(topic => {
-        this.topicService.add(new Topic(topic, week.weekNumber, this.addEditTopicsForm.get('subjectRealization').value.subject)).subscribe();
+        this.topicService.add(topic[0], topic[1]).subscribe();
       })
     });
   }
@@ -46,18 +50,29 @@ export class AddEditTopicsComponent implements OnInit {
   }
 
   addTopic(){
-    this.addEditTopicsForm.get('week').value.topics.push(this.addEditTopicsForm.get('topic').value);
+    this.addEditTopicsForm.get('week').value.topics.push([new Topic(this.addEditTopicsForm.get('topic').value, this.addEditTopicsForm.get('week').value.weekNumber, this.addEditTopicsForm.get('subjectRealization').value.subject, null), this.addEditTopicsForm.get('icon').value, this.iconPreview]);
   }
 
   addWeek(){
     this.weeks.push(new Week(this.weeks.length+1));
+  }
+
+  onImagePicked(event: Event) {
+    const file = (event.target as HTMLInputElement).files[0];
+    this.addEditTopicsForm.patchValue({ icon: file });
+    this.addEditTopicsForm.get("icon").updateValueAndValidity();
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.iconPreview = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   }
   
 }
 
 class Week{
   weekNumber:number;
-  topics: String[];
+  topics: [Topic, File, string][];
 
   constructor(weekNumber:number){
     this.weekNumber = weekNumber;

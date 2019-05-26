@@ -24,8 +24,11 @@ export class TopicService {
     return this.http.delete(this.topicUrl+`/${id}`);
   }
 
-  add(topic:Topic) {
-    return this.http.post(this.topicUrl, topic);
+  add(topic:Topic, icon:File) {
+    const postData = new FormData();
+    postData.append("icon", icon, icon.name);
+    postData.append("data", JSON.stringify(topic));
+    return this.http.post(this.topicUrl, postData);
   }
 
   update(id:string, topic:Topic) {

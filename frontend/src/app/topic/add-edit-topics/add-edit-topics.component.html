@@ -25,6 +25,18 @@
     <textarea matInput placeholder="Topic" name="topic" formControlName="topic"></textarea>
   </mat-form-field>
 
+  <div>
+    <button mat-stroked-button type="button" (click)="filePicker.click()">Add icon</button>
+    <input hidden type="file" #filePicker (change)="onImagePicked($event)">
+    <mat-error>{{formError.mapErrors(addEditTopicsForm.get('icon'), 'Icon')}}</mat-error>
+  </div>
+
+  <div class="image-preview" *ngIf="iconPreview && iconPreview !== '' && addEditTopicsForm.get('icon').valid">
+    <img [src]="iconPreview" alt="Can't display icon">
+  </div>
+
+  <br>
+
   <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
 
   <h3>Topics</h3>
@@ -42,7 +54,15 @@
     </ng-template>
 
     <mat-step label="week" *ngFor="let week of weeks">
-      <div *ngFor="let topic of week.topics">{{topic}}</div>
+      <ol>
+        <li *ngFor="let topic of week.topics">
+          <div class="image-preview" *ngIf="topic[2]">
+            <img [src]="topic[2]" alt="Can't display icon">
+            {{topic[0].description}}
+          </div>
+          <div *ngIf="!topic[2]">{{topic[0].description}}</div>
+        </li>
+      </ol>
     </mat-step>
   </mat-vertical-stepper>
 

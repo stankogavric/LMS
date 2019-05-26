@@ -25,8 +25,8 @@ public class TopicService {
         return topicRepo.findById(id);
     }
 
-    public void addTopic(Topic topic) {
-        topicRepo.save(topic);
+    public Topic addTopic(Topic topic) {
+        return topicRepo.save(topic);
     }
 
     public void removeTopic(Long id) {

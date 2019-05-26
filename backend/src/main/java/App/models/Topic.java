@@ -21,16 +21,20 @@ public class Topic {
 	
 	@Column(nullable = false)
 	private Integer week;
+	
+	@Column(length=128)
+	private String iconPath;
 
 	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private Subject subject;
 
 	public Topic() {}
 
-	public Topic(String description, Integer week, Subject subject) {
+	public Topic(String description, Integer week, String iconPath, Subject subject) {
 		super();
 		this.description = description;
 		this.week = week;
+		this.iconPath = iconPath;
 		this.subject = subject;
 	}
 
@@ -64,6 +68,14 @@ public class Topic {
 
 	public void setWeek(Integer week) {
 		this.week = week;
+	}
+
+	public String getIconPath() {
+		return iconPath;
+	}
+
+	public void setIconPath(String iconPath) {
+		this.iconPath = iconPath;
 	}
 	
 }

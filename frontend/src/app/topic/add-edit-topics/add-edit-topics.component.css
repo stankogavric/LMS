@@ -6,3 +6,12 @@
 .example-container > * {
     width: 100%;
 }
+
+.image-preview {
+    height: 50px;
+    margin: 16px 0;
+}
+  
+.image-preview img {
+    height: 100%;
+}
