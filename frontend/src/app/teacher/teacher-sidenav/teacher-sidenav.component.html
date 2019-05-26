@@ -1,3 +1,4 @@
+<!--
 <button type="button" mat-button (click)="drawer.toggle()">
   <mat-icon>menu</mat-icon>
 </button>
@@ -6,15 +7,21 @@
     <button mat-button [matMenuTriggerFor]="teacherMenu">Menu</button>
     <br>
     <mat-menu #teacherMenu="matMenu">
-      <button mat-menu-item routerLink = "teacherSubjects">My Current Subjects</button><br>
-      <button mat-menu-item routerLink="">Ishodi??</button><br>
-      <button mat-menu-item routerLink="">Create exam types</button><br>
-      <button mat-menu-item routerLink="">Enter grades</button><br>
-      <button mat-menu-item routerLink="">Create notifications</button><br>
-      <button mat-menu-item routerLink="">Students on my subjects</button><br>
-      <button mat-menu-item routerLink="">Search students</button><br>
-      <button mat-menu-item routerLink="">Forum</button><br>
-      <button mat-menu-item routerLink="">Messages</button><br>
+-->
+      <button mat-button routerLink = "teacherSubjects">My Current Subjects</button><br>
+      <button mat-button [matMenuTriggerFor]="addMenu">Add</button><br>
+      <mat-menu #addMenu="matMenu">
+        <button mat-menu-item routerLink="add/exam">Exam</button>
+        <button mat-menu-item routerLink="add/topics">Topics</button>
+      </mat-menu>
+      <button mat-button routerLink="">Create exam types</button><br>
+      <button mat-button routerLink="">Enter grades</button><br>
+      <button mat-button routerLink="">Create notifications</button><br>
+      <button mat-button routerLink="">Students on my subjects</button><br>
+      <button mat-button routerLink="">Search students</button><br>
+      <button mat-button routerLink="">Forum</button><br>
+      <button mat-button routerLink="">Messages</button><br>
+<!--
     </mat-menu>
 </mat-drawer>
 
@@ -23,3 +30,4 @@
 </div>
 
 </mat-drawer-container>
+-->

@@ -6,7 +6,6 @@
 <mat-drawer-container class="main-container" autosize>
     <mat-drawer #drawer class="main-sidenav" mode="side" opened="true">
         <app-admin-sidenav *ngIf="(roles.indexOf('ROLE_ADMINISTRATOR') >= 0)"></app-admin-sidenav>
-        <app-admin-sidenav *ngIf="(roles.indexOf('ROLE_TEACHER') >= 0)"></app-admin-sidenav>
         <app-student-sidenav *ngIf="(roles.indexOf('ROLE_STUDENT') >= 0)"></app-student-sidenav>
         <app-teacher-sidenav *ngIf="(roles.indexOf('ROLE_TEACHER') >= 0)"></app-teacher-sidenav>
     </mat-drawer>
