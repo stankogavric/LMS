@@ -8,6 +8,7 @@ import { Student } from './student.model';
 export class StudentService {
 
   private studentUrl = "http://localhost:8080/student";
+  private subjAttUrl = "http://localhost:8080/subjectattendance"
 
   constructor(private http: HttpClient) {
   }
@@ -34,5 +35,8 @@ export class StudentService {
   update(id:string, student:Student) {
     return this.http.put(this.studentUrl+`/${id}`, student)
   }
-
+  
+  getStudentsBySubjectId(subjId: number, teacherUsername: string) {
+    return this.http.get<Student[]>(this.subjAttUrl+`/teacher/${teacherUsername}/${subjId}/students`);
+  }
 }
