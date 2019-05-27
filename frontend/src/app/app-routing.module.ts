@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'add/exam', component: ExamAddEditComponent },
 
   { path: 'add/topics', component: AddEditTopicsComponent },
+  { path: 'edit/topics/:id', component: AddEditTopicsComponent },
         
   { path: 'administrators', component: AdministratorsComponent},
   { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },

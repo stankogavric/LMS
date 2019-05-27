@@ -7,6 +7,8 @@ import { TopicService } from '../topic.service';
 import { Topic } from '../topic.model';
 import { mimeTypeValidator } from 'src/app/validators/mime-type-validator.directive';
 import { FormErrorService } from 'src/app/shared/formError.service';
+import { ActivatedRoute } from '@angular/router';
+import { SubjectRealizationService } from 'src/app/subject/subject-realization.service';
 
 @Component({
   selector: 'app-add-edit-topics',
@@ -17,11 +19,12 @@ export class AddEditTopicsComponent implements OnInit {
 
   public addEditTopicsForm : FormGroup;
   public subjectRealizations: SubjectRealization[] = [];
-  public topics: String[] = [];
+  private subjectRealization: SubjectRealization;
   public weeks: Week[] = [];
   public iconPreview: string;
+  private id : String;
 
-  constructor(private fb: FormBuilder, private teacherService: TeacherService, private topicService: TopicService, private authService: AuthService, public formError: FormErrorService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private teacherService: TeacherService, private topicService: TopicService, private authService: AuthService, private subjectRealizationService: SubjectRealizationService, public formError: FormErrorService) { }
 
   ngOnInit() {
     this.addEditTopicsForm = this.fb.group({
@@ -31,18 +34,57 @@ export class AddEditTopicsComponent implements OnInit {
       icon: ['', {asyncValidators: [mimeTypeValidator]}],
     });
 
-    this.getSubjectRealization();
+    if(this.route.snapshot.paramMap.get("id")){
+      this.id = this.route.snapshot.paramMap.get("id");
+      this.subjectRealizationService.getOne(this.id).subscribe(data => {
+        this.subjectRealization = data;
+        this.addEditTopicsForm.patchValue({subjectRealization: data});
+        this.subjectRealizations.push(this.subjectRealization);
+        this.topicService.getAllBySubjectId(this.subjectRealization.subject.id).subscribe((data: Topic[]) => {
+          let tempTopics: Topic[] = data;
+          tempTopics.sort((t1, t2) => (t1.week > t2.week) ? 1 : -1);
+          tempTopics.forEach(t => {
+            let week = new Week(t.week);
+            let exists = false;
+            this.weeks.forEach(week => {
+              if(t.week == week.weekNumber){
+                exists = true;
+              }
+            })
+            if(!exists){
+              this.weeks.push(week);
+            }
+            
+            for(let i = 0; i < t.week; i++){
+              if(this.weeks[i].weekNumber != i+1){
+                this.weeks.splice(i, 0, new Week(i+1));
+              }
+            }
+
+            this.weeks[t.week-1].topics.push([t, null, null]);
+          });
+        });
+      });
+    }
+    else{
+      this.getSubjectRealizations();
+    }
   }
 
-  add(){
+  save(){
     this.weeks.forEach(week => {
       week.topics.forEach(topic => {
-        this.topicService.add(topic[0], topic[1]).subscribe();
+        if(topic[0].id){
+          this.topicService.update(topic[0].id, topic[0]).subscribe();
+        }
+        else{
+          this.topicService.add(topic[0], topic[1]).subscribe();
+        }
       })
     });
   }
 
-  getSubjectRealization(){
+  getSubjectRealizations(){
     let loggedUser = this.authService.getCurrentUser();
     this.teacherService.getSubjectRealization(loggedUser).subscribe(data => {
       this.subjectRealizations = data;
@@ -74,7 +116,14 @@ export class AddEditTopicsComponent implements OnInit {
   }
 
   deleteTopic(week:Week, topic: [Topic, File, string]){
-    this.weeks[this.weeks.indexOf(week)].topics.splice(this.weeks[this.weeks.indexOf(week)].topics.indexOf(topic), 1);
+    if(topic[0].id){
+      this.topicService.delete(topic[0].id).subscribe(_ => {
+        this.weeks[this.weeks.indexOf(week)].topics.splice(this.weeks[this.weeks.indexOf(week)].topics.indexOf(topic), 1);
+      });
+    }
+    else{
+      this.weeks[this.weeks.indexOf(week)].topics.splice(this.weeks[this.weeks.indexOf(week)].topics.indexOf(topic), 1);
+    }
   }
   
 }

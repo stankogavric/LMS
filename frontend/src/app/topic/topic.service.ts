@@ -16,11 +16,15 @@ export class TopicService {
     return this.http.get<Topic[]>(this.topicUrl);
   }
 
+  getAllBySubjectId(id: number) {
+    return this.http.get<Topic[]>(this.topicUrl+`/bySubject/${id}`);
+  }
+
   getOne(id: String) {
     return this.http.get<Topic>(this.topicUrl+`/${id}`);
   }
 
-  delete(id: String) {
+  delete(id: number) {
     return this.http.delete(this.topicUrl+`/${id}`);
   }
 
@@ -31,7 +35,7 @@ export class TopicService {
     return this.http.post(this.topicUrl, postData);
   }
 
-  update(id:string, topic:Topic) {
+  update(id:number, topic:Topic) {
     return this.http.put(this.topicUrl+`/${id}`, topic)
   }
 
