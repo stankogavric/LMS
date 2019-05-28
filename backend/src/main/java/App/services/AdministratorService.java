@@ -17,6 +17,9 @@ public class AdministratorService {
     @Autowired
     private LoginService loginServ;
     
+    @Autowired
+    private AccountDataService accountServ;
+    
     public AdministratorService() {
     }
 
@@ -44,7 +47,7 @@ public class AdministratorService {
         Optional<Administrator> Adm = administratorRepo.findById(id);
         if(Adm.isPresent()) {
             administrator.setId(Adm.get().getId());
-            administratorRepo.save(administrator);
+            accountServ.updateAccountData(administrator.getAccountData().getId(), administrator.getAccountData());        
         }
     }
 

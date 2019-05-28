@@ -19,9 +19,9 @@ export class FormErrorService {
         'mustMatch': (c: FormControl, name: string) => `${name} must match password`,
         'invalidMimeType': (c: FormControl, name: string) => `Invalid type, only png and jpg are supported for ${name}`,
         'pattern' (c: FormControl, name: string) {
-            console.log(this.patternMap);
-            console.log(c.errors['pattern']['requiredPattern']);
-            console.log(this.patternMap[c.errors['pattern']['requiredPattern']])
+            // console.log(this.patternMap);
+            // console.log(c.errors['pattern']['requiredPattern']);
+            // console.log(this.patternMap[c.errors['pattern']['requiredPattern']])
             return `${name} ${this.patternMap[c.errors['pattern']['requiredPattern']]}`
         }
     }

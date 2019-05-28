@@ -13,6 +13,15 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepo;
+    
+    @Autowired
+    private AccountDataService accountServ;
+    
+    @Autowired
+    private AddressService addressServ;
+    
+    @Autowired
+    private PersonalDataService personalServ;
 
     @Autowired
     private LoginService loginServ;
@@ -44,7 +53,9 @@ public class StudentService {
         Optional<Student> Stu = studentRepo.findById(id);
         if(Stu.isPresent()) {
             student.setId(Stu.get().getId());
-            studentRepo.save(student);
+            accountServ.updateAccountData(student.getAccountData().getId(), student.getAccountData());
+            addressServ.updateAddress(student.getAddress().getId(), student.getAddress());
+            personalServ.updatePersonalData(student.getPersonalData().getId(), student.getPersonalData());
         }
     }
     

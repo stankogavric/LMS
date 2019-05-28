@@ -15,11 +15,21 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepo;
+    
     @Autowired
     private SubjectRealizationRepository subjectRealizationRepo;
     
     @Autowired
     private LoginService loginServ;
+    
+    @Autowired
+    private AccountDataService accountServ;
+    
+    @Autowired
+    private AddressService addressServ;
+    
+    @Autowired
+    private PersonalDataService personalServ;
 
     public TeacherService() {
     }
@@ -48,7 +58,9 @@ public class TeacherService {
         Optional<Teacher> Tea = teacherRepo.findById(id);
         if(Tea.isPresent()) {
             teacher.setId(Tea.get().getId());
-            teacherRepo.save(teacher);
+            accountServ.updateAccountData(teacher.getAccountData().getId(), teacher.getAccountData());
+            addressServ.updateAddress(teacher.getAddress().getId(), teacher.getAddress());
+            personalServ.updatePersonalData(teacher.getPersonalData().getId(), teacher.getPersonalData());
         }
     }
     
