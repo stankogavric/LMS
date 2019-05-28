@@ -31,17 +31,21 @@ export class TeacherAddEditComponent implements OnInit {
         this.form.patchValue(this.teacher);
       });
     }
-
   }
 
   onSave(){
     if(this.form.invalid){
       this.formErrorService.markFormGroupTouched(this.form);
     }else{
-      const teacher = this.form.value;
-      delete teacher['accountData']['confirmPassword'];
-      delete teacher['personalData']['profileImage'];
-      this.teacher = teacher;
+      const tchr = this.form.value;
+      delete tchr['accountData']['confirmPassword'];
+      delete tchr['personalData']['profileImage'];
+
+      tchr.accountData.id = this.teacher.accountData.id;
+      tchr.personalData.id = this.teacher.personalData.id;
+      tchr.address.id = this.teacher.address.id;
+      this.teacher = tchr;
+
       if(this.edit){
         this.teacherService.update(this.id, this.teacher).subscribe();
       }else{

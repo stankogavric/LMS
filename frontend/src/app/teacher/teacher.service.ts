@@ -33,6 +33,7 @@ export class TeacherService {
   }
 
   update(id:string, teacher:Teacher) {
+    console.log(this.teacherUrl+`/${id}`);
     return this.http.put(this.teacherUrl+`/${id}`, teacher)
   }
 

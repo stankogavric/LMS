@@ -37,6 +37,8 @@ export class AdministratorAddEditComponent implements OnInit {
     }else{
       const admin = this.form.value;
       delete admin['accountData']['confirmPassword'];
+      
+      admin.accountData.id = this.administrator.accountData.id;
       this.administrator = admin;
   
       if(this.edit){

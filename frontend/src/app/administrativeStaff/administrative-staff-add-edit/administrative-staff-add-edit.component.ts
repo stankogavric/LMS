@@ -38,6 +38,10 @@ export class AdministrativeStaffAddEditComponent implements OnInit {
       const admStf = this.form.value;
       delete admStf['accountData']['confirmPassword'];
       delete admStf['personalData']['profileImage'];
+      
+      admStf.accountData.id = this.administrativeStaff.accountData.id;
+      admStf.personalData.id = this.administrativeStaff.personalData.id;
+      admStf.address.id = this.administrativeStaff.address.id;
       this.administrativeStaff = admStf;
 
       if(this.edit){

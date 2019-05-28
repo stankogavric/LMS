@@ -22,6 +22,15 @@ public class AdministrativeStaffService {
     private LoginService loginServ;
     
     @Autowired
+    private AccountDataService accountServ;
+    
+    @Autowired
+    private AddressService addressServ;
+    
+    @Autowired
+    private PersonalDataService personalServ;
+    
+    @Autowired
     private StudentService studentService;
     
     @Autowired
@@ -57,7 +66,9 @@ public class AdministrativeStaffService {
         Optional<AdministrativeStaff> Adm = administrativeStaffRepo.findById(id);
         if(Adm.isPresent()) {
             administrativeStaff.setId(Adm.get().getId());
-            administrativeStaffRepo.save(administrativeStaff);
+            accountServ.updateAccountData(administrativeStaff.getAccountData().getId(), administrativeStaff.getAccountData());
+            addressServ.updateAddress(administrativeStaff.getAddress().getId(), administrativeStaff.getAddress());
+            personalServ.updatePersonalData(administrativeStaff.getPersonalData().getId(), administrativeStaff.getPersonalData());
         }
     }
     

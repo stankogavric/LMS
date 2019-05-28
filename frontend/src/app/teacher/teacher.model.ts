@@ -5,7 +5,7 @@ import { PersonalData } from '../personal-data/personal-data.model';
 
 export class Teacher {
 	id:number;
-	accountdata: AccountData;
+	accountData: AccountData;
 	personalData: PersonalData;
 	address: Address;
 	biography:string;
