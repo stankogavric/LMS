@@ -29,6 +29,7 @@ import { ExamComponent } from './exam/exam.component';
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 import { ExamTopicComponent } from './exam-topic/exam-topic.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
+import { FileComponent } from './file/file.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.
     ExamComponent,
     ExamAddEditComponent,
     ExamTopicComponent,
-    AddEditTopicsComponent
+    AddEditTopicsComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import { mimeTypeValidator } from 'src/app/validators/mime-type-validator.direct
 import { FormErrorService } from 'src/app/shared/formError.service';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectRealizationService } from 'src/app/subject/subject-realization.service';
+import { FileService } from 'src/app/file/file.service';
 
 @Component({
   selector: 'app-add-edit-topics',
@@ -23,8 +24,14 @@ export class AddEditTopicsComponent implements OnInit {
   public weeks: Week[] = [];
   public iconPreview: string;
   private id : String;
+  public fileUrl: String = this.fileService.fileUrl;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private teacherService: TeacherService, private topicService: TopicService, private authService: AuthService, private subjectRealizationService: SubjectRealizationService, public formError: FormErrorService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute,
+    private teacherService: TeacherService, private topicService: TopicService,
+    private authService: AuthService, private subjectRealizationService: SubjectRealizationService,
+    private fileService: FileService, public formError: FormErrorService) {
+      
+    }
 
   ngOnInit() {
     this.addEditTopicsForm = this.fb.group({
@@ -60,7 +67,6 @@ export class AddEditTopicsComponent implements OnInit {
                 this.weeks.splice(i, 0, new Week(i+1));
               }
             }
-
             this.weeks[t.week-1].topics.push([t, null, null]);
           });
         });
