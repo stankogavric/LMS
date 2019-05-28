@@ -39,6 +39,12 @@ public class TopicController {
     public ResponseEntity<Iterable<Topic>> getTopics() {
         return new ResponseEntity<Iterable<Topic>>(topicService.getTopics(), HttpStatus.OK);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/bySubject/{id}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Optional<Topic>>> getTopicsBySubjectId(@PathVariable Long id) {
+        return new ResponseEntity<Iterable<Optional<Topic>>>(topicService.getTopicsBySubjectId(id), HttpStatus.OK);
+    }
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/{id}", method=RequestMethod.GET)

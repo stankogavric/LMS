@@ -23,6 +23,7 @@ import { SubjectsComponent } from './subject/subjects/subjects.component';
 import { TeacherSubjectsComponent} from './teacher/teacher-subjects/teacher-subjects.component'; 
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
+import { StudentsListComponent } from './student/students-list/students-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   { path: 'add/exam', component: ExamAddEditComponent },
 
   { path: 'add/topics', component: AddEditTopicsComponent },
+  { path: 'edit/topics/:id', component: AddEditTopicsComponent },
         
   { path: 'administrators', component: AdministratorsComponent},
   { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
@@ -66,6 +68,7 @@ const routes: Routes = [
   { path: 'studyPrograms', component: StudyProgramsComponent},
   { path: 'subjects', component: SubjectsComponent},
   {path: 'teacherSubjects', component: TeacherSubjectsComponent},
+  {path:'studentListBySubject', component: StudentsListComponent},
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];

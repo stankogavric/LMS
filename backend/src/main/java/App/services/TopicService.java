@@ -20,6 +20,10 @@ public class TopicService {
     public Iterable<Topic> getTopics() {
         return topicRepo.findAll();
     }
+    
+    public Iterable<Optional<Topic>> getTopicsBySubjectId(Long id) {
+        return topicRepo.findBySubjectId(id);
+    }
 
     public Optional<Topic> getTopicById(Long id) {
         return topicRepo.findById(id);
@@ -31,7 +35,9 @@ public class TopicService {
 
     public void removeTopic(Long id) {
         Optional<Topic> topic = topicRepo.findById(id);
-        topicRepo.delete(topic.get());
+        Topic t = topic.get();
+        t.setDeleted(true);
+        topicRepo.save(t);
     }
 
     public void updateTopic(Long id, Topic topic) {
