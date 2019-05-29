@@ -51,10 +51,20 @@ public class StudentController {
         }
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
+    public ResponseEntity<Student> getStudentByUsername(@PathVariable String username) {
+        Optional<Student> student = studentService.getStudentByUsername(username);
+        if(student.isPresent()) {
+            return new ResponseEntity<Student>(student.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+    }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student Students) {
-        studentService.updateStudent(id, Students);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT)
+    public ResponseEntity<Student> updateStudent(@PathVariable String username, @RequestBody Student Students) {
+        studentService.updateStudent(username, Students);
         return new ResponseEntity<Student>(Students, HttpStatus.CREATED);
     }
 

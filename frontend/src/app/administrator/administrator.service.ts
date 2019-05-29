@@ -20,6 +20,10 @@ export class AdministratorService {
     return this.http.get<Administrator>(this.administratorUrl+`/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<Administrator>(this.administratorUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.administratorUrl+`/${id}`);
   }
@@ -28,8 +32,8 @@ export class AdministratorService {
     return this.http.post(this.administratorUrl+'/register', administrator);
   }
 
-  update(id:string, administrator:Administrator) {
-    return this.http.put(this.administratorUrl+`/${id}`, administrator)
+  update(username:string, administrator:Administrator) {
+    return this.http.put(this.administratorUrl+`/${username}`, administrator)
   }
 
 }

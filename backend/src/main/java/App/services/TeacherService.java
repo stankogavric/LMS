@@ -41,6 +41,10 @@ public class TeacherService {
     public Optional<Teacher> getTeacherById(Long id) {
         return teacherRepo.findById(id);
     }
+    
+    public Optional<Teacher> getTeacherByUsername(String username) {
+        return teacherRepo.getByUsername(username);
+    }
 
     public void addTeacher(Teacher teacher) {
     	loginServ.addPermsion(teacher.getAccountData(), "ROLE_TEACHER");
@@ -54,8 +58,8 @@ public class TeacherService {
         teacherRepo.save(t);
     }
 
-    public void updateTeacher(Long id, Teacher teacher) {
-        Optional<Teacher> Tea = teacherRepo.findById(id);
+    public void updateTeacher(String username, Teacher teacher) {
+        Optional<Teacher> Tea = teacherRepo.getByUsername(username);
         if(Tea.isPresent()) {
             teacher.setId(Tea.get().getId());
             accountServ.updateAccountData(teacher.getAccountData().getId(), teacher.getAccountData());

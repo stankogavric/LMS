@@ -53,10 +53,20 @@ public class AdministrativeStaffController {
         }
         return new ResponseEntity<AdministrativeStaff>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
+    public ResponseEntity<AdministrativeStaff> getAdministrativeStaffByUsername(@PathVariable String username) {
+        Optional<AdministrativeStaff> administrativeStaff = administrativeStaffService.getAdministrativeStaffByUsername(username);
+        if(administrativeStaff.isPresent()) {
+            return new ResponseEntity<AdministrativeStaff>(administrativeStaff.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<AdministrativeStaff>(HttpStatus.NOT_FOUND);
+    }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<AdministrativeStaff> updateAdministrativeStaff(@PathVariable Long id, @RequestBody AdministrativeStaff AdministrativeStaff) {
-        administrativeStaffService.updateAdministrativeStaff(id, AdministrativeStaff);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT)
+    public ResponseEntity<AdministrativeStaff> updateAdministrativeStaff(@PathVariable String username, @RequestBody AdministrativeStaff AdministrativeStaff) {
+        administrativeStaffService.updateAdministrativeStaff(username, AdministrativeStaff);
         return new ResponseEntity<AdministrativeStaff>(AdministrativeStaff, HttpStatus.CREATED);
     }
 

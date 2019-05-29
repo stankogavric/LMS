@@ -21,6 +21,10 @@ export class StudentService {
     return this.http.get<Student>(this.studentUrl+`/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<Student>(this.studentUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.studentUrl+`/${id}`);
   }
@@ -32,8 +36,8 @@ export class StudentService {
     return this.http.post(this.studentUrl+'/register', postData);
   }
 
-  update(id:string, student:Student) {
-    return this.http.put(this.studentUrl+`/${id}`, student)
+  update(username:string, student:Student) {
+    return this.http.put(this.studentUrl+`/${username}`, student)
   }
   
   getStudentsBySubjectId(subjId: number, teacherUsername: string) {

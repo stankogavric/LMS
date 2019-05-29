@@ -13,7 +13,7 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 export class StudentAddEditComponent implements OnInit {
 
   private edit = false;
-  private id : string;
+  private username : string;
   public student: Student = new Student();
   public form : FormGroup;
 
@@ -21,10 +21,10 @@ export class StudentAddEditComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({});
-    if(this.route.snapshot.paramMap.get("id")){
+    if(this.route.snapshot.paramMap.get("username")){
       this.edit = true;
-      this.id = this.route.snapshot.paramMap.get("id");
-      this.studentService.getOne(this.id).subscribe((data: Student) => {
+      this.username = this.route.snapshot.paramMap.get("username");
+      this.studentService.getOneByUsername(this.username).subscribe((data: Student) => {
         this.student = data;
         this.form.patchValue(this.student);
       });
@@ -45,7 +45,7 @@ export class StudentAddEditComponent implements OnInit {
       this.student = std;
       
       if(this.edit){
-        this.studentService.update(this.id, this.student).subscribe();
+        this.studentService.update(this.username, this.student).subscribe();
       }else{
         this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
       }

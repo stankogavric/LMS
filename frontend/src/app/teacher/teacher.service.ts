@@ -21,6 +21,10 @@ export class TeacherService {
     return this.http.get<Teacher>(this.teacherUrl+`/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<Teacher>(this.teacherUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.teacherUrl+`/${id}`);
   }
@@ -32,9 +36,8 @@ export class TeacherService {
     return this.http.post(this.teacherUrl+'/register', postData);
   }
 
-  update(id:string, teacher:Teacher) {
-    console.log(this.teacherUrl+`/${id}`);
-    return this.http.put(this.teacherUrl+`/${id}`, teacher)
+  update(username:string, teacher:Teacher) {
+    return this.http.put(this.teacherUrl+`/${username}`, teacher)
   }
 
   getSubjectRealization(username: String){
