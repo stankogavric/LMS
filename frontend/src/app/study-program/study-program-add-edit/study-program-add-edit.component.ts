@@ -47,7 +47,9 @@ export class StudyProgramAddEditComponent implements OnInit {
   save(){
     const s = this.studyProgramAddEditForm.value;
     this.studyProgram = s;
-    this.studyProgramService.add(this.studyProgram).subscribe();
+    this.studyProgramService.add(this.studyProgram).subscribe(_ => {
+      this.studyProgramAddEditForm.reset();
+    });
   }
 
 }
