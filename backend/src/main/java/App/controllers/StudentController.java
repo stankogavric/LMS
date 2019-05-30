@@ -98,9 +98,11 @@ public class StudentController {
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATIVE_STAFF','ROLE_ADMINISTRATOR')")
-	public ResponseEntity<Student> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String studentStr) throws IOException {
+	public ResponseEntity<Student> uploadFile(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String studentStr) throws IOException {
 		Student student = new ObjectMapper().readValue(studentStr, Student.class);
-		fileService.saveProfileImage(file, "student_" + student.getAccountData().getUsername(), student.getPersonalData());
+		if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "student_" + student.getAccountData().getUsername(), student.getPersonalData());
+		}
 		studentService.addStudent(student);
 		return new ResponseEntity<Student>(student, HttpStatus.OK);
 	}

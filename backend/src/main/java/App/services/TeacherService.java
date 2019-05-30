@@ -37,6 +37,10 @@ public class TeacherService {
     public Iterable<Teacher> getTeachers() {
         return teacherRepo.findAll();
     }
+    
+    public Iterable<Optional<Teacher>> getTeachersByFaculty(Long facultyId) {
+        return teacherRepo.getAllByFaculty(facultyId);
+    }
 
     public Optional<Teacher> getTeacherById(Long id) {
         return teacherRepo.findById(id);

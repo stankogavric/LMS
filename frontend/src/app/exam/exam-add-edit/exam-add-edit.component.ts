@@ -8,7 +8,6 @@ import { TeacherService } from 'src/app/teacher/teacher.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ExamTopic } from 'src/app/exam-topic/exam-topic.model';
-import { ExamTopicService } from '../exam-topic.service';
 
 @Component({
   selector: 'app-exam-add-edit',
@@ -23,7 +22,7 @@ export class ExamAddEditComponent implements OnInit {
   public subjectRealizations: SubjectRealization[] = [];
   public topics: ExamTopic[] = [];
 
-  constructor(private fb: FormBuilder, private examService: ExamService, private examTopicService: ExamTopicService, private teacherService: TeacherService, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private examService: ExamService, private teacherService: TeacherService, private authService: AuthService) { }
 
   ngOnInit() {
     this.examAddEditForm = this.fb.group({

@@ -24,6 +24,7 @@ import { TeacherSubjectsComponent} from './teacher/teacher-subjects/teacher-subj
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 import { StudentsListComponent } from './student/students-list/students-list.component';
+import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -61,6 +62,7 @@ const routes: Routes = [
   
   { path: 'studyPrograms', component: StudyProgramsComponent},
   { path: 'studyProgram/:id', component: StudyProgramComponent},
+  { path: 'add/studyProgram', component: StudyProgramAddEditComponent },
 
   { path: 'subject/:id', component: SubjectComponent},
   { path: 'currentSubjects', component: CurrentSubjectsComponent},
