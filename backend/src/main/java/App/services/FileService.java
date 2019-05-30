@@ -31,7 +31,7 @@ public class FileService {
 	    Tika tika = new Tika();
 	    String mimeType = tika.detect(file.getBytes());
 		if(file != null && (mimeType.equals("image/png") || mimeType.equals("image/jpeg"))) {
-			File convertFile = new File("src\\main\\resources\\images\\topic_icons\\" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
+			File convertFile = new File("src/main/resources/images/topic_icons/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 			convertFile.createNewFile();
 			FileOutputStream fout = new FileOutputStream(convertFile);
 			fout.write(file.getBytes());
