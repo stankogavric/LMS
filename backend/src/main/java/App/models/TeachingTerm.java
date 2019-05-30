@@ -25,20 +25,16 @@ public class TeachingTerm {
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	private SubjectRealization subjectRealization;
-	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private Classroom classroom;
 
 	public TeachingTerm() {
 		super();
 	}
 
-	public TeachingTerm(Date startTime, Date endTime, SubjectRealization subjectRealization, Classroom classroom) {
+	public TeachingTerm(Date startTime, Date endTime, SubjectRealization subjectRealization) {
 		super();
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.subjectRealization = subjectRealization;
-		this.classroom = classroom;
 	}
 
 	public Long getId() {
@@ -71,14 +67,6 @@ public class TeachingTerm {
 
 	public void setSubjectRealization(SubjectRealization subjectRealization) {
 		this.subjectRealization = subjectRealization;
-	}
-
-	public Classroom getClassroom() {
-		return classroom;
-	}
-
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
 	}
 
 }

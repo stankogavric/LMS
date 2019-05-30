@@ -164,7 +164,8 @@
             "dean": "Teacher",
             "studyPrograms": "StudyProgram[]",
             "phones": "FacultyPhones[]",
-            "emails": "FacultyEmails[]"
+            "emails": "FacultyEmails[]",
+            "classrooms": "Classroom[]"
         }
     },
     {
@@ -184,7 +185,8 @@
             "id": "Long",
             "name": "String",
             "type": "String",
-            "capacity": "Integer"
+            "capacity": "Integer",
+            "faculty": "Faculty"
         }
     },
     {
@@ -346,8 +348,7 @@
             "id": "Long",
             "startTime": "Date[]",
             "endTime": "Date[]",
-            "subjectRealization": "SubjectRealization",
-            "classroom": "Classroom"
+            "subjectRealization": "SubjectRealization"
         }
     },
     {

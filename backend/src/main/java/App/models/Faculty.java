@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.utils.View.ShowClassroom;
 import App.utils.View.ShowFacultyEmails;
 import App.utils.View.ShowFacultyPhones;
 import App.utils.View.ShowStudyProgram;
@@ -51,11 +52,15 @@ public class Faculty {
 	@JsonView(ShowFacultyEmails.class)
 	@OneToMany(mappedBy="faculty")
 	private Set<FacultyEmails> emails;
+	
+	@JsonView(ShowClassroom.class)
+	@OneToMany(mappedBy="faculty")
+	private Set<Classroom> classrooms;
 
 	public Faculty() {}
 
 	public Faculty(String name, University university, Address address, Teacher dean, Set<StudyProgram> studyPrograms,
-			String description, Set<FacultyPhones> phones, Set<FacultyEmails> emails) {
+			String description, Set<FacultyPhones> phones, Set<FacultyEmails> emails, Set<Classroom> classrooms) {
 		super();
 		this.name = name;
 		this.university = university;
@@ -65,6 +70,7 @@ public class Faculty {
 		this.description = description;
 		this.phones = phones;
 		this.emails = emails;
+		this.classrooms = classrooms;
 	}
 
 	public Long getId(){
@@ -137,6 +143,14 @@ public class Faculty {
 
 	public void setEmails(Set<FacultyEmails> emails) {
 		this.emails = emails;
+	}
+
+	public Set<Classroom> getClassrooms() {
+		return classrooms;
+	}
+
+	public void setClassrooms(Set<Classroom> classrooms) {
+		this.classrooms = classrooms;
 	}
 	
 }
