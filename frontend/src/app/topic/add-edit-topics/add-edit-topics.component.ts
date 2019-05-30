@@ -84,7 +84,9 @@ export class AddEditTopicsComponent implements OnInit {
           this.topicService.update(topic[0].id, topic[0]).subscribe();
         }
         else{
-          this.topicService.add(topic[0], topic[1]).subscribe();
+          this.topicService.add(topic[0], topic[1]).subscribe(_ => {
+            this.addEditTopicsForm.reset();
+          });
         }
       })
     });
@@ -102,6 +104,8 @@ export class AddEditTopicsComponent implements OnInit {
     delete this.iconPreview;
     this.addEditTopicsForm.patchValue({ icon: "" });
     this.addEditTopicsForm.get("icon").updateValueAndValidity();
+    this.addEditTopicsForm.patchValue({ topic: "" });
+    this.addEditTopicsForm.get("topic").updateValueAndValidity();
   }
 
   addWeek(){

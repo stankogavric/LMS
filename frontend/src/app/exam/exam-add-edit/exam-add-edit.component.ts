@@ -55,7 +55,10 @@ export class ExamAddEditComponent implements OnInit {
     this.topics.forEach(topic => {
       this.exam.syllabus.push(new ExamTopic(topic, null));
     })*/
-    this.examService.add(this.exam).subscribe(/*exam =>{
+    this.examService.add(this.exam).subscribe(_ => {
+      this.examAddEditForm.reset();
+    }
+      /*exam =>{
       this.topics.forEach(topic => {
         this.examTopicService.add(new ExamTopic(topic, exam)).subscribe();
       });
