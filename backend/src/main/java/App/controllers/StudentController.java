@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -62,10 +61,14 @@ public class StudentController {
         return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
     }
 
-    @RequestMapping(value="/{username}", method=RequestMethod.PUT)
-    public ResponseEntity<Student> updateStudent(@PathVariable String username, @RequestBody Student Students) {
-        studentService.updateStudent(username, Students);
-        return new ResponseEntity<Student>(Students, HttpStatus.CREATED);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Student> updateStudent(@PathVariable String username, @RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String studentStr) throws IOException {
+    	Student student = new ObjectMapper().readValue(studentStr, Student.class);
+    	if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "student_" + student.getAccountData().getUsername(), student.getPersonalData());
+		}
+    	studentService.updateStudent(username, student);
+        return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
@@ -98,13 +101,13 @@ public class StudentController {
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PreAuthorize("hasAnyRole('ROLE_ADMINISTRATIVE_STAFF','ROLE_ADMINISTRATOR')")
-	public ResponseEntity<Student> uploadFile(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String studentStr) throws IOException {
+	public ResponseEntity<Student> addStudent(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String studentStr) throws IOException {
 		Student student = new ObjectMapper().readValue(studentStr, Student.class);
 		if(file.isPresent()) {
 			fileService.saveProfileImage(file.get(), "student_" + student.getAccountData().getUsername(), student.getPersonalData());
 		}
 		studentService.addStudent(student);
-		return new ResponseEntity<Student>(student, HttpStatus.OK);
+		return new ResponseEntity<Student>(student, HttpStatus.CREATED);
 	}
     
 }

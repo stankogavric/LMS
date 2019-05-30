@@ -26,6 +26,7 @@ export class StudentAddEditComponent implements OnInit {
       this.username = this.route.snapshot.paramMap.get("username");
       this.studentService.getOneByUsername(this.username).subscribe((data: Student) => {
         this.student = data;
+        // this.form.get('personalData').get('profilePicturePath').patchValue(this.student.personalData.profilePicturePath);
         this.form.patchValue(this.student);
       });
     }
@@ -38,14 +39,17 @@ export class StudentAddEditComponent implements OnInit {
       const std = this.form.value;
       delete std['accountData']['confirmPassword'];
       delete std['personalData']['profileImage'];
-      this.student = std;
       if (this.edit) {
         std.accountData.id = this.student.accountData.id;
         std.personalData.id = this.student.personalData.id;
         std.address.id = this.student.address.id;
-        this.studentService.update(this.username, this.student).subscribe();
+        this.student = std;
+        this.studentService.update(this.username, this.student, this.form.get('personalData').get('profileImage').value).subscribe();
       } else {
-        this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
+        this.student = std;
+        this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe(_ => {
+          this.form.reset();
+        });
       }
     }
   }

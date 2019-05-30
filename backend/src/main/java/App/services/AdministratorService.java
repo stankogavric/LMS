@@ -3,6 +3,7 @@ package App.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import App.models.Administrator;
@@ -19,6 +20,9 @@ public class AdministratorService {
     
     @Autowired
     private AccountDataService accountServ;
+    
+    @Autowired
+	private PasswordEncoder passwordEncoder;
     
     public AdministratorService() {
     }
@@ -37,6 +41,7 @@ public class AdministratorService {
 
     public void addAdministrator(Administrator administrator) {
     	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMINISTRATOR");
+    	administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));
         administratorRepo.save(administrator);
     }
     
@@ -51,6 +56,7 @@ public class AdministratorService {
         Optional<Administrator> Adm = administratorRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrator.setId(Adm.get().getId());
+            administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));
             accountServ.updateAccountData(administrator.getAccountData().getId(), administrator.getAccountData());        
         }
     }

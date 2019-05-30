@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import App.models.AdministrativeStaff;
@@ -39,6 +40,9 @@ public class AdministrativeStaffService {
     @Autowired
     private StudentYearService studentYearService;
     
+    @Autowired
+	private PasswordEncoder passwordEncoder;
+    
     public AdministrativeStaffService() {
     }
 
@@ -56,6 +60,7 @@ public class AdministrativeStaffService {
 
     public void addAdministrativeStaff(AdministrativeStaff administrativeStaff) {
     	loginServ.addPermsion(administrativeStaff.getAccountData(), "ROLE_ADMINISTRATIVE_STAFF");
+    	administrativeStaff.getAccountData().setPassword(passwordEncoder.encode(administrativeStaff.getAccountData().getPassword()));
         administrativeStaffRepo.save(administrativeStaff);
     }
     
@@ -70,6 +75,7 @@ public class AdministrativeStaffService {
         Optional<AdministrativeStaff> Adm = administrativeStaffRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrativeStaff.setId(Adm.get().getId());
+            administrativeStaff.getAccountData().setPassword(passwordEncoder.encode(administrativeStaff.getAccountData().getPassword()));
             accountServ.updateAccountData(administrativeStaff.getAccountData().getId(), administrativeStaff.getAccountData());
             addressServ.updateAddress(administrativeStaff.getAddress().getId(), administrativeStaff.getAddress());
             personalServ.updatePersonalData(administrativeStaff.getPersonalData().getId(), administrativeStaff.getPersonalData());

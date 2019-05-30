@@ -12,18 +12,18 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 })
 export class TeacherAddEditComponent implements OnInit {
   private edit = false;
-  private username : string;
-  public form : FormGroup;
+  private username: string;
+  public form: FormGroup;
   public teacher: Teacher;
 
   constructor(private teacherService: TeacherService, private route: ActivatedRoute, public formErrorService: FormErrorService) { }
 
   ngOnInit() {
-    
+
     this.form = new FormGroup({
       biography: new FormControl('')
     });
-    if(this.route.snapshot.paramMap.get("username")){
+    if (this.route.snapshot.paramMap.get("username")) {
       this.edit = true;
       this.username = this.route.snapshot.paramMap.get("username");
       this.teacherService.getOneByUsername(this.username).subscribe((data: Teacher) => {
@@ -33,23 +33,24 @@ export class TeacherAddEditComponent implements OnInit {
     }
   }
 
-  onSave(){
-    if(this.form.invalid){
+  onSave() {
+    if (this.form.invalid) {
       this.formErrorService.markFormGroupTouched(this.form);
-    }else{
+    } else {
       const tchr = this.form.value;
       delete tchr['accountData']['confirmPassword'];
       delete tchr['personalData']['profileImage'];
-
-      tchr.accountData.id = this.teacher.accountData.id;
-      tchr.personalData.id = this.teacher.personalData.id;
-      tchr.address.id = this.teacher.address.id;
-      this.teacher = tchr;
-
-      if(this.edit){
-        this.teacherService.update(this.username, this.teacher).subscribe();
-      }else{
-        this.teacherService.add(this.teacher, this.form.get('personalData').get('profileImage').value).subscribe();
+      if (this.edit) {
+        tchr.accountData.id = this.teacher.accountData.id;
+        tchr.personalData.id = this.teacher.personalData.id;
+        tchr.address.id = this.teacher.address.id;
+        this.teacher = tchr;
+        this.teacherService.update(this.username, this.teacher, this.form.get('personalData').get('profileImage').value).subscribe();
+      } else {
+        this.teacher = tchr;
+        this.teacherService.add(this.teacher, this.form.get('personalData').get('profileImage').value).subscribe(_ => {
+          this.form.reset();
+        });
       }
     }
   }

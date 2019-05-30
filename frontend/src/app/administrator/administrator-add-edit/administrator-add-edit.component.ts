@@ -12,7 +12,7 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 })
 export class AdministratorAddEditComponent implements OnInit {
 
-  private username : string;
+  private username: string;
   private edit = false;
   public administrator = new Administrator();
   public form = new FormGroup({});
@@ -21,7 +21,7 @@ export class AdministratorAddEditComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({});
-    if(this.route.snapshot.paramMap.get("username")){
+    if (this.route.snapshot.paramMap.get("username")) {
       this.edit = true;
       this.username = this.route.snapshot.paramMap.get("username");
       this.AdminService.getOneByUsername(this.username).subscribe((data: Administrator) => {
@@ -31,20 +31,21 @@ export class AdministratorAddEditComponent implements OnInit {
     }
   }
 
-  onSave(){
-    if(this.form.invalid){
+  onSave() {
+    if (this.form.invalid) {
       this.formErrorService.markFormGroupTouched(this.form);
-    }else{
+    } else {
       const admin = this.form.value;
       delete admin['accountData']['confirmPassword'];
-      
-      admin.accountData.id = this.administrator.accountData.id;
-      this.administrator = admin;
-  
-      if(this.edit){
+      if (this.edit) {
+        admin.accountData.id = this.administrator.accountData.id;
+        this.administrator = admin;
         this.AdminService.update(this.username, this.administrator).subscribe();
-      }else{
-        this.AdminService.add(this.administrator).subscribe();
+      } else {
+        this.administrator = admin;
+        this.AdminService.add(this.administrator).subscribe(_ => {
+          this.form.reset();
+        });
       }
     }
   }

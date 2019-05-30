@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import App.models.AccountData;
@@ -41,9 +40,6 @@ public class LoginService {
 	@Autowired
 	private TokenUtils tokenUtils;
 	
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
 	public ResponseEntity<HashMap<String, String>> login(AccountData accData) {
 		try {
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(accData.getUsername(),
@@ -66,8 +62,6 @@ public class LoginService {
 	}
 	
 	public void addPermsion(AccountData accData, String role) {
-		accData.setPassword(passwordEncoder.encode(accData.getPassword()));
-
 		accData = accR.save(accData);
 		accData.setAccountDataPermissions(new HashSet<AccountDataPermission>());
 		accData.getAccountDataPermissions().add(new AccountDataPermission(null, accData, pr.getByTitle(role).get()));

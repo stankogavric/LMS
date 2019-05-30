@@ -35,13 +35,20 @@ export class TeacherService {
 
   add(teacher:Teacher, image:File) {
     const postData = new FormData();
-    postData.append("profileImage", image, image.name);
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
     postData.append("data", JSON.stringify(teacher));
     return this.http.post(this.teacherUrl+'/register', postData);
   }
 
-  update(username:string, teacher:Teacher) {
-    return this.http.put(this.teacherUrl+`/${username}`, teacher)
+  update(username:string, teacher:Teacher, image:File) {
+    const postData = new FormData();
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
+    postData.append("data", JSON.stringify(teacher));
+    return this.http.put(this.teacherUrl+`/${username}`, postData)
   }
 
   getSubjectRealization(username: String){

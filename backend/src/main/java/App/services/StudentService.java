@@ -3,6 +3,7 @@ package App.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import App.models.Student;
@@ -26,6 +27,9 @@ public class StudentService {
     @Autowired
     private LoginService loginServ;
     
+    @Autowired
+	private PasswordEncoder passwordEncoder;
+    
     public StudentService() {
     }
 
@@ -43,6 +47,7 @@ public class StudentService {
 
     public void addStudent(Student student) {
     	loginServ.addPermsion(student.getAccountData(), "ROLE_STUDENT");
+    	student.getAccountData().setPassword(passwordEncoder.encode(student.getAccountData().getPassword()));
         studentRepo.save(student);
     }
 
@@ -57,6 +62,7 @@ public class StudentService {
         Optional<Student> Stu = studentRepo.getByUsername(username);
         if(Stu.isPresent()) {
             student.setId(Stu.get().getId());
+            student.getAccountData().setPassword(passwordEncoder.encode(student.getAccountData().getPassword()));
             accountServ.updateAccountData(student.getAccountData().getId(), student.getAccountData());
             addressServ.updateAddress(student.getAddress().getId(), student.getAddress());
             personalServ.updatePersonalData(student.getPersonalData().getId(), student.getPersonalData());

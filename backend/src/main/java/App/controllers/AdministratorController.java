@@ -62,7 +62,7 @@ public class AdministratorController {
     @RequestMapping(value="/{username}", method=RequestMethod.PUT)
     public ResponseEntity<Administrator> updateAdministrator(@PathVariable String username, @RequestBody Administrator Administrators) {
         administratorService.updateAdministrator(username, Administrators);
-        return new ResponseEntity<Administrator>(Administrators, HttpStatus.CREATED);
+        return new ResponseEntity<Administrator>(Administrators, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)

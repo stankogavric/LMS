@@ -38,8 +38,13 @@ export class StudentService {
     return this.http.post(this.studentUrl+'/register', postData);
   }
 
-  update(username:string, student:Student) {
-    return this.http.put(this.studentUrl+`/${username}`, student)
+  update(username:string, student:Student, image:File) {
+    const postData = new FormData();
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
+    postData.append("data", JSON.stringify(student));
+    return this.http.put(this.studentUrl+`/${username}`, postData)
   }
   
   getStudentsBySubjectId(subjId: number, teacherUsername: string) {

@@ -37,8 +37,8 @@ export class TeachersComponent implements OnInit {
     });
   }
 
-  update(id: string, teacher: Teacher){
-    this.teacherService.update(id, teacher).subscribe((data: any) => {
+  update(id: string, teacher: Teacher, image: File){
+    this.teacherService.update(id, teacher, image).subscribe((data: any) => {
       this.getAll();
     });
   }

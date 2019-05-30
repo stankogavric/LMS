@@ -30,13 +30,20 @@ export class AdministrativeStaffService {
 
   add(admStf:AdministrativeStaff, image:File) {
     const postData = new FormData();
-    postData.append("profileImage", image, image.name);
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
     postData.append("data", JSON.stringify(admStf));
     return this.http.post(this.administrativeStaffUrl+'/register', postData);
   }
 
-  update(username:string, administrativeStaff:AdministrativeStaff) {
-    return this.http.put(this.administrativeStaffUrl+`/${username}`, administrativeStaff)
+  update(username:string, administrativeStaff:AdministrativeStaff, image:File) {
+    const postData = new FormData();
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
+    postData.append("data", JSON.stringify(administrativeStaff));
+    return this.http.put(this.administrativeStaffUrl+`/${username}`, postData)
   }
 
 }
