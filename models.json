@@ -1,5 +1,5 @@
 [{
-        "repNum":10,
+		"repNum":40,
         "naziv": "AccountData",
         "mnozina": "AccountData",
         "data": {
@@ -11,21 +11,22 @@
         }
     },
     {
-        "naziv": "AccountDataPermission",
-        "mnozina": "AccountDataPermissions",
-        "data": {
-            "id": "Long",
-            "accountData": "AccountData",
-            "permission": "Permission"
-        }
-    },
-    {
         "naziv": "Permission",
         "mnozina": "Permissions",
         "data": {
             "id": "Long",
             "title": "String",
             "accDataPermissions": "AccountDataPermission[]"
+        }
+    },
+    {
+    	"repNum":10,
+        "naziv": "AccountDataPermission",
+        "mnozina": "AccountDataPermissions",
+        "data": {
+            "id": "Long",
+            "accountData": "AccountData",
+            "permission": "Permission"
         }
     },
     {
@@ -346,8 +347,8 @@
         "mnozina": "TeachingTerms",
         "data": {
             "id": "Long",
-            "startTime": "Date[]",
-            "endTime": "Date[]",
+            "startTime": "Date",
+            "endTime": "Date",
             "subjectRealization": "SubjectRealization"
         }
     },
