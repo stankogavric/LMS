@@ -31,7 +31,9 @@ export class StudentService {
 
   add(student:Student, image:File) {
     const postData = new FormData();
-    postData.append("profileImage", image, image.name);
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
     postData.append("data", JSON.stringify(student));
     return this.http.post(this.studentUrl+'/register', postData);
   }

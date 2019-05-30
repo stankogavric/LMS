@@ -15,7 +15,7 @@ export class StudentAddEditComponent implements OnInit {
   private edit = false;
   private username : string;
   public student: Student = new Student();
-  public form : FormGroup;
+  public form: FormGroup;
 
   constructor(private studentService: StudentService, private route: ActivatedRoute, public formErrorService: FormErrorService) { }
 
@@ -31,22 +31,20 @@ export class StudentAddEditComponent implements OnInit {
     }
   }
 
-  onSave(){
-    if(this.form.invalid){
+  onSave() {
+    if (this.form.invalid) {
       this.formErrorService.markFormGroupTouched(this.form);
-    }else{
+    } else {
       const std = this.form.value;
       delete std['accountData']['confirmPassword'];
       delete std['personalData']['profileImage'];
-
-      std.accountData.id = this.student.accountData.id;
-      std.personalData.id = this.student.personalData.id;
-      std.address.id = this.student.address.id;
       this.student = std;
-      
-      if(this.edit){
+      if (this.edit) {
+        std.accountData.id = this.student.accountData.id;
+        std.personalData.id = this.student.personalData.id;
+        std.address.id = this.student.address.id;
         this.studentService.update(this.username, this.student).subscribe();
-      }else{
+      } else {
         this.studentService.add(this.student, this.form.get('personalData').get('profileImage').value).subscribe();
       }
     }
