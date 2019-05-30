@@ -30,6 +30,10 @@ public class AdministratorService {
     public Optional<Administrator> getAdministratorById(Long id) {
         return administratorRepo.findById(id);
     }
+    
+    public Optional<Administrator> getAdministratorByUsername(String username) {
+        return administratorRepo.getByUsername(username);
+    }
 
     public void addAdministrator(Administrator administrator) {
     	loginServ.addPermsion(administrator.getAccountData(), "ROLE_ADMINISTRATOR");
@@ -43,8 +47,8 @@ public class AdministratorService {
         administratorRepo.save(a);
     }
 
-    public void updateAdministrator(Long id, Administrator administrator) {
-        Optional<Administrator> Adm = administratorRepo.findById(id);
+    public void updateAdministrator(String username, Administrator administrator) {
+        Optional<Administrator> Adm = administratorRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrator.setId(Adm.get().getId());
             accountServ.updateAccountData(administrator.getAccountData().getId(), administrator.getAccountData());        

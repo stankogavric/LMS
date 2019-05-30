@@ -14,6 +14,9 @@ export class ToolbarComponent implements OnInit {
   title = "sQuadunum";
   faculties = [];
   isLoggedIn = false;
+  public loggedUserUsername: String;
+  private loggedUserRoles: String[];
+  public loggedUserType: String;
 
   private loggedInSubcription : Subscription;
 
@@ -29,6 +32,23 @@ export class ToolbarComponent implements OnInit {
         this.isLoggedIn = status;
       }
     );
+    this.loggedUserUsername = this.authService.getCurrentUser();
+    this.loggedUserRoles = this.authService.getCurrentRoles();
+    this.loggedUserRoles.forEach(role => {
+      if(role == "ROLE_ADMINISTRATOR"){
+        this.loggedUserType = "administrator";
+      }
+      else if(role == "ROLE_ADMINISTRATIVE_STAFF"){
+        this.loggedUserType = "administrativestaff";
+      }
+      else if(role == "ROLE_TEACHER"){
+        this.loggedUserType = "teacher";
+      }
+      else if(role == "ROLE_STUDENT"){
+        this.loggedUserType = "student";
+      }
+    });
+
   }
 
   onLogout(){

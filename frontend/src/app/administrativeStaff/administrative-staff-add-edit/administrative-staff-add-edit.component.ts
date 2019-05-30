@@ -12,7 +12,7 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 })
 export class AdministrativeStaffAddEditComponent implements OnInit {
 
-  private id : string;
+  private username : string;
   private edit = false;
   public administrativeStaff = new AdministrativeStaff();
   public form = new FormGroup({});
@@ -21,10 +21,10 @@ export class AdministrativeStaffAddEditComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({});
-    if(this.route.snapshot.paramMap.get("id")){
+    if(this.route.snapshot.paramMap.get("username")){
       this.edit = true;
-      this.id = this.route.snapshot.paramMap.get("id");
-      this.ASService.getOne(this.id).subscribe((data: AdministrativeStaff) => {
+      this.username = this.route.snapshot.paramMap.get("username");
+      this.ASService.getOneByUsername(this.username).subscribe((data: AdministrativeStaff) => {
         this.administrativeStaff = data;
         this.form.patchValue(this.administrativeStaff);
       });
@@ -45,7 +45,7 @@ export class AdministrativeStaffAddEditComponent implements OnInit {
       this.administrativeStaff = admStf;
 
       if(this.edit){
-        this.ASService.update(this.id, this.administrativeStaff).subscribe();
+        this.ASService.update(this.username, this.administrativeStaff).subscribe();
       }else{
         this.ASService.add(this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe();
       }

@@ -20,6 +20,10 @@ export class AdministrativeStaffService {
     return this.http.get<AdministrativeStaff>(this.administrativeStaffUrl+`/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<AdministrativeStaff>(this.administrativeStaffUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.administrativeStaffUrl+`/${id}`);
   }
@@ -31,8 +35,8 @@ export class AdministrativeStaffService {
     return this.http.post(this.administrativeStaffUrl+'/register', postData);
   }
 
-  update(id:string, administrativeStaff:AdministrativeStaff) {
-    return this.http.put(this.administrativeStaffUrl+`/${id}`, administrativeStaff)
+  update(username:string, administrativeStaff:AdministrativeStaff) {
+    return this.http.put(this.administrativeStaffUrl+`/${username}`, administrativeStaff)
   }
 
 }

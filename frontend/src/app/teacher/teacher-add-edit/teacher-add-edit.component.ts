@@ -12,7 +12,7 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 })
 export class TeacherAddEditComponent implements OnInit {
   private edit = false;
-  private id : string;
+  private username : string;
   public form : FormGroup;
   public teacher: Teacher;
 
@@ -23,10 +23,10 @@ export class TeacherAddEditComponent implements OnInit {
     this.form = new FormGroup({
       biography: new FormControl('')
     });
-    if(this.route.snapshot.paramMap.get("id")){
+    if(this.route.snapshot.paramMap.get("username")){
       this.edit = true;
-      this.id = this.route.snapshot.paramMap.get("id");
-      this.teacherService.getOne(this.id).subscribe((data: Teacher) => {
+      this.username = this.route.snapshot.paramMap.get("username");
+      this.teacherService.getOneByUsername(this.username).subscribe((data: Teacher) => {
         this.teacher = data;
         this.form.patchValue(this.teacher);
       });
@@ -47,7 +47,7 @@ export class TeacherAddEditComponent implements OnInit {
       this.teacher = tchr;
 
       if(this.edit){
-        this.teacherService.update(this.id, this.teacher).subscribe();
+        this.teacherService.update(this.username, this.teacher).subscribe();
       }else{
         this.teacherService.add(this.teacher, this.form.get('personalData').get('profileImage').value).subscribe();
       }

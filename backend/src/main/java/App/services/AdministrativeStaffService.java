@@ -49,6 +49,10 @@ public class AdministrativeStaffService {
     public Optional<AdministrativeStaff> getAdministrativeStaffById(Long id) {
         return administrativeStaffRepo.findById(id);
     }
+    
+    public Optional<AdministrativeStaff> getAdministrativeStaffByUsername(String username) {
+        return administrativeStaffRepo.getByUsername(username);
+    }
 
     public void addAdministrativeStaff(AdministrativeStaff administrativeStaff) {
     	loginServ.addPermsion(administrativeStaff.getAccountData(), "ROLE_ADMINISTRATIVE_STAFF");
@@ -62,8 +66,8 @@ public class AdministrativeStaffService {
         administrativeStaffRepo.save(a);
     }
 
-    public void updateAdministrativeStaff(Long id, AdministrativeStaff administrativeStaff) {
-        Optional<AdministrativeStaff> Adm = administrativeStaffRepo.findById(id);
+    public void updateAdministrativeStaff(String username, AdministrativeStaff administrativeStaff) {
+        Optional<AdministrativeStaff> Adm = administrativeStaffRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrativeStaff.setId(Adm.get().getId());
             accountServ.updateAccountData(administrativeStaff.getAccountData().getId(), administrativeStaff.getAccountData());

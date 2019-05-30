@@ -31,12 +31,12 @@ const routes: Routes = [
 
   { path: 'students', component: StudentsComponent},
   { path: 'student/:id', component: StudentComponent},
-  { path: 'edit/student/:id', component: StudentAddEditComponent },
+  { path: 'edit/student/:username', component: StudentAddEditComponent },
   { path: 'register/student', component: StudentAddEditComponent, 
         canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE_STAFF']}},
         
   { path: 'teachers', component: TeachersComponent},
-  { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
+  { path: 'edit/teacher/:username', component: TeacherAddEditComponent },
   { path: 'register/teacher', component: TeacherAddEditComponent, 
         canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
 
@@ -47,12 +47,12 @@ const routes: Routes = [
   { path: 'edit/topics/:id', component: AddEditTopicsComponent },
         
   { path: 'administrators', component: AdministratorsComponent},
-  { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
+  { path: 'edit/administrator/:username', component: AdministratorAddEditComponent },
   { path: 'register/administrator', component: AdministratorAddEditComponent, 
         canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
 
   { path: 'administrativeStaff', component: AdministrativeStaffComponent},
-  { path: 'edit/administrativestaff/:id', component: AdministrativeStaffAddEditComponent },
+  { path: 'edit/administrativestaff/:username', component: AdministrativeStaffAddEditComponent },
   { path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard], 
       data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
 

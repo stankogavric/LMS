@@ -14,4 +14,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, Long> {
 	Iterable<Optional<Teacher>> findTeachersByFirstName(String firstName);
 	@Query("SELECT t FROM Teacher t WHERE t.personalData.personalNumber = ?1")
 	Optional<Teacher> findTeacherByJmbg(String jmbg);
+	@Query("SELECT t FROM Teacher t WHERE t.accountData.username = ?1")
+	Optional<Teacher> getByUsername(String username);
 }
