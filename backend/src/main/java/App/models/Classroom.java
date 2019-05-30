@@ -1,10 +1,12 @@
 package App.models;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Classroom {
@@ -21,16 +23,20 @@ public class Classroom {
 	
 	@Column(nullable = false)
 	private Integer capacity;
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Faculty faculty;
 
 	public Classroom() {
 		super();
 	}
 
-	public Classroom(String name, String type, Integer capacity) {
+	public Classroom(String name, String type, Integer capacity, Faculty faculty) {
 		super();
 		this.name = name;
 		this.type = type;
 		this.capacity = capacity;
+		this.faculty = faculty;
 	}
 
 	public Long getId() {
@@ -63,6 +69,14 @@ public class Classroom {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
+
+	public void setFaculty(Faculty faculty) {
+		this.faculty = faculty;
 	}
 	
 }
