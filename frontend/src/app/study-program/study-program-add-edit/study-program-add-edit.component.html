@@ -8,7 +8,7 @@
   <mat-form-field>
     <mat-label>Faculty</mat-label>
     <mat-select name = "faculty" formControlName="faculty">
-      <mat-option *ngFor="let faculty of faculties" [value]="faculty" (onSelectionChange)="getTeachersByFaculty(faculty.id)">
+      <mat-option *ngFor="let faculty of faculties" [value]="faculty" (click)="getTeachersByFaculty(faculty.id)">
         {{faculty.name}}
       </mat-option>
     </mat-select>

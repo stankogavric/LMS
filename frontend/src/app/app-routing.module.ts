@@ -63,6 +63,7 @@ const routes: Routes = [
   { path: 'studyPrograms', component: StudyProgramsComponent},
   { path: 'studyProgram/:id', component: StudyProgramComponent},
   { path: 'add/studyProgram', component: StudyProgramAddEditComponent },
+  { path: 'edit/studyProgram/:id', component: StudyProgramAddEditComponent },
 
   { path: 'subject/:id', component: SubjectComponent},
   { path: 'currentSubjects', component: CurrentSubjectsComponent},

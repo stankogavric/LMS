@@ -38,7 +38,7 @@
             <mat-icon>delete</mat-icon>
             Delete
           </button>
-          <button mat-raised-button color="accent" (click)="update(studyProgram.id, studyProgram)">
+          <button mat-raised-button color="accent" [routerLink]="['/edit/studyProgram', studyProgram.id]">
             <mat-icon>edit</mat-icon>
             Edit
           </button>
