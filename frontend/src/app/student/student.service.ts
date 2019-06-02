@@ -22,19 +22,30 @@ export class StudentService {
     return this.http.get<Student>(this.studentUrl + `/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<Student>(this.studentUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.studentUrl + `/${id}`);
   }
 
   add(student: Student, image: File) {
     const postData = new FormData();
-    postData.append("profileImage", image, image.name);
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
     postData.append("data", JSON.stringify(student));
     return this.http.post(this.studentUrl + '/register', postData);
   }
 
-  update(id: string, student: Student) {
-    return this.http.put(this.studentUrl + `/${id}`, student)
+  update(username:string, student:Student, image:File) {
+    const postData = new FormData();
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
+    postData.append("data", JSON.stringify(student));
+    return this.http.put(this.studentUrl+`/${username}`, postData)
   }
 
   getStudentsBySubjectId(subjId: number, teacherUsername: string) {

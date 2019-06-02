@@ -38,8 +38,8 @@ export class AdministrativeStaffComponent implements OnInit {
     });
   }
 
-  update(id: string, administrativeStaffPerson: AdministrativeStaff){
-    this.administrativeStaffService.update(id, administrativeStaffPerson).subscribe((data: any) => {
+  update(id: string, administrativeStaffPerson: AdministrativeStaff, image: File){
+    this.administrativeStaffService.update(id, administrativeStaffPerson, image).subscribe((data: any) => {
       this.getAll();
     });
   }

@@ -1,0 +1,31 @@
+<div class="example-container" [formGroup]="studyProgramAddEditForm">
+
+  <mat-form-field>
+    <input matInput name="name" placeholder="Name" formControlName="name">
+    <mat-error *ngIf="studyProgramAddEditForm.get('name').invalid">Please enter the valid name.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Faculty</mat-label>
+    <mat-select name = "faculty" formControlName="faculty">
+      <mat-option *ngFor="let faculty of faculties" [value]="faculty" (click)="getTeachersByFaculty(faculty.id)">
+        {{faculty.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Head teacher</mat-label>
+    <mat-select name = "headTeacher" formControlName="headTeacher">
+      <mat-option *ngFor="let headTeacher of headTeachers" [value]="headTeacher">
+        {{headTeacher.personalData.firstName}} {{headTeacher.personalData.lastName}} {{headTeacher.accountData.email}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" name="description" formControlName="description"></textarea>
+  </mat-form-field>
+    
+  <button mat-raised-button color="accent" (click)="save()" [disabled]="studyProgramAddEditForm.invalid">Save</button>
+</div>

@@ -20,19 +20,30 @@ export class AdministrativeStaffService {
     return this.http.get<AdministrativeStaff>(this.administrativeStaffUrl+`/${id}`);
   }
 
+  getOneByUsername(username: String) {
+    return this.http.get<AdministrativeStaff>(this.administrativeStaffUrl+`/username/${username}`);
+  }
+
   delete(id: String) {
     return this.http.delete(this.administrativeStaffUrl+`/${id}`);
   }
 
   add(admStf:AdministrativeStaff, image:File) {
     const postData = new FormData();
-    postData.append("profileImage", image, image.name);
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
     postData.append("data", JSON.stringify(admStf));
     return this.http.post(this.administrativeStaffUrl+'/register', postData);
   }
 
-  update(id:string, administrativeStaff:AdministrativeStaff) {
-    return this.http.put(this.administrativeStaffUrl+`/${id}`, administrativeStaff)
+  update(username:string, administrativeStaff:AdministrativeStaff, image:File) {
+    const postData = new FormData();
+    if(image) {
+      postData.append("profileImage", image, image.name);
+    }
+    postData.append("data", JSON.stringify(administrativeStaff));
+    return this.http.put(this.administrativeStaffUrl+`/${username}`, postData)
   }
 
 }

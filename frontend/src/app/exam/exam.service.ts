@@ -27,7 +27,7 @@ export class ExamService {
     return this.http.delete(this.examUrl+`/${id}`);
   }
 
-  add(exam:Exam):Observable<any> {
+  add(exam:Exam) {
     return this.http.post(this.examUrl, exam);
   }
 

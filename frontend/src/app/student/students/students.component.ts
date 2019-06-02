@@ -37,8 +37,8 @@ export class StudentsComponent implements OnInit {
     });
   }
 
-  update(id: string, student: Student){
-    this.studentService.update(id, student).subscribe((data: any) => {
+  update(id: string, student: Student, image: File){
+    this.studentService.update(id, student, image).subscribe((data: any) => {
       this.getAll();
     });
   }

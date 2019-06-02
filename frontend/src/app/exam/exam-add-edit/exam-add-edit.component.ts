@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ExamService } from '../exam.service';
 import { ExamType } from '../exam-type.model';
@@ -6,9 +6,8 @@ import { Exam } from '../exam.model';
 import { SubjectRealization } from 'src/app/subject/subject-realization.model';
 import { TeacherService } from 'src/app/teacher/teacher.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ExamTopic } from 'src/app/exam-topic/exam-topic.model';
-import { ExamTopicService } from '../exam-topic.service';
 
 @Component({
   selector: 'app-exam-add-edit',
@@ -21,9 +20,9 @@ export class ExamAddEditComponent implements OnInit {
   public exam: Exam = new Exam();
   public examTypes: ExamType[] = [];
   public subjectRealizations: SubjectRealization[] = [];
-  public topics: String[] = [];
+  public topics: ExamTopic[] = [];
 
-  constructor(private fb: FormBuilder, private examService: ExamService, private examTopicService: ExamTopicService, private teacherService: TeacherService, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private examService: ExamService, private teacherService: TeacherService, private authService: AuthService) { }
 
   ngOnInit() {
     this.examAddEditForm = this.fb.group({
@@ -48,11 +47,22 @@ export class ExamAddEditComponent implements OnInit {
     const e = this.examAddEditForm.value;
     delete e.topic;
     this.exam = e;
-    this.examService.add(this.exam).subscribe(exam =>{
+    this.exam.syllabus = this.topics;
+
+
+    /*
+    this.exam.syllabus = [];
+    this.topics.forEach(topic => {
+      this.exam.syllabus.push(new ExamTopic(topic, null));
+    })*/
+    this.examService.add(this.exam).subscribe(_ => {
+      this.examAddEditForm.reset();
+    }
+      /*exam =>{
       this.topics.forEach(topic => {
         this.examTopicService.add(new ExamTopic(topic, exam)).subscribe();
       });
-    });
+  }*/);
   }
 
   getSubjectRealization(){
@@ -63,7 +73,11 @@ export class ExamAddEditComponent implements OnInit {
   }
 
   addTopic(){
-    this.topics.push(this.examAddEditForm.get('topic').value);
+    this.topics.push(new ExamTopic(this.examAddEditForm.get('topic').value, null));
+  }
+
+  deleteTopic(topic: ExamTopic){
+    this.topics.splice(this.topics.indexOf(topic), 1);
   }
 
   drop(event: CdkDragDrop<string[]>) {

@@ -32,10 +32,10 @@ public class StudyProgram {
 	@OneToMany(mappedBy="studyProgram")
 	private Set<YearOfStudy> yearsOfStudy;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.REFRESH})
 	private Teacher headTeacher;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade= {CascadeType.REFRESH})
 	private Faculty faculty;
 	
 	@Column(length=128, nullable = false)

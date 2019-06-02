@@ -26,6 +26,7 @@ import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.
 import { StudentsListComponent } from './student/students-list/students-list.component';
 import { SearchStudentsComponent } from './student/search-students/search-students.component';
 import { StudentDetailComponent } from './student/student-detail/student-detail.component';
+import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
 
 const routes: Routes = [
       { path: '', component: HomeComponent },
@@ -33,14 +34,14 @@ const routes: Routes = [
 
       { path: 'students', component: StudentsComponent },
       { path: 'student/:id', component: StudentComponent },
-      { path: 'edit/student/:id', component: StudentAddEditComponent },
+      { path: 'edit/student/:username', component: StudentAddEditComponent },
       {
             path: 'register/student', component: StudentAddEditComponent,
             canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE_STAFF'] }
       },
 
       { path: 'teachers', component: TeachersComponent },
-      { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
+      { path: 'edit/teacher/:username', component: TeacherAddEditComponent },
       {
             path: 'register/teacher', component: TeacherAddEditComponent,
             canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
@@ -50,16 +51,17 @@ const routes: Routes = [
       { path: 'add/exam', component: ExamAddEditComponent },
 
       { path: 'add/topics', component: AddEditTopicsComponent },
+      { path: 'edit/topics/:id', component: AddEditTopicsComponent },
 
       { path: 'administrators', component: AdministratorsComponent },
-      { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
+      { path: 'edit/administrator/:username', component: AdministratorAddEditComponent },
       {
             path: 'register/administrator', component: AdministratorAddEditComponent,
             canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
       },
 
       { path: 'administrativeStaff', component: AdministrativeStaffComponent },
-      { path: 'edit/administrativestaff/:id', component: AdministrativeStaffAddEditComponent },
+      { path: 'edit/administrativestaff/:username', component: AdministrativeStaffAddEditComponent },
       {
             path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard],
             data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
@@ -70,6 +72,8 @@ const routes: Routes = [
 
       { path: 'studyPrograms', component: StudyProgramsComponent },
       { path: 'studyProgram/:id', component: StudyProgramComponent },
+      { path: 'add/studyProgram', component: StudyProgramAddEditComponent },
+      { path: 'edit/studyProgram/:id', component: StudyProgramAddEditComponent },
 
       { path: 'subject/:id', component: SubjectComponent },
       { path: 'currentSubjects', component: CurrentSubjectsComponent },
@@ -80,8 +84,8 @@ const routes: Routes = [
       { path: 'studentListBySubject', component: StudentsListComponent },
       { path: 'searchStudents', component: SearchStudentsComponent },
       { path: 'student/details/:id', component: StudentDetailComponent },
-  //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+      //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
+      { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@ package App.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import App.models.SubjectRealization;
@@ -15,11 +16,24 @@ public class TeacherService {
 
     @Autowired
     private TeacherRepository teacherRepo;
+    
     @Autowired
     private SubjectRealizationRepository subjectRealizationRepo;
     
     @Autowired
     private LoginService loginServ;
+    
+    @Autowired
+    private AccountDataService accountServ;
+    
+    @Autowired
+    private AddressService addressServ;
+    
+    @Autowired
+    private PersonalDataService personalServ;
+    
+    @Autowired
+	private PasswordEncoder passwordEncoder;
 
     public TeacherService() {
     }
@@ -27,13 +41,22 @@ public class TeacherService {
     public Iterable<Teacher> getTeachers() {
         return teacherRepo.findAll();
     }
+    
+    public Iterable<Optional<Teacher>> getTeachersByFaculty(Long facultyId) {
+        return teacherRepo.getAllByFaculty(facultyId);
+    }
 
     public Optional<Teacher> getTeacherById(Long id) {
         return teacherRepo.findById(id);
     }
+    
+    public Optional<Teacher> getTeacherByUsername(String username) {
+        return teacherRepo.getByUsername(username);
+    }
 
     public void addTeacher(Teacher teacher) {
     	loginServ.addPermsion(teacher.getAccountData(), "ROLE_TEACHER");
+    	teacher.getAccountData().setPassword(passwordEncoder.encode(teacher.getAccountData().getPassword()));
         teacherRepo.save(teacher);
     }
 
@@ -44,11 +67,14 @@ public class TeacherService {
         teacherRepo.save(t);
     }
 
-    public void updateTeacher(Long id, Teacher teacher) {
-        Optional<Teacher> Tea = teacherRepo.findById(id);
+    public void updateTeacher(String username, Teacher teacher) {
+        Optional<Teacher> Tea = teacherRepo.getByUsername(username);
         if(Tea.isPresent()) {
             teacher.setId(Tea.get().getId());
-            teacherRepo.save(teacher);
+            teacher.getAccountData().setPassword(passwordEncoder.encode(teacher.getAccountData().getPassword()));
+            accountServ.updateAccountData(teacher.getAccountData().getId(), teacher.getAccountData());
+            addressServ.updateAddress(teacher.getAddress().getId(), teacher.getAddress());
+            personalServ.updatePersonalData(teacher.getPersonalData().getId(), teacher.getPersonalData());
         }
     }
     

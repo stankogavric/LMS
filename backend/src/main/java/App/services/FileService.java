@@ -18,12 +18,12 @@ public class FileService {
 	    Tika tika = new Tika();
 	    String mimeType = tika.detect(file.getBytes());
 		if(file != null && (mimeType.equals("image/png") || mimeType.equals("image/jpeg"))) {
-			File convertFile = new File("resources\\images\\profile images\\" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
+			File convertFile = new File("src/main/resources/images/profile_images/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 			convertFile.createNewFile();
 			FileOutputStream fout = new FileOutputStream(convertFile);
 			fout.write(file.getBytes());
 			fout.close();
-			pData.setProfilePicturePath(convertFile.getPath());
+			pData.setProfilePicturePath("images/profile_images/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 		}
 	}
 	
@@ -31,12 +31,12 @@ public class FileService {
 	    Tika tika = new Tika();
 	    String mimeType = tika.detect(file.getBytes());
 		if(file != null && (mimeType.equals("image/png") || mimeType.equals("image/jpeg"))) {
-			File convertFile = new File("resources\\images\\topic icons\\" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
+			File convertFile = new File("src/main/resources/images/topic_icons/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 			convertFile.createNewFile();
 			FileOutputStream fout = new FileOutputStream(convertFile);
 			fout.write(file.getBytes());
 			fout.close();
-			tData.setIconPath(convertFile.getPath());
+			tData.setIconPath("images/topic_icons/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 		}
 	}
 	

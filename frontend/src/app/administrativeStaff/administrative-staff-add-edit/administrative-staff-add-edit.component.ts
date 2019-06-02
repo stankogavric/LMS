@@ -12,38 +12,43 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 })
 export class AdministrativeStaffAddEditComponent implements OnInit {
 
-  private id : string;
+  private username: string;
   private edit = false;
   public administrativeStaff = new AdministrativeStaff();
   public form = new FormGroup({});
 
-  constructor(private ASService: AdministrativeStaffService, private route: ActivatedRoute,  public formErrorService: FormErrorService) { }
+  constructor(private ASService: AdministrativeStaffService, private route: ActivatedRoute, public formErrorService: FormErrorService) { }
 
   ngOnInit() {
     this.form = new FormGroup({});
-    if(this.route.snapshot.paramMap.get("id")){
+    if (this.route.snapshot.paramMap.get("username")) {
       this.edit = true;
-      this.id = this.route.snapshot.paramMap.get("id");
-      this.ASService.getOne(this.id).subscribe((data: AdministrativeStaff) => {
+      this.username = this.route.snapshot.paramMap.get("username");
+      this.ASService.getOneByUsername(this.username).subscribe((data: AdministrativeStaff) => {
         this.administrativeStaff = data;
         this.form.patchValue(this.administrativeStaff);
       });
     }
   }
 
-  onSave(){
-    if(this.form.invalid){
+  onSave() {
+    if (this.form.invalid) {
       this.formErrorService.markFormGroupTouched(this.form);
-    }else{
+    } else {
       const admStf = this.form.value;
       delete admStf['accountData']['confirmPassword'];
       delete admStf['personalData']['profileImage'];
-      this.administrativeStaff = admStf;
-
-      if(this.edit){
-        this.ASService.update(this.id, this.administrativeStaff).subscribe();
-      }else{
-        this.ASService.add(this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe();
+      if (this.edit) {
+        admStf.accountData.id = this.administrativeStaff.accountData.id;
+        admStf.personalData.id = this.administrativeStaff.personalData.id;
+        admStf.address.id = this.administrativeStaff.address.id;
+        this.administrativeStaff = admStf;
+        this.ASService.update(this.username, this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe();
+      } else {
+        this.administrativeStaff = admStf;
+        this.ASService.add(this.administrativeStaff, this.form.get('personalData').get('profileImage').value).subscribe(_ => {
+          this.form.reset();
+        });
       }
     }
   }

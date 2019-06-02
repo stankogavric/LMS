@@ -14,6 +14,6 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 	Optional<Student> findStudentByJmbg(String jmbg);
 	@Query("SELECT s FROM Student s WHERE s.personalData.firstName LIKE ?1")
 	Iterable<Optional<Student>> findStudentsByFirstName(String firstName);
-
-
+	@Query("SELECT s FROM Student s WHERE s.accountData.username = ?1")
+	Optional<Student> getByUsername(String username);
 }

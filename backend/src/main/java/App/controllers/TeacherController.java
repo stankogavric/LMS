@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
@@ -42,6 +41,12 @@ public class TeacherController {
     public ResponseEntity<Iterable<Teacher>> getTeachers() {
         return new ResponseEntity<Iterable<Teacher>>(teacherService.getTeachers(), HttpStatus.OK);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/faculty/{facultyId}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Optional<Teacher>>> getTeachersByFaculty(@PathVariable Long facultyId) {
+        return new ResponseEntity<Iterable<Optional<Teacher>>>(teacherService.getTeachersByFaculty(facultyId), HttpStatus.OK);
+    }
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/{id}", method=RequestMethod.GET)
@@ -52,11 +57,25 @@ public class TeacherController {
         }
         return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
+    public ResponseEntity<Teacher> getTeacherByUsername(@PathVariable String username) {
+        Optional<Teacher> teacher = teacherService.getTeacherByUsername(username);
+        if(teacher.isPresent()) {
+            return new ResponseEntity<Teacher>(teacher.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Teacher>(HttpStatus.NOT_FOUND);
+    }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher Teachers) {
-        teacherService.updateTeacher(id, Teachers);
-        return new ResponseEntity<Teacher>(Teachers, HttpStatus.CREATED);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Teacher> updateTeacher(@PathVariable String username, @RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String teacherStr) throws IOException {
+    	Teacher teacher = new ObjectMapper().readValue(teacherStr, Teacher.class);
+		if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "teacher_" + teacher.getAccountData().getUsername(), teacher.getPersonalData());
+		}
+    	teacherService.updateTeacher(username, teacher);
+        return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
@@ -90,11 +109,13 @@ public class TeacherController {
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Secured("ROLE_ADMINISTRATOR")
-	public ResponseEntity<Teacher> uploadFile(@RequestPart("profileImage") MultipartFile file, @RequestPart("data") String teacherStr) throws IOException {
+	public ResponseEntity<Teacher> addTeacher(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String teacherStr) throws IOException {
 		Teacher teacher = new ObjectMapper().readValue(teacherStr, Teacher.class);
-		fileService.saveProfileImage(file, "teacher_" + teacher.getAccountData().getUsername(), teacher.getPersonalData());
+		if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "teacher_" + teacher.getAccountData().getUsername(), teacher.getPersonalData());
+		}
 		teacherService.addTeacher(teacher);
-		return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
+		return new ResponseEntity<Teacher>(teacher, HttpStatus.CREATED);
 	}
     
     @JsonView(HideOptionalProperties.class)

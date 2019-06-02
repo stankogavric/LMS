@@ -18,6 +18,6 @@
     <mat-error>{{formError.mapErrors(personalDataForm.get('profileImage'), 'First name')}}</mat-error>
   </div>
 </div>
-<div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profileImage').valid">
+<div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profileImage').valid && personalDataForm.get('profileImage').value">
   <img [src]="imagePreview" alt="Can't dispaly picture">
 </div>

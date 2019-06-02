@@ -36,7 +36,7 @@
 
   <br>
 
-  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
+  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value?.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
 
   <h3>Topics</h3>
   <mat-vertical-stepper #stepper>
@@ -63,7 +63,15 @@
               Delete
             </button>
           </div>
-          <div *ngIf="!topic[2]">
+          <div class="image-preview" *ngIf="topic[0].iconPath">
+            <img [src]="fileUrl+topic[0].iconPath" alt="Can't display icon">
+            {{topic[0].description}}
+            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+              <mat-icon>delete</mat-icon>
+              Delete
+            </button>
+          </div>
+          <div *ngIf="!topic[2] && !topic[0].iconPath">
             {{topic[0].description}}
             <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
               <mat-icon>delete</mat-icon>
@@ -75,5 +83,5 @@
     </mat-step>
   </mat-vertical-stepper>
 
-  <button mat-raised-button color="accent" (click)="add()">Save topics</button>
+  <button mat-raised-button color="accent" (click)="save()" [disabled]="!addEditTopicsForm.get('subjectRealization').value">Save topics</button>
 </div>

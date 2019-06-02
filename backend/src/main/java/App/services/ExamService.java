@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import App.models.Exam;
+import App.models.ExamTopic;
 import App.models.ExamType;
 import App.repositories.ExamRepository;
 import App.repositories.ExamTypeRepository;
@@ -17,6 +19,8 @@ public class ExamService {
     private ExamRepository examRepo;
 	@Autowired
     private ExamTypeRepository examTypeRepo;
+	@Autowired
+	private ExamTopicService examTopicService;
 
 	public ExamService() {
 	}
@@ -29,8 +33,15 @@ public class ExamService {
         return examRepo.findById(id);
     }
 
+    @Transactional
     public void addExam(Exam exam) {
-    	examRepo.save(exam);
+    	Exam e = new Exam(exam.getStartTime(), exam.getEndTime(), exam.getPoints(), exam.getDurationInMinutes(), exam.getSubjectRealization(), exam.getExamType(), exam.getExamRealizations(), exam.getSyllabus());
+    	e.setSyllabus(null);
+    	e.setId(examRepo.save(e).getId());
+    	for(ExamTopic examTopic: exam.getSyllabus()) {
+    		examTopic.setExam(e);
+    		examTopicService.addExamTopic(examTopic);
+    	}
     }
 
     public void removeExam(Long id) {

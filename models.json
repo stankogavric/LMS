@@ -1,11 +1,49 @@
 [{
-        "repNum":10,
+		"repNum":40,
         "naziv": "AccountData",
         "mnozina": "AccountData",
         "data": {
             "id": "Long",
             "username": "String",
             "password": "String",
+            "email": "String",
+            "accountDataPermissions" : "AccountDataPermission[]"
+        }
+    },
+    {
+        "naziv": "Permission",
+        "mnozina": "Permissions",
+        "data": {
+            "id": "Long",
+            "title": "String",
+            "accDataPermissions": "AccountDataPermission[]"
+        }
+    },
+    {
+    	"repNum":10,
+        "naziv": "AccountDataPermission",
+        "mnozina": "AccountDataPermissions",
+        "data": {
+            "id": "Long",
+            "accountData": "AccountData",
+            "permission": "Permission"
+        }
+    },
+    {
+        "naziv": "Author",
+        "mnozina": "Authors",
+        "data": {
+            "id": "Long",
+            "firstName": "String",
+            "lastName": "String",
+            "teachingMaterial": "TeachingMaterial"
+        }
+    },
+    {
+        "naziv": "Email",
+        "mnozina": "Emails",
+        "data": {
+            "id": "Long",
             "email": "String"
         }
     },
@@ -14,7 +52,7 @@
         "naziv": "TitleType",
         "mnozina": "TitleTypes",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String"
         }
     },
@@ -22,7 +60,7 @@
         "naziv": "Title",
         "mnozina": "Titles",
         "data": {
-            "id": "String",
+            "id": "Long",
             "startDate": "Date",
             "endDate": "Date",
             "scientificField": "ScientificField",
@@ -33,7 +71,7 @@
         "naziv": "ScientificField",
         "mnozina": "ScientificFields",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String"
         }
     },
@@ -41,7 +79,7 @@
         "naziv": "Country",
         "mnozina": "Countries",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "cities": "City[]"
         }
@@ -50,9 +88,53 @@
         "naziv": "City",
         "mnozina": "Cities",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "country": "Country"
+        }
+    },
+    {
+        "naziv": "FacultyEmails",
+        "mnozina": "FacultyEmails",
+        "data": {
+            "id": "Long",
+            "faculty": "Faculty",
+            "email": "Email"
+        }
+    },
+    {
+        "naziv": "FacultyPhones",
+        "mnozina": "FacultyPhones",
+        "data": {
+            "id": "Long",
+            "faculty": "Faculty",
+            "phone": "Phone"
+        }
+    },
+    {
+        "naziv": "UniversityEmails",
+        "mnozina": "UniversityEmails",
+        "data": {
+            "id": "Long",
+            "university": "University",
+            "email": "Email"
+        }
+    },
+    {
+        "naziv": "UniversityPhones",
+        "mnozina": "UniversityPhones",
+        "data": {
+            "id": "Long",
+            "university": "University",
+            "phone": "Phone"
+        }
+    },
+    {
+        "naziv": "Phone",
+        "mnozina": "Phones",
+        "data": {
+            "id": "Long",
+            "phone": "String"
         }
     },
     {
@@ -60,43 +142,59 @@
         "naziv": "University",
         "mnozina": "Universities",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "description": "String",
             "dateOfEstablishment": "Date",
             "faculties": "Faculty[]",
             "address": "Address",
-            "rector": "Teacher"
+            "rector": "Teacher",
+            "phones": "UniversityPhones[]",
+            "emails": "UniversityEmails[]"
         }
     },
     {
         "naziv": "Faculty",
         "mnozina": "Faculties",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "description": "String",
             "university": "University",
             "address": "Address",
             "dean": "Teacher",
-            "studyPrograms": "StudyProgram[]"
+            "studyPrograms": "StudyProgram[]",
+            "phones": "FacultyPhones[]",
+            "emails": "FacultyEmails[]",
+            "classrooms": "Classroom[]"
         }
     },
     {
         "naziv": "Address",
         "mnozina": "Addresses",
         "data": {
-            "id": "String",
+            "id": "Long",
             "street": "String",
             "number": "String",
             "city": "City"
         }
     },
     {
+        "naziv": "Classroom",
+        "mnozina": "Classrooms",
+        "data": {
+            "id": "Long",
+            "name": "String",
+            "type": "String",
+            "capacity": "Integer",
+            "faculty": "Faculty"
+        }
+    },
+    {
         "naziv": "StudyProgram",
         "mnozina": "StudyPrograms",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "description": "String",
             "yearsOfStudy": "YearOfStudy[]",
@@ -109,7 +207,7 @@
         "naziv": "YearOfStudy",
         "mnozina": "YearsOfStudy",
         "data": {
-            "id": "String",
+            "id": "Long",
             "year": "Integer",
             "subjectRealizations": "SubjectRealization[]",
             "studyProgram": "StudyProgram",
@@ -121,18 +219,62 @@
         "naziv": "StudentYear",
         "mnozina": "StudentsYear",
         "data": {
-            "id": "String",
+            "id": "Long",
             "enrolmentDate": "Date",
             "numIndex": "String",
             "yearOfStudy": "YearOfStudy",
-            "student": "Student"
+            "student": "Student",
+            "examRealizations": "ExamRealization[]"
+        }
+    },
+    {
+        "naziv": "Exam",
+        "mnozina": "Exams",
+        "data": {
+            "id": "Long",
+            "startTime": "Date",
+            "endTime": "Date",
+            "points": "Integer",
+            "durationInMinutes": "Integer",
+            "subjectRealization": "SubjectRealization",
+            "examType": "ExamType",
+            "examRealizations": "ExamRealization[]",
+            "syllabus": "ExamTopic[]"
+        }
+    },
+    {
+        "naziv": "ExamRealization",
+        "mnozina": "ExamRealizations",
+        "data": {
+            "id": "Long",
+            "points": "Integer",
+            "note": "String",
+            "exam": "Exam",
+            "studentYear": "StudentYear"
+        }
+    },
+    {
+        "naziv": "ExamTopic",
+        "mnozina": "ExamTopics",
+        "data": {
+            "id": "Long",
+            "description": "String",
+            "exam": "Exam"
+        }
+    },
+    {
+        "naziv": "ExamType",
+        "mnozina": "ExamTypes",
+        "data": {
+            "id": "Long",
+            "name": "String"
         }
     },
     {
         "naziv": "Subject",
         "mnozina": "Subjects",
         "data": {
-            "id": "String",
+            "id": "Long",
             "name": "String",
             "ects": "Integer",
             "mandatory": "Boolean",
@@ -142,7 +284,8 @@
             "researchPaper": "Integer",
             "otherClasses": "Integer",
             "syllabus": "Topic[]",
-            "prerequisite": "Subject[]",
+            "prerequisites": "Subject[]",
+            "prerequisiteFor": "Subject[]",
             "yearOfStudy": "YearOfStudy",
             "deleted": "Boolean"
         }
@@ -151,9 +294,19 @@
         "naziv": "Topic",
         "mnozina": "Topics",
         "data": {
-            "id": "String",
+            "id": "Long",
             "description": "String",
             "week": "Integer",
+            "iconPath": "String",
+            "subject": "Subject",
+            "deleted": "Boolean"
+        }
+    },
+    {
+        "naziv": "Prerequisite",
+        "mnozina": "Prerequisites",
+        "data": {
+            "id": "Long",
             "subject": "Subject"
         }
     },
@@ -182,8 +335,21 @@
         "data": {
             "id": "Long",
             "teacherRealizations": "TeacherRealization[]",
+            "teachingTerms": "TeachingTerm[]",
+            "exams": "Exam[]",
             "subject": "Subject",
+            "teachingMaterials": "TeachingMaterial[]",
             "yearOfStudy": "YearOfStudy"
+        }
+    },
+    {
+        "naziv": "TeachingTerm",
+        "mnozina": "TeachingTerms",
+        "data": {
+            "id": "Long",
+            "startTime": "Date",
+            "endTime": "Date",
+            "subjectRealization": "SubjectRealization"
         }
     },
     {
@@ -200,7 +366,7 @@
         "naziv": "Teacher",
         "mnozina": "Teachers",
         "data": {
-            "id": "String",
+            "id": "Long",
             "biography": "String",
             "titles": "Title[]",
             "address": "Address",
@@ -255,21 +421,38 @@
         }
     },
     {
-        "naziv": "Permission",
-        "mnozina": "Permissions",
+        "naziv": "File",
+        "mnozina": "Files",
         "data": {
             "id": "Long",
-            "title": "String"
+            "description": "String",
+            "url": "String",
+            "message": "Message",
+            "teachingMaterial": "TeachingMaterial"
         }
     },
     {
-        "repNum":10,
-        "naziv": "AccountDataPermission",
-        "mnozina": "AccountDataPermissions",
+        "naziv": "Message",
+        "mnozina": "Messages",
         "data": {
             "id": "Long",
-            "accountDataId": "String",
-            "PermissionId": "String"
+            "content": "String",
+            "date": "Date",
+            "recipient": "AccountData",
+            "sender": "AccountData",
+            "attachments": "File[]"
+        }
+    },
+    {
+        "naziv": "TeachingMaterial",
+        "mnozina": "TeachingMaterials",
+        "data": {
+            "id": "Long",
+            "name": "String",
+            "authors": "Author[]",
+            "publicationDate": "Date",
+            "files": "File[]",
+            "subjectRealization": "SubjectRealization"
         }
     }
 ]

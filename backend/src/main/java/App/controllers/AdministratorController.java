@@ -41,6 +41,16 @@ public class AdministratorController {
         }
         return new ResponseEntity<Administrator>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
+    public ResponseEntity<Administrator> getAdministratorByUsername(@PathVariable String username) {
+        Optional<Administrator> administrator = administratorService.getAdministratorByUsername(username);
+        if(administrator.isPresent()) {
+            return new ResponseEntity<Administrator>(administrator.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<Administrator>(HttpStatus.NOT_FOUND);
+    }
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/register", method=RequestMethod.POST)
@@ -49,10 +59,10 @@ public class AdministratorController {
         return new ResponseEntity<Administrator>(Administrators, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<Administrator> updateAdministrator(@PathVariable Long id, @RequestBody Administrator Administrators) {
-        administratorService.updateAdministrator(id, Administrators);
-        return new ResponseEntity<Administrator>(Administrators, HttpStatus.CREATED);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT)
+    public ResponseEntity<Administrator> updateAdministrator(@PathVariable String username, @RequestBody Administrator Administrators) {
+        administratorService.updateAdministrator(username, Administrators);
+        return new ResponseEntity<Administrator>(Administrators, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)

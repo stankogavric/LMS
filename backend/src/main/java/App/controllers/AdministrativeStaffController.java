@@ -53,11 +53,25 @@ public class AdministrativeStaffController {
         }
         return new ResponseEntity<AdministrativeStaff>(HttpStatus.NOT_FOUND);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/username/{username}", method=RequestMethod.GET)
+    public ResponseEntity<AdministrativeStaff> getAdministrativeStaffByUsername(@PathVariable String username) {
+        Optional<AdministrativeStaff> administrativeStaff = administrativeStaffService.getAdministrativeStaffByUsername(username);
+        if(administrativeStaff.isPresent()) {
+            return new ResponseEntity<AdministrativeStaff>(administrativeStaff.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<AdministrativeStaff>(HttpStatus.NOT_FOUND);
+    }
 
-    @RequestMapping(value="/{id}", method=RequestMethod.PUT)
-    public ResponseEntity<AdministrativeStaff> updateAdministrativeStaff(@PathVariable Long id, @RequestBody AdministrativeStaff AdministrativeStaff) {
-        administrativeStaffService.updateAdministrativeStaff(id, AdministrativeStaff);
-        return new ResponseEntity<AdministrativeStaff>(AdministrativeStaff, HttpStatus.CREATED);
+    @RequestMapping(value="/{username}", method=RequestMethod.PUT, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AdministrativeStaff> updateAdministrativeStaff(@PathVariable String username, @RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String admStfStr) throws IOException {
+    	AdministrativeStaff admStf = new ObjectMapper().readValue(admStfStr, AdministrativeStaff.class);
+		if(file.isPresent()) {
+			fileService.saveProfileImage(file.get(), "administrative_staff_" + admStf.getAccountData().getUsername(), admStf.getPersonalData());
+		}
+    	administrativeStaffService.updateAdministrativeStaff(username, admStf);
+        return new ResponseEntity<AdministrativeStaff>(admStf, HttpStatus.OK);
     }
 
     @RequestMapping(value="/{id}", method=RequestMethod.DELETE)
@@ -74,13 +88,13 @@ public class AdministrativeStaffController {
     @JsonView(HideOptionalProperties.class)
 	@RequestMapping(value = "/register", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@Secured("ROLE_ADMINISTRATOR")
-	public ResponseEntity<AdministrativeStaff> uploadFile(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String admStfStr) throws IOException {
+	public ResponseEntity<AdministrativeStaff> addAdministrativeStaff(@RequestPart("profileImage") Optional<MultipartFile> file, @RequestPart("data") String admStfStr) throws IOException {
 		AdministrativeStaff admStf = new ObjectMapper().readValue(admStfStr, AdministrativeStaff.class);
 		if(file.isPresent()) {
 			fileService.saveProfileImage(file.get(), "administrative_staff_" + admStf.getAccountData().getUsername(), admStf.getPersonalData());
 		}
 		administrativeStaffService.addAdministrativeStaff(admStf);
-		return new ResponseEntity<AdministrativeStaff>(admStf, HttpStatus.OK);
+		return new ResponseEntity<AdministrativeStaff>(admStf, HttpStatus.CREATED);
 	}
     
     @JsonView(HideOptionalProperties.class)
