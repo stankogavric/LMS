@@ -1,11 +1,13 @@
 package App.services;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import App.models.Student;
+import App.repositories.StudentCustomRepositoryImpl;
 import App.repositories.StudentRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class StudentService {
 
     @Autowired
     private StudentRepository studentRepo;
+    
+    @Autowired
+    private StudentCustomRepositoryImpl studentCustomRepo;
 
     @Autowired
     private LoginService loginServ;
@@ -54,6 +59,11 @@ public class StudentService {
     
     public Optional<Student> getStudentByJmbg(String jmbg){
     	return studentRepo.findStudentByJmbg(jmbg);
+    }
+    
+    public Collection<Student> searchStudents(String firstName, String lastName, String indexNum, String enrolment, String avgGrade){    	
+    	return studentCustomRepo.searchStudents(firstName, lastName, indexNum, enrolment, avgGrade);
+		
     }
 
 }

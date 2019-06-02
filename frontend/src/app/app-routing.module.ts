@@ -12,68 +12,80 @@ import { SubjectComponent } from './subject/subject.component';
 import { StudentsComponent } from './student/students/students.component';
 import { TeachersComponent } from './teacher/teachers/teachers.component';
 import { StudentComponent } from './student/student.component';
-import { CurrentSubjectsComponent} from './student/current-subjects/current-subjects.component';
-import { PastSubjectsComponent} from './student/past-subjects/past-subjects.component';
+import { CurrentSubjectsComponent } from './student/current-subjects/current-subjects.component';
+import { PastSubjectsComponent } from './student/past-subjects/past-subjects.component';
 import { StudyProgramsComponent } from './study-program/study-programs/study-programs.component';
 import { LoginComponent } from './login/login.component';
 import { AdministratorsComponent } from './administrator/administrators/administrators.component';
 import { AdministrativeStaffComponent } from './administrativeStaff/administrative-staff/administrative-staff.component';
 import { AdministratorAddEditComponent } from './administrator/administrator-add-edit/administrator-add-edit.component';
 import { SubjectsComponent } from './subject/subjects/subjects.component';
-import { TeacherSubjectsComponent} from './teacher/teacher-subjects/teacher-subjects.component'; 
+import { TeacherSubjectsComponent } from './teacher/teacher-subjects/teacher-subjects.component';
 import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 import { StudentsListComponent } from './student/students-list/students-list.component';
+import { SearchStudentsComponent } from './student/search-students/search-students.component';
+import { StudentDetailComponent } from './student/student-detail/student-detail.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent },
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
 
-  { path: 'students', component: StudentsComponent},
-  { path: 'student/:id', component: StudentComponent},
-  { path: 'edit/student/:id', component: StudentAddEditComponent },
-  { path: 'register/student', component: StudentAddEditComponent, 
-        canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE_STAFF']}},
-        
-  { path: 'teachers', component: TeachersComponent},
-  { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
-  { path: 'register/teacher', component: TeacherAddEditComponent, 
-        canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
+      { path: 'students', component: StudentsComponent },
+      { path: 'student/:id', component: StudentComponent },
+      { path: 'edit/student/:id', component: StudentAddEditComponent },
+      {
+            path: 'register/student', component: StudentAddEditComponent,
+            canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR', 'ROLE_ADMINISTRATIVE_STAFF'] }
+      },
+
+      { path: 'teachers', component: TeachersComponent },
+      { path: 'edit/teacher/:id', component: TeacherAddEditComponent },
+      {
+            path: 'register/teacher', component: TeacherAddEditComponent,
+            canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
+      },
 
 
-  { path: 'add/exam', component: ExamAddEditComponent },
+      { path: 'add/exam', component: ExamAddEditComponent },
 
-  { path: 'add/topics', component: AddEditTopicsComponent },
-        
-  { path: 'administrators', component: AdministratorsComponent},
-  { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
-  { path: 'register/administrator', component: AdministratorAddEditComponent, 
-        canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
+      { path: 'add/topics', component: AddEditTopicsComponent },
 
-  { path: 'administrativeStaff', component: AdministrativeStaffComponent},
-  { path: 'edit/administrativestaff/:id', component: AdministrativeStaffAddEditComponent },
-  { path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard], 
-      data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
+      { path: 'administrators', component: AdministratorsComponent },
+      { path: 'edit/administrator/:id', component: AdministratorAddEditComponent },
+      {
+            path: 'register/administrator', component: AdministratorAddEditComponent,
+            canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
+      },
 
-  { path: 'university', component: UniversityComponent},
-  { path: 'faculty/:id', component: FacultyComponent},
-  
-  { path: 'studyPrograms', component: StudyProgramsComponent},
-  { path: 'studyProgram/:id', component: StudyProgramComponent},
+      { path: 'administrativeStaff', component: AdministrativeStaffComponent },
+      { path: 'edit/administrativestaff/:id', component: AdministrativeStaffAddEditComponent },
+      {
+            path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard],
+            data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
+      },
 
-  { path: 'subject/:id', component: SubjectComponent},
-  { path: 'currentSubjects', component: CurrentSubjectsComponent},
-  { path: 'pastSubjects', component: PastSubjectsComponent},
-  { path: 'studyPrograms', component: StudyProgramsComponent},
-  { path: 'subjects', component: SubjectsComponent},
-  {path: 'teacherSubjects', component: TeacherSubjectsComponent},
-  {path:'studentListBySubject', component: StudentsListComponent},
+      { path: 'university', component: UniversityComponent },
+      { path: 'faculty/:id', component: FacultyComponent },
+
+      { path: 'studyPrograms', component: StudyProgramsComponent },
+      { path: 'studyProgram/:id', component: StudyProgramComponent },
+
+      { path: 'subject/:id', component: SubjectComponent },
+      { path: 'currentSubjects', component: CurrentSubjectsComponent },
+      { path: 'pastSubjects', component: PastSubjectsComponent },
+      { path: 'studyPrograms', component: StudyProgramsComponent },
+      { path: 'subjects', component: SubjectsComponent },
+      { path: 'teacherSubjects', component: TeacherSubjectsComponent },
+      { path: 'studentListBySubject', component: StudentsListComponent },
+      { path: 'searchStudents', component: SearchStudentsComponent },
+      { path: 'student/details/:id', component: StudentDetailComponent },
   //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+      imports: [RouterModule.forRoot(routes)],
+      exports: [RouterModule]
 })
 export class AppRoutingModule { }

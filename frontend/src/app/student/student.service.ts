@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Student } from './student.model';
+import { StudentDetails } from './studentDetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -18,25 +19,37 @@ export class StudentService {
   }
 
   getOne(id: String) {
-    return this.http.get<Student>(this.studentUrl+`/${id}`);
+    return this.http.get<Student>(this.studentUrl + `/${id}`);
   }
 
   delete(id: String) {
-    return this.http.delete(this.studentUrl+`/${id}`);
+    return this.http.delete(this.studentUrl + `/${id}`);
   }
 
-  add(student:Student, image:File) {
+  add(student: Student, image: File) {
     const postData = new FormData();
     postData.append("profileImage", image, image.name);
     postData.append("data", JSON.stringify(student));
-    return this.http.post(this.studentUrl+'/register', postData);
+    return this.http.post(this.studentUrl + '/register', postData);
   }
 
-  update(id:string, student:Student) {
-    return this.http.put(this.studentUrl+`/${id}`, student)
+  update(id: string, student: Student) {
+    return this.http.put(this.studentUrl + `/${id}`, student)
   }
-  
+
   getStudentsBySubjectId(subjId: number, teacherUsername: string) {
-    return this.http.get<Student[]>(this.subjAttUrl+`/teacher/${teacherUsername}/${subjId}/students`);
+    return this.http.get<Student[]>(this.subjAttUrl + `/teacher/${teacherUsername}/${subjId}/students`);
   }
+
+  searchStudents(queryParams: {}) {
+    return this.http.get<Student[]>(this.studentUrl + `/search/`, {
+      params:queryParams
+    });   
+
+  }
+
+  getStudentDetails(id: string){
+    return this.http.get<StudentDetails>(this.studentUrl+`/details/${id}`);
+  }
+
 }

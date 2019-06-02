@@ -24,6 +24,7 @@ import App.models.SubjectAttendance;
 import App.services.SubjectAttendanceService;
 import App.utils.View.HideOptionalProperties;
 import App.utils.View.ShowStudent;
+import App.utils.View.ShowSubjectAttendance;
 import App.utils.View.ShowYearOfStudy;
 
 @CrossOrigin(origins={"http://localhost:4200"})
@@ -107,6 +108,14 @@ public class SubjectAttendanceController {
     	Collection<Student> studenti = subjectAttendanceService.getStudentsBySubject(subjectId, teacherUsername);
     	
     	return new ResponseEntity<Collection<StudentDTO>>(studentMapper.toDtoList(studenti), HttpStatus.OK);
+    }
+    
+    @JsonView(ShowSubjectAttendance.class)
+    @RequestMapping(value="/{studentId}/exams", method=RequestMethod.GET)
+    public ResponseEntity<Collection<SubjectAttendance>> getExamsByStudent(@PathVariable Long studentId){
+    	Collection<SubjectAttendance> subjAttendances = subjectAttendanceService.getExamsByStudent(studentId);
+    	
+    	return new ResponseEntity<Collection<SubjectAttendance>>(subjAttendances, HttpStatus.OK);
     }
     
 }

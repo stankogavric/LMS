@@ -66,5 +66,9 @@ public class SubjectAttendanceService {
     	Date today = new Date();
     	return subjectAttendanceRepo.findStudentsBySubject(subjectId, today, teacherUsername);
     }
+    
+    public ArrayList<SubjectAttendance> getExamsByStudent(Long studentId){
+    	return subjectAttendanceRepo.getExamsByStudent(studentId);
+    }
 
 }

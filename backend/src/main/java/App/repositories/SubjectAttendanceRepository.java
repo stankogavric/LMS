@@ -32,4 +32,7 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 			+ "AND sa.subjectRealization.subject = tr.subjectRealization.subject "
 			+ "AND tr.teacher.accountData.username = ?3")
 	ArrayList<Student> findStudentsBySubject(Long subjectId, Date today, String teacherUsername);
+	
+	@Query("SELECT sa FROM SubjectAttendance sa JOIN sa.subjectRealization.exams WHERE sa.student.id = ?1")
+	ArrayList<SubjectAttendance> getExamsByStudent(Long studentId);
 }
