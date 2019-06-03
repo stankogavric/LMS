@@ -12,7 +12,6 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Subquery;
 
-import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -88,9 +87,7 @@ public class StudentCustomRepositoryImpl implements StudentCustomRepository {
 			}
 		};
 		//System.out.println("query " + entityManager.createQuery(criteria.where(predicates.toArray(new Predicate[0]))).unwrap(Query.class).getQueryString());
-		Collection<Student> results = entityManager.createQuery(criteria.where(predicates.toArray(new Predicate[0])))
-				.getResultList();
-		System.out.println(results.size());
+		Collection<Student> results = entityManager.createQuery(criteria.where(predicates.toArray(new Predicate[0]))).getResultList();
 		return results;
 
 	}

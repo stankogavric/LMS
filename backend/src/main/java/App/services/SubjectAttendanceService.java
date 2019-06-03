@@ -67,8 +67,4 @@ public class SubjectAttendanceService {
     	return subjectAttendanceRepo.findStudentsBySubject(subjectId, today, teacherUsername);
     }
     
-    public ArrayList<SubjectAttendance> getExamsByStudent(Long studentId){
-    	return subjectAttendanceRepo.getExamsByStudent(studentId);
-    }
-
 }

@@ -10,7 +10,7 @@ import { StudentService } from '../student.service';
 })
 export class StudentDetailComponent implements OnInit {
 
-  student: StudentDetails;
+  student?: StudentDetails;
   constructor(private studentService: StudentService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -18,7 +18,6 @@ export class StudentDetailComponent implements OnInit {
     this.studentService.getStudentDetails(this.route.snapshot.paramMap.get('id')).subscribe(
        ( data: StudentDetails) => {
          this.student = data;
-         console.log("ucitan student  ", data);
        }
      );
   }

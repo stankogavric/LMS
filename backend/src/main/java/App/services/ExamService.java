@@ -1,5 +1,6 @@
 package App.services;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +61,11 @@ public class ExamService {
     public Iterable<ExamType> getExamTypes() {
     	return examTypeRepo.findAll();
     }
+    
+    public ArrayList<Object> getExamsByStudent(Long studentId){
+    	return examRepo.getExamsByStudent(studentId);
+    	
+    }
+
 	
 }

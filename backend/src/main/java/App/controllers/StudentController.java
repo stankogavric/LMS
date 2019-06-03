@@ -29,7 +29,6 @@ import App.models.Student;
 import App.services.FileService;
 import App.services.StudentService;
 import App.utils.View.HideOptionalProperties;
-import App.utils.View.ShowStudent;
 
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
@@ -41,6 +40,12 @@ public class StudentController {
     
     @Autowired
     FileService fileService;
+    
+    @Autowired
+    StudentMapper studentMapper;
+    
+    @Autowired
+    StudentDetailsMapper studentDetailsMapper;
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping()
@@ -132,7 +137,7 @@ public class StudentController {
 
 	}
 	
-	@JsonView(ShowStudent.class)
+	@JsonView(HideOptionalProperties.class)
 	@RequestMapping(value="/details/{id}", method=RequestMethod.GET)
 	public ResponseEntity<StudentDetailsDTO> getStudentDetailsById(@PathVariable Long id){
 		Optional<Student> student = studentService.getStudentById(id);

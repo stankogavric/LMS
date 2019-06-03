@@ -36,11 +36,9 @@ export class SearchStudentsComponent implements OnInit {
   search() {
     let query = {};
     query = this.searchForm.value;
-    console.log(query);
     this.studentService.searchStudents(query)
       .subscribe((data: Student[]) => {
         this.students = data;
-        console.log(this.students);
         this.dataSource.data = data;
       });
   }

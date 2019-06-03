@@ -1,5 +1,4 @@
 import { StudentYear } from "./student-year.model";
-import { SubjectAttendance } from "../subject/SubjectAttendance.model";
 
 export class StudentDetails {
     id: number;
@@ -8,5 +7,4 @@ export class StudentDetails {
     email: string;
     profilePicturePath: string;
     studentYears: StudentYear[];
-    subjectAttendances: SubjectAttendance[];
 }
