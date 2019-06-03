@@ -4,6 +4,7 @@ import { Exam } from './exam.model';
 import { ExamType } from './exam-type.model';
 import { ExamTopic } from '../exam-topic/exam-topic.model';
 import { Observable } from 'rxjs';
+import { ExamDTO } from './examDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,10 @@ export class ExamService {
 
   getExamTypes() {
     return this.http.get<ExamType[]>(this.examUrl+`/types`);
+  }
+
+  getStudentsExams(id: string){
+    return this.http.get<[]>(this.examUrl+ `/${id}/exams`);
   }
 
 }

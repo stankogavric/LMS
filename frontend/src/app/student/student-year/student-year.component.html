@@ -1,0 +1,24 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-description style="float:left;">
+      Study program: {{studentYear.yearOfStudy.studyProgramName}} <br>
+      Year of study: {{studentYear.yearOfStudy.year}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <ul>
+    <li>
+      <label for="facultyName">Faculty:</label>
+      {{studentYear.yearOfStudy.facultyName}}
+    </li>
+    <li>
+      <label for="numIndex">Index number:</label>
+      {{studentYear.numIndex}}
+    </li>
+    <li>
+      <label for="start">School year start date: {{studentYear.yearOfStudy.startDate}} end date:
+        {{studentYear.yearOfStudy.endDate}}</label>
+    </li>
+    <li><label for="enrolmentDate"> Enrolment date</label>
+    {{studentYear.enrolmentDate}}</li>
+  </ul>
+</mat-expansion-panel>

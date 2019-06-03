@@ -8,5 +8,4 @@ export class StudentYear {
 	numIndex:string;
 	yearOfStudy:YearOfStudy;
     student:Student;
-    examRealizations: ExamRealization[];
 }

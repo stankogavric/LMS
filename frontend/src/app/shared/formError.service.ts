@@ -7,7 +7,9 @@ import { Injectable } from '@angular/core';
 export class FormErrorService {
     patternMap = {
         '^[0-9]{13}$': " must be 13 characters long",
-        '^[a-zA-Z]{3,}$': " must have at least 3 characters, and can't contain white space"
+        '^[a-zA-Z]{3,}$': " must have at least 3 characters, and can't contain white space",
+        '^[0-9]$': " must be number",
+        '^[a-zA-Z]$': " must be letter"
     }
 
     errorMap: { 

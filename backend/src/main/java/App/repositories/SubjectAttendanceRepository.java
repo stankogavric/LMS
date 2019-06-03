@@ -32,4 +32,5 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 			+ "AND sa.subjectRealization.subject = tr.subjectRealization.subject "
 			+ "AND tr.teacher.accountData.username = ?3")
 	ArrayList<Student> findStudentsBySubject(Long subjectId, Date today, String teacherUsername);
+	
 }
