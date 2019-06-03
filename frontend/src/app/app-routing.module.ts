@@ -25,6 +25,7 @@ import { ExamAddEditComponent } from './exam/exam-add-edit/exam-add-edit.compone
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 import { StudentsListComponent } from './student/students-list/students-list.component';
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
+import { ClassScheduleAddEditComponent } from './administrativeStaff/class-schedule-add-edit/class-schedule-add-edit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,6 +57,7 @@ const routes: Routes = [
   { path: 'edit/administrativestaff/:username', component: AdministrativeStaffAddEditComponent },
   { path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard], 
       data: { expectedRoles: ['ROLE_ADMINISTRATOR']}},
+  { path: 'classSchedule', component: ClassScheduleAddEditComponent},
 
   { path: 'university', component: UniversityComponent},
   { path: 'faculty/:id', component: FacultyComponent},

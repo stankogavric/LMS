@@ -1,0 +1,78 @@
+<div class="example-container" [formGroup]="classScheduleForm">
+  <mat-form-field>
+    <mat-label>Study program</mat-label>
+    <mat-select name = "yearOfStudy" formControlName="yearOfStudy">
+      <mat-option *ngFor="let yearOfStudy of yearsOfStudies" [value]="yearOfStudy" (click)="getTeacherRealizations(yearOfStudy.id); classScheduleForm.get('yearOfStudy').disable()">
+        {{yearOfStudy.year}}. godina {{yearOfStudy.studyProgram.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Subject</mat-label>
+    <mat-select name = "teacherRealization" formControlName="teacherRealization">
+      <mat-option *ngFor="let teacherRealization of teacherRealizations" [value]="teacherRealization">
+        {{teacherRealization.subjectRealization.subject.name}} {{teacherRealization.teacher.personalData.firstName}} {{teacherRealization.teacher.personalData.lastName}} {{teacherRealization.teacher.accountData.email}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Day</mat-label>
+    <mat-select name = "day" formControlName="day">
+      <mat-option *ngFor="let day of days; let i = index" [value]="i">
+        {{day}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="time" name="startTime" placeholder="Start time" formControlName="startTime">
+    <mat-error *ngIf="classScheduleForm.get('startTime').invalid">Please enter the valid start time.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Classroom</mat-label>
+    <mat-select name = "classroom" formControlName="classroom">
+      <mat-option *ngFor="let classroom of classrooms" [value]="classroom">
+        {{classroom.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" (click)="add()" [disabled]="classScheduleForm.invalid">Add</button>
+</div>
+<br>
+
+<table class="classSchedule">
+  <thead>
+    <tr>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td *ngFor="let day of classSchedule | keyvalue">
+        <div class="example" *ngIf="day.value.length > 0">
+          <div class="example-list">
+            <div class="example-box" *ngFor="let item of day.value">
+              <div>{{item.teacherRealization.subjectRealization.subject.name}}</div>
+              <br>
+              <div>{{item.teacherRealization.teacher.personalData.firstName}} {{item.teacherRealization.teacher.personalData.lastName}} {{item.teacherRealization.teacher.accountData.email}}</div>
+              <br>
+              <div>{{item.startTime.hours>=10 ? item.startTime.hours : '0'+item.startTime.hours}}:{{item.startTime.minutes>=10 ? item.startTime.minutes : '0'+item.startTime.minutes}}-{{item.endTime.hours>=10 ? item.endTime.hours : '0'+item.endTime.hours}}:{{item.endTime.minutes>=10 ? item.endTime.minutes : '0'+item.endTime.minutes}}</div>
+              <br>
+              <div>{{item.classroom.name}}</div>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

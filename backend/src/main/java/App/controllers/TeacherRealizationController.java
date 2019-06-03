@@ -33,6 +33,12 @@ public class TeacherRealizationController {
     public ResponseEntity<Iterable<TeacherRealization>> getTeacherRealizations() {
         return new ResponseEntity<Iterable<TeacherRealization>>(teacherRealizationService.getTeacherRealizations(), HttpStatus.OK);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/yearOfStudy/{yearOfStudyId}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Optional<TeacherRealization>>> getTeacherRealizationsByYearOfStudy(@PathVariable Long yearOfStudyId) {
+        return new ResponseEntity<Iterable<Optional<TeacherRealization>>>(teacherRealizationService.getTeacherRealizationsByYearOfStudy(yearOfStudyId), HttpStatus.OK);
+    }
 
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/{id}", method=RequestMethod.GET)

@@ -1,6 +1,7 @@
 package App.repositories;
 
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +16,8 @@ import App.models.TeacherRealization;
 public interface TeacherRealizationRepository extends JpaRepository<TeacherRealization, Long> {
 	@Query("SELECT tr.teacher FROM TeacherRealization tr WHERE tr.subjectRealization.subject.id = ?1")
 	Iterable<Teacher> findTeachersWhoTeachSubject(Long subjectId);
+	@Query("SELECT tr FROM TeacherRealization tr WHERE tr.subjectRealization.yearOfStudy.id = ?1")
+	Iterable<Optional<TeacherRealization>> getByYearOfStudy(Long yearOfStudyId);
 	
 	@Query(
 	"SELECT tr.subjectRealization.subject FROM TeacherRealization tr \n"

@@ -23,6 +23,10 @@ public class TeacherRealizationService {
     public Iterable<TeacherRealization> getTeacherRealizations() {
         return teacherRealizationRepo.findAll();
     }
+    
+    public Iterable<Optional<TeacherRealization>> getTeacherRealizationsByYearOfStudy(Long yearOfStudyId) {
+        return teacherRealizationRepo.getByYearOfStudy(yearOfStudyId);
+    }
 
     public Optional<TeacherRealization> getTeacherRealizationById(Long id) {
         return teacherRealizationRepo.findById(id);

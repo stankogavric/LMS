@@ -1,0 +1,51 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+  
+.example-container > * {
+    width: 100%;
+}
+
+/*table {
+    width: 100%;
+}*/
+
+.example {
+    /*width: 400px;*/
+    max-width: 100%;
+    /*margin: 0 25px 25px 0;*/
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+  }
+
+  .example-box:last-child {
+    border: none;
+  }
+  
+  .example-box {
+    padding: 20px 10px;
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    /*display: flex;
+    flex-direction: row;*/
+    align-items: center;
+    /*justify-content: space-between;*/
+    box-sizing: border-box;
+    background: white;
+    font-size: 14px;
+  }
+
+  .classSchedule tbody tr td {
+    border: 1px solid black;
+    vertical-align: top;
+  }
