@@ -1,3 +1,18 @@
+/* Customs */
+
+.personal-div {
+    /* display: flex; */
+    background-color: rgb(255, 255, 170);
+}
+
+.personal-card {
+    background-color: rgb(255, 255, 170);
+}
+
+.personal-form {
+    margin-top: 10px;
+}
+
 .image-preview {
     height: 80px;
     margin: 16px 0;

@@ -1,13 +1,16 @@
-<mat-card>
-  <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
-    <mat-form-field>
-      <input matInput name="username" ngModel type="text" placeholder="Username" #usernameInput="ngModel" required>
-      <mat-error>{{formError.mapErrors(usernameInput, 'Username')}}</mat-error>
-    </mat-form-field>
-    <mat-form-field>
-      <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel" required>
-      <mat-error>{{formError.mapErrors(passwordInput, 'Password')}}</mat-error>
-    </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Login</button>
-  </form>
-</mat-card>
+<div class="login-div">
+  <mat-card class="login-card">
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm">
+      <mat-form-field>
+        <input matInput name="username" ngModel type="text" placeholder="Username" #usernameInput="ngModel" required>
+        <mat-error>{{formError.mapErrors(usernameInput, 'Username')}}</mat-error>
+      </mat-form-field><br>
+      <mat-form-field class="password-form">
+        <input type="password" name="password" ngModel matInput placeholder="Password" #passwordInput="ngModel"
+          required>
+        <mat-error>{{formError.mapErrors(passwordInput, 'Password')}}</mat-error>
+      </mat-form-field><br>
+      <button class="login-button" mat-raised-button color="primary" type="submit">Login</button>
+    </form>
+  </mat-card>
+</div>

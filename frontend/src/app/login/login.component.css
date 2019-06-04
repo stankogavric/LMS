@@ -1,0 +1,22 @@
+/* Customs */
+
+.login-div {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-card {
+    background-color: rgb(255, 255, 170);
+}
+
+.password-form {
+    margin-top: 10px
+}
+
+.login-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
