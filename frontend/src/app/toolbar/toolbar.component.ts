@@ -30,25 +30,29 @@ export class ToolbarComponent implements OnInit {
     this.loggedInSubcription = this.authService.loggedInStatusChanged.subscribe(
       (status: boolean)=>{
         this.isLoggedIn = status;
-
-        this.loggedUserUsername = this.authService.getCurrentUser();
-        this.loggedUserRoles = this.authService.getCurrentRoles();
-        this.loggedUserRoles.forEach(role => {
-          if(role == "ROLE_ADMINISTRATOR"){
-            this.loggedUserType = "administrator";
-          }
-          else if(role == "ROLE_ADMINISTRATIVE_STAFF"){
-            this.loggedUserType = "administrativestaff";
-          }
-          else if(role == "ROLE_TEACHER"){
-            this.loggedUserType = "teacher";
-          }
-          else if(role == "ROLE_STUDENT"){
-            this.loggedUserType = "student";
-          }
-        });
+        this.setUserForEditProfile(); // on log in
       }
     );
+    this.setUserForEditProfile(); // when refresh page while the user is logged in
+  }
+
+  setUserForEditProfile(){
+    this.loggedUserUsername = this.authService.getCurrentUser();
+    this.loggedUserRoles = this.authService.getCurrentRoles();
+    this.loggedUserRoles.forEach(role => {
+      if(role == "ROLE_ADMINISTRATOR"){
+        this.loggedUserType = "administrator";
+      }
+      else if(role == "ROLE_ADMINISTRATIVE_STAFF"){
+        this.loggedUserType = "administrativestaff";
+      }
+      else if(role == "ROLE_TEACHER"){
+        this.loggedUserType = "teacher";
+      }
+      else if(role == "ROLE_STUDENT"){
+        this.loggedUserType = "student";
+      }
+    });
   }
 
   onLogout(){

@@ -27,6 +27,7 @@ import { StudentsListComponent } from './student/students-list/students-list.com
 import { SearchStudentsComponent } from './student/search-students/search-students.component';
 import { StudentDetailComponent } from './student/student-detail/student-detail.component';
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
+import { ClassScheduleAddEditComponent } from './administrativeStaff/class-schedule-add-edit/class-schedule-add-edit.component';
 
 const routes: Routes = [
       { path: '', component: HomeComponent },
@@ -50,6 +51,13 @@ const routes: Routes = [
 
       { path: 'add/exam', component: ExamAddEditComponent },
 
+      { path: 'administrativeStaff', component: AdministrativeStaffComponent},
+      { path: 'edit/administrativestaff/:username', component: AdministrativeStaffAddEditComponent },
+      { 
+            path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, 
+            canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}
+      },
+      { path: 'classSchedule', component: ClassScheduleAddEditComponent},
       { path: 'add/topics', component: AddEditTopicsComponent },
       { path: 'edit/topics/:id', component: AddEditTopicsComponent },
 
@@ -63,8 +71,8 @@ const routes: Routes = [
       { path: 'administrativeStaff', component: AdministrativeStaffComponent },
       { path: 'edit/administrativestaff/:username', component: AdministrativeStaffAddEditComponent },
       {
-            path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, canActivate: [RoleGuard],
-            data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
+            path: 'register/administrativestaff', component: AdministrativeStaffAddEditComponent, 
+            canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR'] }
       },
 
       { path: 'university', component: UniversityComponent },

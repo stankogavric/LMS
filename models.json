@@ -349,7 +349,8 @@
             "id": "Long",
             "startTime": "Date",
             "endTime": "Date",
-            "subjectRealization": "SubjectRealization"
+            "subjectRealization": "SubjectRealization",
+            "classroom": "Classroom"
         }
     },
     {

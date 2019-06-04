@@ -31,6 +31,7 @@ import { ExamTopicComponent } from './exam-topic/exam-topic.component';
 import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.component';
 import { FileComponent } from './file/file.component';
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
+import { ClassroomComponent } from './classroom/classroom.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { StudyProgramAddEditComponent } from './study-program/study-program-add-
     ExamTopicComponent,
     AddEditTopicsComponent,
     FileComponent,
-    StudyProgramAddEditComponent
+    StudyProgramAddEditComponent,
+    ClassroomComponent
   ],
   imports: [
     BrowserModule,

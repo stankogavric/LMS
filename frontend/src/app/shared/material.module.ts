@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import {MatSortModule} from '@angular/material/sort';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
   MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule, MatCheckboxModule, 
-  MatIconModule, MatMenuModule, MatSelectModule, MatDatepickerModule, MatStepperModule, MatNativeDateModule
-} from "@angular/material";
+  MatIconModule, MatMenuModule, MatSelectModule, MatDatepickerModule, MatStepperModule, MatListModule, 
+  MatNativeDateModule } from "@angular/material";
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   imports: [
@@ -27,6 +27,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDatepickerModule,
     DragDropModule,
     MatStepperModule,
+    MatListModule,
     MatNativeDateModule,
     MatTabsModule,
     MatSortModule
@@ -49,6 +50,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatDatepickerModule,
     DragDropModule,
     MatStepperModule,
+    MatListModule,
     MatNativeDateModule,
     MatTabsModule,
     MatSortModule
