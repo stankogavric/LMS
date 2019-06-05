@@ -1,20 +1,20 @@
-<div [formGroup]="accountDataForm">
-  <mat-card>
+<div class="account-div" [formGroup]="accountDataForm">
+  <mat-card class="account-card">
     <mat-card-title>Account info</mat-card-title>
-    <mat-form-field>
+    <mat-form-field class="account-form">
       <input matInput type="text" name="username" placeholder="Username" formControlName="username">
       <mat-error>{{formError.mapErrors(accountDataForm.get('username'), 'Username')}}</mat-error>
     </mat-form-field><br>
-    <mat-form-field>
+    <mat-form-field class="account-form">
       <input matInput type="email" name="email" placeholder="E-Mail" formControlName="email">
       <mat-error>{{formError.mapErrors(accountDataForm.get('email'), 'Email')}}</mat-error>
     </mat-form-field><br>
-    <mat-form-field>
+    <mat-form-field class="account-form">
       <input matInput type="password" name="password" placeholder="Password" formControlName="password"
         (change)="accountDataForm.get('confirmPassword').updateValueAndValidity()">
       <mat-error>{{formError.mapErrors(accountDataForm.get('password'), 'Password')}}</mat-error>
     </mat-form-field><br>
-    <mat-form-field>
+    <mat-form-field class="account-form">
       <input matInput type="password" name="confirmPassword" placeholder="Confirm password"
         formControlName="confirmPassword">
         <mat-error>{{formError.mapErrors(accountDataForm.get('confirmPassword'), 'Confirm password')}}</mat-error>

@@ -1,0 +1,10 @@
+/* Customs */
+
+.wrapper {
+    margin: 0 auto; 
+    width:250px;
+}
+
+.save-button {
+    margin: 30px;
+}
