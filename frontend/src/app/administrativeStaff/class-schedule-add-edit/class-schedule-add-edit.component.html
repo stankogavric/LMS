@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-label>Study program</mat-label>
     <mat-select name = "yearOfStudy" formControlName="yearOfStudy">
-      <mat-option *ngFor="let yearOfStudy of yearsOfStudies" [value]="yearOfStudy" (click)="getTeacherRealizations(yearOfStudy.id); classScheduleForm.get('yearOfStudy').disable()">
+      <mat-option *ngFor="let yearOfStudy of yearsOfStudies" [value]="yearOfStudy" (click)="getTeacherRealizations(yearOfStudy.id);">
         {{yearOfStudy.year}}. godina {{yearOfStudy.studyProgram.name}}
       </mat-option>
     </mat-select>
@@ -60,13 +60,18 @@
     <tr>
       <td *ngFor="let day of classSchedule | keyvalue">
         <div class="example" *ngIf="day.value.length > 0">
-          <div class="example-list">
-            <div class="example-box" *ngFor="let item of day.value">
-              <div>{{item.teacherRealization.subjectRealization.subject.name}}</div>
+          <div cdkDropList [cdkDropListData]="day.value" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of day.value" cdkDrag>
+              <div>
+                {{item.teacherRealization.subjectRealization.subject.name}}
+                <button class="deleteButton" mat-raised-button color="warn" (click)="delete(item.teachingTermId, item, day.value)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
               <br>
               <div>{{item.teacherRealization.teacher.personalData.firstName}} {{item.teacherRealization.teacher.personalData.lastName}} {{item.teacherRealization.teacher.accountData.email}}</div>
               <br>
-              <div>{{item.startTime.hours>=10 ? item.startTime.hours : '0'+item.startTime.hours}}:{{item.startTime.minutes>=10 ? item.startTime.minutes : '0'+item.startTime.minutes}}-{{item.endTime.hours>=10 ? item.endTime.hours : '0'+item.endTime.hours}}:{{item.endTime.minutes>=10 ? item.endTime.minutes : '0'+item.endTime.minutes}}</div>
+              <div>{{item.startTime.getHours()>=10 ? item.startTime.getHours() : '0'+item.startTime.getHours()}}:{{item.startTime.getMinutes()>=10 ? item.startTime.getMinutes() : '0'+item.startTime.getMinutes()}}-{{item.endTime.getHours()>=10 ? item.endTime.getHours() : '0'+item.endTime.getHours()}}:{{item.endTime.getMinutes()>=10 ? item.endTime.getMinutes() : '0'+item.endTime.getMinutes()}}</div>
               <br>
               <div>{{item.classroom.name}}</div>
             </div>
@@ -76,3 +81,5 @@
     </tr>
   </tbody>
 </table>
+<br>
+<button mat-raised-button color="accent" (click)="save()" [disabled]="!classScheduleForm.get('yearOfStudy').value">Save</button>
