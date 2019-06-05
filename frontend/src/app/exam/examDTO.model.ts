@@ -5,4 +5,5 @@ export class ExamDTO {
     studyProgramName: string;
     points: number;
     date: Date;
+    ects: number;
 }

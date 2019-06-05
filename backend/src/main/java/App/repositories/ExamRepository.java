@@ -10,7 +10,7 @@ import App.models.Exam;
 
 @Repository
 public interface ExamRepository extends JpaRepository<Exam, Long> {
-	@Query("SELECT sa.finalGrade, sa.subjectRealization.subject.name, sa.subjectRealization.yearOfStudy.year, sa.subjectRealization.yearOfStudy.studyProgram.name, er.points, er.exam.startTime "
+	@Query("SELECT sa.finalGrade, sa.subjectRealization.subject.name, sa.subjectRealization.yearOfStudy.year, sa.subjectRealization.yearOfStudy.studyProgram.name, er.points, er.exam.startTime, sa.subjectRealization.subject.ects "
 			+ "FROM ExamRealization er, SubjectAttendance sa "
 			+ "WHERE sa.student.id = ?1 "
 			+ "AND sa.subjectRealization.id = er.exam.subjectRealization.id")

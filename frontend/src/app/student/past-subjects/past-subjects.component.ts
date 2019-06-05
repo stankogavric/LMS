@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Subject} from '../../subject/subject.model';
-import {SubjectService} from '../../subject/subject.service';
-import { AuthService} from '../../auth/auth.service';
+import { SubjectService } from '../../subject/subject.service';
+import { AuthService } from '../../auth/auth.service';
+import { ExamDTO } from '../../exam/examDTO.model';
 
 @Component({
   selector: 'app-past-subjects',
@@ -10,13 +10,10 @@ import { AuthService} from '../../auth/auth.service';
 })
 export class PastSubjectsComponent implements OnInit {
 
-  panelOpenState = false;
+  exams?: ExamDTO[] = [];
+  avgGrade?: number;
+  totalEcts?: number;
 
-
-  subjects: Subject[] = [];
-  avgGrade : number = 0; //TODO after backend is finished with all classes
-  totalEcts : number = 0;
-  
   constructor(private subjectService: SubjectService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -26,41 +23,52 @@ export class PastSubjectsComponent implements OnInit {
     }
     else {
       console.log("unknown username");
-    }   
-    
+    }
+
   }
 
-  getPastSubjects(username: String){
-    this.subjectService.getStudentsPastSubjects(username).subscribe((data : Subject[]) => {
-      this.subjects = data;
-      this.getAvgGrade();
-      this.getTotalEcts();
-    });
+  getPastSubjects(username: String) {
+    this.subjectService.getStudentsPastSubjects(username).subscribe(
+      (data: ExamDTO[]) => {
+        if (data != null) {
+          for (let i = 0; i < data.length; i++) {
+            let exam = new ExamDTO();
+            exam.date = data[i][5];
+            exam.grade = data[i][0];
+            exam.points = data[i][4];
+            exam.studyProgramName = data[i][3];
+            exam.subject = data[i][1];
+            exam.year = data[i][2];
+            exam.ects = data[i][6];
+            this.exams.push(exam);
+          };
+        };
+        this.getAvgGrade();
+        this.getTotalEcts();
+      });
   }
 
-  getAvgGrade(){
+  getAvgGrade() {
     let sum = 0;
     let total = 0
-    for (let i = 0; i < this.subjects.length; i++) {
-      if (this.subjects[i][1] != null) {
-        sum += this.subjects[i][1];
+    for (let i = 0; i < this.exams.length; i++) {
+      if (this.exams[i].grade != null) {
+        sum += this.exams[i].grade;
         total++;
       }
     };
-    this.avgGrade = sum/total;
+    this.avgGrade = sum / total;
   }
 
   getTotalEcts() {
     let ects = 0;
-    for (let i = 0; i < this.subjects.length; i++) {
-      if(this.subjects[i].ects != null){
-       ects+= this.subjects[i].ects;
+    for (let i = 0; i < this.exams.length; i++) {
+      if (this.exams[i].ects != null) {
+        ects += this.exams[i].ects;
       }
     }
     this.totalEcts = ects;
   }
-
-
 
 
 

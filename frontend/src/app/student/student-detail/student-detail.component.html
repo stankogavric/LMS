@@ -7,8 +7,8 @@
   <p>Email: {{student.email}}</p>
 </div>
 <div>
-  <p>Average Grade: avggrade dodaj</p>
-  <p>Total ects: dodaj ects</p>
+  <p>Average Grade: {{avgGrade}}</p>
+  <p>Total ects: {{totalEcts}}</p>
   
   <mat-tab-group>
       <mat-tab label="Enrolled Years">
@@ -22,7 +22,7 @@
          </mat-tab>
       <mat-tab label="Student Exams"> 
         <ng-template matTabContent>
-          <app-student-exams></app-student-exams>
+          <app-student-exams [exams] = "exams"></app-student-exams>
         </ng-template>
       </mat-tab>
       <mat-tab label="Submited exams"> 
