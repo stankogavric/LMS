@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 import { Student } from '../student.model';
 import { StudentService } from '../student.service';
 
@@ -12,15 +13,21 @@ export class StudentsComponent implements OnInit {
 
   students : Student[] = [];
   student : Student = new Student();
-  displayedColumns: string[] = ['no', 'firstName', 'lastName', 'personalNumber', 'profilePicturePath', 'country', 'city', 'street', 'streetNumber', 'email', 'username', 'actions'];
+  displayedColumns: string[] = ['no', 'personalData.firstName', 'personalData.lastName', 'personalData.personalNumber', 'personalData.profilePicturePath', 'address.city.country.name', 'address.city.name', 'address.street', 'address.number', 'accountData.email', 'accountData.username', 'actions'];
   dataSource = new MatTableDataSource<Student>(this.students);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private studentService: StudentService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      if (property.includes('.')) return property.split('.').reduce((o,i)=>o[i], item)
+        return item[property];
+    };
+    this.dataSource.sort = this.sort;
     this.getAll();
   }
 

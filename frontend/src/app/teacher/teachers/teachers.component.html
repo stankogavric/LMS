@@ -1,63 +1,63 @@
 <div class="mat-elevation-z8">
-  <table class="teacher-table" mat-table [dataSource]="dataSource">
+  <table class="teacher-table" mat-table [dataSource]="dataSource" matSort>
 
     <ng-container matColumnDef="no">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let i = index;"> {{i+1}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="firstName">
-      <th mat-header-cell *matHeaderCellDef> First name </th>
+    <ng-container matColumnDef="personalData.firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First name </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.personalData.firstName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="lastName">
-      <th mat-header-cell *matHeaderCellDef> Last name </th>
+    <ng-container matColumnDef="personalData.lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last name </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.personalData.lastName}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="personalNumber">
-      <th mat-header-cell *matHeaderCellDef> Personal number </th>
+    <ng-container matColumnDef="personalData.personalNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Personal number </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.personalData.personalNumber}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="profilePicturePath">
-      <th mat-header-cell *matHeaderCellDef> Profile picture path </th>
+    <ng-container matColumnDef="personalData.profilePicturePath">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Profile picture path </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.personalData.profilePicturePath}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="country">
-      <th mat-header-cell *matHeaderCellDef> Country </th>
+    <ng-container matColumnDef="address.city.country.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.address.city.country.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="city">
-      <th mat-header-cell *matHeaderCellDef> City </th>
+    <ng-container matColumnDef="address.city.name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.address.city.name}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="street">
-      <th mat-header-cell *matHeaderCellDef> Street </th>
+    <ng-container matColumnDef="address.street">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Street </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.address.street}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="streetNumber">
-      <th mat-header-cell *matHeaderCellDef> Street number </th>
+    <ng-container matColumnDef="address.number">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Street number </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.address.number}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email </th>
+    <ng-container matColumnDef="accountData.email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.accountData.email}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef> Username </th>
+    <ng-container matColumnDef="accountData.username">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.accountData.username}} </td>
     </ng-container>
 
     <ng-container matColumnDef="biography">
-      <th mat-header-cell *matHeaderCellDef> Biography </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Biography </th>
       <td mat-cell *matCellDef="let teacher"> {{teacher.biography}} </td>
     </ng-container>
 
