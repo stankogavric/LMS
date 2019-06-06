@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from './subject.model';
 import { Topic } from '../topic/topic.model';
+import { ExamDTO } from '../exam/examDTO.model';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class SubjectService {
   }
 
   getStudentsPastSubjects(username : String){
-    return this.http.get<Subject[]>(this.subjAttUrl+`/pastSubjects/${username}`);
+    return this.http.get<ExamDTO[]>(this.subjAttUrl+`/pastSubjects/${username}`);
   }
 
   getStudentsCurrentSubjects(username: String){

@@ -1,4 +1,5 @@
 import { StudentYear } from "./student-year.model";
+import { ExamDTO } from "../exam/examDTO.model";
 
 export class StudentDetails {
     id: number;

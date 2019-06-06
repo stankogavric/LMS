@@ -94,7 +94,6 @@ public class SubjectAttendanceController {
     	return new ResponseEntity<ArrayList<Subject>>(subjectAttendanceService.getCurrentSubjects(studentUsername), HttpStatus.OK);
     }
     
-    //TODO fix fetching data after all classes added
     @JsonView(ShowYearOfStudy.class)
     @RequestMapping(value="/pastSubjects/{studentUsername}", method=RequestMethod.GET)
     public ResponseEntity<ArrayList<Object>> getPastSubjectsByStudentUsername(@PathVariable String studentUsername) {
