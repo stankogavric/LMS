@@ -1,0 +1,13 @@
+/* Customs */
+
+.address-div {
+    display: flex;
+}
+
+.address-card {
+    background-color: rgb(255, 255, 170);
+}
+
+.address-form {
+    margin-top: 10px;
+}

@@ -17,7 +17,7 @@ export class TeacherService {
     return this.http.get<Teacher[]>(this.teacherUrl);
   }
 
-  getAllByFaculty(facultyId: String) {
+  getAllByFaculty(facultyId: number) {
     return this.http.get<Teacher[]>(this.teacherUrl+`/faculty/${facultyId}`);
   }
 

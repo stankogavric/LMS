@@ -64,6 +64,13 @@ public class Student {
 		this.deleted = deleted;
 		this.yearOfStudy = yearOfStudy;
 	}
+	
+	public Student(Long id, String firstName, String lastName, String email) {
+		this.id = id;
+		this.personalData.setFirstName(firstName);
+		this.personalData.setLastName(lastName);
+		this.accountData.setEmail(email);
+	}
 
 	public Long getId(){
 		return id;

@@ -347,9 +347,12 @@
         "mnozina": "TeachingTerms",
         "data": {
             "id": "Long",
+            "day": "String",
             "startTime": "Date",
             "endTime": "Date",
-            "subjectRealization": "SubjectRealization"
+            "subjectRealization": "SubjectRealization",
+            "classroom": "Classroom",
+            "deleted": "Boolean"
         }
     },
     {

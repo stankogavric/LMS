@@ -7,6 +7,11 @@ import { StudentsComponent } from './students/students.component';
 import { CurrentSubjectsComponent } from './current-subjects/current-subjects.component';
 import { PastSubjectsComponent } from './past-subjects/past-subjects.component';
 import { StudentsListComponent } from './students-list/students-list.component';
+import { SearchStudentsComponent } from './search-students/search-students.component';
+import { StudentDetailComponent } from './student-detail/student-detail.component';
+import { StudentExamsComponent } from './student-exams/student-exams.component';
+import { StudentYearComponent } from './student-year/student-year.component';
+
 
 @NgModule({
   declarations: [
@@ -16,6 +21,10 @@ import { StudentsListComponent } from './students-list/students-list.component';
     CurrentSubjectsComponent,
     PastSubjectsComponent,
     StudentsListComponent,
+    SearchStudentsComponent,
+    StudentDetailComponent,
+    StudentExamsComponent,
+    StudentYearComponent
   ],
   imports: [
     SharedModule

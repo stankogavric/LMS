@@ -16,6 +16,10 @@ export class SubjectRealizationService {
     return this.http.get<SubjectRealization[]>(this.subjectRealizationUrl);
   }
 
+  getAllByYearOfStudy(yearOfStudyId: number) {
+    return this.http.get<SubjectRealization[]>(this.subjectRealizationUrl+`/yearOfStudy/${yearOfStudyId}`);
+  }
+
   getOne(id: String) {
     return this.http.get<SubjectRealization>(this.subjectRealizationUrl+`/${id}`);
   }

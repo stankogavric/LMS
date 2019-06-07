@@ -1,14 +1,14 @@
-<mat-card-title>Personal info</mat-card-title>
-<div [formGroup]="personalDataForm">
-  <mat-form-field>
+<div class="personal-div" [formGroup]="personalDataForm">
+  <mat-card-title>Personal info</mat-card-title>
+  <mat-form-field class="personal-form">
     <input matInput name="personalNumber" type="number" placeholder="Personal number" formControlName="personalNumber">
     <mat-error>{{formError.mapErrors(personalDataForm.get('personalNumber'), 'Personal number')}}</mat-error>
   </mat-form-field><br>
-  <mat-form-field>
+  <mat-form-field class="personal-form">
     <input matInput name="firstName" type="text" placeholder="First name" formControlName="firstName">
     <mat-error>{{formError.mapErrors(personalDataForm.get('firstName'), 'First name')}}</mat-error>
   </mat-form-field><br>
-  <mat-form-field>
+  <mat-form-field class="personal-form">
     <input matInput name="lastName" type="text" placeholder="Last name" formControlName="lastName">
     <mat-error>{{formError.mapErrors(personalDataForm.get('lastName'), 'Last name')}}</mat-error>
   </mat-form-field><br>
@@ -17,7 +17,8 @@
     <input hidden type="file" #filePicker (change)="onImagePicked($event)">
     <mat-error>{{formError.mapErrors(personalDataForm.get('profileImage'), 'First name')}}</mat-error>
   </div>
-</div>
-<div class="image-preview" *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profileImage').valid && personalDataForm.get('profileImage').value">
-  <img [src]="imagePreview" alt="Can't dispaly picture">
+  <div class="image-preview"
+    *ngIf="imagePreview && imagePreview !== '' && personalDataForm.get('profileImage').valid && personalDataForm.get('profileImage').value">
+    <img [src]="imagePreview" alt="Can't dispaly picture">
+  </div>
 </div>

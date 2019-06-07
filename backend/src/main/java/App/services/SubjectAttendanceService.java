@@ -66,5 +66,5 @@ public class SubjectAttendanceService {
     	Date today = new Date();
     	return subjectAttendanceRepo.findStudentsBySubject(subjectId, today, teacherUsername);
     }
-
+    
 }

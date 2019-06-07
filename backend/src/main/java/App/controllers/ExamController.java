@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,4 +72,13 @@ public class ExamController {
     public ResponseEntity<Iterable<ExamType>> getExamTypes() {
         return new ResponseEntity<Iterable<ExamType>>(examService.getExamTypes(), HttpStatus.OK);
     }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/{studentId}/exams", method=RequestMethod.GET)
+    public ResponseEntity<Collection<Object>> getExamsByStudent(@PathVariable Long studentId){
+    	Collection<Object> exams = examService.getExamsByStudent(studentId);
+    	if (exams.isEmpty()) return new ResponseEntity<Collection<Object>>(HttpStatus.NO_CONTENT);
+    	return new ResponseEntity<Collection<Object>>(exams, HttpStatus.OK);
+    }
+    
 }

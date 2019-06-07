@@ -36,7 +36,7 @@
 
   <br>
 
-  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
+  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!addEditTopicsForm.get('topic').value?.toString().trim() || !addEditTopicsForm.get('week').value">Add topic</button>
 
   <h3>Topics</h3>
   <mat-vertical-stepper #stepper>

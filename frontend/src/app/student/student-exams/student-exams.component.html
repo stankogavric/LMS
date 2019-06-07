@@ -1,0 +1,47 @@
+<mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <div class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource" >
+        
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+        <td mat-cell *matCellDef="let exam"> {{exam.subject}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="points">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Points </th>
+        <td mat-cell *matCellDef="let exam"> {{exam.points}} </td>
+      </ng-container>
+ 
+      <ng-container matColumnDef="grade">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Grade </th>
+        <td mat-cell *matCellDef="let exam"> {{exam.grade}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Exam date </th>
+        <td mat-cell *matCellDef="let exam"> {{exam.date | date: "dd/MM/yyyy"}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="studyProgramName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Study program </th>
+          <td mat-cell *matCellDef="let exam"> {{exam.studyProgramName}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="year">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Year </th>
+          <td mat-cell *matCellDef="let exam"> {{exam.year}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="ects">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ECTS </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.ects}}</td>
+          </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>

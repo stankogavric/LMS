@@ -30,8 +30,13 @@ export class ToolbarComponent implements OnInit {
     this.loggedInSubcription = this.authService.loggedInStatusChanged.subscribe(
       (status: boolean)=>{
         this.isLoggedIn = status;
+        this.setUserForEditProfile(); // on log in
       }
     );
+    this.setUserForEditProfile(); // when refresh page while the user is logged in
+  }
+
+  setUserForEditProfile(){
     this.loggedUserUsername = this.authService.getCurrentUser();
     this.loggedUserRoles = this.authService.getCurrentRoles();
     this.loggedUserRoles.forEach(role => {
@@ -48,7 +53,6 @@ export class ToolbarComponent implements OnInit {
         this.loggedUserType = "student";
       }
     });
-
   }
 
   onLogout(){

@@ -24,7 +24,7 @@ exports.config = {
     require('ts-node').register({
       project: require('path').join(__dirname, './tsconfig.e2e.json')
     });
-    jasmine.getEnv().addReporter(new HtmlReporter({ 
+    jasmine.getEnv().addReporter(new HtmlReporter({
       baseDirectory: require('path').join(__dirname, './results')
     }).getJasmine2Reporter());
   }

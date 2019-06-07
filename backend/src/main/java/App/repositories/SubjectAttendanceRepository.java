@@ -22,7 +22,11 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 	@Query("SELECT DISTINCT sa.subjectRealization.subject FROM SubjectAttendance sa WHERE sa.student.accountData.username = ?1 AND sa.finalGrade = NULL")
 	ArrayList<Subject> findCurrentSubjects(String username);
 	
-	@Query("SELECT sa.subjectRealization.subject, sa.finalGrade FROM SubjectAttendance sa WHERE sa.student.accountData.username = ?1 AND sa.finalGrade IS NOT NULL")
+	@Query("SELECT sa.finalGrade, sa.subjectRealization.subject.name, sa.subjectRealization.yearOfStudy.year, "
+			+ "sa.subjectRealization.yearOfStudy.studyProgram.name, er.points, er.exam.startTime, sa.subjectRealization.subject.ects \n" + 
+			"FROM ExamRealization er, SubjectAttendance sa \n" + 
+			"WHERE sa.student.accountData.username = ?1 \n" + 
+			"AND sa.subjectRealization.id = er.exam.subjectRealization.id")
 	ArrayList<Object> findPastSubjects(String username);
 	
 	@Query("SELECT sa.student FROM SubjectAttendance sa, TeacherRealization tr "
@@ -32,4 +36,5 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 			+ "AND sa.subjectRealization.subject = tr.subjectRealization.subject "
 			+ "AND tr.teacher.accountData.username = ?3")
 	ArrayList<Student> findStudentsBySubject(Long subjectId, Date today, String teacherUsername);
+	
 }

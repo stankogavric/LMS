@@ -1,11 +1,5 @@
 <div>
-  <p>Subjects history</p>
-  <p>Average grade: {{avgGrade}}</p> <br>
-  <p>Total ECTS: {{totalEcts}}</p>
-
-  <mat-accordion>
-    <ng-container *ngFor="let subject of subjects; let i = index">
-      <app-subject  [subject]="subject"></app-subject>
-    </ng-container>
-</mat-accordion>
+    <p>Average Grade: {{avgGrade}}</p>
+    <p>Total ects: {{totalEcts}}</p>
+    <app-student-exams [exams]="exams"></app-student-exams>
 </div>
