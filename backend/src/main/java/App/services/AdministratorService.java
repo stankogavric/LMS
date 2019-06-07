@@ -56,7 +56,6 @@ public class AdministratorService {
         Optional<Administrator> Adm = administratorRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrator.setId(Adm.get().getId());
-            administrator.getAccountData().setPassword(passwordEncoder.encode(administrator.getAccountData().getPassword()));
             accountServ.updateAccountData(administrator.getAccountData().getId(), administrator.getAccountData());        
         }
     }

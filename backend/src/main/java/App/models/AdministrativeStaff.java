@@ -34,8 +34,7 @@ public class AdministrativeStaff {
 
 	public AdministrativeStaff() {}
 
-	public AdministrativeStaff(Address address, App.models.AccountData accountData, PersonalData personalData,
-			@NotNull Boolean deleted) {
+	public AdministrativeStaff(Address address, App.models.AccountData accountData, PersonalData personalData, Boolean deleted) {
 		super();
 		this.address = address;
 		AccountData = accountData;

@@ -47,7 +47,7 @@ public class StudyProgram {
 	public StudyProgram() {}
 
 	public StudyProgram(String name, Set<YearOfStudy> yearsOfStudy, Teacher headTeacher, Faculty faculty,
-			String description, @NotNull Boolean deleted) {
+			String description, Boolean deleted) {
 		super();
 		this.name = name;
 		this.yearsOfStudy = yearsOfStudy;

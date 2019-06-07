@@ -3,6 +3,7 @@ package App.models;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,12 +48,13 @@ public class Student {
 	@NotNull
 	private Boolean deleted = false;
 	
+	@Column
 	private int yearOfStudy;
 
 	public Student() {}
 
 	public Student(Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears,
-			AccountData accountData, PersonalData personalData, @NotNull Boolean deleted, int yearOfStudy) {
+			AccountData accountData, PersonalData personalData, Boolean deleted, int yearOfStudy) {
 		super();
 		this.subjectAttendances = subjectAttendances;
 		this.address = address;

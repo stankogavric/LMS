@@ -29,9 +29,8 @@ public class Permission {
 
 	public Permission() {};
 	
-	public Permission(Long id, String title, Set<AccountDataPermission> accDataPermissions) {
+	public Permission(String title, Set<AccountDataPermission> accDataPermissions) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.accDataPermissions = accDataPermissions;
 	}

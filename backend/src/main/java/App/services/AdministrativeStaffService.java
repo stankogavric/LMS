@@ -75,7 +75,6 @@ public class AdministrativeStaffService {
         Optional<AdministrativeStaff> Adm = administrativeStaffRepo.getByUsername(username);
         if(Adm.isPresent()) {
             administrativeStaff.setId(Adm.get().getId());
-            administrativeStaff.getAccountData().setPassword(passwordEncoder.encode(administrativeStaff.getAccountData().getPassword()));
             accountServ.updateAccountData(administrativeStaff.getAccountData().getId(), administrativeStaff.getAccountData());
             addressServ.updateAddress(administrativeStaff.getAddress().getId(), administrativeStaff.getAddress());
             personalServ.updatePersonalData(administrativeStaff.getPersonalData().getId(), administrativeStaff.getPersonalData());

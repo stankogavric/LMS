@@ -71,7 +71,6 @@ public class TeacherService {
         Optional<Teacher> Tea = teacherRepo.getByUsername(username);
         if(Tea.isPresent()) {
             teacher.setId(Tea.get().getId());
-            teacher.getAccountData().setPassword(passwordEncoder.encode(teacher.getAccountData().getPassword()));
             accountServ.updateAccountData(teacher.getAccountData().getId(), teacher.getAccountData());
             addressServ.updateAddress(teacher.getAddress().getId(), teacher.getAddress());
             personalServ.updatePersonalData(teacher.getPersonalData().getId(), teacher.getPersonalData());
