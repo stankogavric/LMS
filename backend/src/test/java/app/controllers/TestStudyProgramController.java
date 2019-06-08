@@ -10,13 +10,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.sql.SQLException;
 
 
-import java.text.ParseException;
+import java.text.ParseException;import java.util.Arrays;
+import java.util.HashSet;
+
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
 import static org.junit.Assert.assertEquals;
-import com.jayway.jsonpath.JsonPath;import java.util.Arrays;
-import java.util.HashSet;
-
+import com.jayway.jsonpath.JsonPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -54,11 +54,11 @@ public class TestStudyProgramController {
 	@Before
 	public void setupStudyProgram() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		studyProgramService.addStudyProgram(new StudyProgram("name_1", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(813, dt.parse("2016-01-04 00:00:00"), dt.parse("2020-05-09 00:00:00"), null, null))), null, null, "description_1", false));
-		studyProgramService.addStudyProgram(new StudyProgram("name_2", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(407, dt.parse("2012-05-07 00:00:00"), dt.parse("2018-11-13 00:00:00"), null, null))), null, null, "description_2", false));
-		studyProgramService.addStudyProgram(new StudyProgram("name_3", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(241, dt.parse("2019-06-25 00:00:00"), dt.parse("2011-08-20 00:00:00"), null, null))), null, null, "description_3", false));
-		studyProgramService.addStudyProgram(new StudyProgram("name_4", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(886, dt.parse("2023-05-03 00:00:00"), dt.parse("2005-08-21 00:00:00"), null, null))), null, null, "description_4", false));
-		studyProgramService.addStudyProgram(new StudyProgram("name_5", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(270, dt.parse("2024-08-05 00:00:00"), dt.parse("2011-05-13 00:00:00"), null, null))), null, null, "description_5", false));
+		studyProgramService.addStudyProgram(new StudyProgram("name_1", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(641, dt.parse("2011-01-08 00:00:00"), dt.parse("2019-01-20 00:00:00"), null, null))), null, null, "description_1", false));
+		studyProgramService.addStudyProgram(new StudyProgram("name_2", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(609, dt.parse("2025-03-00 00:00:00"), dt.parse("2025-09-23 00:00:00"), null, null))), null, null, "description_2", false));
+		studyProgramService.addStudyProgram(new StudyProgram("name_3", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(578, dt.parse("2021-04-22 00:00:00"), dt.parse("2008-08-10 00:00:00"), null, null))), null, null, "description_3", false));
+		studyProgramService.addStudyProgram(new StudyProgram("name_4", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(690, dt.parse("2025-03-13 00:00:00"), dt.parse("2009-05-25 00:00:00"), null, null))), null, null, "description_4", false));
+		studyProgramService.addStudyProgram(new StudyProgram("name_5", new HashSet<YearOfStudy>(Arrays.asList(new YearOfStudy(687, dt.parse("2025-11-20 00:00:00"), dt.parse("2021-08-20 00:00:00"), null, null))), null, null, "description_5", false));
 	}
 
 	@After
@@ -85,8 +85,8 @@ public class TestStudyProgramController {
 		.andExpect(jsonPath("$.description", equalTo("description_5")))
 		.andExpect(jsonPath("$.deleted", equalTo(false))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2024-08-05 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearsOfStudy[0].startDate")));
-		assertEquals(dt.parse("2011-05-13 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearsOfStudy[0].endDate")));
+		assertEquals(dt.parse("2025-11-20 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearsOfStudy[0].startDate")));
+		assertEquals(dt.parse("2021-08-20 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearsOfStudy[0].endDate")));
 
 	}
 }

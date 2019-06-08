@@ -44,13 +44,14 @@ public class TeachingTerm {
 	}
 
 	public TeachingTerm(String day, Date startTime, Date endTime, SubjectRealization subjectRealization,
-			Classroom classroom) {
+			Classroom classroom, Boolean deleted) {
 		super();
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.subjectRealization = subjectRealization;
 		this.classroom = classroom;
+		this.deleted = deleted;
 	}
 
 	public Long getId() {

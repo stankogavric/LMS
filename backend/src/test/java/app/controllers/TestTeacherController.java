@@ -10,14 +10,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.sql.SQLException;
 
 
-import java.text.ParseException;
-import java.util.TimeZone;
-import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
-import com.jayway.jsonpath.JsonPath;import java.util.Arrays;
+import java.text.ParseException;import java.util.Arrays;
 import java.util.HashSet;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import java.util.TimeZone;
+import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertEquals;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,11 +35,11 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.TeacherService;
 
+import App.models.PersonalData;
 import App.models.Address;
 import App.models.Teacher;
-import App.models.AccountData;
 import App.models.Title;
-import App.models.PersonalData;
+import App.models.AccountData;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -58,11 +58,11 @@ public class TestTeacherController {
 	@Before
 	public void setupTeacher() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		teacherService.addTeacher(new Teacher("biography_1", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2011-05-13 00:00:00"), dt.parse("2018-06-09 00:00:00"), null, null))), new Address("street_1", "number_1", null), new AccountData("username_1", "password_1", "email_1", null), new PersonalData("firstName_1", "lastName_1", "personalNumber_1", "profilePicturePath_1"), false));
-		teacherService.addTeacher(new Teacher("biography_2", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2016-05-10 00:00:00"), dt.parse("2005-02-17 00:00:00"), null, null))), new Address("street_2", "number_2", null), new AccountData("username_2", "password_2", "email_2", null), new PersonalData("firstName_2", "lastName_2", "personalNumber_2", "profilePicturePath_2"), false));
-		teacherService.addTeacher(new Teacher("biography_3", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2006-07-03 00:00:00"), dt.parse("2016-11-16 00:00:00"), null, null))), new Address("street_3", "number_3", null), new AccountData("username_3", "password_3", "email_3", null), new PersonalData("firstName_3", "lastName_3", "personalNumber_3", "profilePicturePath_3"), false));
-		teacherService.addTeacher(new Teacher("biography_4", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2015-06-16 00:00:00"), dt.parse("2017-09-13 00:00:00"), null, null))), new Address("street_4", "number_4", null), new AccountData("username_4", "password_4", "email_4", null), new PersonalData("firstName_4", "lastName_4", "personalNumber_4", "profilePicturePath_4"), false));
-		teacherService.addTeacher(new Teacher("biography_5", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2011-02-21 00:00:00"), dt.parse("2019-09-12 00:00:00"), null, null))), new Address("street_5", "number_5", null), new AccountData("username_5", "password_5", "email_5", null), new PersonalData("firstName_5", "lastName_5", "personalNumber_5", "profilePicturePath_5"), false));
+		teacherService.addTeacher(new Teacher("biography_1", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2025-04-26 00:00:00"), dt.parse("2007-05-26 00:00:00"), null, null))), new Address("street_1", "number_1", null), new AccountData("username_1", "password_1", "email_1", null), new PersonalData("firstName_1", "lastName_1", "personalNumber_1", "profilePicturePath_1"), false));
+		teacherService.addTeacher(new Teacher("biography_2", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2009-06-15 00:00:00"), dt.parse("2023-11-01 00:00:00"), null, null))), new Address("street_2", "number_2", null), new AccountData("username_2", "password_2", "email_2", null), new PersonalData("firstName_2", "lastName_2", "personalNumber_2", "profilePicturePath_2"), false));
+		teacherService.addTeacher(new Teacher("biography_3", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2024-00-27 00:00:00"), dt.parse("2017-02-07 00:00:00"), null, null))), new Address("street_3", "number_3", null), new AccountData("username_3", "password_3", "email_3", null), new PersonalData("firstName_3", "lastName_3", "personalNumber_3", "profilePicturePath_3"), false));
+		teacherService.addTeacher(new Teacher("biography_4", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2013-09-18 00:00:00"), dt.parse("2012-05-05 00:00:00"), null, null))), new Address("street_4", "number_4", null), new AccountData("username_4", "password_4", "email_4", null), new PersonalData("firstName_4", "lastName_4", "personalNumber_4", "profilePicturePath_4"), false));
+		teacherService.addTeacher(new Teacher("biography_5", new HashSet<Title>(Arrays.asList(new Title(dt.parse("2021-02-21 00:00:00"), dt.parse("2019-11-22 00:00:00"), null, null))), new Address("street_5", "number_5", null), new AccountData("username_5", "password_5", "email_5", null), new PersonalData("firstName_5", "lastName_5", "personalNumber_5", "profilePicturePath_5"), false));
 	}
 
 	@After
@@ -95,8 +95,8 @@ public class TestTeacherController {
 		.andExpect(jsonPath("$.personalData.profilePicturePath", equalTo("profilePicturePath_5")))
 		.andExpect(jsonPath("$.deleted", equalTo(false))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2011-02-21 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.titles[0].startDate")));
-		assertEquals(dt.parse("2019-09-12 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.titles[0].endDate")));
+		assertEquals(dt.parse("2021-02-21 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.titles[0].startDate")));
+		assertEquals(dt.parse("2019-11-22 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.titles[0].endDate")));
 		assertEquals(true, BCrypt.checkpw("password_5", JsonPath.parse(result).read("$.accountData.password")));
 
 	}

@@ -10,13 +10,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.sql.SQLException;
 
 
-import java.text.ParseException;
-import com.jayway.jsonpath.JsonPath;
-import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
-import java.util.TimeZone;import java.util.Arrays;
+import java.text.ParseException;import java.util.Arrays;
 import java.util.HashSet;
 
+import java.util.TimeZone;
+import java.text.SimpleDateFormat;
+import static org.junit.Assert.assertEquals;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,12 +34,12 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.UniversityService;
 
+import App.models.UniversityEmails;
+import App.models.UniversityPhones;
 import App.models.Address;
+import App.models.Faculty;
 import App.models.Teacher;
 import App.models.University;
-import App.models.Faculty;
-import App.models.UniversityPhones;
-import App.models.UniversityEmails;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -58,11 +58,11 @@ public class TestUniversityController {
 	@Before
 	public void setupUniversity() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		universityService.addUniversity(new University("name_1", dt.parse("2024-11-14 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_1", null, null, null, null, "description_1", null, null, null))), new Address("street_1", "number_1", null), new Teacher("biography_1", null, null, null, null, false), "description_1", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
-		universityService.addUniversity(new University("name_2", dt.parse("2012-02-08 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_2", null, null, null, null, "description_2", null, null, null))), new Address("street_2", "number_2", null), new Teacher("biography_2", null, null, null, null, false), "description_2", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
-		universityService.addUniversity(new University("name_3", dt.parse("2014-06-25 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_3", null, null, null, null, "description_3", null, null, null))), new Address("street_3", "number_3", null), new Teacher("biography_3", null, null, null, null, false), "description_3", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
-		universityService.addUniversity(new University("name_4", dt.parse("2024-07-12 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_4", null, null, null, null, "description_4", null, null, null))), new Address("street_4", "number_4", null), new Teacher("biography_4", null, null, null, null, false), "description_4", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
-		universityService.addUniversity(new University("name_5", dt.parse("2011-09-23 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_5", null, null, null, null, "description_5", null, null, null))), new Address("street_5", "number_5", null), new Teacher("biography_5", null, null, null, null, false), "description_5", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
+		universityService.addUniversity(new University("name_1", dt.parse("2006-11-27 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_1", null, null, null, null, "description_1", null, null, null))), new Address("street_1", "number_1", null), new Teacher("biography_1", null, null, null, null, false), "description_1", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
+		universityService.addUniversity(new University("name_2", dt.parse("2016-09-23 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_2", null, null, null, null, "description_2", null, null, null))), new Address("street_2", "number_2", null), new Teacher("biography_2", null, null, null, null, false), "description_2", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
+		universityService.addUniversity(new University("name_3", dt.parse("2008-09-24 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_3", null, null, null, null, "description_3", null, null, null))), new Address("street_3", "number_3", null), new Teacher("biography_3", null, null, null, null, false), "description_3", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
+		universityService.addUniversity(new University("name_4", dt.parse("2020-08-08 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_4", null, null, null, null, "description_4", null, null, null))), new Address("street_4", "number_4", null), new Teacher("biography_4", null, null, null, null, false), "description_4", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
+		universityService.addUniversity(new University("name_5", dt.parse("2009-09-07 00:00:00"), new HashSet<Faculty>(Arrays.asList(new Faculty("name_5", null, null, null, null, "description_5", null, null, null))), new Address("street_5", "number_5", null), new Teacher("biography_5", null, null, null, null, false), "description_5", new HashSet<UniversityPhones>(Arrays.asList(new UniversityPhones(null, null))), new HashSet<UniversityEmails>(Arrays.asList(new UniversityEmails(null, null)))));
 	}
 
 	@After
@@ -94,7 +94,7 @@ public class TestUniversityController {
 		.andExpect(jsonPath("$.rector.deleted", equalTo(false)))
 		.andExpect(jsonPath("$.description", equalTo("description_5"))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2011-09-23 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.dateOfEstablishment")));
+		assertEquals(dt.parse("2009-09-07 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.dateOfEstablishment")));
 
 	}
 }

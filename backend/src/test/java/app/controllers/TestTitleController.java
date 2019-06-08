@@ -11,10 +11,10 @@ import java.sql.SQLException;
 
 
 import java.text.ParseException;
-import com.jayway.jsonpath.JsonPath;
+import java.util.TimeZone;
 import java.text.SimpleDateFormat;
 import static org.junit.Assert.assertEquals;
-import java.util.TimeZone;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,11 +53,11 @@ public class TestTitleController {
 	@Before
 	public void setupTitle() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		titleService.addTitle(new Title(dt.parse("2007-08-16 00:00:00"), dt.parse("2012-00-15 00:00:00"), new ScientificField("name_1"), new Teacher("biography_1", null, null, null, null, false)));
-		titleService.addTitle(new Title(dt.parse("2025-09-23 00:00:00"), dt.parse("2015-01-11 00:00:00"), new ScientificField("name_2"), new Teacher("biography_2", null, null, null, null, false)));
-		titleService.addTitle(new Title(dt.parse("2014-10-04 00:00:00"), dt.parse("2009-08-12 00:00:00"), new ScientificField("name_3"), new Teacher("biography_3", null, null, null, null, false)));
-		titleService.addTitle(new Title(dt.parse("2012-00-20 00:00:00"), dt.parse("2007-00-22 00:00:00"), new ScientificField("name_4"), new Teacher("biography_4", null, null, null, null, false)));
-		titleService.addTitle(new Title(dt.parse("2025-11-06 00:00:00"), dt.parse("2005-05-02 00:00:00"), new ScientificField("name_5"), new Teacher("biography_5", null, null, null, null, false)));
+		titleService.addTitle(new Title(dt.parse("2005-02-24 00:00:00"), dt.parse("2006-03-25 00:00:00"), new ScientificField("name_1"), new Teacher("biography_1", null, null, null, null, false)));
+		titleService.addTitle(new Title(dt.parse("2017-06-13 00:00:00"), dt.parse("2025-04-12 00:00:00"), new ScientificField("name_2"), new Teacher("biography_2", null, null, null, null, false)));
+		titleService.addTitle(new Title(dt.parse("2014-00-23 00:00:00"), dt.parse("2024-02-18 00:00:00"), new ScientificField("name_3"), new Teacher("biography_3", null, null, null, null, false)));
+		titleService.addTitle(new Title(dt.parse("2009-02-26 00:00:00"), dt.parse("2016-11-02 00:00:00"), new ScientificField("name_4"), new Teacher("biography_4", null, null, null, null, false)));
+		titleService.addTitle(new Title(dt.parse("2022-03-22 00:00:00"), dt.parse("2013-03-16 00:00:00"), new ScientificField("name_5"), new Teacher("biography_5", null, null, null, null, false)));
 	}
 
 	@After
@@ -85,8 +85,8 @@ public class TestTitleController {
 		.andExpect(jsonPath("$.teacher.personalData", equalTo(null)))
 		.andExpect(jsonPath("$.teacher.deleted", equalTo(false))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2025-11-06 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startDate")));
-		assertEquals(dt.parse("2005-05-02 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endDate")));
+		assertEquals(dt.parse("2022-03-22 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startDate")));
+		assertEquals(dt.parse("2013-03-16 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endDate")));
 
 	}
 }

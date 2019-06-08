@@ -29,8 +29,8 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.CountryService;
 
-import App.models.City;
 import App.models.Country;
+import App.models.City;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)

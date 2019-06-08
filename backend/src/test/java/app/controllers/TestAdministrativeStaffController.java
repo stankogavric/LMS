@@ -10,9 +10,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.sql.SQLException;
 
 
-import static org.junit.Assert.assertEquals;
 import com.jayway.jsonpath.JsonPath;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,10 +30,10 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.AdministrativeStaffService;
 
-import App.models.AdministrativeStaff;
 import App.models.AccountData;
-import App.models.Address;
 import App.models.PersonalData;
+import App.models.AdministrativeStaff;
+import App.models.Address;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)

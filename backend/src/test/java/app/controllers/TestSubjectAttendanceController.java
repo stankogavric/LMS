@@ -27,9 +27,9 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.SubjectAttendanceService;
 
-import App.models.Student;
 import App.models.SubjectAttendance;
 import App.models.SubjectRealization;
+import App.models.Student;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -47,11 +47,11 @@ public class TestSubjectAttendanceController {
 
 	@Before
 	public void setupSubjectAttendance() {
-		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(724, new Student(null, null, null, null, null, false, 876), new SubjectRealization(null, null, null, null, null, null)));
-		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(676, new Student(null, null, null, null, null, false, 202), new SubjectRealization(null, null, null, null, null, null)));
-		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(933, new Student(null, null, null, null, null, false, 356), new SubjectRealization(null, null, null, null, null, null)));
-		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(632, new Student(null, null, null, null, null, false, 101), new SubjectRealization(null, null, null, null, null, null)));
-		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(122, new Student(null, null, null, null, null, false, 629), new SubjectRealization(null, null, null, null, null, null)));
+		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(193, new Student(null, null, null, null, null, false, 697), new SubjectRealization(null, null, null, null, null, null)));
+		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(685, new Student(null, null, null, null, null, false, 729), new SubjectRealization(null, null, null, null, null, null)));
+		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(865, new Student(null, null, null, null, null, false, 872), new SubjectRealization(null, null, null, null, null, null)));
+		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(957, new Student(null, null, null, null, null, false, 257), new SubjectRealization(null, null, null, null, null, null)));
+		subjectAttendanceService.addSubjectAttendance(new SubjectAttendance(949, new Student(null, null, null, null, null, false, 560), new SubjectRealization(null, null, null, null, null, null)));
 	}
 
 	@After
@@ -69,12 +69,12 @@ public class TestSubjectAttendanceController {
     public void getSubjectAttendanceId() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/subjectattendance/5").accept(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.finalGrade", equalTo(122)))
+		.andExpect(jsonPath("$.finalGrade", equalTo(949)))
 		.andExpect(jsonPath("$.student.address", equalTo(null)))
 		.andExpect(jsonPath("$.student.accountData", equalTo(null)))
 		.andExpect(jsonPath("$.student.personalData", equalTo(null)))
 		.andExpect(jsonPath("$.student.deleted", equalTo(false)))
-		.andExpect(jsonPath("$.student.yearOfStudy", equalTo(629)))
+		.andExpect(jsonPath("$.student.yearOfStudy", equalTo(560)))
 		.andExpect(jsonPath("$.subjectRealization.subject", equalTo(null)))
 		.andExpect(jsonPath("$.subjectRealization.yearOfStudy", equalTo(null)));
 	}
