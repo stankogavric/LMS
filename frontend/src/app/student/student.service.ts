@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Student } from './student.model';
 import { StudentDetails } from './studentDetails.model';
+import { StudentDissertationDTO } from './student-dissertation/student-dissertation-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import { StudentDetails } from './studentDetails.model';
 export class StudentService {
 
   private studentUrl = "http://localhost:8080/student";
-  private subjAttUrl = "http://localhost:8080/subjectattendance"
+  private subjAttUrl = "http://localhost:8080/subjectattendance";
+  private dissertationUrl = "http://localhost:8080/dissertation";
 
   constructor(private http: HttpClient) {
   }
@@ -61,6 +63,10 @@ export class StudentService {
 
   getStudentDetails(id: string){
     return this.http.get<StudentDetails>(this.studentUrl+`/details/${id}`);
+  }
+
+  getDissertations(id: string){
+    return this.http.get<StudentDissertationDTO[]>(this.dissertationUrl + `/${id}`);
   }
 
 }

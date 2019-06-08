@@ -49,4 +49,5 @@ public class View {
     public interface ShowForumUserForumRole{ };
     public interface ShowForumRole{ };
     public interface ShowForumTopic{ };
+    public interface ShowDissertation{};
 }

@@ -12,6 +12,7 @@ import { ExamDTO } from './examDTO.model';
 export class ExamService {
 
   private examUrl = "http://localhost:8080/exam";
+  private examReal = "http://localhost:8080/examrealization";
 
   constructor(private http: HttpClient) {
   }
@@ -42,6 +43,10 @@ export class ExamService {
 
   getStudentsExams(id: string){
     return this.http.get<[]>(this.examUrl+ `/${id}/exams`);
+  }
+
+  getStudentsRegisteredExams(id: string){
+    return this.http.get<[]>(this.examReal+ `/${id}`);
   }
 
 }

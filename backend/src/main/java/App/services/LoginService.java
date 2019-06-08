@@ -64,7 +64,7 @@ public class LoginService {
 	public void addPermsion(AccountData accData, String role) {
 		accData = accR.save(accData);
 		accData.setAccountDataPermissions(new HashSet<AccountDataPermission>());
-		accData.getAccountDataPermissions().add(new AccountDataPermission(accData, pr.getByTitle(role).get()));
+		accData.getAccountDataPermissions().add(new AccountDataPermission(null, accData, pr.getByTitle(role).get()));
 		accR.save(accData);
 	}
 	

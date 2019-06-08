@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -39,17 +40,22 @@ public class StudentYear {
 	@JsonView(ShowExamRealization.class)
 	@OneToMany(mappedBy="studentYear")
 	private Set<ExamRealization> examRealizations;
+	
+	@OneToOne(mappedBy = "studentYear")
+	private Dissertation dissertation;
 
 	public StudentYear() {}
 
-	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student,
-			Set<ExamRealization> examRealizations) {
+	public StudentYear(Long id, Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student,
+			Set<ExamRealization> examRealizations, Dissertation dissertation) {
 		super();
+		this.id = id;
 		this.enrolmentDate = enrolmentDate;
 		this.numIndex = numIndex;
 		this.yearOfStudy = yearOfStudy;
 		this.student = student;
 		this.examRealizations = examRealizations;
+		this.dissertation = dissertation;
 	}
 
 	public Long getId(){
@@ -99,5 +105,15 @@ public class StudentYear {
 	public void setExamRealizations(Set<ExamRealization> examRealizations) {
 		this.examRealizations = examRealizations;
 	}
+
+	public Dissertation getDissertation() {
+		return dissertation;
+	}
+
+	public void setDissertation(Dissertation dissertation) {
+		this.dissertation = dissertation;
+	}
+	
+	
 	
 }

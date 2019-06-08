@@ -15,7 +15,7 @@ public class ExamRealization {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private Integer points;
 	
 	@Column(length=128, nullable = false)

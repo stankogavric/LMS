@@ -67,6 +67,7 @@ public class StudentService {
         Optional<Student> Stu = studentRepo.getByUsername(username);
         if(Stu.isPresent()) {
             student.setId(Stu.get().getId());
+            student.getAccountData().setPassword(passwordEncoder.encode(student.getAccountData().getPassword()));
             accountServ.updateAccountData(student.getAccountData().getId(), student.getAccountData());
             addressServ.updateAddress(student.getAddress().getId(), student.getAddress());
             personalServ.updatePersonalData(student.getPersonalData().getId(), student.getPersonalData());

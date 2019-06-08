@@ -11,6 +11,7 @@ import { SearchStudentsComponent } from './search-students/search-students.compo
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { StudentExamsComponent } from './student-exams/student-exams.component';
 import { StudentYearComponent } from './student-year/student-year.component';
+import { StudentDissertationComponent } from './student-dissertation/student-dissertation.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StudentYearComponent } from './student-year/student-year.component';
     SearchStudentsComponent,
     StudentDetailComponent,
     StudentExamsComponent,
-    StudentYearComponent
+    StudentYearComponent,
+    StudentDissertationComponent
   ],
   imports: [
     SharedModule

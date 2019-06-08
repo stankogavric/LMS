@@ -21,8 +21,9 @@ public class AccountDataPermission {
 	public AccountDataPermission() {
 	}
 	
-	public AccountDataPermission(AccountData accountData, Permission permission) {
+	public AccountDataPermission(Long id, AccountData accountData, Permission permission) {
 		super();
+		this.id = id;
 		this.accountData = accountData;
 		this.permission = permission;
 	}

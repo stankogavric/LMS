@@ -1,5 +1,5 @@
 <div>
     <p>Average Grade: {{avgGrade}}</p>
     <p>Total ects: {{totalEcts}}</p>
-    <app-student-exams [exams]="exams"></app-student-exams>
+    <app-student-exams [(exams)]="exams" *ngIf="fetched"></app-student-exams>
 </div>

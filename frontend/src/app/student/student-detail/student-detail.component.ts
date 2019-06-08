@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StudentService } from '../student.service';
 import { ExamDTO } from '../../exam/examDTO.model';
 import { ExamService } from '../../exam/exam.service';
+import { FileService } from '../../file/file.service';
 
 @Component({
   selector: 'app-student-detail',
@@ -16,12 +17,13 @@ export class StudentDetailComponent implements OnInit {
   exams?: ExamDTO[] = [];
   totalEcts?: number;
   avgGrade?: number;
-  constructor(private studentService: StudentService, private route: ActivatedRoute, private examService: ExamService) { }
+  constructor(private studentService: StudentService, private route: ActivatedRoute, private examService: ExamService, private fileService: FileService) { }
 
   ngOnInit() {
     this.studentService.getStudentDetails(this.route.snapshot.paramMap.get('id')).subscribe(
       (data: StudentDetails) => {
         this.student = data;
+        this.student.profilePicturePath = this.fileService.fileUrl + this.student.profilePicturePath;
       }
     );
     this.getStudentExams(this.route.snapshot.paramMap.get('id'));
