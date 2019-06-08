@@ -224,8 +224,7 @@
             "numIndex": "String",
             "yearOfStudy": "YearOfStudy",
             "student": "Student",
-            "examRealizations": "ExamRealization[]",
-	    "dissertation": "Dissertation"
+            "examRealizations": "ExamRealization[]"
         }
     },
     {
@@ -468,7 +467,9 @@
             "title": "String",
             "applicationDate": "Date",
             "defenseDate": "Date",
-            "mentor": "Teacher"
+            "mentor": "Teacher",
+			"studentYear": "StudentYear",
+			"file": "DissertationFile"
         }
     },
 
@@ -477,8 +478,7 @@
         "mnozina": "DissertationFiles",
         "data": {
             "id": "Long",
-            "url": "String",
-            "dissertation": "Dissertation"
+            "url": "String"
         }
     }
 ]
