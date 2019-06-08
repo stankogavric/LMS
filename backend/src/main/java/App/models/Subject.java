@@ -79,7 +79,7 @@ public class Subject {
 	public Subject(String name, Integer ects, Boolean mandatory, Integer lecturesNum, Integer exercisesNum,
 			Integer otherActivitiesNum, Integer researchPaper, Integer otherClasses, Set<Topic> syllabus,
 			Set<Subject> prerequisites, Set<Subject> prerequisiteFor, YearOfStudy yearOfStudy,
-			@NotNull Boolean deleted) {
+			Boolean deleted) {
 		super();
 		this.name = name;
 		this.ects = ects;

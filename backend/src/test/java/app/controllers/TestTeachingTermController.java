@@ -10,11 +10,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.sql.SQLException;
 
 
-import java.text.ParseException;
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
 import com.jayway.jsonpath.JsonPath;
+import static org.junit.Assert.assertEquals;
+import java.text.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,11 +51,11 @@ public class TestTeachingTermController {
 	@Before
 	public void setupTeachingTerm() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		teachingTermService.addTeachingTerm(new TeachingTerm("day_1", dt.parse("2023-07-26 00:00:00"), dt.parse("2006-06-02 00:00:00"), null, null, false));
-		teachingTermService.addTeachingTerm(new TeachingTerm("day_2", dt.parse("2023-02-02 00:00:00"), dt.parse("2019-06-02 00:00:00"), null, null, false));
-		teachingTermService.addTeachingTerm(new TeachingTerm("day_3", dt.parse("2014-04-23 00:00:00"), dt.parse("2013-10-04 00:00:00"), null, null, false));
-		teachingTermService.addTeachingTerm(new TeachingTerm("day_4", dt.parse("2013-06-13 00:00:00"), dt.parse("2016-07-04 00:00:00"), null, null, false));
-		teachingTermService.addTeachingTerm(new TeachingTerm("day_5", dt.parse("2007-08-08 00:00:00"), dt.parse("2024-03-01 00:00:00"), null, null, false));
+		teachingTermService.addTeachingTerm(new TeachingTerm("day_1", dt.parse("2012-08-27 00:00:00"), dt.parse("2011-08-12 00:00:00"), null, null, false));
+		teachingTermService.addTeachingTerm(new TeachingTerm("day_2", dt.parse("2005-08-26 00:00:00"), dt.parse("2011-00-14 00:00:00"), null, null, false));
+		teachingTermService.addTeachingTerm(new TeachingTerm("day_3", dt.parse("2011-09-24 00:00:00"), dt.parse("2018-06-05 00:00:00"), null, null, false));
+		teachingTermService.addTeachingTerm(new TeachingTerm("day_4", dt.parse("2013-08-28 00:00:00"), dt.parse("2012-07-00 00:00:00"), null, null, false));
+		teachingTermService.addTeachingTerm(new TeachingTerm("day_5", dt.parse("2016-09-08 00:00:00"), dt.parse("2006-08-27 00:00:00"), null, null, false));
 	}
 
 	@After
@@ -81,8 +81,8 @@ public class TestTeachingTermController {
 		.andExpect(jsonPath("$.classroom", equalTo(null)))
 		.andExpect(jsonPath("$.deleted", equalTo(false))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2007-08-08 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startTime")));
-		assertEquals(dt.parse("2024-03-01 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endTime")));
+		assertEquals(dt.parse("2016-09-08 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startTime")));
+		assertEquals(dt.parse("2006-08-27 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endTime")));
 
 	}
 }

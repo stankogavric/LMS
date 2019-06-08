@@ -9,14 +9,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.SQLException;
 
-
-import java.text.ParseException;import java.util.Arrays;
+import java.util.Arrays;
 import java.util.HashSet;
 
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
 import com.jayway.jsonpath.JsonPath;
+import static org.junit.Assert.assertEquals;
+import java.text.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,9 +34,9 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.SubjectService;
 
-import App.models.Subject;
-import App.models.Topic;
 import App.models.YearOfStudy;
+import App.models.Topic;
+import App.models.Subject;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -55,11 +55,11 @@ public class TestSubjectController {
 	@Before
 	public void setupSubject() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		subjectService.addSubject(new Subject("name_1", 502, false, 621, 298, 72, 650, 962, new HashSet<Topic>(Arrays.asList(new Topic("description_1", 587, "iconPath_1", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_1", 620, false, 881, 818, 181, 895, 699, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_1", 222, false, 714, 622, 323, 591, 975, null, null, null, null, false))), new YearOfStudy(479, dt.parse("2005-09-28 00:00:00"), dt.parse("2008-00-02 00:00:00"), null, null), false));
-		subjectService.addSubject(new Subject("name_2", 957, false, 710, 561, 758, 466, 222, new HashSet<Topic>(Arrays.asList(new Topic("description_2", 904, "iconPath_2", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_2", 650, false, 959, 440, 215, 279, 443, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_2", 218, false, 434, 984, 70, 864, 203, null, null, null, null, false))), new YearOfStudy(306, dt.parse("2011-07-07 00:00:00"), dt.parse("2022-05-08 00:00:00"), null, null), false));
-		subjectService.addSubject(new Subject("name_3", 105, false, 875, 855, 539, 281, 709, new HashSet<Topic>(Arrays.asList(new Topic("description_3", 774, "iconPath_3", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_3", 760, false, 867, 57, 763, 452, 329, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_3", 321, false, 135, 348, 669, 447, 268, null, null, null, null, false))), new YearOfStudy(821, dt.parse("2015-04-04 00:00:00"), dt.parse("2006-01-17 00:00:00"), null, null), false));
-		subjectService.addSubject(new Subject("name_4", 218, false, 186, 431, 233, 779, 838, new HashSet<Topic>(Arrays.asList(new Topic("description_4", 625, "iconPath_4", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_4", 873, false, 392, 180, 141, 998, 371, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_4", 423, false, 911, 601, 675, 306, 320, null, null, null, null, false))), new YearOfStudy(84, dt.parse("2006-02-19 00:00:00"), dt.parse("2014-05-18 00:00:00"), null, null), false));
-		subjectService.addSubject(new Subject("name_5", 15, false, 167, 171, 553, 290, 631, new HashSet<Topic>(Arrays.asList(new Topic("description_5", 392, "iconPath_5", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_5", 846, false, 497, 281, 110, 637, 421, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_5", 908, false, 713, 752, 797, 390, 239, null, null, null, null, false))), new YearOfStudy(866, dt.parse("2024-10-06 00:00:00"), dt.parse("2006-02-06 00:00:00"), null, null), false));
+		subjectService.addSubject(new Subject("name_1", 22, false, 460, 124, 553, 794, 256, new HashSet<Topic>(Arrays.asList(new Topic("description_1", 397, "iconPath_1", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_1", 754, false, 717, 764, 525, 117, 9, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_1", 301, false, 682, 675, 245, 187, 972, null, null, null, null, false))), new YearOfStudy(465, dt.parse("2014-07-23 00:00:00"), dt.parse("2016-09-20 00:00:00"), null, null), false));
+		subjectService.addSubject(new Subject("name_2", 544, false, 400, 722, 274, 341, 678, new HashSet<Topic>(Arrays.asList(new Topic("description_2", 788, "iconPath_2", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_2", 989, false, 391, 875, 359, 156, 972, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_2", 640, false, 695, 370, 875, 927, 772, null, null, null, null, false))), new YearOfStudy(18, dt.parse("2018-10-23 00:00:00"), dt.parse("2010-04-19 00:00:00"), null, null), false));
+		subjectService.addSubject(new Subject("name_3", 594, false, 566, 473, 483, 394, 315, new HashSet<Topic>(Arrays.asList(new Topic("description_3", 208, "iconPath_3", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_3", 809, false, 409, 7, 670, 586, 994, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_3", 986, false, 395, 520, 283, 715, 734, null, null, null, null, false))), new YearOfStudy(584, dt.parse("2018-09-01 00:00:00"), dt.parse("2016-07-17 00:00:00"), null, null), false));
+		subjectService.addSubject(new Subject("name_4", 920, false, 319, 739, 504, 643, 787, new HashSet<Topic>(Arrays.asList(new Topic("description_4", 264, "iconPath_4", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_4", 62, false, 90, 160, 557, 564, 836, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_4", 616, false, 15, 863, 418, 227, 879, null, null, null, null, false))), new YearOfStudy(939, dt.parse("2017-04-05 00:00:00"), dt.parse("2009-05-17 00:00:00"), null, null), false));
+		subjectService.addSubject(new Subject("name_5", 271, false, 436, 300, 30, 624, 382, new HashSet<Topic>(Arrays.asList(new Topic("description_5", 820, "iconPath_5", null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_5", 763, false, 983, 176, 466, 464, 693, null, null, null, null, false))), new HashSet<Subject>(Arrays.asList(new Subject("name_5", 766, false, 626, 684, 432, 475, 766, null, null, null, null, false))), new YearOfStudy(564, dt.parse("2006-05-24 00:00:00"), dt.parse("2005-10-06 00:00:00"), null, null), false));
 	}
 
 	@After
@@ -81,39 +81,39 @@ public class TestSubjectController {
 		String result = mockMvc.perform(MockMvcRequestBuilders.get("/subject/5").accept(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
 		.andExpect(jsonPath("$.name", equalTo("name_5")))
-		.andExpect(jsonPath("$.ects", equalTo(15)))
+		.andExpect(jsonPath("$.ects", equalTo(271)))
 		.andExpect(jsonPath("$.mandatory", equalTo(false)))
-		.andExpect(jsonPath("$.lecturesNum", equalTo(167)))
-		.andExpect(jsonPath("$.exercisesNum", equalTo(171)))
-		.andExpect(jsonPath("$.otherActivitiesNum", equalTo(553)))
-		.andExpect(jsonPath("$.researchPaper", equalTo(290)))
-		.andExpect(jsonPath("$.otherClasses", equalTo(631)))
+		.andExpect(jsonPath("$.lecturesNum", equalTo(436)))
+		.andExpect(jsonPath("$.exercisesNum", equalTo(300)))
+		.andExpect(jsonPath("$.otherActivitiesNum", equalTo(30)))
+		.andExpect(jsonPath("$.researchPaper", equalTo(624)))
+		.andExpect(jsonPath("$.otherClasses", equalTo(382)))
 		.andExpect(jsonPath("$.prerequisites[0].name", equalTo("name_5")))
-		.andExpect(jsonPath("$.prerequisites[0].ects", equalTo(846)))
+		.andExpect(jsonPath("$.prerequisites[0].ects", equalTo(763)))
 		.andExpect(jsonPath("$.prerequisites[0].mandatory", equalTo(false)))
-		.andExpect(jsonPath("$.prerequisites[0].lecturesNum", equalTo(497)))
-		.andExpect(jsonPath("$.prerequisites[0].exercisesNum", equalTo(281)))
-		.andExpect(jsonPath("$.prerequisites[0].otherActivitiesNum", equalTo(110)))
-		.andExpect(jsonPath("$.prerequisites[0].researchPaper", equalTo(637)))
-		.andExpect(jsonPath("$.prerequisites[0].otherClasses", equalTo(421)))
+		.andExpect(jsonPath("$.prerequisites[0].lecturesNum", equalTo(983)))
+		.andExpect(jsonPath("$.prerequisites[0].exercisesNum", equalTo(176)))
+		.andExpect(jsonPath("$.prerequisites[0].otherActivitiesNum", equalTo(466)))
+		.andExpect(jsonPath("$.prerequisites[0].researchPaper", equalTo(464)))
+		.andExpect(jsonPath("$.prerequisites[0].otherClasses", equalTo(693)))
 		.andExpect(jsonPath("$.prerequisites[0].prerequisites", equalTo(null)))
 		.andExpect(jsonPath("$.prerequisites[0].prerequisiteFor", equalTo(null)))
 		.andExpect(jsonPath("$.prerequisites[0].deleted", equalTo(false)))
 		.andExpect(jsonPath("$.prerequisiteFor[0].name", equalTo("name_5")))
-		.andExpect(jsonPath("$.prerequisiteFor[0].ects", equalTo(908)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].ects", equalTo(766)))
 		.andExpect(jsonPath("$.prerequisiteFor[0].mandatory", equalTo(false)))
-		.andExpect(jsonPath("$.prerequisiteFor[0].lecturesNum", equalTo(713)))
-		.andExpect(jsonPath("$.prerequisiteFor[0].exercisesNum", equalTo(752)))
-		.andExpect(jsonPath("$.prerequisiteFor[0].otherActivitiesNum", equalTo(797)))
-		.andExpect(jsonPath("$.prerequisiteFor[0].researchPaper", equalTo(390)))
-		.andExpect(jsonPath("$.prerequisiteFor[0].otherClasses", equalTo(239)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].lecturesNum", equalTo(626)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].exercisesNum", equalTo(684)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].otherActivitiesNum", equalTo(432)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].researchPaper", equalTo(475)))
+		.andExpect(jsonPath("$.prerequisiteFor[0].otherClasses", equalTo(766)))
 		.andExpect(jsonPath("$.prerequisiteFor[0].prerequisites", equalTo(null)))
 		.andExpect(jsonPath("$.prerequisiteFor[0].prerequisiteFor", equalTo(null)))
 		.andExpect(jsonPath("$.prerequisiteFor[0].deleted", equalTo(false)))
 		.andExpect(jsonPath("$.deleted", equalTo(false))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2024-10-06 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearOfStudy.startDate")));
-		assertEquals(dt.parse("2006-02-06 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearOfStudy.endDate")));
+		assertEquals(dt.parse("2006-05-24 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearOfStudy.startDate")));
+		assertEquals(dt.parse("2005-10-06 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.yearOfStudy.endDate")));
 
 	}
 }

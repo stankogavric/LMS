@@ -38,7 +38,7 @@ public class Topic {
 
 	public Topic() {}
 
-	public Topic(String description, Integer week, String iconPath, Subject subject, @NotNull Boolean deleted) {
+	public Topic(String description, Integer week, String iconPath, Subject subject, Boolean deleted) {
 		super();
 		this.description = description;
 		this.week = week;

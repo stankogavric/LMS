@@ -27,8 +27,8 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.ClassroomService;
 
-import App.models.Classroom;
 import App.models.Faculty;
+import App.models.Classroom;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -46,11 +46,11 @@ public class TestClassroomController {
 
 	@Before
 	public void setupClassroom() {
-		classroomService.addClassroom(new Classroom("name_1", "type_1", 602, new Faculty("name_1", null, null, null, null, "description_1", null, null, null)));
-		classroomService.addClassroom(new Classroom("name_2", "type_2", 738, new Faculty("name_2", null, null, null, null, "description_2", null, null, null)));
-		classroomService.addClassroom(new Classroom("name_3", "type_3", 241, new Faculty("name_3", null, null, null, null, "description_3", null, null, null)));
-		classroomService.addClassroom(new Classroom("name_4", "type_4", 883, new Faculty("name_4", null, null, null, null, "description_4", null, null, null)));
-		classroomService.addClassroom(new Classroom("name_5", "type_5", 299, new Faculty("name_5", null, null, null, null, "description_5", null, null, null)));
+		classroomService.addClassroom(new Classroom("name_1", "type_1", 299, new Faculty("name_1", null, null, null, null, "description_1", null, null, null)));
+		classroomService.addClassroom(new Classroom("name_2", "type_2", 313, new Faculty("name_2", null, null, null, null, "description_2", null, null, null)));
+		classroomService.addClassroom(new Classroom("name_3", "type_3", 18, new Faculty("name_3", null, null, null, null, "description_3", null, null, null)));
+		classroomService.addClassroom(new Classroom("name_4", "type_4", 888, new Faculty("name_4", null, null, null, null, "description_4", null, null, null)));
+		classroomService.addClassroom(new Classroom("name_5", "type_5", 144, new Faculty("name_5", null, null, null, null, "description_5", null, null, null)));
 	}
 
 	@After
@@ -70,7 +70,7 @@ public class TestClassroomController {
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
 		.andExpect(jsonPath("$.name", equalTo("name_5")))
 		.andExpect(jsonPath("$.type", equalTo("type_5")))
-		.andExpect(jsonPath("$.capacity", equalTo(299)))
+		.andExpect(jsonPath("$.capacity", equalTo(144)))
 		.andExpect(jsonPath("$.faculty.name", equalTo("name_5")))
 		.andExpect(jsonPath("$.faculty.university", equalTo(null)))
 		.andExpect(jsonPath("$.faculty.address", equalTo(null)))

@@ -30,10 +30,10 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.AdministrativeStaffService;
 
-import App.models.AccountData;
 import App.models.PersonalData;
-import App.models.AdministrativeStaff;
 import App.models.Address;
+import App.models.AdministrativeStaff;
+import App.models.AccountData;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)

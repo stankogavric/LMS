@@ -46,10 +46,9 @@ public class StudentYear {
 
 	public StudentYear() {}
 
-	public StudentYear(Long id, Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student,
+	public StudentYear(Date enrolmentDate, String numIndex, YearOfStudy yearOfStudy, Student student,
 			Set<ExamRealization> examRealizations, Dissertation dissertation) {
 		super();
-		this.id = id;
 		this.enrolmentDate = enrolmentDate;
 		this.numIndex = numIndex;
 		this.yearOfStudy = yearOfStudy;

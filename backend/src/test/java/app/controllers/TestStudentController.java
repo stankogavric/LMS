@@ -9,15 +9,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.SQLException;
 
-
-import java.text.ParseException;import java.util.Arrays;
+import java.util.Arrays;
 import java.util.HashSet;
 
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
 import com.jayway.jsonpath.JsonPath;
+import static org.junit.Assert.assertEquals;
+import java.text.ParseException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,11 +35,11 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.StudentService;
 
-import App.models.SubjectAttendance;
 import App.models.StudentYear;
+import App.models.PersonalData;
 import App.models.Student;
 import App.models.Address;
-import App.models.PersonalData;
+import App.models.SubjectAttendance;
 import App.models.AccountData;
 
 @RunWith(SpringRunner.class)
@@ -59,11 +59,11 @@ public class TestStudentController {
 	@Before
 	public void setupStudent() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(96, null, null))), new Address("street_1", "number_1", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2020-04-14 00:00:00"), "numIndex_1", null, null, null))), new AccountData("username_1", "password_1", "email_1", null), new PersonalData("firstName_1", "lastName_1", "personalNumber_1", "profilePicturePath_1"), false, 264));
-		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(983, null, null))), new Address("street_2", "number_2", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2018-06-22 00:00:00"), "numIndex_2", null, null, null))), new AccountData("username_2", "password_2", "email_2", null), new PersonalData("firstName_2", "lastName_2", "personalNumber_2", "profilePicturePath_2"), false, 613));
-		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(585, null, null))), new Address("street_3", "number_3", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2010-08-25 00:00:00"), "numIndex_3", null, null, null))), new AccountData("username_3", "password_3", "email_3", null), new PersonalData("firstName_3", "lastName_3", "personalNumber_3", "profilePicturePath_3"), false, 743));
-		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(283, null, null))), new Address("street_4", "number_4", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2019-03-22 00:00:00"), "numIndex_4", null, null, null))), new AccountData("username_4", "password_4", "email_4", null), new PersonalData("firstName_4", "lastName_4", "personalNumber_4", "profilePicturePath_4"), false, 890));
-		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(27, null, null))), new Address("street_5", "number_5", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2015-03-26 00:00:00"), "numIndex_5", null, null, null))), new AccountData("username_5", "password_5", "email_5", null), new PersonalData("firstName_5", "lastName_5", "personalNumber_5", "profilePicturePath_5"), false, 840));
+		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(729, null, null))), new Address("street_1", "number_1", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2021-06-21 00:00:00"), "numIndex_1", null, null, null, null))), new AccountData("username_1", "password_1", "email_1", null), new PersonalData("firstName_1", "lastName_1", "personalNumber_1", "profilePicturePath_1"), false, 449));
+		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(331, null, null))), new Address("street_2", "number_2", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2009-08-14 00:00:00"), "numIndex_2", null, null, null, null))), new AccountData("username_2", "password_2", "email_2", null), new PersonalData("firstName_2", "lastName_2", "personalNumber_2", "profilePicturePath_2"), false, 28));
+		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(487, null, null))), new Address("street_3", "number_3", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2013-06-28 00:00:00"), "numIndex_3", null, null, null, null))), new AccountData("username_3", "password_3", "email_3", null), new PersonalData("firstName_3", "lastName_3", "personalNumber_3", "profilePicturePath_3"), false, 578));
+		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(958, null, null))), new Address("street_4", "number_4", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2012-09-27 00:00:00"), "numIndex_4", null, null, null, null))), new AccountData("username_4", "password_4", "email_4", null), new PersonalData("firstName_4", "lastName_4", "personalNumber_4", "profilePicturePath_4"), false, 948));
+		studentService.addStudent(new Student(new HashSet<SubjectAttendance>(Arrays.asList(new SubjectAttendance(915, null, null))), new Address("street_5", "number_5", null), new HashSet<StudentYear>(Arrays.asList(new StudentYear(dt.parse("2007-09-00 00:00:00"), "numIndex_5", null, null, null, null))), new AccountData("username_5", "password_5", "email_5", null), new PersonalData("firstName_5", "lastName_5", "personalNumber_5", "profilePicturePath_5"), false, 151));
 	}
 
 	@After
@@ -94,9 +94,9 @@ public class TestStudentController {
 		.andExpect(jsonPath("$.personalData.personalNumber", equalTo("personalNumber_5")))
 		.andExpect(jsonPath("$.personalData.profilePicturePath", equalTo("profilePicturePath_5")))
 		.andExpect(jsonPath("$.deleted", equalTo(false)))
-		.andExpect(jsonPath("$.yearOfStudy", equalTo(840))).andReturn().getResponse().getContentAsString();
+		.andExpect(jsonPath("$.yearOfStudy", equalTo(151))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2015-03-26 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.studentYears[0].enrolmentDate")));
+		assertEquals(dt.parse("2007-09-00 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.studentYears[0].enrolmentDate")));
 		assertEquals(true, BCrypt.checkpw("password_5", JsonPath.parse(result).read("$.accountData.password")));
 
 	}

@@ -97,10 +97,9 @@ public class Dissertation {
 		this.file = file;
 	}
 
-	public Dissertation(Long id, String title, Date applicationDate, Date defenseDate, Teacher mentor,
+	public Dissertation(String title, Date applicationDate, Date defenseDate, Teacher mentor,
 			StudentYear studentYear, DissertationFile file) {
 		super();
-		this.id = id;
 		this.title = title;
 		this.applicationDate = applicationDate;
 		this.defenseDate = defenseDate;

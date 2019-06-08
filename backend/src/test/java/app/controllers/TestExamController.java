@@ -9,14 +9,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.SQLException;
 
-
-import java.text.ParseException;import java.util.Arrays;
+import java.util.Arrays;
 import java.util.HashSet;
 
 import java.util.TimeZone;
 import java.text.SimpleDateFormat;
-import static org.junit.Assert.assertEquals;
 import com.jayway.jsonpath.JsonPath;
+import static org.junit.Assert.assertEquals;
+import java.text.ParseException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,8 +34,8 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.ExamService;
 
-import App.models.ExamRealization;
 import App.models.ExamTopic;
+import App.models.ExamRealization;
 import App.models.Exam;
 
 @RunWith(SpringRunner.class)
@@ -55,11 +55,11 @@ public class TestExamController {
 	@Before
 	public void setupExam() throws ParseException {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		examService.addExam(new Exam(dt.parse("2010-11-17 00:00:00"), dt.parse("2012-03-21 00:00:00"), 598, 750, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(476, "note_1", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_1", null)))));
-		examService.addExam(new Exam(dt.parse("2012-07-28 00:00:00"), dt.parse("2009-06-06 00:00:00"), 818, 932, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(498, "note_2", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_2", null)))));
-		examService.addExam(new Exam(dt.parse("2012-04-14 00:00:00"), dt.parse("2006-02-08 00:00:00"), 711, 173, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(727, "note_3", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_3", null)))));
-		examService.addExam(new Exam(dt.parse("2006-03-16 00:00:00"), dt.parse("2025-09-06 00:00:00"), 856, 265, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(734, "note_4", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_4", null)))));
-		examService.addExam(new Exam(dt.parse("2005-08-00 00:00:00"), dt.parse("2022-00-15 00:00:00"), 627, 752, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(243, "note_5", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_5", null)))));
+		examService.addExam(new Exam(dt.parse("2009-03-23 00:00:00"), dt.parse("2017-10-12 00:00:00"), 735, 971, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(350, "note_1", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_1", null)))));
+		examService.addExam(new Exam(dt.parse("2011-06-00 00:00:00"), dt.parse("2007-03-24 00:00:00"), 461, 85, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(930, "note_2", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_2", null)))));
+		examService.addExam(new Exam(dt.parse("2013-00-08 00:00:00"), dt.parse("2013-04-14 00:00:00"), 901, 446, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(221, "note_3", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_3", null)))));
+		examService.addExam(new Exam(dt.parse("2017-04-07 00:00:00"), dt.parse("2025-03-09 00:00:00"), 344, 607, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(536, "note_4", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_4", null)))));
+		examService.addExam(new Exam(dt.parse("2013-10-02 00:00:00"), dt.parse("2017-09-27 00:00:00"), 228, 982, null, null, new HashSet<ExamRealization>(Arrays.asList(new ExamRealization(786, "note_5", null, null))), new HashSet<ExamTopic>(Arrays.asList(new ExamTopic("description_5", null)))));
 	}
 
 	@After
@@ -80,13 +80,13 @@ public class TestExamController {
 		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String result = mockMvc.perform(MockMvcRequestBuilders.get("/exam/5").accept(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.points", equalTo(627)))
-		.andExpect(jsonPath("$.durationInMinutes", equalTo(752)))
+		.andExpect(jsonPath("$.points", equalTo(228)))
+		.andExpect(jsonPath("$.durationInMinutes", equalTo(982)))
 		.andExpect(jsonPath("$.subjectRealization", equalTo(null)))
 		.andExpect(jsonPath("$.examType", equalTo(null))).andReturn().getResponse().getContentAsString();
 
-		assertEquals(dt.parse("2005-08-00 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startTime")));
-		assertEquals(dt.parse("2022-00-15 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endTime")));
+		assertEquals(dt.parse("2013-10-02 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.startTime")));
+		assertEquals(dt.parse("2017-09-27 00:00:00"), dtt.parse(JsonPath.parse(result).read("$.endTime")));
 
 	}
 }

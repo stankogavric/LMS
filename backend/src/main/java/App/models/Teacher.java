@@ -47,7 +47,7 @@ public class Teacher {
 	public Teacher() {}
 
 	public Teacher(String biography, Set<Title> titles, Address address, AccountData accountData,
-			PersonalData personalData, @NotNull Boolean deleted) {
+			PersonalData personalData, Boolean deleted) {
 		super();
 		this.biography = biography;
 		this.titles = titles;
