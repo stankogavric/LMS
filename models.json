@@ -224,7 +224,8 @@
             "numIndex": "String",
             "yearOfStudy": "YearOfStudy",
             "student": "Student",
-            "examRealizations": "ExamRealization[]"
+            "examRealizations": "ExamRealization[]",
+	    "dissertation": "Dissertation"
         }
     },
     {
@@ -456,6 +457,28 @@
             "publicationDate": "Date",
             "files": "File[]",
             "subjectRealization": "SubjectRealization"
+        }
+    },
+
+{
+    	"naziv": "Dissertation",
+        "mnozina": "Dissertations",
+        "data": {
+            "id": "Long",
+            "title": "String",
+            "applicationDate": "Date",
+            "defenseDate": "Date",
+            "mentor": "Teacher"
+        }
+    },
+
+    {
+	"naziv": "DissertationFile",
+        "mnozina": "DissertationFiles",
+        "data": {
+            "id": "Long",
+            "url": "String",
+            "dissertation": "Dissertation"
         }
     }
 ]

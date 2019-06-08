@@ -25,10 +25,8 @@ public class Exam {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column
 	private Date startTime;
 	
-	@Column
 	private Date endTime;
 	
 	@Column(nullable = false)

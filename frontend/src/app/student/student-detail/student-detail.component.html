@@ -9,39 +9,33 @@
 <div>
   <p>Average Grade: {{avgGrade}}</p>
   <p>Total ects: {{totalEcts}}</p>
-  
+
   <mat-tab-group>
-      <mat-tab label="Enrolled Years">
-          <ng-template matTabContent>
-              <mat-accordion>
-                  <ng-container *ngFor="let studentYear of student.studentYears; let i = index">
-                    <app-student-year [studentYear] = "studentYear"> </app-student-year>        
-                  </ng-container>
-                </mat-accordion>        
-          </ng-template>
-         </mat-tab>
-      <mat-tab label="Student Exams"> 
-        <ng-template matTabContent>
-          <app-student-exams [exams] = "exams"></app-student-exams>
-        </ng-template>
-      </mat-tab>
-      <mat-tab label="Submited exams"> 
-          <ng-template matTabContent>
-            prijavljeni ispiti
-            <!-- TODO -->
-          </ng-template>
-        </mat-tab>
-        <mat-tab label="Final dissertation"> 
-            <ng-template matTabContent>
-              zavrsni rad
-              <!-- TODO -->
-            </ng-template>
-          </mat-tab>
-    </mat-tab-group>
-
-  
+    <mat-tab label="Enrolled Years">
+      <ng-template matTabContent>
+        <mat-accordion>
+          <ng-container *ngFor="let studentYear of student.studentYears; let i = index">
+            <app-student-year [studentYear]="studentYear"> </app-student-year>
+          </ng-container>
+        </mat-accordion>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Student Exams">
+      <ng-template matTabContent>
+        <app-student-exams [exams]="exams"></app-student-exams>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Submited exams">
+      <ng-template matTabContent>
+        <app-registered-exams></app-registered-exams>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Final dissertation">
+      <ng-template matTabContent>
+        <app-student-dissertation></app-student-dissertation>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
 
 
-
-  
 </div>

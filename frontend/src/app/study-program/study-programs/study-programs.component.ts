@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatSort } from '@angular/material/sort';
 import { StudyProgram } from '../study-program.model';
 import { StudyProgramService } from '../study-program.service';
 
@@ -13,21 +12,15 @@ export class StudyProgramsComponent implements OnInit {
 
   studyPrograms : StudyProgram[] = [];
   studyProgram : StudyProgram = new StudyProgram();
-  displayedColumns: string[] = ['no', 'name', 'description', 'headTeacher.personalData.firstName', 'faculty.name', 'faculty.university.name', 'actions'];
+  displayedColumns: string[] = ['no', 'name', 'description', 'headTeacher', 'faculty', 'university', 'actions'];
   dataSource = new MatTableDataSource<StudyProgram>(this.studyPrograms);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private studyProgramService: StudyProgramService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sortingDataAccessor = (item, property) => {
-      if (property.includes('.')) return property.split('.').reduce((o,i)=>o[i], item)
-        return item[property];
-    };
-    this.dataSource.sort = this.sort;
     this.getAll();
   }
 

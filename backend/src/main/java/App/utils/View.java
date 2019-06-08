@@ -40,4 +40,5 @@ public class View {
     public interface ShowTeachingMaterial{ };
     public interface ShowAccountDataPermission{ };
     public interface ShowClassroom{ };
+    public interface ShowDissertation{};
 }

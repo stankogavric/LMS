@@ -30,7 +30,7 @@ public class Topic {
 	@Column(length=128)
 	private String iconPath;
 
-	@ManyToOne(cascade={CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private Subject subject;
 	
 	@NotNull
@@ -38,7 +38,7 @@ public class Topic {
 
 	public Topic() {}
 
-	public Topic(String description, Integer week, String iconPath, Subject subject, Boolean deleted) {
+	public Topic(String description, Integer week, String iconPath, Subject subject, @NotNull Boolean deleted) {
 		super();
 		this.description = description;
 		this.week = week;
