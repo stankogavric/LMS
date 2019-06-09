@@ -47,9 +47,7 @@ public class YearOfStudy {
 
 	public YearOfStudy() {}
 
-	public YearOfStudy(Long id, int year, Date startDate, Date endDate, Set<SubjectRealization> subjectRealizations,
-			StudyProgram studyProgram) {
-		this.id = id;
+	public YearOfStudy(int year, Date startDate, Date endDate, Set<SubjectRealization> subjectRealizations, StudyProgram studyProgram) {
 		this.year = year;
 		this.startDate = startDate;
 		this.endDate = endDate;

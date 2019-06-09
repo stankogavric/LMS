@@ -21,9 +21,15 @@ export class ClassScheduleAddEditComponent implements OnInit {
   public classScheduleForm : FormGroup;
   public classSchedule = [[], [], [], [], [], [], []];
   public yearsOfStudies: YearOfStudy[] = [];
-  public teacherRealizations: TeacherRealization[];
-  public classrooms: Classroom[];
+  public teacherRealizations: TeacherRealization[] = [];
+  public teacherRealizationsByYearOfStudy: TeacherRealization[] = [];
+  public classrooms: Classroom[] = [];
+  public teachingTerms: TeachingTerm[] = [];
   public days: String[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  public selectedDay = 0;
+  public selectedTeacherRealization: TeacherRealization;
+  public selectedClassroom: Classroom;
+  private selectedStartTime: Date;
 
   constructor(private fb: FormBuilder, private teacherRealizationService: TeacherRealizationService, private yearOfStudyService: YearOfStudyService, private classroomService: ClassroomService, private teachingTermService: TeachingTermService) { }
 
@@ -38,6 +44,8 @@ export class ClassScheduleAddEditComponent implements OnInit {
 
     this.getYearsOfStudies();
     this.getClassrooms();
+    //this.getTeachingTerms();
+    this.getTeacherRealizations();
   }
 
   getYearsOfStudies(){
@@ -46,10 +54,16 @@ export class ClassScheduleAddEditComponent implements OnInit {
     })
   }
 
-  getTeacherRealizations(yearOfStudyId: number){
-    this.teacherRealizationService.getAllByYearOfStudy(yearOfStudyId).subscribe(data => {
+  getTeacherRealizationsByYearOfStudy(id: number){
+    this.teacherRealizationService.getAllByYearOfStudy(id).subscribe(data => {
+      this.teacherRealizationsByYearOfStudy = data;
+      this.getTeachingTermsByYearOfStudy(id);
+    });
+  }
+
+  getTeacherRealizations(){
+    this.teacherRealizationService.getAll().subscribe(data => {
       this.teacherRealizations = data;
-      this.getTeachingTerms(yearOfStudyId);
     });
   }
 
@@ -59,30 +73,39 @@ export class ClassScheduleAddEditComponent implements OnInit {
     });
   }
 
-  getTeachingTerms(yearOfStudyId: number){
+  getTeachingTerms(){
+    this.teachingTermService.getAll().subscribe(data => {
+      this.teachingTerms = data;
+    });
+  }
+
+  getTeachingTermsByYearOfStudy(id: number){
     this.classSchedule = [[], [], [], [], [], [], []];
-    this.teachingTermService.getAllByYearOfStudy(yearOfStudyId).subscribe(data => {
+    this.teachingTermService.getAll().subscribe(data => {
+      this.teachingTerms = data;
       data.forEach(teachingTerm => {
         let teacherRealization: TeacherRealization;
         this.teacherRealizations.forEach(tr => { // or get teacher realization by subject realization id
-          if(tr.subjectRealization.id == teachingTerm.subjectRealization.id){
+          if(tr.subjectRealization.id == teachingTerm.subjectRealization.id && tr.subjectRealization.yearOfStudy.id == id){
             teacherRealization = tr;
             return false;
           }
         });
-        this.classSchedule[teachingTerm.day].push({
-          "teachingTermId": teachingTerm.id,
-          "teacherRealization": teacherRealization,
-          "day": teachingTerm.day,
-          "startTime": new Date(teachingTerm.startTime),
-          "endTime": new Date(teachingTerm.endTime),
-          "classroom": teachingTerm.classroom
-        });
+        if(teachingTerm.subjectRealization.yearOfStudy.id == this.classScheduleForm.get('yearOfStudy').value.id){
+          this.classSchedule[teachingTerm.day].push({
+            "teachingTermId": teachingTerm.id,
+            "teacherRealization": teacherRealization,
+            "day": teachingTerm.day,
+            "startTime": new Date(teachingTerm.startTime),
+            "endTime": new Date(teachingTerm.endTime),
+            "classroom": teachingTerm.classroom
+          });
+        }
       })
-    })
+    });
   }
 
-  add(){
+  check():Boolean{
     let valid = true;
     let endTimeT: Time = {
       hours: +this.classScheduleForm.get('startTime').value.substring(0,2), // '+' convert string to number
@@ -98,11 +121,163 @@ export class ClassScheduleAddEditComponent implements OnInit {
     let startTimeD = new Date();
     startTimeD.setHours(startTimeT.hours);
     startTimeD.setMinutes(startTimeT.minutes);
+    startTimeD.setSeconds(0);
 
     let endTimeD = new Date();
     endTimeD.setHours(endTimeT.hours);
     endTimeD.setMinutes(endTimeT.minutes);
+    endTimeD.setSeconds(0);
 
+    let startTime = startTimeD.getTime();
+    let endTime = endTimeD.getTime();
+
+    this.classSchedule.forEach(day => {
+      day.forEach(item => {
+        let itemStartTimeD = new Date();
+        itemStartTimeD.setHours(item.startTime.getHours());
+        itemStartTimeD.setMinutes(item.startTime.getMinutes());
+        let itemEndTimeD = new Date();
+        itemEndTimeD.setHours(item.endTime.getHours());
+        itemEndTimeD.setMinutes(item.endTime.getMinutes());
+        let itemStartTime = itemStartTimeD.getTime();
+        let itemEndTime = itemEndTimeD.getTime();
+        if(
+          item.day == this.classScheduleForm.get('day').value
+          &&
+          (
+            (startTime > itemStartTime && startTime < itemEndTime)
+            ||
+            (endTime > itemStartTime && endTime < itemEndTime)
+            ||
+            (startTime < itemStartTime && endTime > itemEndTime)
+            ||
+            (startTime == itemStartTime && endTime == itemEndTime)
+          )
+        )
+        {
+          alert("Termin je zauzet");
+          valid = false;
+          return false;
+        }
+      })
+    })
+
+    let item = {
+      //"yearOfStudy": this.classScheduleForm.get('yearOfStudy').value,
+      "teacherRealization": this.classScheduleForm.get('teacherRealization').value,
+      "day": this.classScheduleForm.get('day').value,
+      "startTime": startTimeD,
+      "endTime": endTimeD,
+      "classroom": this.classScheduleForm.get('classroom').value
+    }
+
+    /*
+    this.teacherRealizations.forEach(teacherRealization => {
+      if(
+        teacherRealization.teacher.id == item.teacherRealization.teacher.id
+        &&
+        (
+          item.day == this.classScheduleForm.get('day').value
+          &&
+          (
+            (startTime > itemStartTime && startTime < itemEndTime)
+            ||
+            (endTime > itemStartTime && endTime < itemEndTime)
+            ||
+            (startTime < itemStartTime && endTime > itemEndTime)
+            ||
+            (startTime == itemStartTime && endTime == itemEndTime)
+          )
+        )
+      )
+      {
+        alert("Termin je zauzet");
+        valid = false;
+        return false;
+      }
+    })
+    */
+    this.teachingTerms.forEach(teachingTerm => {
+      if(teachingTerm.subjectRealization.yearOfStudy.id != this.classScheduleForm.get('yearOfStudy').value.id){
+        let startTime = new Date(teachingTerm.startTime).getTime();
+        let endTime = new Date(teachingTerm.endTime).getTime();
+        
+        let itemStartTimeD = new Date(teachingTerm.startTime);
+        itemStartTimeD.setHours(item.startTime.getHours());
+        itemStartTimeD.setMinutes(item.startTime.getMinutes());
+        let itemEndTimeD = new Date(teachingTerm.endTime);
+        itemEndTimeD.setHours(item.endTime.getHours());
+        itemEndTimeD.setMinutes(item.endTime.getMinutes());
+        let itemStartTime = itemStartTimeD.getTime();
+        let itemEndTime = itemEndTimeD.getTime();
+
+        let teacherFree = true;
+        this.teacherRealizations.forEach(teacherRealization => {
+          if(
+              teacherRealization.teacher.id == item.teacherRealization.teacher.id
+              &&
+              teacherRealization.subjectRealization.id == teachingTerm.subjectRealization.id
+            ){
+              teacherFree = false;
+          }
+        })
+
+        if(
+          (
+            teachingTerm.subjectRealization.yearOfStudy.id == item.teacherRealization.subjectRealization.yearOfStudy.id
+            ||
+            teachingTerm.classroom.id == item.classroom.id
+            ||
+            !teacherFree
+          )
+          &&
+          (
+            teachingTerm.day == this.classScheduleForm.get('day').value
+            &&
+            (
+              (startTime > itemStartTime && startTime < itemEndTime)
+              ||
+              (endTime > itemStartTime && endTime < itemEndTime)
+              ||
+              (startTime < itemStartTime && endTime > itemEndTime)
+              ||
+              (startTime == itemStartTime && endTime == itemEndTime)
+            )
+          )
+        )
+        {
+          alert("Termin je zauzet");
+          valid = false;
+          return false;
+        }
+      }
+    })
+    return valid;
+  }
+
+  add(){
+    //let valid = true;
+    let endTimeT: Time = {
+      hours: +this.classScheduleForm.get('startTime').value.substring(0,2), // '+' convert string to number
+      minutes: +this.classScheduleForm.get('startTime').value.substring(3)
+    };
+    endTimeT.hours=(endTimeT.hours+this.classScheduleForm.get('teacherRealization').value.numberOfClasses);
+    
+    let startTimeT: Time = {
+      hours: +this.classScheduleForm.get('startTime').value.substring(0,2), // '+' convert string to number
+      minutes: +this.classScheduleForm.get('startTime').value.substring(3)
+    };
+
+    let startTimeD = new Date();
+    startTimeD.setHours(startTimeT.hours);
+    startTimeD.setMinutes(startTimeT.minutes);
+    startTimeD.setSeconds(0);
+
+    let endTimeD = new Date();
+    endTimeD.setHours(endTimeT.hours);
+    endTimeD.setMinutes(endTimeT.minutes);
+    endTimeD.setSeconds(0);
+/*
     let startTime = startTimeD.getTime();
     let endTime = endTimeD.getTime();
 
@@ -119,22 +294,16 @@ export class ClassScheduleAddEditComponent implements OnInit {
 
         if(
           item.day == this.classScheduleForm.get('day').value
-          &&(
-          (startTime > itemStartTime
           &&
-          startTime < itemEndTime)
-          ||
-          (endTime > itemStartTime
-          &&
-          endTime < itemEndTime)
-          ||
-          (startTime < itemStartTime
-          &&
-          endTime > itemEndTime)
-          ||
-          (startTime == itemStartTime
-          &&
-          endTime == itemEndTime))
+          (
+            (startTime > itemStartTime && startTime < itemEndTime)
+            ||
+            (endTime > itemStartTime && endTime < itemEndTime)
+            ||
+            (startTime < itemStartTime && endTime > itemEndTime)
+            ||
+            (startTime == itemStartTime && endTime == itemEndTime)
+          )
         )
         {
           alert("Termin je zauzet");
@@ -144,8 +313,96 @@ export class ClassScheduleAddEditComponent implements OnInit {
       })
     })
 
+    let item = {
+      //"yearOfStudy": this.classScheduleForm.get('yearOfStudy').value,
+      "teacherRealization": this.classScheduleForm.get('teacherRealization').value,
+      "day": this.classScheduleForm.get('day').value,
+      "startTime": startTimeD,
+      "endTime": endTimeD,
+      "classroom": this.classScheduleForm.get('classroom').value
+    }
 
-    if(valid){
+    
+    this.teacherRealizations.forEach(teacherRealization => {
+      if(
+        teacherRealization.teacher.id == item.teacherRealization.teacher.id
+        &&
+        (
+          item.day == this.classScheduleForm.get('day').value
+          &&
+          (
+            (startTime > itemStartTime && startTime < itemEndTime)
+            ||
+            (endTime > itemStartTime && endTime < itemEndTime)
+            ||
+            (startTime < itemStartTime && endTime > itemEndTime)
+            ||
+            (startTime == itemStartTime && endTime == itemEndTime)
+          )
+        )
+      )
+      {
+        alert("Termin je zauzet");
+        valid = false;
+        return false;
+      }
+    })
+    
+    this.teachingTerms.forEach(teachingTerm => {
+      let startTime = new Date(teachingTerm.startTime).getTime();
+      let endTime = new Date(teachingTerm.endTime).getTime();
+      
+      let itemStartTimeD = new Date(teachingTerm.startTime);
+      itemStartTimeD.setHours(item.startTime.getHours());
+      itemStartTimeD.setMinutes(item.startTime.getMinutes());
+      let itemEndTimeD = new Date(teachingTerm.endTime);
+      itemEndTimeD.setHours(item.endTime.getHours());
+      itemEndTimeD.setMinutes(item.endTime.getMinutes());
+      let itemStartTime = itemStartTimeD.getTime();
+      let itemEndTime = itemEndTimeD.getTime();
+
+      let teacherFree = true;
+      this.teacherRealizations.forEach(teacherRealization => {
+        if(
+            teacherRealization.teacher.id == item.teacherRealization.teacher.id
+            &&
+            teacherRealization.subjectRealization.id == teachingTerm.subjectRealization.id
+          ){
+            teacherFree = false;
+        }
+      })
+
+      if(
+        (
+          teachingTerm.subjectRealization.yearOfStudy.id == item.teacherRealization.subjectRealization.yearOfStudy.id
+          ||
+          teachingTerm.classroom.id == item.classroom.id
+          ||
+          !teacherFree
+        )
+        &&
+        (
+          teachingTerm.day == this.classScheduleForm.get('day').value
+          &&
+          (
+            (startTime > itemStartTime && startTime < itemEndTime)
+            ||
+            (endTime > itemStartTime && endTime < itemEndTime)
+            ||
+            (startTime < itemStartTime && endTime > itemEndTime)
+            ||
+            (startTime == itemStartTime && endTime == itemEndTime)
+          )
+        )
+      )
+      {
+        alert("Termin je zauzet");
+        valid = false;
+        return false;
+      }
+    })
+*/
+    if(this.check()){
       this.classSchedule[this.classScheduleForm.get('day').value].push(
         {
           //"yearOfStudy": this.classScheduleForm.get('yearOfStudy').value,
@@ -173,7 +430,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
         endTime.setSeconds(0);
         let teachingTerm = new TeachingTerm(item.day, startTime, endTime, item.teacherRealization.subjectRealization, item.classroom);
         if(item.teachingTermId){ // already exists
-          //this.teachingTermService.update(item.teachingTermId, teachingTerm).subscribe();
+          this.teachingTermService.update(item.teachingTermId, teachingTerm).subscribe();
         }
         else{
           this.teachingTermService.add(teachingTerm).subscribe();
@@ -182,7 +439,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
     });
     this.classScheduleForm.reset();
     this.classSchedule = [[], [], [], [], [], [], []];
-    this.teacherRealizations = [];
+    this.teacherRealizationsByYearOfStudy = [];
   }
 
   delete(teachingTermId, item, day){
@@ -196,10 +453,21 @@ export class ClassScheduleAddEditComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+      this.selectedTeacherRealization = event.previousContainer.data[event.previousIndex]['teacherRealization'];
+      this.classScheduleForm.patchValue({teacherRealization: this.selectedTeacherRealization});
+      this.selectedDay = +event.container.id;
+      this.classScheduleForm.patchValue({day: this.selectedDay});
+      this.selectedStartTime = event.previousContainer.data[event.previousIndex]['startTime'];
+      this.classScheduleForm.patchValue({startTime: (this.selectedStartTime.getHours()>=10 ? this.selectedStartTime.getHours() : '0'+this.selectedStartTime.getHours()) +':'+ (this.selectedStartTime.getMinutes()>=10 ? this.selectedStartTime.getMinutes() : '0'+this.selectedStartTime.getMinutes())});
+      this.selectedClassroom = event.previousContainer.data[event.previousIndex]['classroom'];
+      this.classScheduleForm.patchValue({classroom: this.selectedClassroom});
+      if(this.check()){
+        event.previousContainer.data[event.previousIndex]['day'] = this.selectedDay;
+        transferArrayItem(event.previousContainer.data,
+                          event.container.data,
+                          event.previousIndex,
+                          event.currentIndex);
+      }
     }
   }
 }

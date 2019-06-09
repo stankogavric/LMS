@@ -9,12 +9,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.SQLException;
 
-
-import static org.junit.Assert.assertEquals;
-import com.jayway.jsonpath.JsonPath;import java.util.Arrays;
+import java.util.Arrays;
 import java.util.HashSet;
 
+import com.jayway.jsonpath.JsonPath;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

@@ -458,8 +458,7 @@
             "subjectRealization": "SubjectRealization"
         }
     },
-
-{
+    {
     	"naziv": "Dissertation",
         "mnozina": "Dissertations",
         "data": {
@@ -472,13 +471,111 @@
 			"file": "DissertationFile"
         }
     },
-
     {
 	"naziv": "DissertationFile",
         "mnozina": "DissertationFiles",
         "data": {
             "id": "Long",
             "url": "String"
+        }
+    },
+    {
+        "naziv": "PostFile",
+        "mnozina": "PostFiles",
+        "data": {
+            "id": "Long",
+            "description": "String",
+            "url": "String",
+            "post": "Post"
+        }
+    },
+    {
+        "naziv": "Post",
+        "mnozina": "Posts",
+        "data": {
+            "id": "Long",
+            "timeOfPublication": "Date",
+            "content": "String",
+            "deleted": "Boolean",
+            "attachment": "PostFile[]",
+            "author": "ForumUser",
+            "topic": "ForumTopic"
+        }
+    },
+    {
+        "naziv": "ForumUser",
+        "mnozina": "ForumUsers",
+        "data": {
+            "id": "Long",
+            "roles": "ForumUserForumRole[]",
+            "account": "AccountData",
+            "posts": "Post[]",
+            "topics": "ForumTopic[]",
+            "forum": "Forum"
+        }
+    },
+    {
+        "naziv": "Forum",
+        "mnozina": "Forums",
+        "data": {
+            "id": "Long",
+            "users": "ForumUser[]",
+            "categories": "Category[]"
+        }
+    },
+    {
+        "naziv": "Category",
+        "mnozina": "Categories",
+        "data": {
+            "id": "Long",
+            "title": "String",
+            "deleted": "Boolean",
+            "categoryRoles": "CategoryRole[]",
+            "topics": "ForumTopic[]",
+            "forum": "Forum"
+        }
+    },
+    {
+        "naziv": "CategoryRole",
+        "mnozina": "CategoryRoles",
+        "data": {
+            "id": "Long",
+            "couldRead": "String",
+            "couldWrite": "String",
+			"category": "Category",
+        	"forumRole": "ForumRole"
+        }
+    },
+    {
+        "naziv": "ForumUserForumRole",
+        "mnozina": "ForumUserForumRoles",
+        "data": {
+            "id": "Long",
+            "user": "ForumUser",
+            "role": "ForumRole"
+        }
+    },
+    {
+        "naziv": "ForumRole",
+        "mnozina": "ForumRoles",
+        "data": {
+            "id": "Long",
+            "title": "String",
+            "users": "ForumUserForumRole[]",
+            "categoryRoles": "CategoryRole[]"
+        }
+    },
+    {
+        "naziv": "ForumTopic",
+        "mnozina": "ForumTopics",
+        "data": {
+            "id": "Long",
+            "title": "String",
+            "category": "Category",
+            "posts": "Post[]",
+            "author": "ForumUser",
+            "deleted": "Boolean",
+            "isLocked": "Boolean"
         }
     }
 ]

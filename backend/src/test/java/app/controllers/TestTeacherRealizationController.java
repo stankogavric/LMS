@@ -27,10 +27,10 @@ import App.App;
 import App.utils.DbTestUtil;
 import App.services.TeacherRealizationService;
 
+import App.models.TeachingType;
 import App.models.TeacherRealization;
 import App.models.Teacher;
 import App.models.SubjectRealization;
-import App.models.TeachingType;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
@@ -48,11 +48,11 @@ public class TestTeacherRealizationController {
 
 	@Before
 	public void setupTeacherRealization() {
-		teacherRealizationService.addTeacherRealization(new TeacherRealization(345, new TeachingType("name_1"), new Teacher("biography_1", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
-		teacherRealizationService.addTeacherRealization(new TeacherRealization(318, new TeachingType("name_2"), new Teacher("biography_2", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
-		teacherRealizationService.addTeacherRealization(new TeacherRealization(47, new TeachingType("name_3"), new Teacher("biography_3", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
-		teacherRealizationService.addTeacherRealization(new TeacherRealization(592, new TeachingType("name_4"), new Teacher("biography_4", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
-		teacherRealizationService.addTeacherRealization(new TeacherRealization(529, new TeachingType("name_5"), new Teacher("biography_5", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
+		teacherRealizationService.addTeacherRealization(new TeacherRealization(788, new TeachingType("name_1"), new Teacher("biography_1", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
+		teacherRealizationService.addTeacherRealization(new TeacherRealization(234, new TeachingType("name_2"), new Teacher("biography_2", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
+		teacherRealizationService.addTeacherRealization(new TeacherRealization(68, new TeachingType("name_3"), new Teacher("biography_3", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
+		teacherRealizationService.addTeacherRealization(new TeacherRealization(112, new TeachingType("name_4"), new Teacher("biography_4", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
+		teacherRealizationService.addTeacherRealization(new TeacherRealization(570, new TeachingType("name_5"), new Teacher("biography_5", null, null, null, null, false), new SubjectRealization(null, null, null, null, null, null)));
 	}
 
 	@After
@@ -70,7 +70,7 @@ public class TestTeacherRealizationController {
     public void getTeacherRealizationId() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/teacherrealization/5").accept(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
-		.andExpect(jsonPath("$.numberOfClasses", equalTo(529)))
+		.andExpect(jsonPath("$.numberOfClasses", equalTo(570)))
 		.andExpect(jsonPath("$.teachingType.name", equalTo("name_5")))
 		.andExpect(jsonPath("$.teacher.biography", equalTo("biography_5")))
 		.andExpect(jsonPath("$.teacher.address", equalTo(null)))

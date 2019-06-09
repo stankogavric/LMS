@@ -28,7 +28,7 @@ public class Administrator {
 
 	public Administrator() {}
 
-	public Administrator(AccountData accountData, @NotNull Boolean deleted) {
+	public Administrator(AccountData accountData, Boolean deleted) {
 		super();
 		this.accountData = accountData;
 		this.deleted = deleted;

@@ -45,11 +45,11 @@ public class TestTopicController {
 
 	@Before
 	public void setupTopic() {
-		topicService.addTopic(new Topic("description_1", 199, "iconPath_1", null, false));
-		topicService.addTopic(new Topic("description_2", 581, "iconPath_2", null, false));
-		topicService.addTopic(new Topic("description_3", 635, "iconPath_3", null, false));
-		topicService.addTopic(new Topic("description_4", 735, "iconPath_4", null, false));
-		topicService.addTopic(new Topic("description_5", 558, "iconPath_5", null, false));
+		topicService.addTopic(new Topic("description_1", 167, "iconPath_1", null, false));
+		topicService.addTopic(new Topic("description_2", 224, "iconPath_2", null, false));
+		topicService.addTopic(new Topic("description_3", 567, "iconPath_3", null, false));
+		topicService.addTopic(new Topic("description_4", 671, "iconPath_4", null, false));
+		topicService.addTopic(new Topic("description_5", 375, "iconPath_5", null, false));
 	}
 
 	@After
@@ -68,7 +68,7 @@ public class TestTopicController {
         mockMvc.perform(MockMvcRequestBuilders.get("/topic/5").accept(MediaType.APPLICATION_JSON_UTF8))
         .andExpect(status().isOk()).andExpect(jsonPath("$", notNullValue()))
 		.andExpect(jsonPath("$.description", equalTo("description_5")))
-		.andExpect(jsonPath("$.week", equalTo(558)))
+		.andExpect(jsonPath("$.week", equalTo(375)))
 		.andExpect(jsonPath("$.iconPath", equalTo("iconPath_5")))
 		.andExpect(jsonPath("$.subject", equalTo(null)))
 		.andExpect(jsonPath("$.deleted", equalTo(false)));

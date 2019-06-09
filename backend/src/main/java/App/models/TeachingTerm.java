@@ -33,7 +33,7 @@ public class TeachingTerm {
 	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private SubjectRealization subjectRealization;
 	
-	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	private Classroom classroom;
 	
 	@NotNull
@@ -44,13 +44,14 @@ public class TeachingTerm {
 	}
 
 	public TeachingTerm(String day, Date startTime, Date endTime, SubjectRealization subjectRealization,
-			Classroom classroom) {
+			Classroom classroom, Boolean deleted) {
 		super();
 		this.day = day;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.subjectRealization = subjectRealization;
 		this.classroom = classroom;
+		this.deleted = deleted;
 	}
 
 	public Long getId() {
