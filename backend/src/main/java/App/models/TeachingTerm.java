@@ -33,7 +33,7 @@ public class TeachingTerm {
 	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
 	private SubjectRealization subjectRealization;
 	
-	@ManyToOne(cascade= {CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne(cascade= CascadeType.REFRESH)
 	private Classroom classroom;
 	
 	@NotNull

@@ -2,7 +2,7 @@
   <mat-form-field>
     <mat-label>Study program</mat-label>
     <mat-select name = "yearOfStudy" formControlName="yearOfStudy">
-      <mat-option *ngFor="let yearOfStudy of yearsOfStudies" [value]="yearOfStudy" (click)="getTeacherRealizations(yearOfStudy.id);">
+      <mat-option *ngFor="let yearOfStudy of yearsOfStudies" [value]="yearOfStudy" (click)="getTeacherRealizationsByYearOfStudy(yearOfStudy.id);">
         {{yearOfStudy.year}}. godina {{yearOfStudy.studyProgram.name}}
       </mat-option>
     </mat-select>
@@ -10,8 +10,8 @@
 
   <mat-form-field>
     <mat-label>Subject</mat-label>
-    <mat-select name = "teacherRealization" formControlName="teacherRealization">
-      <mat-option *ngFor="let teacherRealization of teacherRealizations" [value]="teacherRealization">
+    <mat-select name = "teacherRealization" formControlName="teacherRealization"  [(value)]="selectedTeacherRealization">
+      <mat-option *ngFor="let teacherRealization of teacherRealizationsByYearOfStudy" [value]="teacherRealization">
         {{teacherRealization.subjectRealization.subject.name}} {{teacherRealization.teacher.personalData.firstName}} {{teacherRealization.teacher.personalData.lastName}} {{teacherRealization.teacher.accountData.email}}
       </mat-option>
     </mat-select>
@@ -19,7 +19,7 @@
 
   <mat-form-field>
     <mat-label>Day</mat-label>
-    <mat-select name = "day" formControlName="day">
+    <mat-select name = "day" formControlName="day" [(value)]="selectedDay">
       <mat-option *ngFor="let day of days; let i = index" [value]="i">
         {{day}}
       </mat-option>
@@ -33,7 +33,7 @@
 
   <mat-form-field>
     <mat-label>Classroom</mat-label>
-    <mat-select name = "classroom" formControlName="classroom">
+    <mat-select name = "classroom" formControlName="classroom"  [(value)]="selectedClassroom">
       <mat-option *ngFor="let classroom of classrooms" [value]="classroom">
         {{classroom.name}}
       </mat-option>
@@ -59,8 +59,9 @@
   <tbody>
     <tr>
       <td *ngFor="let day of classSchedule | keyvalue">
-        <div class="example" *ngIf="day.value.length > 0">
-          <div cdkDropList [cdkDropListData]="day.value" class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example">
+          <div id="{{classSchedule.indexOf(day.value)}}" cdkDropList [cdkDropListData]="day.value" [cdkDropListConnectedTo]="['0', '1', '2', '3', '4', '5', '6']" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="emptyListWidth">Wednesday</div>
             <div class="example-box" *ngFor="let item of day.value" cdkDrag>
               <div>
                 {{item.teacherRealization.subjectRealization.subject.name}}
