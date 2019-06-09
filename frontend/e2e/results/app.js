@@ -244,7 +244,11 @@ app.controller('ScreenshotReportController', function ($scope, $http) {
         "passed": false,
         "pending": false,
         "os": "Windows NT",
+<<<<<<< HEAD
+        "instanceId": 9676,
+=======
         "instanceId": 13792,
+>>>>>>> a27be5ba89b329760aaae402ab35fa78a67fe183
         "browser": {
             "name": "chrome",
             "version": "75.0.3770.80"

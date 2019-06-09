@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { SubjectService } from '../../subject/subject.service';
 import { AuthService } from '../../auth/auth.service';
 import { ExamDTO } from '../../exam/examDTO.model';
@@ -13,6 +13,7 @@ export class PastSubjectsComponent implements OnInit {
   exams?: ExamDTO[] = [];
   avgGrade?: number;
   totalEcts?: number;
+  public fetched: boolean = false;
 
   constructor(private subjectService: SubjectService, private authService: AuthService) { }
 
@@ -42,6 +43,7 @@ export class PastSubjectsComponent implements OnInit {
             exam.ects = data[i][6];
             this.exams.push(exam);
           };
+          this.fetched = true;
         };
         this.getAvgGrade();
         this.getTotalEcts();
@@ -69,7 +71,5 @@ export class PastSubjectsComponent implements OnInit {
     }
     this.totalEcts = ects;
   }
-
-
 
 }

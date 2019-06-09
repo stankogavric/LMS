@@ -1,0 +1,35 @@
+<div class="mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource">
+      
+    <ng-container matColumnDef="registrationNum">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Registration number </th>
+      <td mat-cell *matCellDef="let exam"> {{exam.registrationNum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subject">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Subject </th>
+      <td mat-cell *matCellDef="let exam"> {{exam.subject}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="startTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Time </th>
+      <td mat-cell *matCellDef="let exam"> {{exam.startTime | date: "MMM d, y, h:mm:ss a"}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="endTime">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> End Time </th>
+      <td mat-cell *matCellDef="let exam"> {{exam.endTime | date: "MMM d, y, h:mm:ss a"}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="examType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Exam type </th>
+        <td mat-cell *matCellDef="let exam"> {{exam.examType}}</td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+

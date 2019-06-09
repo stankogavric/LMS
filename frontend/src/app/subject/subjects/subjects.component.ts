@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { MatSort } from '@angular/material/sort';
 import { Subject } from '../subject.model';
 import { SubjectService } from '../subject.service';
 
@@ -17,13 +16,12 @@ export class SubjectsComponent implements OnInit {
   dataSource = new MatTableDataSource<Subject>(this.subjects);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+
 
   constructor(private subjectService: SubjectService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
     this.getAll();
   }
 

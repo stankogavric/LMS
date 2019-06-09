@@ -37,10 +37,8 @@ public class AccountData {
 	
 	public AccountData() {}
 
-	public AccountData(Long id, String username, String password, String email,
-			Set<AccountDataPermission> accountDataPermissions) {
+	public AccountData(String username, String password, String email, Set<AccountDataPermission> accountDataPermissions) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;

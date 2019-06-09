@@ -40,4 +40,14 @@ public class View {
     public interface ShowTeachingMaterial{ };
     public interface ShowAccountDataPermission{ };
     public interface ShowClassroom{ };
+    public interface ShowPostFile{ };
+    public interface ShowPost{ };
+    public interface ShowForumUser{ };
+    public interface ShowForum{ };
+    public interface ShowCategory{ };
+    public interface ShowCategoryRole{ };
+    public interface ShowForumUserForumRole{ };
+    public interface ShowForumRole{ };
+    public interface ShowForumTopic{ };
+    public interface ShowDissertation{};
 }
