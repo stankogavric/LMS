@@ -1,5 +1,6 @@
 package App.controllers;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -79,6 +80,14 @@ public class ExamController {
     	Collection<Object> exams = examService.getExamsByStudent(studentId);
     	if (exams.isEmpty()) return new ResponseEntity<Collection<Object>>(HttpStatus.NO_CONTENT);
     	return new ResponseEntity<Collection<Object>>(exams, HttpStatus.OK);
+    }
+    
+    @JsonView(HideOptionalProperties.class)
+    @RequestMapping(value="/availableExams/{username}", method=RequestMethod.GET)
+    public ResponseEntity<ArrayList<Exam>> getAvailableExamsForRegistration(@PathVariable String username) {
+    	ArrayList<Exam> exams = examService.getAvailableExamsForRegistration(username);
+    	if (exams.size() == 0) return new ResponseEntity<ArrayList<Exam>>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<ArrayList<Exam>>(exams, HttpStatus.OK);
     }
     
 }

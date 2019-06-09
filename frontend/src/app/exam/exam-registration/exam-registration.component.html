@@ -1,0 +1,50 @@
+<div>
+    <p *ngIf="exams.length > 0">Select exams you want to register:</p>
+    <p *ngIf="exams.length == 0">There are no exams available for registration</p>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf = "fetched">
+
+        <ng-container matColumnDef="i">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let i = index;"> {{i+1}} </td>
+        </ng-container>
+        <ng-container matColumnDef="subject">
+            <th mat-header-cell *matHeaderCellDef> Subject </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.subjectName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="startTime">
+            <th mat-header-cell *matHeaderCellDef> Start time </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.startTime | date: 'MMM d, y, h:mm:ss a' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="duration">
+            <th mat-header-cell *matHeaderCellDef> Duration </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.duration}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="examType">
+            <th mat-header-cell *matHeaderCellDef> Exam type </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.examType}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="yearOfStudyYear">
+            <th mat-header-cell *matHeaderCellDef> Year of study </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.yearOfStudyYear}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="studyProgramName">
+            <th mat-header-cell *matHeaderCellDef> Study program </th>
+            <td mat-cell *matCellDef="let exam"> {{exam.studyProgramName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="register">
+            <th mat-header-cell *matHeaderCellDef>  </th>
+            <td mat-cell *matCellDef="let exam"> <button (click) = "register(exam.examId, exam.subjectRealizationId)" >Register</button> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

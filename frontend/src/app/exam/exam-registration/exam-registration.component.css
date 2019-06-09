@@ -1,0 +1,11 @@
+table {
+    width: 100%
+}
+
+.success {
+    background: lightgreen
+}
+
+.error {
+    background: orangered
+}
