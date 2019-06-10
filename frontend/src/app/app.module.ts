@@ -32,6 +32,7 @@ import { AddEditTopicsComponent } from './topic/add-edit-topics/add-edit-topics.
 import { FileComponent } from './file/file.component';
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
 import { ClassroomComponent } from './classroom/classroom.component';
+import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ClassroomComponent } from './classroom/classroom.component';
     AddEditTopicsComponent,
     FileComponent,
     StudyProgramAddEditComponent,
-    ClassroomComponent
+    ClassroomComponent,
+    ExamRegistrationComponent
   ],
   imports: [
     BrowserModule,

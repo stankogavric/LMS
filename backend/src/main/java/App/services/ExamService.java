@@ -1,6 +1,8 @@
 package App.services;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +67,16 @@ public class ExamService {
     public ArrayList<Object> getExamsByStudent(Long studentId){
     	return examRepo.getExamsByStudent(studentId);
     	
+    }
+    
+    public ArrayList<Exam> getAvailableExamsForRegistration(String username){
+    	Calendar plusThree = Calendar.getInstance();
+    	plusThree.setTime(new Date());
+    	plusThree.add(Calendar.DATE, 3);
+    	Calendar plusFourteen = Calendar.getInstance();
+    	plusFourteen.setTime(new Date());
+    	plusFourteen.add(Calendar.DATE, 14); 
+    	return examRepo.getAvailableExamsForRegistration(username, plusThree.getTime(), plusFourteen.getTime());
     }
 
 	

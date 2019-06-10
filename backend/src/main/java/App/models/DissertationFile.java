@@ -20,9 +20,8 @@ public class DissertationFile {
 	@OneToOne(mappedBy = "file")
 	private Dissertation dissertation;
 
-	public DissertationFile(Long id, String url, Dissertation dissertation) {
+	public DissertationFile(String url, Dissertation dissertation) {
 		super();
-		this.id = id;
 		this.url = url;
 		this.dissertation = dissertation;
 	}

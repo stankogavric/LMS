@@ -7,6 +7,7 @@ import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatEx
   MatNativeDateModule } from "@angular/material";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatListModule,
     MatNativeDateModule,
     MatTabsModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
   ],
   exports: [
     MatInputModule,
@@ -53,7 +55,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatListModule,
     MatNativeDateModule,
     MatTabsModule,
-    MatSortModule
+    MatSortModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}
