@@ -3,16 +3,22 @@ package App.services;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.apache.tika.Tika;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import App.models.PersonalData;
 import App.models.Topic;
+import App.repositories.FileRepository;
 
 @Service
 public class FileService {
+	
+	@Autowired
+	private FileRepository fileRepo; 
 
 	public void saveProfileImage(MultipartFile file, String fileName, PersonalData pData) throws IOException {
 	    Tika tika = new Tika();
@@ -39,5 +45,9 @@ public class FileService {
 			tData.setIconPath("images/topic_icons/" + fileName + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")));
 		}
 	}
+	
+	public Iterable<Optional<App.models.File>> getFilesBySubject(Long id) {
+        return fileRepo.getAllBySubject(id);
+    }
 	
 }
