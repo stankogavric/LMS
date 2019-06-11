@@ -1,9 +1,13 @@
 package App.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,7 @@ import App.models.SubjectRealization;
 import App.models.Teacher;
 import App.services.FileService;
 import App.services.TeacherService;
+import App.utils.GeneratePDF;
 import App.utils.View.HideOptionalProperties;
 
 @CrossOrigin(origins={"http://localhost:4200"})
@@ -40,6 +45,22 @@ public class TeacherController {
     @RequestMapping()
     public ResponseEntity<Iterable<Teacher>> getTeachers() {
         return new ResponseEntity<Iterable<Teacher>>(teacherService.getTeachers(), HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/pdf", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> exportStudentsToPDF() {
+
+        ByteArrayInputStream bis = GeneratePDF.teachers((List<Teacher>)teacherService.getTeachers());
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=teachers.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
     
     @JsonView(HideOptionalProperties.class)

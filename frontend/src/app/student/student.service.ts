@@ -9,7 +9,7 @@ import { StudentDissertationDTO } from './student-dissertation/student-dissertat
 })
 export class StudentService {
 
-  private studentUrl = "http://localhost:8080/student";
+  public studentUrl = "http://localhost:8080/student";
   private subjAttUrl = "http://localhost:8080/subjectattendance";
   private dissertationUrl = "http://localhost:8080/dissertation";
 

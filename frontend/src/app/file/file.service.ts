@@ -45,5 +45,23 @@ export class FileService {
     });
   }
 
+  exportDataToXML(data) {
+    const REQUEST_PARAMS = new HttpParams().set('fileName', data.fileName);
+    const REQUEST_URL = data.fileUrl;
+    return this.http.get(REQUEST_URL, {
+      params: REQUEST_PARAMS,
+      responseType: 'arraybuffer'
+    });
+  }
+
+  exportDataToPDF(data) {
+    const REQUEST_PARAMS = new HttpParams().set('fileName', data.fileName);
+    const REQUEST_URL = data.fileUrl+'/pdf';
+    return this.http.get(REQUEST_URL, {
+      params: REQUEST_PARAMS,
+      responseType: 'arraybuffer'
+    });
+  }
+
 }
 

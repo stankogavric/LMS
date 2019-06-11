@@ -8,7 +8,7 @@ import { SubjectRealization } from '../subject/subject-realization.model';
 })
 export class TeacherService {
 
-  private teacherUrl = "http://localhost:8080/teacher";
+  public teacherUrl = "http://localhost:8080/teacher";
 
   constructor(private http: HttpClient) {
   }

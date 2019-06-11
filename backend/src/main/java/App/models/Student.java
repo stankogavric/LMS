@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Where;
 
@@ -19,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import App.utils.View.ShowStudentYear;
 import App.utils.View.ShowSubjectAttendance;
 
-
+@XmlRootElement
 @Entity
 @Where(clause = "deleted = 'false'")
 public class Student {
