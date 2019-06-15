@@ -25,6 +25,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
 			+ "AND sa.student.accountData.username = ?1 "
 			+ "AND e.startTime BETWEEN ?2 AND ?3 \n"
 			+ "AND e NOT IN (SELECT er.exam FROM ExamRealization er WHERE er.studentYear.student.accountData.username = ?1)")
-	ArrayList<Exam> getAvailableExamsForRegistration(String studentUsername, Date plusThree, Date plusFourteen);
+	ArrayList<Object[]> getAvailableExamsForRegistration(String studentUsername, Date plusThree, Date plusFourteen);
 
 }

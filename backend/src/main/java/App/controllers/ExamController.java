@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.dto.ExamRegistrationDTO;
 import App.models.Exam;
 import App.models.ExamType;
 import App.services.ExamService;
@@ -84,10 +85,10 @@ public class ExamController {
     
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/availableExams/{username}", method=RequestMethod.GET)
-    public ResponseEntity<ArrayList<Exam>> getAvailableExamsForRegistration(@PathVariable String username) {
-    	ArrayList<Exam> exams = examService.getAvailableExamsForRegistration(username);
-    	if (exams.size() == 0) return new ResponseEntity<ArrayList<Exam>>(HttpStatus.NO_CONTENT);
-        return new ResponseEntity<ArrayList<Exam>>(exams, HttpStatus.OK);
+    public ResponseEntity<ArrayList<ExamRegistrationDTO>> getAvailableExamsForRegistration(@PathVariable String username) {
+    	ArrayList<ExamRegistrationDTO> exams = examService.getAvailableExamsForRegistration(username);
+    	if (exams.size() == 0) return new ResponseEntity<ArrayList<ExamRegistrationDTO>>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<ArrayList<ExamRegistrationDTO>>(exams, HttpStatus.OK);
     }
     
 }

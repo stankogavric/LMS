@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Exam } from './exam.model';
 import { ExamType } from './exam-type.model';
 import { ExamRealization } from './exam-realization.model';
+import { ExamRegistrationDTO } from './exam-registration/exam-registration-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,12 +48,11 @@ export class ExamService {
     return this.http.get<[]>(this.examReal+ `/${id}`);
   }
 
-  getStudentsAvailableExamsForRegistrations(username: string){
-    return this.http.get<[]>(this.examUrl + `/availableExams/${username}`);
+  getAvailableExamsForRegistration(username: string){
+    return this.http.get<ExamRegistrationDTO[]>(this.examUrl + `/availableExams/${username}`);
   }
 
   registerExam(data: {}){
-    console.log(data);
     return this.http.post(this.examReal, data);
 
   }

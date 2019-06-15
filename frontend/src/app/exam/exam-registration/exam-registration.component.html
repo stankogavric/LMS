@@ -1,8 +1,8 @@
 <div>
-    <p *ngIf="exams.length > 0">Select exams you want to register:</p>
-    <p *ngIf="exams.length == 0">There are no exams available for registration</p>
+    <p *ngIf="exams">Select exams you want to register:</p>
+    <p *ngIf="!exams">There are no exams available for registration</p>
 
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf = "fetched">
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
 
         <ng-container matColumnDef="i">
             <th mat-header-cell *matHeaderCellDef> No. </th>

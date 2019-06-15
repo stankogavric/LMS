@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import App.dto.ExamRegistrationDTO;
 import App.models.Exam;
 import App.models.ExamTopic;
 import App.models.ExamType;
@@ -69,14 +70,23 @@ public class ExamService {
     	
     }
     
-    public ArrayList<Exam> getAvailableExamsForRegistration(String username){
+    public ArrayList<ExamRegistrationDTO> getAvailableExamsForRegistration(String username){
     	Calendar plusThree = Calendar.getInstance();
     	plusThree.setTime(new Date());
     	plusThree.add(Calendar.DATE, 3);
     	Calendar plusFourteen = Calendar.getInstance();
     	plusFourteen.setTime(new Date());
     	plusFourteen.add(Calendar.DATE, 14); 
-    	return examRepo.getAvailableExamsForRegistration(username, plusThree.getTime(), plusFourteen.getTime());
+    	ArrayList<Object[]> available = examRepo.getAvailableExamsForRegistration(username, plusThree.getTime(), plusFourteen.getTime());
+    	ArrayList<ExamRegistrationDTO> exams = new ArrayList<ExamRegistrationDTO>(available.size());
+    	if(available.size() > 0) {
+    		for (int i = 0; i < available.size(); i++) {
+        		exams.add(new ExamRegistrationDTO((Long) available.get(i)[0], (Long) available.get(i)[1], (String) available.get(i)[2],
+        				(Date) available.get(i)[3], (int) available.get(i)[4], (String) available.get(i)[5], (int) available.get(i)[6], (String) available.get(i)[7]));   			
+    		}
+    	}
+    	return exams;
+    	
     }
 
 	
