@@ -18,12 +18,14 @@ import { SubjectsComponent } from '../subject/subjects/subjects.component';
 import { SubjectComponent } from '../subject/subject.component';
 import { TeacherSidenavComponent } from '../teacher/teacher-sidenav/teacher-sidenav.component';
 import { RegisteredExamsComponent } from '../exam/registered-exams/registered-exams.component';
+import { AdministrativeStaffSidenavComponent } from '../administrativeStaff/administrative-staff-sidenav/administrative-staff-sidenav.component';
 
 @NgModule({
   declarations: [
     AdminSidenavComponent,
     StudentSidenavComponent,
     TeacherSidenavComponent,
+    AdministrativeStaffSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
     AddressComponent,
@@ -53,6 +55,7 @@ import { RegisteredExamsComponent } from '../exam/registered-exams/registered-ex
     AdminSidenavComponent,
     StudentSidenavComponent,
     TeacherSidenavComponent,
+    AdministrativeStaffSidenavComponent,
     AccountDataComponent,
     PersonalDataComponent,
     AddressComponent,

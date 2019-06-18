@@ -10,7 +10,7 @@ import App.models.StudentYear;
 
 @Repository
 public interface StudentYearRepository extends JpaRepository<StudentYear, Long> {
-	Optional<StudentYear> findByYearOfStudyId(Long id);
+	Optional<StudentYear> findByYearOfStudyIdAndStudentId(Long yearOfStudyId, Long studentId);
 	
 	@Query("SELECT sy.id FROM StudentYear sy JOIN sy.yearOfStudy.subjectRealizations sr "
 			+ "WHERE  sr.id = ?1 "

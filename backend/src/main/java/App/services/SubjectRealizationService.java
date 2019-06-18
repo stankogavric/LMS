@@ -21,6 +21,10 @@ public class SubjectRealizationService {
     public Iterable<SubjectRealization> getSubjectRealization() {
         return subjectRealizationRepo.findAll();
     }
+    
+    public Iterable<SubjectRealization> getSubjectRealizationByYearOfStudyId(Long id) {
+        return subjectRealizationRepo.findByYearOfStudyId(id);
+    }
 
     public Optional<SubjectRealization> getSubjectRealizationById(Long id) {
         return subjectRealizationRepo.findById(id);

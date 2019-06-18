@@ -3,7 +3,6 @@ package App.models;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +16,7 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.utils.View.ShowElectiveSubjectAttendance;
 import App.utils.View.ShowStudentYear;
 import App.utils.View.ShowSubjectAttendance;
 
@@ -32,6 +32,10 @@ public class Student {
 	@JsonView(ShowSubjectAttendance.class)
 	@OneToMany(mappedBy="student")
 	private Set<SubjectAttendance> subjectAttendances;
+	
+	@JsonView(ShowElectiveSubjectAttendance.class)
+	@OneToMany(mappedBy="student")
+	private Set<ElectiveSubjectAttendance> electiveSubjectAttendances;
 
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Address address;
@@ -48,22 +52,19 @@ public class Student {
 	
 	@NotNull
 	private Boolean deleted = false;
-	
-	@Column
-	private int yearOfStudy;
 
 	public Student() {}
 
-	public Student(Set<SubjectAttendance> subjectAttendances, Address address, Set<StudentYear> studentYears,
-			AccountData accountData, PersonalData personalData, Boolean deleted, int yearOfStudy) {
+	public Student(Set<SubjectAttendance> subjectAttendances, Set<ElectiveSubjectAttendance> electiveSubjectAttendances, Address address, Set<StudentYear> studentYears,
+			AccountData accountData, PersonalData personalData, Boolean deleted) {
 		super();
 		this.subjectAttendances = subjectAttendances;
+		this.electiveSubjectAttendances = electiveSubjectAttendances;
 		this.address = address;
 		this.studentYears = studentYears;
 		this.accountData = accountData;
 		this.personalData = personalData;
 		this.deleted = deleted;
-		this.yearOfStudy = yearOfStudy;
 	}
 	
 	public Student(Long id, String firstName, String lastName, String email) {
@@ -89,6 +90,14 @@ public class Student {
 		this.subjectAttendances = subjectAttendances;
 	}
 	
+	public Set<ElectiveSubjectAttendance> getElectiveSubjectAttendances() {
+		return electiveSubjectAttendances;
+	}
+
+	public void setElectiveSubjectAttendances(Set<ElectiveSubjectAttendance> electiveSubjectAttendances) {
+		this.electiveSubjectAttendances = electiveSubjectAttendances;
+	}
+
 	public Address getAddress(){
 		return address;
 	}
@@ -127,14 +136,6 @@ public class Student {
 
 	public void setDeleted(Boolean deleted) {
 		this.deleted = deleted;
-	}
-
-	public int getYearOfStudy() {
-		return yearOfStudy;
-	}
-
-	public void setYearOfStudy(int yearOfStudy) {
-		this.yearOfStudy = yearOfStudy;
 	}
 	
 }

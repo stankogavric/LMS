@@ -17,6 +17,7 @@ import org.hibernate.annotations.Where;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.utils.View.ShowSubject;
 import App.utils.View.ShowTopic;
 import App.utils.View.ShowYearOfStudy;
 
@@ -64,6 +65,7 @@ public class Subject {
 	@ManyToMany
     private Set<Subject> prerequisites;
 	
+	@JsonView(ShowSubject.class)
 	@ManyToMany(mappedBy="prerequisites")
     private Set<Subject> prerequisiteFor;
 
