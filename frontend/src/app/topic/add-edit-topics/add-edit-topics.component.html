@@ -73,9 +73,9 @@
           </div>
           <div *ngIf="!topic[2] && !topic[0].iconPath">
             {{topic[0].description}}
-            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)" matTooltip="Delete">
               <mat-icon>delete</mat-icon>
-              Delete
+              <!--Delete-->
             </button>
           </div>
         </li>

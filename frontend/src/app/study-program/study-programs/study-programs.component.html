@@ -34,11 +34,11 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>  </th>
         <td mat-cell *matCellDef="let studyProgram"> 
-          <button mat-raised-button color="warn" (click)="delete(studyProgram.id)">
+          <button mat-raised-button color="warn" (click)="delete(studyProgram.id)" matTooltip="Delete">
             <mat-icon>delete</mat-icon>
             <!--Delete-->
           </button>
-          <button mat-raised-button color="accent" [routerLink]="['/edit/studyProgram', studyProgram.id]">
+          <button mat-raised-button color="accent" [routerLink]="['/edit/studyProgram', studyProgram.id]" matTooltip="Edit">
             <mat-icon>edit</mat-icon>
             <!--Edit-->
           </button>
