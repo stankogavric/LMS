@@ -58,22 +58,22 @@
           <div class="image-preview" *ngIf="topic[2]">
             <img [src]="topic[2]" alt="Can't display icon">
             {{topic[0].description}}
-            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+            <button mat-raised-button color="warn" (click)="openDialog(week, topic)" matTooltip="Delete">
               <mat-icon>delete</mat-icon>
-              Delete
+              <!--Delete-->
             </button>
           </div>
           <div class="image-preview" *ngIf="topic[0].iconPath">
             <img [src]="fileUrl+topic[0].iconPath" alt="Can't display icon">
             {{topic[0].description}}
-            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)">
+            <button mat-raised-button color="warn" (click)="openDialog(week, topic)" matTooltip="Delete">
               <mat-icon>delete</mat-icon>
-              Delete
+              <!--Delete-->
             </button>
           </div>
           <div *ngIf="!topic[2] && !topic[0].iconPath">
             {{topic[0].description}}
-            <button mat-raised-button color="warn" (click)="deleteTopic(week, topic)" matTooltip="Delete">
+            <button mat-raised-button color="warn" (click)="openDialog(week, topic)" matTooltip="Delete">
               <mat-icon>delete</mat-icon>
               <!--Delete-->
             </button>

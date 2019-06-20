@@ -8,6 +8,8 @@ import { TeacherService } from 'src/app/teacher/teacher.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ExamTopic } from 'src/app/exam-topic/exam-topic.model';
+import { MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-exam-add-edit',
@@ -22,7 +24,7 @@ export class ExamAddEditComponent implements OnInit {
   public subjectRealizations: SubjectRealization[] = [];
   public topics: ExamTopic[] = [];
 
-  constructor(private fb: FormBuilder, private examService: ExamService, private teacherService: TeacherService, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private examService: ExamService, private teacherService: TeacherService, private authService: AuthService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.examAddEditForm = this.fb.group({
@@ -82,6 +84,19 @@ export class ExamAddEditComponent implements OnInit {
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.topics, event.previousIndex, event.currentIndex);
+  }
+
+  openDialog(topic: ExamTopic): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Delete topic", content: "Are you sure you want to delete this topic?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.deleteTopic(topic);
+      };
+    });
   }
   
 }

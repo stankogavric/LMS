@@ -19,6 +19,7 @@ import { SubjectComponent } from '../subject/subject.component';
 import { TeacherSidenavComponent } from '../teacher/teacher-sidenav/teacher-sidenav.component';
 import { RegisteredExamsComponent } from '../exam/registered-exams/registered-exams.component';
 import { AdministrativeStaffSidenavComponent } from '../administrativeStaff/administrative-staff-sidenav/administrative-staff-sidenav.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { AdministrativeStaffSidenavComponent } from '../administrativeStaff/admi
     AddressComponent,
     SubjectsComponent,
     SubjectComponent,
-    RegisteredExamsComponent
+    RegisteredExamsComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     CommonModule,
@@ -61,7 +63,9 @@ import { AdministrativeStaffSidenavComponent } from '../administrativeStaff/admi
     AddressComponent,
     SubjectComponent,
     SubjectsComponent,
-    RegisteredExamsComponent
-  ]
+    RegisteredExamsComponent,
+    ConfirmationDialogComponent
+  ],
+  entryComponents: [ ConfirmationDialogComponent ]
 })
 export class SharedModule { }

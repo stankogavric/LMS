@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { YearOfStudy } from 'src/app/year-of-study/year-of-study.model';
 import { YearOfStudyService } from 'src/app/year-of-study/year-of-study.service';
 import { AdministrativeStaffService } from '../administrative-staff.service';
 import { Student } from 'src/app/student/student.model';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-enrollment-to-the-next-year',
@@ -21,7 +22,7 @@ export class EnrollmentToTheNextYearComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fb: FormBuilder, private yearOfStudyService: YearOfStudyService, private administrativeStaffService: AdministrativeStaffService) { }
+  constructor(private fb: FormBuilder, private yearOfStudyService: YearOfStudyService, private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -49,6 +50,19 @@ export class EnrollmentToTheNextYearComponent implements OnInit {
     this.administrativeStaffService.enrollmentToTheNextYear(student, this.enrollmentToTheNextYearForm.get('yearOfStudy').value).subscribe(_ => {
       this.getStudentsForEnrollmentToTheNextYear(this.enrollmentToTheNextYearForm.get('yearOfStudy').value);
     })
+  }
+
+  openDialog(student: Student): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Enroll student", content: "Are you sure you want to enroll this student?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.enrollmentToTheNextYear(student);
+      };
+    });
   }
 
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { StudyProgram } from '../study-program.model';
 import { StudyProgramService } from '../study-program.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-study-programs',
@@ -17,7 +18,7 @@ export class StudyProgramsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private studyProgramService: StudyProgramService) {}
+  constructor(private studyProgramService: StudyProgramService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -28,6 +29,14 @@ export class StudyProgramsComponent implements OnInit {
     this.studyProgramService.getAll().subscribe((data: StudyProgram[]) => {
       this.studyPrograms = data;
       this.dataSource.data = data;
+      this.dataSource.filterPredicate = function(data, filter): boolean {
+        return data.name.toLowerCase().includes(filter) || 
+                data.description.toLowerCase().includes(filter) ||
+                data.headTeacher.personalData.firstName.toLowerCase().includes(filter) ||
+                data.headTeacher.personalData.lastName.toLowerCase().includes(filter) ||
+                data.faculty.name.toLowerCase().includes(filter) ||
+                data.faculty.university.name.toLowerCase().includes(filter);
+      };
     });
   }
 
@@ -47,6 +56,23 @@ export class StudyProgramsComponent implements OnInit {
     this.studyProgramService.update(id, studyProgram).subscribe((data: any) => {
       this.getAll();
     });
+  }
+
+  openDialog(id: String): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Delete study program", content: "Are you sure you want to delete this study program?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.delete(id);
+      };
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

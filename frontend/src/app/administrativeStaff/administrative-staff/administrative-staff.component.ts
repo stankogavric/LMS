@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { AdministrativeStaff } from '../administrative-staff';
 import { AdministrativeStaffService } from '../administrative-staff.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-administrative-staff',
@@ -18,7 +19,7 @@ export class AdministrativeStaffComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private administrativeStaffService: AdministrativeStaffService) {}
+  constructor(private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -29,6 +30,18 @@ export class AdministrativeStaffComponent implements OnInit {
     this.administrativeStaffService.getAll().subscribe((data: AdministrativeStaff[]) => {
       this.administrativeStaff = data;
       this.dataSource.data = data;
+      this.dataSource.filterPredicate = function(data, filter): boolean {
+        return data.personalData.firstName.toLowerCase().includes(filter) ||
+                data.personalData.lastName.toLowerCase().includes(filter) || 
+                data.personalData.personalNumber.toLowerCase().includes(filter) ||
+                data.personalData.profilePicturePath.toLowerCase().includes(filter) || 
+                data.address.city.country.name.toLowerCase().includes(filter) ||
+                data.address.city.name.toLowerCase().includes(filter) || 
+                data.address.street.toLowerCase().includes(filter) ||
+                data.address.number.toLowerCase().includes(filter) || 
+                data.accountData.email.toLowerCase().includes(filter) ||
+                data.accountData.username.toLowerCase().includes(filter);
+      };
     });
   }
 
@@ -42,6 +55,23 @@ export class AdministrativeStaffComponent implements OnInit {
     this.administrativeStaffService.update(id, administrativeStaffPerson, image).subscribe((data: any) => {
       this.getAll();
     });
+  }
+
+  openDialog(id: String): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Delete administrative staff", content: "Are you sure you want to delete this administrative staff?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.delete(id);
+      };
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }

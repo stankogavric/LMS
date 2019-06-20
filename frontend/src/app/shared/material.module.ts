@@ -4,10 +4,11 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule, MatCardModule, MatButtonModule, MatToolbarModule, MatExpansionModule, 
   MatProgressSpinnerModule, MatPaginatorModule, MatSidenavModule, MatTableModule, MatCheckboxModule, 
   MatIconModule, MatMenuModule, MatSelectModule, MatDatepickerModule, MatStepperModule, MatListModule, 
-  MatNativeDateModule, MatTreeModule, MatTooltipModule } from "@angular/material";
+  MatNativeDateModule, MatTreeModule, MatTooltipModule, MatFormFieldModule } from "@angular/material";
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatTabsModule } from '@angular/material/tabs';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -34,7 +35,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSortModule,
     MatSnackBarModule,
     MatTreeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule
   ],
   exports: [
     MatInputModule,
@@ -60,7 +63,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatSortModule,
     MatSnackBarModule,
     MatTreeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatDialogModule,
+    MatFormFieldModule
   ]
 })
 export class MaterialModule {}

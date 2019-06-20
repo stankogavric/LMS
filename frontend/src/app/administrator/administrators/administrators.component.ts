@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { Administrator } from '../administrator.model';
 import { AdministratorService } from '../administrator.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-administrators',
@@ -17,7 +19,7 @@ export class AdministratorsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private administratorService: AdministratorService) {}
+  constructor(private administratorService: AdministratorService, public dialog: MatDialog) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -28,6 +30,10 @@ export class AdministratorsComponent implements OnInit {
     this.administratorService.getAll().subscribe((data: Administrator[]) => {
       this.administrators = data;
       this.dataSource.data = data;
+      this.dataSource.filterPredicate = function(data, filter): boolean {
+        return data.accountData.email.toLowerCase().includes(filter) || 
+                data.accountData.username.toLowerCase().includes(filter);
+      };
     });
   }
 
@@ -41,6 +47,23 @@ export class AdministratorsComponent implements OnInit {
     this.administratorService.update(id, administrator).subscribe((data: any) => {
       this.getAll();
     });
+  }
+
+  openDialog(id: String): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Delete administrator", content: "Are you sure you want to delete this administrator?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.delete(id);
+      };
+    });
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
