@@ -4,6 +4,7 @@ import { Administrator } from '../administrator.model';
 import { AdministratorService } from '../administrator.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-administrators',
@@ -19,7 +20,7 @@ export class AdministratorsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private administratorService: AdministratorService, public dialog: MatDialog) {}
+  constructor(private administratorService: AdministratorService, public dialog: MatDialog, private snackBarService: SnackBarService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -40,6 +41,7 @@ export class AdministratorsComponent implements OnInit {
   delete(id: String){
     this.administratorService.delete(id).subscribe((data: any) => {
       this.getAll();
+      this.snackBarService.openSnackBar("Successfully deleted administrator", "X")
     });
   }
 

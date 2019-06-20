@@ -1,6 +1,7 @@
-<button mat-button routerLink="/add/studyProgram" matTooltip="Add new study program">
-  <mat-icon>add_circle</mat-icon>
+<button class="buttonBorder" mat-button routerLink="/add/studyProgram" matTooltip="Add new study program">
+  <mat-icon>add</mat-icon>
 </button>
+<br><br>
 <mat-form-field>
     <span matSuffix><mat-icon>search</mat-icon></span>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">

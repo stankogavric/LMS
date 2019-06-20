@@ -10,3 +10,7 @@ table {
 .admin-table {
     background-color: rgb(255, 255, 170);
 }
+
+.buttonBorder {
+    border: 1px solid gray;
+}

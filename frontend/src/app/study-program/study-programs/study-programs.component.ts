@@ -3,6 +3,7 @@ import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { StudyProgram } from '../study-program.model';
 import { StudyProgramService } from '../study-program.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-study-programs',
@@ -18,7 +19,7 @@ export class StudyProgramsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private studyProgramService: StudyProgramService, public dialog: MatDialog) {}
+  constructor(private studyProgramService: StudyProgramService, public dialog: MatDialog, private snackBarService: SnackBarService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -43,6 +44,7 @@ export class StudyProgramsComponent implements OnInit {
   delete(id: String){
     this.studyProgramService.delete(id).subscribe((data: any) => {
       this.getAll();
+      this.snackBarService.openSnackBar("Successfully deleted study program", "X");
     });
   }
 

@@ -33,7 +33,7 @@
     <textarea matInput placeholder="Topic" name="topic" formControlName="topic"></textarea>
   </mat-form-field>
 
-  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!examAddEditForm.get('topic').value.toString().trim()">Add topic</button>
+  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!examAddEditForm.get('topic').value?.toString().trim()">Add topic</button>
 
   <h3>Topics</h3>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">

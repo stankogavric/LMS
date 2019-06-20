@@ -1,8 +1,9 @@
-<button mat-button routerLink="/register/student" matTooltip="Add new student">
-  <mat-icon>add_circle</mat-icon>
+<button class="buttonBorder" mat-button routerLink="/register/student" matTooltip="Add new student">
+  <mat-icon>add</mat-icon>
 </button>
-<button mat-button (click)="exportDataToXML()">Export data to XML</button>
-<button mat-button (click)="exportDataToPDF()">Export data to PDF</button>
+<button class="buttonBorder" mat-button (click)="exportDataToXML()">Export data to XML</button>
+<button class="buttonBorder" mat-button (click)="exportDataToPDF()">Export data to PDF</button>
+<br><br>
 <mat-form-field>
     <span matSuffix><mat-icon>search</mat-icon></span>
     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">

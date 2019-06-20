@@ -6,6 +6,7 @@ import { YearOfStudyService } from 'src/app/year-of-study/year-of-study.service'
 import { AdministrativeStaffService } from '../administrative-staff.service';
 import { Student } from 'src/app/student/student.model';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-enrollment-to-the-next-year',
@@ -22,7 +23,7 @@ export class EnrollmentToTheNextYearComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private fb: FormBuilder, private yearOfStudyService: YearOfStudyService, private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private yearOfStudyService: YearOfStudyService, private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -49,6 +50,7 @@ export class EnrollmentToTheNextYearComponent implements OnInit {
   enrollmentToTheNextYear(student: Student){
     this.administrativeStaffService.enrollmentToTheNextYear(student, this.enrollmentToTheNextYearForm.get('yearOfStudy').value).subscribe(_ => {
       this.getStudentsForEnrollmentToTheNextYear(this.enrollmentToTheNextYearForm.get('yearOfStudy').value);
+      this.snackBarService.openSnackBar("Successfully enrolled student", "X")
     })
   }
 

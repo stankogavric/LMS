@@ -1,6 +1,25 @@
 <h2 align="center">{{ faculty?.name }}</h2>
 <div align="center">{{ faculty?.description }}</div>
 <br>
+<mat-tab-group>
+    <mat-tab label="Study programs">
+        <div><a class="studyProgramLink" *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
+    </mat-tab>
+    <mat-tab label="Phone">
+        <div *ngFor="let p of faculty?.phones"><mat-icon>phone</mat-icon> {{ p.phone }}</div>
+    </mat-tab>
+    <mat-tab label="Email">
+        <div *ngFor="let e of faculty?.emails"><mat-icon>email</mat-icon> {{ e.email }}</div>
+    </mat-tab>
+    <mat-tab label="Address">
+        <div><mat-icon>location_on</mat-icon> {{ faculty?.address.street }} {{ faculty?.address.number }}, {{ faculty?.address.city.name }}, {{ faculty?.address.city.country.name }}</div>
+    </mat-tab>
+    <mat-tab label="Dean">
+        <div><mat-icon>person</mat-icon> {{ faculty?.dean.personalData.firstName }} {{ faculty?.dean.personalData.lastName }}</div>
+        <div><mat-icon>email</mat-icon> {{ faculty?.dean.accountData.email }}</div>
+    </mat-tab>
+</mat-tab-group>
+<!--
 <div>Study programs:</div>
 <div><a *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
 <br>
@@ -8,3 +27,4 @@
 <div *ngFor="let p of faculty?.phones">Phone: {{ p.phone }}</div>
 <div *ngFor="let e of faculty?.emails">Email: {{ e.email }}</div>
 <div>Address: {{ faculty?.address.street }} {{ faculty?.address.number }}, {{ faculty?.address.city.name }}, {{ faculty?.address.city.country.name }}</div>
+-->

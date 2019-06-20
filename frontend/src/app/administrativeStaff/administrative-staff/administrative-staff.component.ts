@@ -3,6 +3,7 @@ import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 import { AdministrativeStaff } from '../administrative-staff';
 import { AdministrativeStaffService } from '../administrative-staff.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-administrative-staff',
@@ -19,7 +20,7 @@ export class AdministrativeStaffComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog) {}
+  constructor(private administrativeStaffService: AdministrativeStaffService, public dialog: MatDialog, private snackBarService: SnackBarService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -48,6 +49,7 @@ export class AdministrativeStaffComponent implements OnInit {
   delete(id: String){
     this.administrativeStaffService.delete(id).subscribe((data: any) => {
       this.getAll();
+      this.snackBarService.openSnackBar("Successfully deleted administrative staff", "X");
     });
   }
 

@@ -12,6 +12,7 @@ import { TeachingTerm } from 'src/app/teacher/teaching-term.model';
 import { TeachingTermService } from 'src/app/teacher/teaching-term.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-class-schedule-add-edit',
@@ -33,7 +34,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
   public selectedClassroom: Classroom;
   private selectedStartTime: Date;
 
-  constructor(private fb: FormBuilder, private teacherRealizationService: TeacherRealizationService, private yearOfStudyService: YearOfStudyService, private classroomService: ClassroomService, private teachingTermService: TeachingTermService, public dialog: MatDialog) { }
+  constructor(private fb: FormBuilder, private teacherRealizationService: TeacherRealizationService, private yearOfStudyService: YearOfStudyService, private classroomService: ClassroomService, private teachingTermService: TeachingTermService, public dialog: MatDialog, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.classScheduleForm = this.fb.group({
@@ -157,7 +158,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
           )
         )
         {
-          alert("Termin je zauzet");
+          this.snackBarService.openSnackBar("This teaching term is busy", "X")
           valid = false;
           return false;
         }
@@ -248,7 +249,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
           )
         )
         {
-          alert("Termin je zauzet");
+          this.snackBarService.openSnackBar("This teaching term is busy", "X")
           valid = false;
           return false;
         }
@@ -442,6 +443,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
     this.classScheduleForm.reset();
     this.classSchedule = [[], [], [], [], [], [], []];
     this.teacherRealizationsByYearOfStudy = [];
+    this.snackBarService.openSnackBar("Successfully saved class schedule", "X");
   }
 
   delete(teachingTermId, item, day){
@@ -449,6 +451,7 @@ export class ClassScheduleAddEditComponent implements OnInit {
       this.teachingTermService.delete(teachingTermId).subscribe();
     }
     day.splice(day.indexOf(item), 1);
+    this.snackBarService.openSnackBar("Successfully deleted teaching term", "X");
   }
 
   drop(event: CdkDragDrop<string[]>) {

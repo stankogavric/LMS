@@ -5,6 +5,7 @@ import { StudentService } from '../student.service';
 import { saveAs } from 'file-saver';
 import { FileService } from 'src/app/file/file.service';
 import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-students',
@@ -20,7 +21,7 @@ export class StudentsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private studentService: StudentService, private fileService: FileService, public dialog: MatDialog) {}
+  constructor(private studentService: StudentService, private fileService: FileService, public dialog: MatDialog, private snackBarService: SnackBarService) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
@@ -49,6 +50,7 @@ export class StudentsComponent implements OnInit {
   delete(id: string){
     this.studentService.delete(id).subscribe((data: any) => {
       this.getAll();
+      this.snackBarService.openSnackBar("Successfully deleted student", "X")
     });
   }
 

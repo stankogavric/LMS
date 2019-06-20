@@ -1,6 +1,28 @@
 <h2 align="center">{{ university?.name }}</h2>
 <div align="center">{{ university?.description }}</div>
-<div>Rector: {{ university?.rector.personalData.firstName }} {{ university?.rector.personalData.lastName }}</div>
+<!--<div>Rector: {{ university?.rector.personalData.firstName }} {{ university?.rector.personalData.lastName }}</div>-->
+<br>
+<mat-tab-group>
+    <mat-tab label="Phone">
+        <div *ngFor="let p of university?.phones"><mat-icon>phone</mat-icon> {{ p.phone }}</div>
+    </mat-tab>
+    <mat-tab label="Email">
+        <div *ngFor="let e of university?.emails"><mat-icon>email</mat-icon> {{ e.email }}</div>
+    </mat-tab>
+    <mat-tab label="Address">
+        <div><mat-icon>location_on</mat-icon> {{ university?.address.street }} {{ university?.address.number }}, {{ university?.address.city.name }}, {{ university?.address.city.country.name }}</div>
+        <br>
+        <ng-template matTabContent>
+            <app-map></app-map>
+        </ng-template>
+    </mat-tab>
+    <mat-tab label="Rector">
+        <div><mat-icon>person</mat-icon> {{ university?.rector.personalData.firstName }} {{ university?.rector.personalData.lastName }}</div>
+        <div><mat-icon>email</mat-icon> {{ university?.rector.accountData.email }}</div>
+    </mat-tab>
+</mat-tab-group>
+<!--
 <div *ngFor="let p of university?.phones">Phone: {{ p.phone }}</div>
 <div *ngFor="let e of university?.emails">Email: {{ e.email }}</div>
 <div>Address: {{ university?.address.street }} {{ university?.address.number }}, {{ university?.address.city.name }}, {{ university?.address.city.country.name }}</div>
+-->
