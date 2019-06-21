@@ -4,19 +4,23 @@
 <br>
 <mat-tab-group>
     <mat-tab label="Phone">
+        <br>
         <div *ngFor="let p of university?.phones"><mat-icon>phone</mat-icon> {{ p.phone }}</div>
     </mat-tab>
     <mat-tab label="Email">
+        <br>
         <div *ngFor="let e of university?.emails"><mat-icon>email</mat-icon> {{ e.email }}</div>
     </mat-tab>
     <mat-tab label="Address">
-        <div><mat-icon>location_on</mat-icon> {{ university?.address.street }} {{ university?.address.number }}, {{ university?.address.city.name }}, {{ university?.address.city.country.name }}</div>
-        <br>
         <ng-template matTabContent>
-            <app-map></app-map>
+            <br>
+            <div><mat-icon>location_on</mat-icon> {{ university?.address.street }} {{ university?.address.number }}, {{ university?.address.city.name }}, {{ university?.address.city.country.name }}</div>
+            <br>
+            <app-ol-map [object]="university" [longitude]="19.844376" [latitude]="45.253076"></app-ol-map>
         </ng-template>
     </mat-tab>
     <mat-tab label="Rector">
+        <br>
         <div><mat-icon>person</mat-icon> {{ university?.rector.personalData.firstName }} {{ university?.rector.personalData.lastName }}</div>
         <div><mat-icon>email</mat-icon> {{ university?.rector.accountData.email }}</div>
     </mat-tab>

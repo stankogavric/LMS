@@ -6,15 +6,24 @@
         <div><a class="studyProgramLink" *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
     </mat-tab>
     <mat-tab label="Phone">
+        <br>
         <div *ngFor="let p of faculty?.phones"><mat-icon>phone</mat-icon> {{ p.phone }}</div>
     </mat-tab>
+    <br>
     <mat-tab label="Email">
+        <br>
         <div *ngFor="let e of faculty?.emails"><mat-icon>email</mat-icon> {{ e.email }}</div>
     </mat-tab>
     <mat-tab label="Address">
-        <div><mat-icon>location_on</mat-icon> {{ faculty?.address.street }} {{ faculty?.address.number }}, {{ faculty?.address.city.name }}, {{ faculty?.address.city.country.name }}</div>
+        <ng-template matTabContent>
+            <br>
+            <div><mat-icon>location_on</mat-icon> {{ faculty?.address.street }} {{ faculty?.address.number }}, {{ faculty?.address.city.name }}, {{ faculty?.address.city.country.name }}</div>
+            <br>
+            <app-ol-map [object]="faculty" [longitude]="19.844376" [latitude]="45.253076"></app-ol-map>
+        </ng-template>
     </mat-tab>
     <mat-tab label="Dean">
+        <br>
         <div><mat-icon>person</mat-icon> {{ faculty?.dean.personalData.firstName }} {{ faculty?.dean.personalData.lastName }}</div>
         <div><mat-icon>email</mat-icon> {{ faculty?.dean.accountData.email }}</div>
     </mat-tab>
