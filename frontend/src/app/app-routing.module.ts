@@ -30,6 +30,7 @@ import { StudyProgramAddEditComponent } from './study-program/study-program-add-
 import { ClassScheduleAddEditComponent } from './administrativeStaff/class-schedule-add-edit/class-schedule-add-edit.component';
 import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
 import { EnterGradeComponent } from './exam/enter-grade/enter-grade.component';
+import { EnrollmentToTheNextYearComponent } from './administrativeStaff/enrollment-to-the-next-year/enrollment-to-the-next-year.component';
 
 const routes: Routes = [
       { path: '', component: HomeComponent },
@@ -60,6 +61,7 @@ const routes: Routes = [
             canActivate: [RoleGuard], data: { expectedRoles: ['ROLE_ADMINISTRATOR']}
       },
       { path: 'classSchedule', component: ClassScheduleAddEditComponent},
+      { path: 'enrollmentToTheNextYear', component: EnrollmentToTheNextYearComponent},
       { path: 'add/topics', component: AddEditTopicsComponent },
       { path: 'edit/topics/:id', component: AddEditTopicsComponent },
 

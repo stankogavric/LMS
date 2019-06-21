@@ -34,6 +34,7 @@ import { StudyProgramAddEditComponent } from './study-program/study-program-add-
 import { ClassroomComponent } from './classroom/classroom.component';
 import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
 import { EnterGradeComponent } from './exam/enter-grade/enter-grade.component';
+import { OlMapComponent } from './ol-map/ol-map.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,11 @@ import { EnterGradeComponent } from './exam/enter-grade/enter-grade.component';
     StudyProgramAddEditComponent,
     ClassroomComponent,
     ExamRegistrationComponent,
+<<<<<<< HEAD
     EnterGradeComponent
+=======
+    OlMapComponent
+>>>>>>> aa332ebb43d5576c21d3f82c8539fbe2dc51ac82
   ],
   imports: [
     BrowserModule,

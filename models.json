@@ -384,6 +384,7 @@
         "data": {
             "id": "Long",
             "subjectAttendances": "SubjectAttendance[]",
+            "electiveSubjectAttendances": "ElectiveSubjectAttendance[]",
             "address": "Address",
             "studentYears": "StudentYear[]",
             "accountData": "AccountData",
@@ -576,6 +577,15 @@
             "author": "ForumUser",
             "deleted": "Boolean",
             "isLocked": "Boolean"
+        }
+    },
+    {
+    	"naziv": "ElectiveSubjectAttendance",
+        "mnozina": "ElectiveSubjectAttendances",
+        "data": {
+            "id": "Long",
+            "student": "Student",
+            "subjectRealization": "SubjectRealization"
         }
     }
 ]

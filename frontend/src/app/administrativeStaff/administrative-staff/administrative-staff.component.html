@@ -1,3 +1,11 @@
+<button class="buttonBorder" mat-button routerLink="/register/administrativestaff" matTooltip="Add new administrative staff">
+  <mat-icon>add</mat-icon>
+</button>
+<br><br>
+<mat-form-field>
+    <span matSuffix><mat-icon>search</mat-icon></span>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
 <div class="mat-elevation-z8">
   <table class="adminstaff-table" mat-table [dataSource]="dataSource">
 
@@ -59,11 +67,11 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let administrativeStaffPerson"> 
-        <button mat-raised-button color="warn" (click)="delete(administrativeStaffPerson.id)">
+        <button mat-raised-button color="warn" (click)="openDialog(administrativeStaffPerson.id)" matTooltip="Delete">
           <mat-icon>delete</mat-icon>
           <!--Delete-->
         </button>
-        <button mat-raised-button color="accent" [routerLink]="['/edit/administrativestaff', administrativeStaffPerson.accountData.username]">
+        <button mat-raised-button color="accent" [routerLink]="['/edit/administrativestaff', administrativeStaffPerson.accountData.username]" matTooltip="Edit">
           <mat-icon>edit</mat-icon>
           <!--Edit-->
         </button>

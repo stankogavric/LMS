@@ -1,7 +1,6 @@
 package App.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import App.models.AdministrativeStaff;
 import App.models.Student;
+import App.models.YearOfStudy;
 import App.services.AdministrativeStaffService;
 import App.services.FileService;
 import App.utils.View.HideOptionalProperties;
@@ -98,15 +98,27 @@ public class AdministrativeStaffController {
 	}
     
     @JsonView(HideOptionalProperties.class)
-    @RequestMapping(value="/enrollment/{studyProgram}/{yearOfStudy}", method=RequestMethod.GET)
-    public ResponseEntity<Iterable<Student>> getStudentsForEnrollmentToTheNextYear(@PathVariable String studyProgram, @PathVariable int yearOfStudy) {
-        return new ResponseEntity<Iterable<Student>>(administrativeStaffService.getStudentsForEnrollmentToTheNextYear(studyProgram, yearOfStudy), HttpStatus.OK);
+    @RequestMapping(value="/enrollment/{yearOfStudyId}", method=RequestMethod.GET)
+    public ResponseEntity<Iterable<Student>> getStudentsForEnrollmentToTheNextYear(@PathVariable Long yearOfStudyId) {
+        return new ResponseEntity<Iterable<Student>>(administrativeStaffService.getStudentsForEnrollmentToTheNextYear(yearOfStudyId), HttpStatus.OK);
     }
     
+//    @JsonView(HideOptionalProperties.class)
+//    @RequestMapping(value="/enrollment/{studyProgram}/{yearOfStudy}", method=RequestMethod.GET)
+//    public ResponseEntity<Iterable<Student>> getStudentsForEnrollmentToTheNextYear(@PathVariable String studyProgram, @PathVariable int yearOfStudy) {
+//        return new ResponseEntity<Iterable<Student>>(administrativeStaffService.getStudentsForEnrollmentToTheNextYear(studyProgram, yearOfStudy), HttpStatus.OK);
+//    }
+    
     @JsonView(HideOptionalProperties.class)
-    @RequestMapping(value="/enrollment", method=RequestMethod.POST)
-    public ResponseEntity<Boolean> enrollmentStudentToTheNextYear(@RequestBody ArrayList<String> ids) {
-        return new ResponseEntity<Boolean>(administrativeStaffService.enrollmentStudentToTheNextYear(ids), HttpStatus.OK);
+    @RequestMapping(value="/enrollment/{studentId}", method=RequestMethod.PUT)
+    public ResponseEntity<Boolean> enrollmentStudentToTheNextYear(@PathVariable Long studentId, @RequestBody YearOfStudy yearOfStudy) {
+    	return new ResponseEntity<Boolean>(administrativeStaffService.enrollmentStudentToTheNextYear(studentId, yearOfStudy), HttpStatus.OK);
     }
+    
+//    @JsonView(HideOptionalProperties.class)
+//    @RequestMapping(value="/enrollment", method=RequestMethod.POST)
+//    public ResponseEntity<Boolean> enrollmentStudentToTheNextYear(@RequestBody ArrayList<String> ids) {
+//        return new ResponseEntity<Boolean>(administrativeStaffService.enrollmentStudentToTheNextYear(ids), HttpStatus.OK);
+//    }
 
 }

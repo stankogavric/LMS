@@ -2,6 +2,15 @@ table {
     width: 100%;
 }
 
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
 .programs-table {
     background-color: rgb(255, 255, 170);
+}
+
+.buttonBorder {
+    border: 1px solid gray;
 }

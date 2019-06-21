@@ -10,6 +10,9 @@ import { FormErrorService } from 'src/app/shared/formError.service';
 import { ActivatedRoute } from '@angular/router';
 import { SubjectRealizationService } from 'src/app/subject/subject-realization.service';
 import { FileService } from 'src/app/file/file.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/confirmation-dialog/confirmation-dialog.component';
+import { MatDialog } from '@angular/material';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-add-edit-topics',
@@ -29,7 +32,8 @@ export class AddEditTopicsComponent implements OnInit {
   constructor(private fb: FormBuilder, private route: ActivatedRoute,
     private teacherService: TeacherService, private topicService: TopicService,
     private authService: AuthService, private subjectRealizationService: SubjectRealizationService,
-    private fileService: FileService, public formError: FormErrorService) {
+    private fileService: FileService, public formError: FormErrorService, public dialog: MatDialog,
+    private snackBarService: SnackBarService) {
       
     }
 
@@ -90,6 +94,7 @@ export class AddEditTopicsComponent implements OnInit {
         }
       })
     });
+    this.snackBarService.openSnackBar("Successfully saved topics", "X");
   }
 
   getSubjectRealizations(){
@@ -106,10 +111,12 @@ export class AddEditTopicsComponent implements OnInit {
     this.addEditTopicsForm.get("icon").updateValueAndValidity();
     this.addEditTopicsForm.patchValue({ topic: "" });
     this.addEditTopicsForm.get("topic").updateValueAndValidity();
+    this.snackBarService.openSnackBar("Successfully added new topic", "X")
   }
 
   addWeek(){
     this.weeks.push(new Week(this.weeks.length+1));
+    this.snackBarService.openSnackBar("Successfully added new week", "X")
   }
 
   onImagePicked(event: Event) {
@@ -134,6 +141,20 @@ export class AddEditTopicsComponent implements OnInit {
     else{
       this.weeks[this.weeks.indexOf(week)].topics.splice(this.weeks[this.weeks.indexOf(week)].topics.indexOf(topic), 1);
     }
+    this.snackBarService.openSnackBar("Successfully deleted topic", "X")
+  }
+
+  openDialog(week:Week, topic: [Topic, File, string]): void {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '250px',
+      data: {title: "Delete topic", content: "Are you sure you want to delete this topic?"}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.deleteTopic(week, topic);
+      };
+    });
   }
   
 }

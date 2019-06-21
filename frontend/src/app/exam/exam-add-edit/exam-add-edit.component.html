@@ -33,17 +33,17 @@
     <textarea matInput placeholder="Topic" name="topic" formControlName="topic"></textarea>
   </mat-form-field>
 
-  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!examAddEditForm.get('topic').value.toString().trim()">Add topic</button>
+  <button mat-raised-button color="accent" (click)="addTopic()" [disabled]="!examAddEditForm.get('topic').value?.toString().trim()">Add topic</button>
 
   <h3>Topics</h3>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div class="example-box" *ngFor="let topic of topics" cdkDrag>{{topic.description}}
-      <button mat-raised-button color="warn" (click)="deleteTopic(topic)">
+      <button mat-raised-button color="warn" (click)="openDialog(topic)" matTooltip="Delete">
         <mat-icon>delete</mat-icon>
-        Delete
+        <!--Delete-->
       </button>
     </div>
   </div>
-    
+  <br>
   <button mat-raised-button color="accent" (click)="add()" [disabled]="examAddEditForm.invalid">Save</button>
 </div>

@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Router } from "@angular/router";
 import decode from 'jwt-decode';
 import { Subject } from 'rxjs';
+import { SnackBarService } from '../shared/snack-bar.service';
 
 @Injectable({ providedIn: "root" })
 export class AuthService {
@@ -10,7 +11,7 @@ export class AuthService {
   roleChanged = new Subject<any[]>();
   loggedInStatusChanged = new Subject<boolean>();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private snackBarService: SnackBarService) {}
 
   login(username: string, password: string){
     this.http.post<{token: string}>("http://localhost:8080/login", {username: username, password: password}).subscribe(response =>{
@@ -19,6 +20,7 @@ export class AuthService {
         this.roleChanged.next(this.getCurrentRoles());
         this.router.navigate(['/']);
         this.loggedInStatusChanged.next(true);
+        this.snackBarService.openSnackBar("Welcome " + this.getCurrentUser() + "!", "X")
       }
     });
   }

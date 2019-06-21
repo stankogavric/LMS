@@ -1,3 +1,7 @@
+<mat-form-field>
+    <span matSuffix><mat-icon>search</mat-icon></span>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+</mat-form-field>
 <div class="mat-elevation-z8">
   <table class="subjects-table" mat-table [dataSource]="dataSource">
 
@@ -18,7 +22,7 @@
 
     <ng-container matColumnDef="mandatory">
       <th mat-header-cell *matHeaderCellDef> Mandatory </th>
-      <td mat-cell *matCellDef="let subject"> {{subject.mandatory}} </td>
+      <td mat-cell *matCellDef="let subject"> {{subject.mandatory ? "Yes" : "No"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="lecturesNum">
@@ -31,7 +35,7 @@
       <td mat-cell *matCellDef="let subject"> {{subject.exercisesNum}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="otherActivitesNum">
+    <ng-container matColumnDef="otherActivitiesNum">
       <th mat-header-cell *matHeaderCellDef> Number of other activities </th>
       <td mat-cell *matCellDef="let subject"> {{subject.otherActivitiesNum}} </td>
     </ng-container>
@@ -49,11 +53,11 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>  </th>
       <td mat-cell *matCellDef="let subject"> 
-        <button mat-raised-button color="warn" (click)="delete(subject.id)">
+        <button mat-raised-button color="warn" (click)="openDialog(subject.id)" matTooltip="Delete">
           <mat-icon>delete</mat-icon>
           <!--Delete-->
         </button>
-        <button mat-raised-button color="accent" [routerLink]="['/edit/subject', subject.id]">
+        <button mat-raised-button color="accent" [routerLink]="['/edit/subject', subject.id]" matTooltip="Edit">
           <mat-icon>edit</mat-icon>
           <!--Edit-->
         </button>

@@ -56,5 +56,9 @@ public class SubjectService {
     public ArrayList<Topic> getSyllabuses(Long subjectId) {
     	return topicRepo.findBySubjectIdEquals(subjectId);
     }
+    
+    public Iterable<Subject> getPrerequisitesForMandatorySubjectsByYearOfStudy(Long yearOfStudyId) {
+        return subjectRepo.getPrerequisitesForMandatorySubjectsByYearOfStudy(yearOfStudyId);
+    }
 
 }

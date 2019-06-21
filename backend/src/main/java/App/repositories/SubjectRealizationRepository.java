@@ -13,4 +13,5 @@ public interface SubjectRealizationRepository extends JpaRepository<SubjectReali
 	Iterable<Teacher> findTeachersWhoTeachExercises(Long subjectId);
 	@Query("SELECT sr FROM SubjectRealization sr JOIN sr.teacherRealizations tr WHERE tr.teacher.accountData.username= ?1")
 	Iterable<SubjectRealization> findByTeacherUsername(String username);
+	Iterable<SubjectRealization> findByYearOfStudyId(Long id);
 }

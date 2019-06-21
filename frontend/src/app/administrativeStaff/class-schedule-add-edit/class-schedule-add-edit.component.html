@@ -65,7 +65,7 @@
             <div class="example-box" *ngFor="let item of day.value" cdkDrag>
               <div>
                 {{item.teacherRealization.subjectRealization.subject.name}}
-                <button class="deleteButton" mat-raised-button color="warn" (click)="delete(item.teachingTermId, item, day.value)">
+                <button class="deleteButton" mat-raised-button color="warn" (click)="openDialog(item.teachingTermId, item, day.value)" matTooltip="Delete">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>

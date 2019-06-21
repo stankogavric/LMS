@@ -1,73 +1,81 @@
 <h2 align="center">{{ studyProgram?.name }}</h2>
 <div align="center">{{ studyProgram?.description }}</div>
 <br>
-<div>Subjects:</div>
-<br>
-<mat-accordion>
-    <div *ngFor="let y of studyProgram?.yearsOfStudy">
-        <!--
-        <a [routerLink]="[ '/subject', s.id ]">
-            <mat-card>{{ s.name }}</mat-card>
-        </a>
-        -->
-        <mat-expansion-panel *ngFor="let s of y?.subjects" (opened)="panelOpenState = true; getTeachingMaterials(s.id)" (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{ s.name }}
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{ s.ects }} ECTS
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-tab-group>
-            <mat-tab label="Syllabus">
-                <ng-template matTabContent>
-                    <p *ngFor="let s of s.syllabus">{{ s.description }}</p>
-                </ng-template>
-            </mat-tab>
-            <mat-tab label="Teaching material">
-                <ng-template matTabContent>
-                    <!--
-                    <div *ngFor="let f of files">
-                        <button mat-button>
-                            <mat-icon>insert_drive_file</mat-icon>
-                            <span (click)="downloadFile(f.url)">{{ f.url.substr(f.url.lastIndexOf('/')+1) }}</span>
-                        </button>
-                    </div>
-                    -->
-
-                    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
-                        <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
-                            <li>
-                            <div class="mat-tree-node">
-                                <button mat-button matTreeNodeToggle *ngIf="!node.url"
-                                        [attr.aria-label]="'toggle ' + node.name">
-                                    <mat-icon class="mat-icon-rtl-mirror">
-                                        {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-                                    </mat-icon>
-                                    
-                                    <mat-icon>folder</mat-icon>
-                                    {{node.name}}
-                                </button>
-                                <button mat-button *ngIf="node.url">
-                                    <mat-icon></mat-icon>
-                                    <mat-icon>insert_drive_file</mat-icon>
-                                    <span (click)="downloadFile(node.url)">{{ node.url.substr(node.url.lastIndexOf('/')+1) }}</span>
-                                </button>
-                            </div>
-                            <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
-                                <ng-container matTreeNodeOutlet></ng-container>
-                            </ul>
-                            </li>
-                        </mat-nested-tree-node>
-                    </mat-tree>
-
-
-                </ng-template>
-            </mat-tab>
-            </mat-tab-group>
-        </mat-expansion-panel>
-    </div>
-</mat-accordion>
+<!--<div>Subjects:</div>-->
+<mat-tab-group>
+    <mat-tab label="Subjects">
+        <br>
+        <mat-accordion>
+            <div *ngFor="let y of studyProgram?.yearsOfStudy">
+                <!--
+                <a [routerLink]="[ '/subject', s.id ]">
+                    <mat-card>{{ s.name }}</mat-card>
+                </a>
+                -->
+                <mat-expansion-panel class="subject" *ngFor="let s of y?.subjects" (opened)="panelOpenState = true; getTeachingMaterials(s.id)" (closed)="panelOpenState = false">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            {{ s.name }}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            {{ s.ects }} ECTS
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <mat-tab-group>
+                        <mat-tab label="Syllabus">
+                            <ng-template matTabContent>
+                                <p *ngFor="let s of s.syllabus">{{ s.description }}</p>
+                            </ng-template>
+                        </mat-tab>
+                        <mat-tab label="Teaching material">
+                            <ng-template matTabContent>
+                                <!--
+                                <div *ngFor="let f of files">
+                                    <button mat-button>
+                                        <mat-icon>insert_drive_file</mat-icon>
+                                        <span (click)="downloadFile(f.url)">{{ f.url.substr(f.url.lastIndexOf('/')+1) }}</span>
+                                    </button>
+                                </div>
+                                -->
+                                <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+                                    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+                                        <li>
+                                        <div class="mat-tree-node">
+                                            <button mat-button matTreeNodeToggle *ngIf="!node.url"
+                                                    [attr.aria-label]="'toggle ' + node.name">
+                                                <mat-icon class="mat-icon-rtl-mirror">
+                                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                                </mat-icon>
+                                                
+                                                <mat-icon>folder</mat-icon>
+                                                {{node.name}}
+                                            </button>
+                                            <button mat-button *ngIf="node.url">
+                                                <mat-icon></mat-icon>
+                                                <mat-icon>insert_drive_file</mat-icon>
+                                                <span (click)="downloadFile(node.url)">{{ node.url.substr(node.url.lastIndexOf('/')+1) }}</span>
+                                            </button>
+                                        </div>
+                                        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                                            <ng-container matTreeNodeOutlet></ng-container>
+                                        </ul>
+                                        </li>
+                                    </mat-nested-tree-node>
+                                </mat-tree>
+                            </ng-template>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-expansion-panel>
+            </div>
+        </mat-accordion>
+    </mat-tab>
+    <mat-tab label="Head teacher">
+        <br>
+        <div><mat-icon>person</mat-icon> {{ studyProgram?.headTeacher.personalData.firstName }} {{ studyProgram?.headTeacher.personalData.lastName }}</div>
+        <div><mat-icon>email</mat-icon> {{ studyProgram?.headTeacher.accountData.email }}</div>
+    </mat-tab>
+</mat-tab-group>
+<!--
 <br>
 <div>Head teacher: {{ studyProgram?.headTeacher.personalData.firstName }} {{ studyProgram?.headTeacher.personalData.lastName }}</div>
+-->

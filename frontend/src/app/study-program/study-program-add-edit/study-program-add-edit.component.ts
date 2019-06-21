@@ -7,6 +7,7 @@ import { FacultyService } from 'src/app/faculty/faculty.service';
 import { TeacherService } from 'src/app/teacher/teacher.service';
 import { StudyProgramService } from '../study-program.service';
 import { ActivatedRoute } from '@angular/router';
+import { SnackBarService } from 'src/app/shared/snack-bar.service';
 
 @Component({
   selector: 'app-study-program-add-edit',
@@ -22,7 +23,7 @@ export class StudyProgramAddEditComponent implements OnInit {
   private edit = false;
   private id: string;
 
-  constructor(private fb: FormBuilder, private route: ActivatedRoute, private facultyService: FacultyService, private teacherService: TeacherService, private studyProgramService: StudyProgramService) { }
+  constructor(private fb: FormBuilder, private route: ActivatedRoute, private facultyService: FacultyService, private teacherService: TeacherService, private studyProgramService: StudyProgramService, private snackBarService: SnackBarService) { }
 
   ngOnInit() {
     this.studyProgramAddEditForm = this.fb.group({
@@ -75,12 +76,15 @@ export class StudyProgramAddEditComponent implements OnInit {
     const s = this.studyProgramAddEditForm.value;
     this.studyProgram = s;
     if(this.edit){
-      this.studyProgramService.update(this.id, this.studyProgram).subscribe();
+      this.studyProgramService.update(this.id, this.studyProgram).subscribe(_ => {
+        this.snackBarService.openSnackBar("Successfully edited study program", "X")
+      });
     }
     else{
       this.studyProgramService.add(this.studyProgram).subscribe(_ => {
         this.studyProgramAddEditForm.reset();
         this.headTeachers = [];
+        this.snackBarService.openSnackBar("Successfully added new study program", "X")
     });
     }
   }

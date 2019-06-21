@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+  opened: boolean = true;
   roles = [];
   private roleSubcription : Subscription;
 
