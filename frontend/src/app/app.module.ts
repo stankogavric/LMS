@@ -58,11 +58,8 @@ import { OlMapComponent } from './ol-map/ol-map.component';
     StudyProgramAddEditComponent,
     ClassroomComponent,
     ExamRegistrationComponent,
-<<<<<<< HEAD
-    EnterGradeComponent
-=======
+    EnterGradeComponent,
     OlMapComponent
->>>>>>> aa332ebb43d5576c21d3f82c8539fbe2dc51ac82
   ],
   imports: [
     BrowserModule,
