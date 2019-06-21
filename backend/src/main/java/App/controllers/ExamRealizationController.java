@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.dto.StudentExamRegistrationDTO;
 import App.models.ExamRealization;
 import App.services.ExamRealizationService;
 import App.utils.View.HideOptionalProperties;
@@ -49,5 +50,13 @@ public class ExamRealizationController {
 		}
 	}
 	
+	@JsonView(HideOptionalProperties.class)
+	@RequestMapping(value="/{teacherUsername}/grading/{subjectId}", method=RequestMethod.GET)
+	public ResponseEntity<ArrayList<StudentExamRegistrationDTO>> getRegisteredExamsOnSubject(@PathVariable String teacherUsername, @PathVariable Long subjectId){
+		ArrayList<StudentExamRegistrationDTO> registeredExams = examRealService.getRegisteredExamsBySubject(subjectId, teacherUsername);
+		if(registeredExams.size() == 0) return new ResponseEntity<ArrayList<StudentExamRegistrationDTO>>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<ArrayList<StudentExamRegistrationDTO>>(registeredExams, HttpStatus.OK);
+	}
+
 
 }

@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import App.dto.ExamDTO;
 import App.dto.ExamRegistrationDTO;
+import App.dto.StudentExamRegistrationDTO;
 import App.models.Exam;
 import App.models.ExamType;
 import App.services.ExamService;
+import App.utils.View;
 import App.utils.View.HideOptionalProperties;
 
 @CrossOrigin(origins={"http://localhost:4200"})
@@ -77,10 +80,10 @@ public class ExamController {
     
     @JsonView(HideOptionalProperties.class)
     @RequestMapping(value="/{studentId}/exams", method=RequestMethod.GET)
-    public ResponseEntity<Collection<Object>> getExamsByStudent(@PathVariable Long studentId){
-    	Collection<Object> exams = examService.getExamsByStudent(studentId);
-    	if (exams.isEmpty()) return new ResponseEntity<Collection<Object>>(HttpStatus.NO_CONTENT);
-    	return new ResponseEntity<Collection<Object>>(exams, HttpStatus.OK);
+    public ResponseEntity<Collection<ExamDTO>> getExamsByStudent(@PathVariable Long studentId){
+    	Collection<ExamDTO> exams = examService.getExamsByStudent(studentId);
+    	if (exams.isEmpty()) return new ResponseEntity<Collection<ExamDTO>>(HttpStatus.NO_CONTENT);
+    	return new ResponseEntity<Collection<ExamDTO>>(exams, HttpStatus.OK);
     }
     
     @JsonView(HideOptionalProperties.class)
@@ -89,6 +92,18 @@ public class ExamController {
     	ArrayList<ExamRegistrationDTO> exams = examService.getAvailableExamsForRegistration(username);
     	if (exams.size() == 0) return new ResponseEntity<ArrayList<ExamRegistrationDTO>>(HttpStatus.NO_CONTENT);
         return new ResponseEntity<ArrayList<ExamRegistrationDTO>>(exams, HttpStatus.OK);
+    }
+    
+    @JsonView(View.HideOptionalProperties.class)
+    @RequestMapping(value="/{teacherUsername}/{subjectId}/addGrades", method=RequestMethod.POST)
+    public ResponseEntity<ArrayList<Exam>> addGrades(@PathVariable String teacherUsername, @PathVariable Long subjectId, @ RequestBody ArrayList<StudentExamRegistrationDTO> studentGrades){
+    	
+    	try {
+			examService.addGrades(subjectId, teacherUsername, studentGrades);
+			return new ResponseEntity<>(HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
     }
     
 }
