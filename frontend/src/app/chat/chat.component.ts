@@ -8,8 +8,9 @@ import { TeacherService } from '../teacher/teacher.service';
 import { StudentService } from '../student/student.service';
 import { Teacher } from '../teacher/teacher.model';
 import { Student } from '../student/student.model';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material';
+import { PersonalDataService } from '../personal-data/personal-data.service';
 
 @Component({
   selector: 'app-chat',
@@ -20,15 +21,17 @@ export class ChatComponent implements OnInit {
   public fileUrl: string = this.fileService.fileUrl;
   private wc;
   public messages: Message[] = [];
-  public groupedMessages: string[] = [];
+  public groupedMessages: Person[] = [];
+  public groupedMessagesUsernames: string[] = [];
   public conversation: Message[] = [];
   public msg: string;
   private message:Message;
   public loggedUser: string = this.authService.getCurrentUser();
-  public recipient: string = '';
+  public recipient: Person = null;
   public teachers: Teacher[] = [];
   public students: Student[] = [];
   public newMessage = false;
+  public loggedPerson: Person;
 
   myControl = new FormControl();
   options: string[] = [];
@@ -37,7 +40,7 @@ export class ChatComponent implements OnInit {
   displayedColumns = ['recipient'];
   dataSource = new MatTableDataSource<Message>(this.conversation);
 
-  constructor(private authService : AuthService, private messageService: MessageService, private fileService : FileService, private studentService: StudentService, private teacherService: TeacherService) {
+  constructor(private authService : AuthService, private messageService: MessageService, private fileService : FileService, private studentService: StudentService, private teacherService: TeacherService, private personalDataService: PersonalDataService) {
     this.wc = Stomp.client("ws://localhost:8080/ws");
     this.wc.connect({}, ()=>{
       this.wc.subscribe("/topic/ws", (msg)=>{
@@ -57,6 +60,7 @@ export class ChatComponent implements OnInit {
     this.getAllConversations();
     this.getAllTeachers();
     this.getAllStudents();
+    this.getLoggedUser();
   }
 
   private _filter(value: string): string[] {
@@ -71,19 +75,25 @@ export class ChatComponent implements OnInit {
 
   send(){
     if(this.msg && this.msg.trim() != ''){
-      this.message = new Message(this.msg, new Date(), this.recipient, this.authService.getCurrentUser(), []);
+      this.message = new Message(this.msg, new Date(), this.recipient.username, this.authService.getCurrentUser(), []);
       this.wc.send("/app/ws", {}, JSON.stringify(this.message));
       this.msg = '';
     }
   }
 
-  showConversation(person: string){
+  showConversation(person: Person){
     this.recipient = person;
     this.messages.forEach(message => {
-      if(message.recipient == person || message.sender == person){
+      if(message.recipient == person.username || message.sender == person.username){
         this.conversation.push(message);
         this.dataSource.data = this.conversation;
       }
+    })
+  }
+
+  preShowConversation(username: string){
+    this.personalDataService.getOneByUsername(username).subscribe(data => {
+        this.showConversation(new Person(username, data.profilePicturePath));
     })
   }
 
@@ -91,11 +101,21 @@ export class ChatComponent implements OnInit {
     this.messageService.getAllByUser(this.authService.getCurrentUser()).subscribe(data => {
       this.messages = data;
       data.forEach(message => {
-        if(message.recipient != this.authService.getCurrentUser() && !this.groupedMessages.includes(message.recipient)){
-          this.groupedMessages.push(message.recipient);
+        if(message.recipient != this.authService.getCurrentUser()){
+          this.personalDataService.getOneByUsername(message.recipient).subscribe(data => {
+            if(!this.groupedMessagesUsernames.includes(message.recipient)){
+              this.groupedMessages.push(new Person(message.recipient, data.profilePicturePath));
+              this.groupedMessagesUsernames.push(message.recipient);
+            }
+          })
         }
-        if(message.sender != this.authService.getCurrentUser() && !this.groupedMessages.includes(message.sender)){
-          this.groupedMessages.push(message.sender);
+        if(message.sender != this.authService.getCurrentUser()){
+          this.personalDataService.getOneByUsername(message.sender).subscribe(data => {
+            if(!this.groupedMessagesUsernames.includes(message.sender)){
+              this.groupedMessages.push(new Person(message.sender, data.profilePicturePath));
+              this.groupedMessagesUsernames.push(message.sender);
+            }
+          })
         }
       })
     });
@@ -119,5 +139,21 @@ export class ChatComponent implements OnInit {
         this.filteredOptions.push(teacher.accountData.username);
       })
     })
+  }
+
+  getLoggedUser(){
+    this.personalDataService.getOneByUsername(this.authService.getCurrentUser()).subscribe(data => {
+      this.loggedPerson = new Person(this.authService.getCurrentUser(), data.profilePicturePath);
+    })
+  }
+}
+
+export class Person {
+  username: string;
+  profilePicturePath: string;
+
+  constructor(username: string, profilePicturePath: string){
+    this.username = username;
+    this.profilePicturePath = profilePicturePath;
   }
 }

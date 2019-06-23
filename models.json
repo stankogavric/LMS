@@ -442,8 +442,8 @@
             "id": "Long",
             "content": "String",
             "date": "Date",
-            "recipient": "AccountData",
-            "sender": "AccountData",
+            "recipient": "String",
+            "sender": "String",
             "attachments": "File[]"
         }
     },

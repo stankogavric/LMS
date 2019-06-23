@@ -24,6 +24,10 @@ public class PersonalDataService {
     public Optional<PersonalData> getPersonalDataById(Long id) {
         return personalDataRepo.findById(id);
     }
+    
+    public Optional<PersonalData> getPersonalDataByUsername(String username) {
+        return personalDataRepo.getByUsername("%"+username+"%");
+    }
 
     public void addPersonalData(PersonalData personalData) {
         personalDataRepo.save(personalData);

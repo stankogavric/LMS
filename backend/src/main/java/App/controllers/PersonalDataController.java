@@ -41,6 +41,16 @@ public class PersonalDataController {
 		}
 		return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
 	}
+	
+	@JsonView(HideOptionalProperties.class)
+	@RequestMapping(value = "/username/{username}", method = RequestMethod.GET)
+	public ResponseEntity<PersonalData> getPersonalDataByUsername(@PathVariable String username) {
+		Optional<PersonalData> personalData = personalDataService.getPersonalDataByUsername(username);
+		if (personalData.isPresent()) {
+			return new ResponseEntity<PersonalData>(personalData.get(), HttpStatus.OK);
+		}
+		return new ResponseEntity<PersonalData>(HttpStatus.NOT_FOUND);
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<PersonalData> addPersonalData(@RequestBody PersonalData PersonalData) {
