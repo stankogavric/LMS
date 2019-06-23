@@ -33,6 +33,7 @@ import { FileComponent } from './file/file.component';
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
 import { ClassroomComponent } from './classroom/classroom.component';
 import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
+import { EnterGradeComponent } from './exam/enter-grade/enter-grade.component';
 import { OlMapComponent } from './ol-map/ol-map.component';
 import { ChatComponent } from './chat/chat.component';
 
@@ -59,7 +60,8 @@ import { ChatComponent } from './chat/chat.component';
     ClassroomComponent,
     ExamRegistrationComponent,
     OlMapComponent,
-    ChatComponent
+    ChatComponent,
+    EnterGradeComponent
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,6 @@ import { AuthService } from '../../auth/auth.service';
 import { ExamRegistrationDTO } from './exam-registration-dto.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material';
-import { Subscription, Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-exam-registration',

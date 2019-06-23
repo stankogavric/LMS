@@ -29,6 +29,7 @@ import { StudentDetailComponent } from './student/student-detail/student-detail.
 import { StudyProgramAddEditComponent } from './study-program/study-program-add-edit/study-program-add-edit.component';
 import { ClassScheduleAddEditComponent } from './administrativeStaff/class-schedule-add-edit/class-schedule-add-edit.component';
 import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
+import { EnterGradeComponent } from './exam/enter-grade/enter-grade.component';
 import { EnrollmentToTheNextYearComponent } from './administrativeStaff/enrollment-to-the-next-year/enrollment-to-the-next-year.component';
 import { ChatComponent } from './chat/chat.component';
 
@@ -93,10 +94,11 @@ const routes: Routes = [
       { path: 'studyPrograms', component: StudyProgramsComponent },
       { path: 'subjects', component: SubjectsComponent },
       { path: 'teacherSubjects', component: TeacherSubjectsComponent },
-      { path: 'studentListBySubject', component: StudentsListComponent },
+      { path: 'studentListBySubject/:id', component: StudentsListComponent },
       { path: 'searchStudents', component: SearchStudentsComponent },
       { path: 'student/details/:id', component: StudentDetailComponent },
       { path: 'registerExam', component: ExamRegistrationComponent },
+      { path: 'enterGrades/:id', component: EnterGradeComponent},
       //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
 
       { path: 'chat', component: ChatComponent },

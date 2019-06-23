@@ -19,14 +19,15 @@ public interface SubjectAttendanceRepository extends JpaRepository<SubjectAttend
 	@Query("SELECT sa.student FROM SubjectAttendance sa WHERE sa.finalGrade < 6 AND sa.subjectRealization.subject.id = ?1")
 	Iterable<Student> findStudentsWhoDidntPassExam(Long subjectId);
 	
-	@Query("SELECT DISTINCT sa.subjectRealization.subject FROM SubjectAttendance sa WHERE sa.student.accountData.username = ?1 AND sa.finalGrade = NULL")
+	@Query("SELECT DISTINCT sa.subjectRealization.subject FROM SubjectAttendance sa WHERE sa.student.accountData.username = ?1 AND sa.finalGrade IS NULL")
 	ArrayList<Subject> findCurrentSubjects(String username);
 	
 	@Query("SELECT sa.finalGrade, sa.subjectRealization.subject.name, sa.subjectRealization.yearOfStudy.year, "
 			+ "sa.subjectRealization.yearOfStudy.studyProgram.name, er.points, er.exam.startTime, sa.subjectRealization.subject.ects \n" + 
 			"FROM ExamRealization er, SubjectAttendance sa \n" + 
 			"WHERE sa.student.accountData.username = ?1 \n" + 
-			"AND sa.subjectRealization.id = er.exam.subjectRealization.id")
+			"AND sa.subjectRealization.id = er.exam.subjectRealization.id "
+			+ "AND sa.finalGrade IS NOT NULL")
 	ArrayList<Object> findPastSubjects(String username);
 	
 	@Query("SELECT sa.student FROM SubjectAttendance sa, TeacherRealization tr "

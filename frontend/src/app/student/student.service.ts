@@ -50,7 +50,7 @@ export class StudentService {
     return this.http.put(this.studentUrl+`/${username}`, postData)
   }
 
-  getStudentsBySubjectId(subjId: number, teacherUsername: string) {
+  getStudentsBySubjectId(subjId: string, teacherUsername: string) {
     return this.http.get<Student[]>(this.subjAttUrl + `/teacher/${teacherUsername}/${subjId}/students`);
   }
 

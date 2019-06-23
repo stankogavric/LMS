@@ -1,9 +1,72 @@
-<div>
+<div class="mat-elevation-z8">
   <p>My current subjects</p>
-  <br>
-  <mat-accordion>
-    <ng-container *ngFor="let subject of subjects; let i = index">
-      <app-subject [subject]="subject"></app-subject>
+  <table class="subjects-table" mat-table [dataSource]="dataSource">
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let i = index;"> {{i+1}} </td>
     </ng-container>
-  </mat-accordion>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ects">
+      <th mat-header-cell *matHeaderCellDef> ECTS </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.ects}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="mandatory">
+      <th mat-header-cell *matHeaderCellDef> Mandatory </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.mandatory}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lecturesNum">
+      <th mat-header-cell *matHeaderCellDef> Number of lectures </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.lecturesNum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="exercisesNum">
+      <th mat-header-cell *matHeaderCellDef> Number of exercises </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.exercisesNum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="otherActivitesNum">
+      <th mat-header-cell *matHeaderCellDef> Number of other activities </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.otherActivitiesNum}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="researchPaper">
+      <th mat-header-cell *matHeaderCellDef> Research paper </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.researchPaper}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="otherClasses">
+      <th mat-header-cell *matHeaderCellDef> Other classes </th>
+      <td mat-cell *matCellDef="let subject"> {{subject.otherClasses}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="grades">
+      <th mat-header-cell *matHeaderCellDef> Enter grades </th>
+      <td mat-cell *matCellDef="let subject">
+        <button mat-raised-button color="primary" [routerLink] = "['/enterGrades/', subject.id]">
+          <mat-icon>edit</mat-icon>
+        </button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="students">
+      <th mat-header-cell *matHeaderCellDef> Students </th>
+      <td mat-cell *matCellDef="let subject">
+        <button mat-raised-button color="green" [routerLink]="['/studentListBySubject/', subject.id]">
+          <mat-icon>people</mat-icon>
+        </button> </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator class="subjects-table" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

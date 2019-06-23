@@ -4,6 +4,7 @@ import { Exam } from './exam.model';
 import { ExamType } from './exam-type.model';
 import { ExamRealization } from './exam-realization.model';
 import { ExamRegistrationDTO } from './exam-registration/exam-registration-dto.model';
+import { StudentExamRegistrationDTO } from './enter-grade/student-exam-registration-dto.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ export class ExamService {
   private examUrl = "http://localhost:8080/exam";
   private examReal = "http://localhost:8080/examrealization";
 
+  getExamRealUrl(){
+    return this.examReal;
+  }
   constructor(private http: HttpClient) {
   }
 
@@ -55,6 +59,14 @@ export class ExamService {
   registerExam(data: {}){
     return this.http.post(this.examReal, data);
 
+  }
+
+  getStudentExamRegistrationsBySubject(subjectId: string, teacherUsername: string){
+    return this.http.get<StudentExamRegistrationDTO[]>(this.examReal + `/${teacherUsername}/grading/${subjectId}`)
+  }
+
+  submitGrades(studentGrades: StudentExamRegistrationDTO[], teacherUsername: string, subjectId: string){
+    return this.http.post(this.examUrl + `/${teacherUsername}/${subjectId}/addGrades`, studentGrades);
   }
 
 

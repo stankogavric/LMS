@@ -18,7 +18,7 @@ public class ExamRealization {
 	@Column(nullable = true)
 	private Integer points;
 	
-	@Column(length=128, nullable = false)
+	@Column(length=128, nullable = true)
 	private String note;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

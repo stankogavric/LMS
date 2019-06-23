@@ -33,17 +33,7 @@ export class StudentDetailComponent implements OnInit {
     this.examService.getStudentsExams(studentId).subscribe(
       (data: ExamDTO[]) => {
         if (data != null) {
-          for (let i = 0; i < data.length; i++) {
-            let exam = new ExamDTO();
-            exam.date = data[i][5];
-            exam.grade = data[i][0];
-            exam.points = data[i][4];
-            exam.studyProgramName = data[i][3];
-            exam.subject = data[i][1];
-            exam.year = data[i][2];
-            exam.ects = data[i][6];
-            this.exams.push(exam);
-          };
+          this.exams = data;
         };
         this.getAvgGrade();
         this.getTotalEcts();

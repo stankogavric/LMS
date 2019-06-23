@@ -1,0 +1,98 @@
+<div>
+  <p>Students registered for exam</p>
+
+  <hr>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows="true" id="my-table">
+
+    <ng-container matColumnDef="no">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let student; let i = dataIndex">{{i+1}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name </th>
+      <td mat-cell *matCellDef="let student"> {{student.firstName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name </th>
+      <td mat-cell *matCellDef="let student"> {{student.lastName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="indexNum">
+      <th mat-header-cell *matHeaderCellDef>Index number </th>
+      <td mat-cell *matCellDef="let student"> {{student.indexNum}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="test1">
+      <th mat-header-cell *matHeaderCellDef>Test 1 pts. </th>
+      <td mat-cell *matCellDef="let student">
+        <mat-form-field>
+          <input matInput type="number" placeholder="points" [(ngModel)]="student.test1">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="test2">
+      <th mat-header-cell *matHeaderCellDef>Test 2 pts. </th>
+      <td mat-cell *matCellDef="let student">
+        <mat-form-field>
+          <input matInput color="warn" type="number" placeholder="points" [(ngModel)]="student.test2">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="attendance">
+      <th mat-header-cell *matHeaderCellDef>Attendance pts. </th>
+      <td mat-cell *matCellDef="let student">
+        <mat-form-field>
+          <input matInput color="warn" type="number" placeholder="points" [(ngModel)]="student.attendance">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="finalExam">
+      <th mat-header-cell *matHeaderCellDef>Final exam pts. </th>
+      <td mat-cell *matCellDef="let student">
+        <mat-form-field>
+          <input matInput color="warn" type="number" placeholder="points" [(ngModel)]="student.finalExam">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef>Total pts. </th>
+      <td mat-cell *matCellDef="let student">{{student.test1 + student.test2 + student.attendance + student.finalExam}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="grade">
+      <th mat-header-cell *matHeaderCellDef>Final grade </th>
+      <td mat-cell *matCellDef="let student">
+        <mat-form-field>
+          <input matInput color="warn" type="number" placeholder="grade" [(ngModel)]="student.grade">
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="save">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let student; let i = dataIndex;">
+        <button mat-raised-button color="primary" (click)="onSave(i)"
+          [disabled]="!student.test1 || !student.test2 || !student.attendance || !student.finalExam || !student.grade">Save</button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayColumns;  sticky: true">
+    </tr>
+    <tr mat-row *matRowDef="let student; columns: displayColumns"></tr>
+  </table>
+
+  <hr>
+  <div>
+    Export results:
+    <button mat-raised-button color="primary" [disabled]="registeredStudents.length == 0" (click) = "toPDF()">PDF</button>
+    <button mat-raised-button color="accent" [disabled]="registeredStudents.length == 0" (click)="submitGrades()"
+      style="float: right;">Submit grades</button>
+  </div>
+</div>
