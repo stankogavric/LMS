@@ -8,3 +8,13 @@
   background-color: rgb(0, 80, 180);
   color: white;
 }
+
+.active-item {
+  color: #3F51B5 !important;
+  background-color: white;
+  border-radius: 0px;
+}
+
+.full-height {
+  height: 100%;
+}

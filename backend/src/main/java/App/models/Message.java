@@ -3,13 +3,11 @@ package App.models;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -29,11 +27,9 @@ public class Message {
 	@Column(nullable = false)
 	private Date date;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private AccountData recipient;
+	private String recipient;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	private AccountData sender;
+	private String sender;
 	
 	@JsonView(ShowTopic.class)
 	@OneToMany(mappedBy="message")
@@ -43,7 +39,7 @@ public class Message {
 		super();
 	}
 
-	public Message(String content, Date date, AccountData recipient, AccountData sender, Set<File> attachments) {
+	public Message(String content, Date date, String recipient, String sender, Set<File> attachments) {
 		super();
 		this.content = content;
 		this.date = date;
@@ -76,19 +72,19 @@ public class Message {
 		this.date = date;
 	}
 
-	public AccountData getRecipient() {
+	public String getRecipient() {
 		return recipient;
 	}
 
-	public void setRecipient(AccountData recipient) {
+	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
 
-	public AccountData getSender() {
+	public String getSender() {
 		return sender;
 	}
 
-	public void setSender(AccountData sender) {
+	public void setSender(String sender) {
 		this.sender = sender;
 	}
 

@@ -30,6 +30,7 @@ import { StudyProgramAddEditComponent } from './study-program/study-program-add-
 import { ClassScheduleAddEditComponent } from './administrativeStaff/class-schedule-add-edit/class-schedule-add-edit.component';
 import { ExamRegistrationComponent } from './exam/exam-registration/exam-registration.component';
 import { EnrollmentToTheNextYearComponent } from './administrativeStaff/enrollment-to-the-next-year/enrollment-to-the-next-year.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
       { path: '', component: HomeComponent },
@@ -97,6 +98,9 @@ const routes: Routes = [
       { path: 'student/details/:id', component: StudentDetailComponent },
       { path: 'registerExam', component: ExamRegistrationComponent },
       //{ path: 'students', component: StudentsComponent, outlet: "adminSidenav"},
+
+      { path: 'chat', component: ChatComponent },
+
       { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 

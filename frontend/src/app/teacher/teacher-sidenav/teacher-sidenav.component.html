@@ -8,18 +8,22 @@
     <br>
     <mat-menu #teacherMenu="matMenu">
 -->
-<button mat-button routerLink = "teacherSubjects">My Current Subjects</button><br>
-<button mat-button [matMenuTriggerFor]="addMenu">Add</button><br>
+<button class="full-width" mat-button routerLink = "teacherSubjects" routerLinkActive="active-item">My Current Subjects</button><br>
+<!--
+<button class="full-width" mat-button [matMenuTriggerFor]="addMenu">Add</button><br>
 <mat-menu #addMenu="matMenu">
   <button mat-menu-item routerLink="add/exam">Exam</button>
   <button mat-menu-item routerLink="add/topics">Topics</button>
 </mat-menu>
-<button mat-button routerLink="">Enter grades</button><br>
-<button mat-button routerLink="">Create notifications</button><br>
-<button mat-button routerLink="studentListBySubject">Students on my subjects</button><br>
-<button mat-button routerLink="searchStudents">Search students</button><br>
-<button mat-button routerLink="">Forum</button><br>
-<button mat-button routerLink="">Messages</button><br>
+-->
+<button class="full-width" mat-button routerLink="add/exam" routerLinkActive="active-item">Add new exam</button>
+<button class="full-width" mat-button routerLink="add/topics" routerLinkActive="active-item">Add new topics</button>
+<button class="full-width" mat-button>Enter grades</button><br>
+<button class="full-width" mat-button>Create notifications</button><br>
+<button class="full-width" mat-button routerLink="studentListBySubject" routerLinkActive="active-item">Students on my subjects</button><br>
+<button class="full-width" mat-button routerLink="searchStudents" routerLinkActive="active-item">Search students</button><br>
+<button class="full-width" mat-button>Forum</button><br>
+<button class="full-width" mat-button routerLink="chat" routerLinkActive="active-item">Chat</button><br>
 <!--
     </mat-menu>
 </mat-drawer>

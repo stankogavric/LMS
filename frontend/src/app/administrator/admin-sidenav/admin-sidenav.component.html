@@ -1,4 +1,4 @@
-<button mat-button [matMenuTriggerFor]="addMenu">Add</button>
+<button class="full-width" mat-button [matMenuTriggerFor]="addMenu">Add</button>
 <br>
 <mat-menu #addMenu="matMenu">
   <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
@@ -13,7 +13,7 @@
 
   <button mat-button routerLink="add/studyProgram">Study program</button>
 </mat-menu>
-<button mat-button [matMenuTriggerFor]="usersMenu">Users</button>
+<button class="full-width" mat-button [matMenuTriggerFor]="usersMenu">Users</button>
 <br>
 <mat-menu #usersMenu="matMenu">
   <!--<button mat-menu-item [routerLink]="[{ outlets: { adminSidenav: ['students'] } }]">Students</button>-->
@@ -22,10 +22,10 @@
   <button mat-menu-item routerLink="administrativeStaff">Administrative staff</button>
   <button mat-menu-item routerLink="administrators">Administrators</button>
 </mat-menu>
-<button mat-button routerLink="subjects">Subjects</button>
+<button class="full-width" mat-button routerLink="subjects" routerLinkActive="active-item">Subjects</button>
 <br>
-<button mat-button routerLink="studyPrograms">Study programs</button>
-
-
+<button class="full-width" mat-button routerLink="studyPrograms" routerLinkActive="active-item">Study programs</button>
 <br>
-<button mat-button routerLink="classSchedule">Class schedule</button>
+<button class="full-width" mat-button routerLink="classSchedule" routerLinkActive="active-item">Class schedule</button>
+<br>
+<button class="full-width" mat-button routerLink="chat" routerLinkActive="active-item">Chat</button>

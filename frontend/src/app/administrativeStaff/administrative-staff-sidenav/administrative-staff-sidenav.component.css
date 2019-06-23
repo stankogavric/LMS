@@ -1,0 +1,9 @@
+.active-item {
+    color: #3F51B5 !important;
+    background-color: beige;
+}
+
+.full-width {
+    width: 100%;
+    text-align: left;
+}

@@ -1,0 +1,74 @@
+<div *ngIf="recipient == ''">
+    <h1>Chats</h1>
+    <br>
+    <button mat-fab class="new-message" (click)="newMessage=true" matTooltip="New message"><mat-icon>add</mat-icon></button>
+    <br>
+    <form class="example-form" *ngIf="newMessage">
+        <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Recipient" matInput [matAutocomplete]="auto" (input)="onInputChanged($event.target.value)">
+            <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="showConversation(option)">
+                    {{option}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+    </form>
+    <br>
+    <div *ngIf="!newMessage">
+        <div *ngFor="let person of groupedMessages">
+            <a class="no-decoration">
+                <mat-card class="conversation" (click)="showConversation(person)">
+                    <img height="50px" [src]="fileUrl+'images/profile_images/default.png'" alt="Profile picture">
+                    <p>{{ person }}</p>
+                </mat-card>
+            </a>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="recipient != ''">
+    <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="recipient">
+            <th mat-header-cell *matHeaderCellDef> 
+                <div align="center">
+                    <button class="back" mat-fab (click)="getAllConversations(); conversation = []; recipient = ''; newMessage = false" matTooltip="Back to chats">
+                        <mat-icon>arrow_back_ios</mat-icon>
+                    </button>
+                    <img height="50px" [src]="fileUrl+'images/profile_images/default.png'" alt="Profile picture">
+                    <p>{{ recipient }}</p>
+                </div>
+                <br>
+            </th>
+            <td class="no-border" mat-cell *matCellDef="let message"> 
+                <div name="bottom" [ngClass]="{'container' : true, 'darker' : message.sender == loggedUser}">
+                    <div [ngClass]="{'right' : message.sender == loggedUser, 'left': message.sender != loggedUser}">
+                        <img height="50px" [src]="fileUrl+'images/profile_images/default.png'" alt="Profile picture">
+                        <p>{{ message.sender }}</p>
+                    </div>
+                    <p>{{ message.content }}</p>
+                    <div [ngClass]="{'time-left' : message.sender == loggedUser, 'time-right' : message.sender != loggedUser}">{{ message.date | date:'medium' }}</div>
+                </div>
+            </td>
+            <td class="no-border" mat-footer-cell *matFooterCellDef>
+                <mat-form-field class="full-width">
+                    <mat-label>Message</mat-label>
+                    <textarea matInput 
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="1"
+                        cdkAutosizeMaxRows="5"
+                        [(ngModel)]="msg">
+                    </textarea>
+                    <button mat-button matSuffix (click)="send()">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </mat-form-field>
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </table>
+</div>

@@ -6,8 +6,8 @@
   </button>
 
   <span class="fill-remaining-space"></span>
-  <div fxLayout="row" fxShow="false" fxShow.gt-sm>
-    <button mat-button routerLink="university">University</button>
+  <div fxLayout="row" fxShow="false" fxShow.gt-sm class="full-height">
+    <button mat-button routerLink="university" routerLinkActive="active-item">University</button>
 
     <button mat-button [matMenuTriggerFor]="facultiesMenu">Faculties</button>
     <mat-menu #facultiesMenu="matMenu">
@@ -15,7 +15,7 @@
     </mat-menu>
 
     <ng-container *ngIf="isLoggedIn">
-      <button mat-button [routerLink]="['edit/'+loggedUserType, loggedUserUsername]">Profile</button>
+      <button mat-button [routerLink]="['edit/'+loggedUserType, loggedUserUsername]" routerLinkActive="active-item">Profile</button>
     </ng-container>
 
     <ng-container *ngIf="isLoggedIn; else elseTemplate">

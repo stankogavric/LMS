@@ -1,0 +1,103 @@
+.container {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.left {
+    float: left;
+    margin-right: 20px;
+    margin-left:0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+    margin-top: 20px;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+    margin-top: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.no-decoration {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.conversation {
+    background-color: beige;
+}
+
+.example-form {
+  min-width: 150px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  margin-bottom: 60px;
+}
+
+.new-message {
+    position: fixed; 
+    bottom: 0; 
+    right: 0; 
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+    z-index: 1;
+}
+
+.back {
+    left: 0; 
+    position: absolute; 
+    margin-left: 10px; 
+    margin-top: 10px;
+}
+
+.no-border {
+    border: none;
+}

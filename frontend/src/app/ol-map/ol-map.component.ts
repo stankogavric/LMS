@@ -58,7 +58,7 @@ export class OlMapComponent implements OnInit, AfterViewInit {
         scale: 0.1,
         anchorXUnits: 'fraction',
         anchorYUnits: 'fraction',
-        src: 'assets/icons/universityLogo.jpg'
+        src: 'assets/icons/universityLogo.png'
       })),
       text: new Text({
         text: this.object.name,
