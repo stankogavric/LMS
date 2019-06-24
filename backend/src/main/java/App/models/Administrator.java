@@ -23,15 +23,27 @@ public class Administrator {
 	@ManyToOne(cascade=CascadeType.ALL)
 	private AccountData accountData;
 	
+	@ManyToOne(cascade=CascadeType.ALL)
+	private PersonalData personalData;
+	
 	@NotNull
 	private Boolean deleted = false;
 
 	public Administrator() {}
 
-	public Administrator(AccountData accountData, Boolean deleted) {
+	public Administrator(AccountData accountData, PersonalData personalData, Boolean deleted) {
 		super();
 		this.accountData = accountData;
+		this.personalData = personalData;
 		this.deleted = deleted;
+	}
+
+	public PersonalData getPersonalData() {
+		return personalData;
+	}
+
+	public void setPersonalData(PersonalData personalData) {
+		this.personalData = personalData;
 	}
 
 	public Long getId(){

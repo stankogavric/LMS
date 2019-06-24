@@ -399,6 +399,7 @@
         "data": {
             "id": "Long",
             "accountData": "AccountData",
+            "personalData": "PersonalData",
             "deleted": "Boolean"
         }
     },
