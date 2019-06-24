@@ -3,7 +3,8 @@
 <br>
 <mat-tab-group>
     <mat-tab label="Study programs">
-        <div><a class="studyProgramLink" *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
+        <br>
+        <div class="studyProgram"><a class="studyProgramLink" *ngFor="let s of faculty?.studyPrograms" [routerLink]="[ '/studyProgram', s.id ]"><mat-card>{{ s.name }}</mat-card></a></div>
     </mat-tab>
     <mat-tab label="Phone">
         <br>

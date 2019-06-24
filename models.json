@@ -389,8 +389,7 @@
             "studentYears": "StudentYear[]",
             "accountData": "AccountData",
             "personalData": "PersonalData",
-            "deleted": "Boolean",
-            "yearOfStudy": "Integer"
+            "deleted": "Boolean"
         }
     },
     {

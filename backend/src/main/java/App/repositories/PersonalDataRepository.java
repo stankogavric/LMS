@@ -10,6 +10,6 @@ import App.models.PersonalData;
 
 @Repository
 public interface PersonalDataRepository extends JpaRepository<PersonalData, Long> {
-	@Query("SELECT p FROM PersonalData p WHERE p.profilePicturePath LIKE  ?1")
+	@Query("SELECT p FROM PersonalData p WHERE p.profilePicturePath LIKE ?1")
 	Optional<PersonalData> getByUsername(String username);
 }

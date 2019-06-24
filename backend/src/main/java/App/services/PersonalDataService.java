@@ -26,7 +26,7 @@ public class PersonalDataService {
     }
     
     public Optional<PersonalData> getPersonalDataByUsername(String username) {
-        return personalDataRepo.getByUsername("%"+username+"%");
+        return personalDataRepo.getByUsername("%/"+username+".%");
     }
 
     public void addPersonalData(PersonalData personalData) {
