@@ -101,16 +101,17 @@ public class AdministrativeStaffService {
         if(!nextYearOfStudy.isPresent()) { // if there is a study program then there are also all study years
         	return studentsForEnrollmentToTheNextYear;
         }
-        	ArrayList<Subject> prerequisites = (ArrayList<Subject>) subjectService.getPrerequisitesForMandatorySubjectsByYearOfStudy(nextYearOfStudy.get().getId());
+        ArrayList<Subject> prerequisites = (ArrayList<Subject>) subjectService.getPrerequisitesForMandatorySubjectsByYearOfStudy(nextYearOfStudy.get().getId());
         ArrayList<Student> tempStudents = (ArrayList<Student>) administrativeStaffRepo.findStudentsForEnrollmentToTheNextYear(yearOfStudyId);
     	
     	int prerequisitesSize = prerequisites.size();
     	if(prerequisitesSize == 0) {
     		studentsForEnrollmentToTheNextYear = (ArrayList<Student>) tempStudents;
     	}
-		for(Student s: tempStudents) {
+    	for(int i = 0; i < tempStudents.size(); i++) {
+//		for(Student s: tempStudents) {
 			int passedPrerequisites = 0;
-			for(SubjectAttendance sa: s.getSubjectAttendances()) {
+			for(SubjectAttendance sa: tempStudents.get(i).getSubjectAttendances()) {
 				for(Subject prerequisite: prerequisites) {
     				if(sa.getFinalGrade() != null && prerequisite.getId() == sa.getSubjectRealization().getSubject().getId()) {
     					passedPrerequisites = passedPrerequisites + 1;
@@ -118,8 +119,9 @@ public class AdministrativeStaffService {
 				}
 			}
 			if(passedPrerequisites == prerequisitesSize) {
-				studentsForEnrollmentToTheNextYear.add(s);
+				studentsForEnrollmentToTheNextYear.add(tempStudents.get(i));
 			}	
+			
 		}
     	
     	return studentsForEnrollmentToTheNextYear;
