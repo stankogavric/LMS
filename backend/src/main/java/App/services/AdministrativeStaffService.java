@@ -107,6 +107,7 @@ public class AdministrativeStaffService {
     	int prerequisitesSize = prerequisites.size();
     	if(prerequisitesSize == 0) {
     		studentsForEnrollmentToTheNextYear = (ArrayList<Student>) tempStudents;
+    		return studentsForEnrollmentToTheNextYear;
     	}
     	for(int i = 0; i < tempStudents.size(); i++) {
 //		for(Student s: tempStudents) {
