@@ -7,8 +7,8 @@
         <mat-form-field class="example-full-width">
             <input type="text" placeholder="Recipient" matInput [matAutocomplete]="auto" (input)="onInputChanged($event.target.value)">
             <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="preShowConversation(option)">
-                    {{option}}
+                <mat-option *ngFor="let option of filteredOptions" [value]="option" (click)="showConversation(option)">
+                    {{option.firstName}} {{option.lastName}}
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
@@ -19,7 +19,7 @@
             <a class="no-decoration">
                 <mat-card class="conversation" (click)="showConversation(person)">
                     <img height="50px" [src]="fileUrl+person.profilePicturePath" alt="Profile picture">
-                    <p>{{ person.username }}</p>
+                    <p>{{ person.firstName }} {{person.lastName}}</p>
                 </mat-card>
             </a>
             <br>
@@ -32,11 +32,11 @@
         <ng-container matColumnDef="recipient">
             <th mat-header-cell *matHeaderCellDef> 
                 <div align="center">
-                    <button class="back" mat-fab (click)="getAllConversations(); conversation = []; recipient = null; newMessage = false" matTooltip="Back to chats">
+                    <button class="back" mat-fab (click)="getAllConversations(); conversation = []; recipient = null; newMessage = false; msg = ''" matTooltip="Back to chats">
                         <mat-icon>arrow_back_ios</mat-icon>
                     </button>
                     <img height="50px" [src]="fileUrl+recipient.profilePicturePath" alt="Profile picture">
-                    <p>{{ recipient.username }}</p>
+                    <p>{{ recipient.firstName }} {{ recipient.lastName }}</p>
                 </div>
                 <br>
             </th>
@@ -45,7 +45,7 @@
                     <div [ngClass]="{'right' : message.sender == loggedUser, 'left': message.sender != loggedUser}">
                         <img *ngIf="message.sender==recipient.username" height="50px" [src]="fileUrl+recipient.profilePicturePath" alt="Profile picture">
                         <img *ngIf="message.sender!=recipient.username" height="50px" [src]="fileUrl+loggedPerson.profilePicturePath" alt="Profile picture">
-                        <p>{{ message.sender }}</p>
+                        <!--<p>{{ message.sender }}</p>-->
                     </div>
                     <p>{{ message.content }}</p>
                     <div [ngClass]="{'time-left' : message.sender == loggedUser, 'time-right' : message.sender != loggedUser}">{{ message.date | date:'medium' }}</div>

@@ -34,8 +34,8 @@ export class ChatComponent implements OnInit {
   public loggedPerson: Person;
 
   myControl = new FormControl();
-  options: string[] = [];
-  filteredOptions: string[] = [];
+  options: Person[] = [];
+  filteredOptions: Person[] = [];
 
   displayedColumns = ['recipient'];
   dataSource = new MatTableDataSource<Message>(this.conversation);
@@ -63,15 +63,20 @@ export class ChatComponent implements OnInit {
     this.getLoggedUser();
   }
 
-  private _filter(value: string): string[] {
+  private _filter(value: string): Person[] {
+    let filteredOptions: Person[] = [];
     const filterValue = value.toLowerCase();
-
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
+    this.options.forEach(person => {
+      if(person.firstName.toLowerCase().includes(filterValue) || person.firstName.toLowerCase().includes(filterValue)){
+        filteredOptions.push(person);
+      }
+    })
+    return filteredOptions;
   }
 
   onInputChanged(searchStr: string): void {
     this.filteredOptions = this._filter(searchStr);
-    }
+  }
 
   send(){
     if(this.msg && this.msg.trim() != ''){
@@ -91,12 +96,6 @@ export class ChatComponent implements OnInit {
     })
   }
 
-  preShowConversation(username: string){
-    this.personalDataService.getOneByUsername(username).subscribe(data => {
-        this.showConversation(new Person(username, data.profilePicturePath));
-    })
-  }
-
   getAllConversations(){
     this.messageService.getAllByUser(this.authService.getCurrentUser()).subscribe(data => {
       this.messages = data;
@@ -104,7 +103,7 @@ export class ChatComponent implements OnInit {
         if(message.recipient != this.authService.getCurrentUser()){
           this.personalDataService.getOneByUsername(message.recipient).subscribe(data => {
             if(!this.groupedMessagesUsernames.includes(message.recipient)){
-              this.groupedMessages.push(new Person(message.recipient, data.profilePicturePath));
+              this.groupedMessages.push(new Person(data.firstName, data.lastName, message.recipient, data.profilePicturePath));
               this.groupedMessagesUsernames.push(message.recipient);
             }
           })
@@ -112,7 +111,7 @@ export class ChatComponent implements OnInit {
         if(message.sender != this.authService.getCurrentUser()){
           this.personalDataService.getOneByUsername(message.sender).subscribe(data => {
             if(!this.groupedMessagesUsernames.includes(message.sender)){
-              this.groupedMessages.push(new Person(message.sender, data.profilePicturePath));
+              this.groupedMessages.push(new Person(data.firstName, data.lastName, message.sender, data.profilePicturePath));
               this.groupedMessagesUsernames.push(message.sender);
             }
           })
@@ -125,8 +124,10 @@ export class ChatComponent implements OnInit {
     this.studentService.getAll().subscribe(data => {
       this.students = data;
       data.forEach(student => {
-        this.options.push(student.accountData.username);
-        this.filteredOptions.push(student.accountData.username);
+        if(student.accountData.username != this.authService.getCurrentUser()){
+          this.options.push(new Person(student.personalData.firstName, student.personalData.lastName, student.accountData.username, student.personalData.profilePicturePath));
+          this.filteredOptions.push(new Person(student.personalData.firstName, student.personalData.lastName, student.accountData.username, student.personalData.profilePicturePath));
+        }
       })
     })
   }
@@ -135,24 +136,30 @@ export class ChatComponent implements OnInit {
     this.teacherService.getAll().subscribe(data => {
       this.teachers = data;
       data.forEach(teacher => {
-        this.options.push(teacher.accountData.username);
-        this.filteredOptions.push(teacher.accountData.username);
+        if(teacher.accountData.username != this.authService.getCurrentUser()){
+          this.options.push(new Person(teacher.personalData.firstName, teacher.personalData.lastName, teacher.accountData.username, teacher.personalData.profilePicturePath));
+          this.filteredOptions.push(new Person(teacher.personalData.firstName, teacher.personalData.lastName, teacher.accountData.username, teacher.personalData.profilePicturePath));
+        }
       })
     })
   }
 
   getLoggedUser(){
     this.personalDataService.getOneByUsername(this.authService.getCurrentUser()).subscribe(data => {
-      this.loggedPerson = new Person(this.authService.getCurrentUser(), data.profilePicturePath);
+      this.loggedPerson = new Person(data.firstName, data.lastName, this.authService.getCurrentUser(), data.profilePicturePath);
     })
   }
 }
 
 export class Person {
+  firstName: string;
+  lastName: string;
   username: string;
   profilePicturePath: string;
 
-  constructor(username: string, profilePicturePath: string){
+  constructor(firstName: string, lastName: string, username: string, profilePicturePath: string){
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.username = username;
     this.profilePicturePath = profilePicturePath;
   }
