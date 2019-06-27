@@ -23,6 +23,9 @@ export class OlMapComponent implements OnInit, AfterViewInit {
   @ViewChild("mappopup")
   private popupElement: ElementRef;
 
+  @ViewChild("marker")
+  private markerElement: ElementRef;
+
   private map;
 
   @Input("object")
@@ -89,7 +92,18 @@ export class OlMapComponent implements OnInit, AfterViewInit {
       offset: [-100, 0]
     });
 
+    let marker = new Overlay({
+      id: "markerOverlay",
+      element: this.markerElement.nativeElement,
+      stopEvent: false,
+      offset: [0, 0]
+    });
+
+    marker.setPosition(universityMap.getGeometry().getCoordinates());
+    marker.getElement().style.display = "block";
+
     this.map.addOverlay(popup);
+    this.map.addOverlay(marker);
 
     this.map.addLayer(new OlLayer.Vector({
       source: vectorSource,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FileService } from '../file/file.service';
 
 @Component({
   selector: 'app-home',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  public fileUrl: string = this.fileService.fileUrl;
+  public homeImageUrl: string = "images/home/welcome.jpg";
+  
+  constructor(private fileService: FileService) { }
 
   ngOnInit() {
   }
